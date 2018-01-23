@@ -1,0 +1,18 @@
+﻿
+@{
+    var userMenu = ViewBag.userMenu;
+    foreach (var data in userMenu)
+    {
+        <li>
+            <a href="/UserManagement/">
+                <i class="@data.MenuIcon"></i>
+                <span class="nav-text">
+                    @data.MenuName
+                    <br />
+                </span>
+            </a>
+        </li>
+
+    }
+
+}
