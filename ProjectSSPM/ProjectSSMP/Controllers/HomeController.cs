@@ -16,9 +16,6 @@ namespace ProjectSSMP.Controllers
         public HomeController(sspmContext context) => this.context = context;
 
         [Authorize]
-        
-
-        
         public IActionResult Index()
         {
             

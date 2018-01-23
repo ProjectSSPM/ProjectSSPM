@@ -2,6 +2,7 @@
 using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
+using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
 using ProjectSSMP.Models;
 using ProjectSSMP.Models.Menu;
@@ -11,8 +12,8 @@ namespace ProjectSSMP.Controllers
     public class BaseController : Controller
     {
         public sspmContext context;
-       
 
+        
         public List<GetMenuModelcs>  GetMenu()
         {
             var loggedInUser = HttpContext.User;

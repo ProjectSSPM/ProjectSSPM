@@ -2,6 +2,7 @@
 using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
+using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.EntityFrameworkCore;
 using ProjectSSMP.Models;
@@ -16,6 +17,7 @@ namespace ProjectSSMP.Controllers
     {
         public UserManagementController(sspmContext context) => this.context = context;
 
+        [Authorize]
         public IActionResult Index()
         {
             ViewBag.userMenu = GetMenu();
