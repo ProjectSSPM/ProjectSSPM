@@ -7,7 +7,7 @@
             foreach (var data in userMenu)
             {
                 <li>
-                    <a href="/UserManagement/">
+                    <a href="@data.MenuUrl" >
                         <i class="@data.MenuIcon"></i>
                         <span class="nav-text">
                             @data.MenuName
