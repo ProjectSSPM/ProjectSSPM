@@ -1,17 +1,12 @@
 ﻿<Properties StartupConfiguration="{99528461-6D99-4BA1-9100-7145EEE92C3D}|Default">
-  <MonoDevelop.Ide.Workbench ActiveDocument="ProjectSSMP/Views/ProjectManagement/CreateProject.cshtml">
-    <Files>
-      <File FileName="ProjectSSMP/Controllers/ProjectManagementController.cs" Line="27" Column="27" />
-      <File FileName="ProjectSSMP/Controllers/UserManagenentController.cs" Line="1" Column="1" />
-      <File FileName="ProjectSSMP/Views/ProjectManagement/CreateProject.cshtml" Line="100" Column="35" />
-      <File FileName="ProjectSSMP/Views/Shared/_LayoutMenu.cshtml" Line="1" Column="1" />
-      <File FileName="../../../Downloads/SSPMProject/SSPMProject/Views/Home/AddProject.cshtml" Line="53" Column="25" />
-      <File FileName="ProjectSSMP/Views/UserManagement/AddUser.cshtml" Line="52" Column="27" />
-    </Files>
-  </MonoDevelop.Ide.Workbench>
+  <MonoDevelop.Ide.Workbench />
   <MonoDevelop.Ide.Workspace ActiveConfiguration="Debug" />
   <MonoDevelop.Ide.DebuggingService.Breakpoints>
-    <BreakpointStore />
+    <BreakpointStore>
+      <Breakpoint file="/Users/Palm/Desktop/ProjectSSPM/ProjectSSPM/ProjectSSMP/Controllers/ProjectManagementController.cs" relfile="ProjectSSMP/Controllers/ProjectManagementController.cs" line="91" column="1" />
+      <Breakpoint file="/Users/Palm/Desktop/ProjectSSPM/ProjectSSPM/ProjectSSMP/Views/ProjectManagement/Index.cshtml" relfile="ProjectSSMP/Views/ProjectManagement/Index.cshtml" line="10" column="1" />
+      <Breakpoint file="/Users/Palm/Desktop/ProjectSSPM/ProjectSSPM/ProjectSSMP/Views/UserManagement/Index.cshtml" relfile="ProjectSSMP/Views/UserManagement/Index.cshtml" line="43" column="1" />
+    </BreakpointStore>
   </MonoDevelop.Ide.DebuggingService.Breakpoints>
   <MonoDevelop.Ide.DebuggingService.PinnedWatches />
   <MonoDevelop.Ide.ItemProperties.ProjectSSMP PreferredExecutionTarget="MonoDevelop.Default" />
