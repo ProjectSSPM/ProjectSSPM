@@ -1,0 +1,41 @@
+﻿@model IEnumerable<ProjectSSMP.Models.MenuGroup>
+@{
+    ViewData["Title"] = "Menu Managenent";
+    Layout = "~/Views/Shared/_LayoutMenu.cshtml";
+}
+
+
+<div class="container">
+    <h2 class="well">MenuManagenent</h2>
+    <table class="table">
+        <thead>
+            <tr>
+                <th>MenuName</th>
+                <th>MenuURL</th>
+                <th>MenuIcon</th>
+                <th>
+                    <a asp-action="AddUser" class="btn btn-primary btn-md" style="margin-left: 15px;">Add Menu</a>
+                </th>
+            </tr>
+        </thead>
+        <tbody>
+            @foreach (var itme in Model)
+            {
+                <tr>
+                    <td>@itme.MenuName</td>
+                    <td>@itme.MenuUrl</td>
+                    <td><i class="@itme.MenuIcon"></i></td>
+                    <td>
+                        &nbsp; &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+                        <a asp-action="Edit" class="btn btn-warning btn-sm" asp-route-id="@itme.MenuId">Edit</a>
+                    </td>
+                </tr>
+
+
+            }
+
+        </tbody>
+    </table>
+</div>
+
+
