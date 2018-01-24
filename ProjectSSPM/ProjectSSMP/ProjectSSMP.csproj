@@ -20,6 +20,6 @@
     <Compile Remove="Controllers\Project.cs" />
   </ItemGroup>
   <ItemGroup>
-    <Folder Include="Views\Project\" />
+    <Folder Include="Views\ProjectManagement\" />
   </ItemGroup>
 </Project>
