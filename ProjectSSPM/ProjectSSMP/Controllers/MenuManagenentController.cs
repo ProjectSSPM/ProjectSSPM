@@ -57,6 +57,18 @@ namespace ProjectSSMP.Controllers
                 context.MenuGroup.Add(menu);
                 await context.SaveChangesAsync();
 
+                var query = from num in context.RunningNumber
+                            where num.Type.Equals("MenuGroup")
+                            select num;
+
+                foreach (RunningNumber RunUserID in query)
+                {
+                    RunUserID.Number = menuid;
+
+                }
+                await context.SaveChangesAsync();
+                return RedirectToAction("Index", "MenuManagenent");
+
             }
             catch (Exception e)
             {
