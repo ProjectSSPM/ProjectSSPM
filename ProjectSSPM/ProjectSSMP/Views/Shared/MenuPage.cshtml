@@ -1,18 +1,102 @@
 ﻿
-@{
-    var userMenu = ViewBag.userMenu;
-    foreach (var data in userMenu)
-    {
+
+<div class="area"></div><nav class="main-menu">
+    <ul>
+        @{
+            var userMenu = ViewBag.userMenu;
+            foreach (var data in userMenu)
+            {
+                <li>
+                    <a href="/UserManagement/">
+                        <i class="@data.MenuIcon"></i>
+                        <span class="nav-text">
+                            @data.MenuName
+                            <br />
+                        </span>
+                    </a>
+                </li>
+
+            }
+
+        }
+        @*<li>
+                <a asp-area="" asp-controller="Home" asp-action="Index">
+                    <i class="fa fa-tachometer fa-2x"></i>
+                    <span class="nav-text">
+                        Dashboard
+
+                    </span>
+                </a>
+
+            </li>
+            <li class="has-subnav">
+                <a asp-area="" asp-controller="Home" asp-action="AddProject">
+                    <i class="fa fa-edit fa-2x"></i>
+                    <span class="nav-text">
+                        Add Project
+                    </span>
+                </a>
+
+            </li>
+            <li class="has-subnav">
+                <a href="#">
+                    <i class="fa fa-cog fa-2x"></i>
+                    <span class="nav-text">
+                        Edit Project
+                    </span>
+                </a>
+
+            </li>
+            <li class="has-subnav">
+                <a asp-area="" asp-controller="Home" asp-action="AddPhase">
+                    <i class="fa fa-check-square-o fa-2x"></i>
+                    <span class="nav-text">
+                        Add Phase
+                    </span>
+                </a>
+
+            </li>
+
+            <li class="has-subnav">
+                <a href="#">
+                    <i class="fa fa-floppy-o fa-2x"></i>
+                    <span class="nav-text">
+                        Save Status
+                    </span>
+                </a>
+
+            </li>
+
+            <li class="has-subnav">
+                <a asp-area="" asp-controller="UserManagement" asp-action="Index">
+                    <i class="fa fa-plus fa-2x"></i>
+                    <span class="nav-text">
+                        User Management
+                    </span>
+                </a>
+
+            </li>
+
+            <li>
+                <a href="#">
+                    <i class="fa fa-bar-chart-o fa-2x"></i>
+                    <span class="nav-text">
+                        Report
+                    </span>
+                </a>
+            </li>*@
+
+    </ul>
+
+
+    <ul class="logout">
         <li>
-            <a href="/UserManagement/">
-                <i class="@data.MenuIcon"></i>
+            <a asp-controller="Security" asp-action="Logout">
+                <i class="fa fa-power-off fa-2x"></i>
                 <span class="nav-text">
-                    @data.MenuName
-                    <br />
+                    Logout
                 </span>
             </a>
         </li>
-
-    }
-
-}
+    </ul>
+</nav>
