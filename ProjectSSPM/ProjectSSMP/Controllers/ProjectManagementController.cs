@@ -10,13 +10,18 @@ using ProjectSSMP.Models;
 
 namespace ProjectSSMP.Controllers
 {
-    public class ProjectController : BaseController
+    public class ProjectManagementController : BaseController
     {
         // GET: /<controller>/
-        public ProjectController(sspmContext context) => this.context = context;
+        public ProjectManagementController(sspmContext context) => this.context = context;
 
         [Authorize]
         public IActionResult Index()
+        {
+            ViewBag.userMenu = GetMenu();
+            return View();
+        }
+        public IActionResult CreateProject()
         {
             ViewBag.userMenu = GetMenu();
             return View();
