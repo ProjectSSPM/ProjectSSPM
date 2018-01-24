@@ -16,5 +16,7 @@ namespace ProjectSSMP.Models
         public DateTime? UserEditDate { get; set; }
         public string JobResponsible { get; set; }
         public string Status { get; set; }
+        public string UserTel { get; set; }
+        public string LineId { get; set; }
     }
 }

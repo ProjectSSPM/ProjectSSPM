@@ -6,9 +6,18 @@ namespace ProjectSSMP.Models
 {
     public partial class sspmContext : DbContext
     {
+        public virtual DbSet<Action> Action { get; set; }
+        public virtual DbSet<Function> Function { get; set; }
+        public virtual DbSet<FunctionLog> FunctionLog { get; set; }
         public virtual DbSet<MenuAuthentication> MenuAuthentication { get; set; }
         public virtual DbSet<MenuGroup> MenuGroup { get; set; }
+        public virtual DbSet<Project> Project { get; set; }
         public virtual DbSet<RunningNumber> RunningNumber { get; set; }
+        public virtual DbSet<Status> Status { get; set; }
+        public virtual DbSet<Task> Task { get; set; }
+        public virtual DbSet<Team> Team { get; set; }
+        public virtual DbSet<TeamTask> TeamTask { get; set; }
+        public virtual DbSet<TimeSheet> TimeSheet { get; set; }
         public virtual DbSet<UserAssignGroup> UserAssignGroup { get; set; }
         public virtual DbSet<UserGroup> UserGroup { get; set; }
         public virtual DbSet<UserSspm> UserSspm { get; set; }
@@ -21,10 +30,76 @@ namespace ProjectSSMP.Models
             
         }
         public sspmContext(DbContextOptions<sspmContext> options)
-            :base(options) { }
+            : base(options) { }
 
         protected override void OnModelCreating(ModelBuilder modelBuilder)
         {
+            modelBuilder.Entity<Action>(entity =>
+            {
+                entity.Property(e => e.ActionId)
+                    .HasColumnName("ActionID")
+                    .HasColumnType("char(1)")
+                    .ValueGeneratedNever();
+
+                entity.Property(e => e.ActionName).HasMaxLength(30);
+            });
+
+            modelBuilder.Entity<Function>(entity =>
+            {
+                entity.HasKey(e => new { e.FunctionId, e.ProjectNumber, e.TaskId });
+
+                entity.Property(e => e.FunctionId)
+                    .HasColumnName("FunctionID")
+                    .HasMaxLength(10);
+
+                entity.Property(e => e.ProjectNumber).HasMaxLength(10);
+
+                entity.Property(e => e.TaskId)
+                    .HasColumnName("TaskID")
+                    .HasMaxLength(10);
+
+                entity.Property(e => e.ActualEnd).HasColumnType("datetime");
+
+                entity.Property(e => e.ActualStart).HasColumnType("datetime");
+
+                entity.Property(e => e.FunctionEnd).HasColumnType("datetime");
+
+                entity.Property(e => e.FunctionName).HasMaxLength(50);
+
+                entity.Property(e => e.FunctionStart).HasColumnType("datetime");
+            });
+
+            modelBuilder.Entity<FunctionLog>(entity =>
+            {
+                entity.HasKey(e => new { e.FunctionId, e.TaskId, e.ProjectNumber, e.FunctionLogId });
+
+                entity.Property(e => e.FunctionId)
+                    .HasColumnName("FunctionID")
+                    .HasMaxLength(10);
+
+                entity.Property(e => e.TaskId)
+                    .HasColumnName("TaskID")
+                    .HasMaxLength(10);
+
+                entity.Property(e => e.ProjectNumber).HasMaxLength(10);
+
+                entity.Property(e => e.FunctionLogId)
+                    .HasColumnName("FunctionLogID")
+                    .HasColumnType("datetime");
+
+                entity.Property(e => e.ActualEnd).HasColumnType("datetime");
+
+                entity.Property(e => e.ActualStart).HasColumnType("datetime");
+
+                entity.Property(e => e.FunctionEnd).HasColumnType("datetime");
+
+                entity.Property(e => e.FunctionStart).HasColumnType("datetime");
+
+                entity.Property(e => e.StatusId)
+                    .HasColumnName("StatusID")
+                    .HasColumnType("char(1)");
+            });
+
             modelBuilder.Entity<MenuAuthentication>(entity =>
             {
                 entity.HasKey(e => new { e.GroupId, e.MenuId });
@@ -56,6 +131,45 @@ namespace ProjectSSMP.Models
                     .HasMaxLength(200);
             });
 
+            modelBuilder.Entity<Project>(entity =>
+            {
+                entity.HasKey(e => e.ProjectNumber);
+
+                entity.Property(e => e.ProjectNumber)
+                    .HasMaxLength(10)
+                    .ValueGeneratedNever();
+
+                entity.Property(e => e.ActualEnd).HasColumnType("datetime");
+
+                entity.Property(e => e.ActualStart).HasColumnType("datetime");
+
+                entity.Property(e => e.CustomerName).HasMaxLength(100);
+
+                entity.Property(e => e.CustomerTel).HasMaxLength(50);
+
+                entity.Property(e => e.Note).HasColumnType("text");
+
+                entity.Property(e => e.ProjectCreateBy).HasMaxLength(10);
+
+                entity.Property(e => e.ProjectCreateDate).HasColumnType("datetime");
+
+                entity.Property(e => e.ProjectEditBy).HasMaxLength(10);
+
+                entity.Property(e => e.ProjectEditDate).HasColumnType("datetime");
+
+                entity.Property(e => e.ProjectEnd).HasColumnType("datetime");
+
+                entity.Property(e => e.ProjectId)
+                    .HasColumnName("ProjectID")
+                    .HasMaxLength(50);
+
+                entity.Property(e => e.ProjectManager).HasMaxLength(10);
+
+                entity.Property(e => e.ProjectName).HasMaxLength(100);
+
+                entity.Property(e => e.ProjectStart).HasColumnType("datetime");
+            });
+
             modelBuilder.Entity<RunningNumber>(entity =>
             {
                 entity.HasKey(e => e.Type);
@@ -67,6 +181,99 @@ namespace ProjectSSMP.Models
                 entity.Property(e => e.Number)
                     .IsRequired()
                     .HasMaxLength(6);
+            });
+
+            modelBuilder.Entity<Status>(entity =>
+            {
+                entity.Property(e => e.StatusId)
+                    .HasColumnName("StatusID")
+                    .HasColumnType("char(1)")
+                    .ValueGeneratedNever();
+
+                entity.Property(e => e.StatusName).HasMaxLength(50);
+            });
+
+            modelBuilder.Entity<Task>(entity =>
+            {
+                entity.HasKey(e => new { e.TaskId, e.ProjectNumber });
+
+                entity.Property(e => e.TaskId)
+                    .HasColumnName("TaskID")
+                    .HasMaxLength(10);
+
+                entity.Property(e => e.ProjectNumber).HasMaxLength(10);
+
+                entity.Property(e => e.ActualEnd).HasColumnType("datetime");
+
+                entity.Property(e => e.ActualStart).HasColumnType("datetime");
+
+                entity.Property(e => e.TaskEnd).HasColumnType("datetime");
+
+                entity.Property(e => e.TaskName).HasMaxLength(100);
+
+                entity.Property(e => e.TaskStart).HasColumnType("datetime");
+            });
+
+            modelBuilder.Entity<Team>(entity =>
+            {
+                entity.Property(e => e.TeamId)
+                    .HasColumnName("TeamID")
+                    .HasMaxLength(10)
+                    .ValueGeneratedNever();
+
+                entity.Property(e => e.Firstname).HasMaxLength(50);
+
+                entity.Property(e => e.Lastname).HasMaxLength(50);
+
+                entity.Property(e => e.UserId)
+                    .HasColumnName("UserID")
+                    .HasMaxLength(10);
+            });
+
+            modelBuilder.Entity<TeamTask>(entity =>
+            {
+                entity.HasKey(e => new { e.TaskId, e.ProjectNumber, e.FunctionId, e.TeamId });
+
+                entity.Property(e => e.TaskId)
+                    .HasColumnName("TaskID")
+                    .HasMaxLength(10);
+
+                entity.Property(e => e.ProjectNumber).HasMaxLength(10);
+
+                entity.Property(e => e.FunctionId)
+                    .HasColumnName("FunctionID")
+                    .HasMaxLength(10);
+
+                entity.Property(e => e.TeamId)
+                    .HasColumnName("TeamID")
+                    .HasMaxLength(10);
+
+                entity.Property(e => e.ProjectResponsible).HasMaxLength(100);
+            });
+
+            modelBuilder.Entity<TimeSheet>(entity =>
+            {
+                entity.HasKey(e => new { e.TimeSheetId, e.TeamTaskId, e.TeamId });
+
+                entity.Property(e => e.TimeSheetId)
+                    .HasColumnName("TimeSheetID")
+                    .HasMaxLength(10);
+
+                entity.Property(e => e.TeamTaskId)
+                    .HasColumnName("TeamTaskID")
+                    .HasMaxLength(10);
+
+                entity.Property(e => e.TeamId)
+                    .HasColumnName("TeamID")
+                    .HasMaxLength(10);
+
+                entity.Property(e => e.ActionId)
+                    .HasColumnName("ActionID")
+                    .HasColumnType("char(1)");
+
+                entity.Property(e => e.TimeSheetEnd).HasColumnType("datetime");
+
+                entity.Property(e => e.TimeSheetStart).HasColumnType("datetime");
             });
 
             modelBuilder.Entity<UserAssignGroup>(entity =>
@@ -113,6 +320,10 @@ namespace ProjectSSMP.Models
 
                 entity.Property(e => e.Lastname).HasMaxLength(50);
 
+                entity.Property(e => e.LineId)
+                    .HasColumnName("LineID")
+                    .HasMaxLength(30);
+
                 entity.Property(e => e.Password).HasMaxLength(30);
 
                 entity.Property(e => e.Status).HasColumnType("char(1)");
@@ -124,6 +335,8 @@ namespace ProjectSSMP.Models
                 entity.Property(e => e.UserEditBy).HasMaxLength(30);
 
                 entity.Property(e => e.UserEditDate).HasColumnType("datetime");
+
+                entity.Property(e => e.UserTel).HasMaxLength(50);
 
                 entity.Property(e => e.Username).HasMaxLength(30);
             });
