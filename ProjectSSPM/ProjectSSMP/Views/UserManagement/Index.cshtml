@@ -69,8 +69,8 @@
                 @Html.DisplayFor(modelItem => item.UserEditBy)
             </td>
             <td>
-                
-                @item.UserEditDate.ToString()
+
+                @Convert.ToString(string.Format("{0:dd MMMM yyyy}", item.UserEditDate))
             </td>
             
             <td>
