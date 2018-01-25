@@ -40,7 +40,7 @@ namespace ProjectSSMP.Controllers
             return View();
         }
 
-        public async Task<IActionResult> CreateTask(string id)
+        public IActionResult CreateTask(string id)
         {
             ViewBag.userMenu = GetMenu();
 
@@ -49,7 +49,6 @@ namespace ProjectSSMP.Controllers
                 return NotFound();
             }
 
-            var Task = await context.Task.SingleOrDefaultAsync(m => m.ProjectNumber == id);
 
             List<CreateTaskInputModel> model = new List<CreateTaskInputModel>();
 
@@ -61,7 +60,7 @@ namespace ProjectSSMP.Controllers
                 
                 model.Add(new CreateTaskInputModel()
                 {
-                    ProjectNumber = itme.ProjectNumber,
+                    ProjectNumber = id,
                     TaskId = itme.TaskId,
                     TaskName = itme.TaskName,
                     TaskStart = itme.TaskStart,
@@ -71,6 +70,7 @@ namespace ProjectSSMP.Controllers
 
                 });
             }
+            ViewData["ProjectNuber"] = id;
             return View(model);
         }
 
@@ -99,7 +99,7 @@ namespace ProjectSSMP.Controllers
 
                 Models.Task ord = new Models.Task
                 {
-                    ProjectNumber = pnum,
+                    ProjectNumber = inputModel.ProjectNumber,
                     TaskId = num.ToString(),
                     TaskName = inputModel.TaskName,
                     TaskStart = inputModel.TaskStart,
@@ -134,7 +134,7 @@ namespace ProjectSSMP.Controllers
                     // Provide for exceptions.
                 }
 
-                return RedirectToAction("CreateProject", "ProjectManagement");
+                return RedirectToAction("CreateTask", "ProjectManagement");
 
 
 
