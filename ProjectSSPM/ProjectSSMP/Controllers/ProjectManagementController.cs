@@ -196,6 +196,12 @@ namespace ProjectSSMP.Controllers
             }
         }
 
+
+        public IActionResult TestTable()
+        {
+            return View();
+        }
+
     }
 
 

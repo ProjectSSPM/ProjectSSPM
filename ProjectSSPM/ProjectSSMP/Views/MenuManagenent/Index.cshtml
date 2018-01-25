@@ -7,7 +7,7 @@
 
 <div class="container">
     <h2 class="well">MenuManagenent</h2>
-    <table class="table">
+    <table class="table" id="example">
         <thead>
             <tr>
                 <th>MenuName</th>
@@ -23,16 +23,20 @@
         <tbody>
             @foreach (var itme in Model)
             {
-                <tr>
-                    <td>@itme.MenuName</td>
-                    <td>@itme.MenuUrl</td>
-                    <td><i class="@itme.MenuIcon"></i></td>
-                    <td>@itme.GroupName</td>
-                    <td>
-                        &nbsp; &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
-                        <a asp-action="Edit" class="btn btn-warning btn-sm" asp-route-id="@itme.MenuId">Edit</a>
-                    </td>
-                </tr>
+            <tr >
+                
+                <td>@itme.MenuName</td>
+                
+                <td>@itme.MenuUrl</td>
+                <td><i class="@itme.MenuIcon"></i></td>
+                <td>@itme.GroupName</td>
+                <td>
+                    &nbsp; &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+                    <a asp-action="Edit" class="btn btn-warning btn-sm" asp-route-id="@itme.MenuId">Edit</a>
+                </td>
+            </tr>
+
+                    
 
 
             }
@@ -40,5 +44,7 @@
         </tbody>
     </table>
 </div>
+
+
 
 
