@@ -5,6 +5,7 @@ using System.Text.RegularExpressions;
 using System.Threading.Tasks;
 using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
+using Microsoft.AspNetCore.Mvc.Rendering;
 using Microsoft.EntityFrameworkCore;
 using ProjectSSMP.Models;
 using ProjectSSMP.Models.Menu;
@@ -16,11 +17,38 @@ namespace ProjectSSMP.Controllers
         public MenuManagenentController(sspmContext context) => this.context = context;
 
         [Authorize]
-        public async Task<IActionResult> Index()
+        public IActionResult Index()
         {
             ViewBag.userMenu = GetMenu();
-            var mm = await (from mg in context.MenuGroup select mg).ToListAsync();
-            return View(mm);
+            List<IndexMenuModel> mode = new List<IndexMenuModel>();
+            var indexmenu = (from mg in context.MenuGroup
+                             join ma in context.MenuAuthentication on mg.MenuId equals ma.MenuId
+                             join ug in context.UserGroup on ma.GroupId equals ug.GroupId
+                             select new
+                             {
+                                 MenuId=mg.MenuId,
+                                 MenuName = mg.MenuName,
+                                 MenuUrl = mg.MenuUrl,
+                                 MenuIcon = mg.MenuIcon,
+                                 GroupId = ug.GroupId,
+                                 GroupName = ug.GroupName
+                             }).ToList();
+            foreach (var item in indexmenu)
+            {
+                mode.Add(new IndexMenuModel()
+                {
+                    MenuId=item.MenuId,
+                    MenuName=item.MenuName,
+                    MenuUrl=item.MenuUrl,
+                    MenuIcon=item.MenuIcon,
+                    GroupId=item.GroupId,
+                    GroupName=item.GroupName
+                });
+
+            }
+             
+            
+            return View(mode);
         }
         public IActionResult AddMenu()
         {
@@ -72,10 +100,17 @@ namespace ProjectSSMP.Controllers
             }
             catch (Exception e)
             {
-
+                var error = e; 
             }
 
             return RedirectToAction("Index", "MenuManagenent");
         }
+        public IActionResult AddMenuAuthen()
+        {
+            ViewData["MenuGroup"] = new SelectList(context.MenuGroup, "MenuId", "MenuName");
+            return View();
+        }
+
+
     }
 }

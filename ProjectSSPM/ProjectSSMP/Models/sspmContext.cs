@@ -30,7 +30,7 @@ namespace ProjectSSMP.Models
             
         }
         public sspmContext(DbContextOptions<sspmContext> options)
-            : base(options) { }
+            : base(options){ }
 
         protected override void OnModelCreating(ModelBuilder modelBuilder)
         {
@@ -168,6 +168,8 @@ namespace ProjectSSMP.Models
                 entity.Property(e => e.ProjectName).HasMaxLength(100);
 
                 entity.Property(e => e.ProjectStart).HasColumnType("datetime");
+
+                entity.Property(e => e.ProjectStatus).HasColumnType("char(1)");
             });
 
             modelBuilder.Entity<RunningNumber>(entity =>
