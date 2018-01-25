@@ -22,5 +22,6 @@ namespace ProjectSSMP.Models
         public DateTime? ActualEnd { get; set; }
         public string Note { get; set; }
         public int? Variant { get; set; }
+        public string ProjectStatus { get; set; }
     }
 }
