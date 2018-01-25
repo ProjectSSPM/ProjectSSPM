@@ -32,10 +32,119 @@ namespace ProjectSSMP.Controllers
             return View();
         }
 
+
+
         public IActionResult CreateAll()
         {
             ViewBag.userMenu = GetMenu();
             return View();
+        }
+
+        public IActionResult CreateTask(string id)
+        {
+            ViewBag.userMenu = GetMenu();
+
+            if (id == null)
+            {
+                return NotFound();
+            }
+
+
+            List<CreateTaskInputModel> model = new List<CreateTaskInputModel>();
+
+
+            var CreateTaskInputModel = (from x in context.Task where x.ProjectNumber.Equals(id) select x);
+
+            foreach (var itme in CreateTaskInputModel)
+            {
+                
+                model.Add(new CreateTaskInputModel()
+                {
+                    ProjectNumber = id,
+                    TaskId = itme.TaskId,
+                    TaskName = itme.TaskName,
+                    TaskStart = itme.TaskStart,
+                    TaskEnd = itme.TaskEnd
+
+
+
+                });
+            }
+            ViewData["ProjectNuber"] = id;
+            return View(model);
+        }
+
+        [HttpPost]
+        [ValidateAntiForgeryToken]
+        public async Task<IActionResult> CreateTask(string pnum, CreateTaskInputModel inputModel)
+        {
+            ViewBag.userMenu = GetMenu();
+
+            try
+            {
+                
+                var id = (from u in context.RunningNumber where u.Type.Equals("TaskID") select u).FirstOrDefault();
+
+                int num;
+                if (id.Number == null)
+                {
+                    num = 100001;
+
+                }
+                else
+                {
+                    num = Convert.ToInt32(id.Number);
+                    num = num + 1;
+                }
+
+                Models.Task ord = new Models.Task
+                {
+                    ProjectNumber = inputModel.ProjectNumber,
+                    TaskId = num.ToString(),
+                    TaskName = inputModel.TaskName,
+                    TaskStart = inputModel.TaskStart,
+                    TaskEnd = inputModel.TaskEnd
+
+                };
+
+
+                // Add the new object to the Orders collection.
+                context.Task.Add(ord);
+                await context.SaveChangesAsync();
+
+
+                var query = from xx in context.RunningNumber
+                            where xx.Type.Equals("TaskId")
+                            select xx;
+
+                foreach (RunningNumber RunTaskID in query)
+                {
+                    RunTaskID.Number = num.ToString();
+
+                }
+
+                // Submit the changes to the database.
+                try
+                {
+                    await context.SaveChangesAsync();
+                }
+                catch (Exception e)
+                {
+                    Console.WriteLine(e);
+                    // Provide for exceptions.
+                }
+
+                return RedirectToAction("CreateTask", "ProjectManagement");
+
+
+
+            }
+            catch (Exception ex)
+            {
+                var message = ex.Message;
+                return View();
+            }
+ 
         }
 
         [HttpPost]
@@ -116,6 +225,8 @@ namespace ProjectSSMP.Controllers
                 return View();
             }
         }
+
+
 
         [HttpPost]
         [ValidateAntiForgeryToken]
@@ -203,6 +314,8 @@ namespace ProjectSSMP.Controllers
         }
 
     }
+
+
 
 
 }

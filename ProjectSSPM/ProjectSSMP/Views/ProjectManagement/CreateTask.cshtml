@@ -1,0 +1,120 @@
+﻿@model IEnumerable<ProjectSSMP.Models.ProjectManagement.CreateTaskInputModel>
+@{
+    ViewData["Title"] = "Project Management";
+    Layout = "~/Views/Shared/_LayoutMenu.cshtml";
+}
+
+<div class="container"> 
+    <h1 class="well">Create Task</h1>
+
+    <table class="table">
+    <thead>
+        <tr>
+                <th>
+                    Task ID
+                </th>
+                <th>
+                    Task Name
+                </th>
+
+                <th>
+                    Estimated Start
+                </th>
+                <th>
+                    Estimated End
+                </th>
+                 <th>
+                    
+                 
+                   
+                </th>
+        </tr>
+    </thead>
+    <tbody>
+        
+        
+@foreach (var item in Model) {
+        <tr>
+            <td>
+                
+                @Html.DisplayFor(modelItem => item.TaskId)
+            </td>
+            <td>
+              
+                @Html.DisplayFor(modelItem => item.TaskName)
+            </td>
+
+
+            <td>
+                
+                @Convert.ToString(string.Format("{0:dd MMMM yyyy}", item.TaskStart))
+            </td>
+            <td>
+                
+                @Convert.ToString(string.Format("{0:dd MMMM yyyy}", item.TaskEnd))
+            </td>
+            
+            <td>
+                <a asp-action="CreateTask" class="btn btn-info btn-sm" asp-route-id="@item.ProjectNumber">Add Function</a> 
+                <a asp-action="Edit" class="btn btn-warning btn-sm" asp-route-id="@item.ProjectNumber">Edit</a> 
+                <a asp-action="Update" class="btn btn-success btn-sm" asp-route-id="@item.ProjectNumber">Update</a> 
+
+            </td>
+        </tr>
+}
+    </tbody>
+
+    </table>
+
+
+
+
+<!-- Task Zone -->
+    <div class="col-lg-12 well">
+  
+                <form asp-controller="ProjectManagement" asp-action="CreateTask" method="post">
+           
+            <input type="hidden" value="@ViewData["ProjectNuber"]" name="ProjectNumber" id="ProjectNumber" />
+
+                            
+                                <div class="col-sm-8 form-group">
+                                        <label>Task Name</label>
+                                    <div class="form-group">
+                                        <input type="text" name="TaskName" id="TaskName" placeholder="Enter Task Name Here.." class="form-control">
+                                    </div>
+                                </div>
+                           
+                           <div class="col-sm-6 form-group">
+                                <label>Estimated Start Date</label>
+                                <div class="form-group">      
+                                        <div class="input-group date form_date col-md-8" data-date="" data-date-format="dd MM yyyy" data-link-field="dtp_input2" data-link-format="yyyy-mm-dd">
+                                            <input class="form-control" size="10" type="text" name="TaskStart" id="TaskStart"  readonly>
+                                            <span class="input-group-addon"><span class="glyphicon glyphicon-remove"></span></span>
+                                            <span class="input-group-addon"><span class="glyphicon glyphicon-calendar"></span></span>
+                                        </div>
+                                    </div>
+                            </div>
+
+                            <div class="col-sm-6 form-group">
+                                <label>Estimated End Date</label>
+                                <div class="form-group">      
+                                        <div class="input-group date form_date col-md-8" data-date="" data-date-format="dd MM yyyy" data-link-field="dtp_input2" data-link-format="yyyy-mm-dd">
+                                            <input class="form-control" size="10" type="text" name="TaskEnd" id="TaskEnd"  readonly>
+                                            <span class="input-group-addon"><span class="glyphicon glyphicon-remove"></span></span>
+                                            <span class="input-group-addon"><span class="glyphicon glyphicon-calendar"></span></span>
+                                        </div>
+                                    </div>
+                            </div>
+
+                     
+
+                                                 
+                        <div class= "col-sm-10 text-right" style="margin-right: 10px;">
+                            <a asp-action="Index" class="btn btn-danger" >Back</a>
+                            <button type="submit" class="btn btn-primary">Submit</button> 
+                        </div>
+                        
+                  </form>
+        </div>
+        <!-- Task Zone -->
+</div>
