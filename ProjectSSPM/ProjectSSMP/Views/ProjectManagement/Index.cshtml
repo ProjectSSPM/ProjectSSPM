@@ -1,10 +1,82 @@
-﻿@*
-    For more information on enabling MVC for empty projects, visit https://go.microsoft.com/fwlink/?LinkID=397860
-*@
+﻿@model IEnumerable<ProjectSSMP.Models.Project>
+
 @{
     ViewData["Title"] = "Project Management";
     Layout = "~/Views/Shared/_LayoutMenu.cshtml";
 }
 
-<h2>Test</h2>
-<a asp-action="CreateProject" class="btn btn-primary btn-md" style="margin-left: 15px;">Add User</a> 
+<div class="container">
+    <h2 class="well">Project Management</h2>
+
+
+<table class="table">
+    <thead>
+        <tr>
+                <th>
+                    Project ID
+                </th>
+                <th>
+                    Project Name
+                </th>
+
+                <th>
+                    Status
+                </th>
+
+                <th>
+                    Estimated Start
+                </th>
+                <th>
+                    Estimated End
+                </th>
+                 <th>
+                    
+                        <a asp-action="CreateAll" class="btn btn-primary btn-md" style="margin-left: 15px;">Create New</a>  
+                   
+                </th>
+        </tr>
+    </thead>
+    <tbody>
+        
+        
+@foreach (var item in Model) {
+        <tr>
+            <td>
+                
+                @Html.DisplayFor(modelItem => item.ProjectId)
+            </td>
+            <td>
+              
+                @Html.DisplayFor(modelItem => item.ProjectName)
+            </td>
+
+            <td>
+                
+                @Html.DisplayFor(modelItem => item.ProjectStatus)
+            </td>
+
+            <td>
+                
+                @Html.DisplayFor(modelItem => item.ProjectStart)
+            </td>
+            <td>
+                
+                @Html.DisplayFor(modelItem => item.ProjectEnd)
+            </td>
+            
+            <td>
+
+                <a asp-action="Edit" class="btn btn-warning btn-sm" asp-route-id="@item.ProjectNumber">Edit</a> 
+                <a asp-action="Add Task" class="btn btn-info btn-sm" asp-route-id="@item.ProjectNumber">Details</a> 
+
+            </td>
+        </tr>
+}
+    </tbody>
+
+</table>
+</div>
+
+
+
+
