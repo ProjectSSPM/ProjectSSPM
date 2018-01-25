@@ -107,9 +107,12 @@ namespace ProjectSSMP.Controllers
         }
         public IActionResult AddMenuAuthen()
         {
+            ViewBag.userMenu = GetMenu();
+            ViewData["UserGroup"] = new SelectList(context.UserGroup, "GroupId", "GroupName");
             ViewData["MenuGroup"] = new SelectList(context.MenuGroup, "MenuId", "MenuName");
             return View();
         }
+        
 
 
     }
