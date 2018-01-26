@@ -36,8 +36,11 @@
 @foreach (var item in Model) {
         <tr>
             <td>
-                
-                @Html.DisplayFor(modelItem => item.TaskId)
+                @{ 
+                    var tavkid = item.TaskId.Split("10000");
+
+                }
+                @Html.Raw(tavkid[1])
             </td>
             <td>
               

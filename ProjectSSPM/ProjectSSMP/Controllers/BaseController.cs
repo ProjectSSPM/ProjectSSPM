@@ -31,7 +31,7 @@ namespace ProjectSSMP.Controllers
                                 MenuUrl  =  mg.MenuUrl,
                                 MenuIcon = mg.MenuIcon
                             }).ToList();
-
+            
             
             return userMenu; ;
         }

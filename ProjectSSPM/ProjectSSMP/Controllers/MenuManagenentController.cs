@@ -46,8 +46,24 @@ namespace ProjectSSMP.Controllers
                 });
 
             }
-             
-            
+            //var indexmenu2 = (from mg in context.MenuGroup
+            //                 join ma in context.MenuAuthentication on mg.MenuId equals ma.MenuId
+            //                 join ug in context.UserGroup on ma.GroupId equals ug.GroupId
+            //                 group ma by ma.MenuId into mag
+            //                 orderby mag.Key
+            //                 select new
+            //                 {
+            //                     mag.Key,
+            //                     mag
+            //                     //MenuId = mgg.MenuId,
+            //                     //MenuName = mg.MenuName,
+            //                     //MenuUrl = mg.MenuUrl,
+            //                     //MenuIcon = mg.MenuIcon,
+            //                     //GroupId = ug.GroupId,
+            //                     //GroupName = ug.GroupName
+            //                 }).ToList();
+
+
             return View(mode);
         }
         public IActionResult AddMenu()
