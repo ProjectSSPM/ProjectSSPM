@@ -346,6 +346,80 @@ namespace ProjectSSMP.Controllers
 
         }
 
+        [HttpPost]
+        [ValidateAntiForgeryToken]
+        public async Task<IActionResult> CreateFunction(string pnum, CreateFunctionInputModel inputModel)
+        {
+            ViewBag.userMenu = GetMenu();
+
+            try
+            {
+
+                var id = (from u in context.RunningNumber where u.Type.Equals("FunctionID") select u).FirstOrDefault();
+
+                int num;
+                if (id.Number == null)
+                {
+                    num = 100001;
+
+                }
+                else
+                {
+                    num = Convert.ToInt32(id.Number);
+                    num = num + 1;
+                }
+
+                Models.Function ord = new Models.Function
+                {
+                    ProjectNumber = inputModel.ProjectNumber,
+                    TaskId = inputModel.TaskId,
+                    FunctionName = inputModel.FunctionName,
+                    FunctionStart = inputModel.FunctionStart,
+                    FunctionEnd = inputModel.FunctionEnd,
+                    FunctionId = num.ToString()
+
+                };
+
+
+                // Add the new object to the Orders collection.
+                context.Function.Add(ord);
+                await context.SaveChangesAsync();
+
+
+                var query = from xx in context.RunningNumber
+                            where xx.Type.Equals("FunctionID")
+                            select xx;
+
+                foreach (RunningNumber RunFunctionID in query)
+                {
+                    RunFunctionID.Number = num.ToString();
+
+                }
+
+                // Submit the changes to the database.
+                try
+                {
+                    await context.SaveChangesAsync();
+                }
+                catch (Exception e)
+                {
+                    Console.WriteLine(e);
+                    // Provide for exceptions.
+                }
+
+                return RedirectToAction("CreateFunction", "ProjectManagement");
+
+
+
+            }
+            catch (Exception ex)
+            {
+                var message = ex.Message;
+                return View();
+            }
+
+        }
+
     }
 
 
