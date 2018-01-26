@@ -19,8 +19,4 @@
   <ItemGroup>
     <Compile Remove="Controllers\Project.cs" />
   </ItemGroup>
-  <ItemGroup>
-    <Folder Include="Views\ProjectManagement\" />
-    <Folder Include="Models\ProjectManagement\" />
-  </ItemGroup>
 </Project>
