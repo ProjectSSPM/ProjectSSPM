@@ -26,6 +26,38 @@ namespace ProjectSSMP.Controllers
             return View(await context.Project.ToListAsync());
         }
 
+        public async Task<IActionResult> EditProject(string id)
+        {
+            ViewBag.userMenu = GetMenu();
+
+            if (id == null)
+            {
+                return NotFound();
+            }
+
+            var Project = await context.Project.SingleOrDefaultAsync(m => m.ProjectNumber == id);
+
+            var e = new CreateProjectInputModel()
+            {
+                ProjectNumber = Project.ProjectNumber,
+                ProjectId = Project.ProjectId,
+                ProjectName = Project.ProjectName,
+                ProjectManager = Project.ProjectManager,
+                ProjectCost = Project.ProjectCost,
+                ProjectStart = Project.ProjectStart,
+                ProjectEnd = Project.ProjectEnd,
+                CustomerTel = Project.CustomerTel,
+                CustomerName = Project.CustomerName
+
+            };
+
+            if (Project == null)
+            {
+                return NotFound();
+            }
+            return View(e);
+        }
+
         public IActionResult CreateProject()
         {
             ViewBag.userMenu = GetMenu();
