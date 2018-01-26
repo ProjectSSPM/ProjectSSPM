@@ -1,6 +1,6 @@
 ﻿$(document).ready(function () {
     //Initialize tooltips
-    $('.nav-tabs > li a[title]').tooltip();
+    //$('.nav-tabs > li a[title]').tooltip();
     
     //Wizard
     $('a[data-toggle="tab"]').on('show.bs.tab', function (e) {

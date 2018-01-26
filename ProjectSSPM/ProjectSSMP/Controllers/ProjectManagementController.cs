@@ -311,9 +311,39 @@ namespace ProjectSSMP.Controllers
         }
 
 
-        public IActionResult TestTable()
+        public IActionResult CreateFunction(string id)
         {
-            return View();
+            ViewBag.userMenu = GetMenu();
+
+            if (id == null)
+            {
+                return NotFound();
+            }
+            List<CreateFunctionInputModel> model = new List<CreateFunctionInputModel>();
+            var projectnumber = (from t in context.Task where t.TaskId.Equals(id) select t).FirstOrDefault();
+
+            var CreateFunction = (from x in context.Function where x.TaskId.Equals(id) 
+                                  select x);
+
+            foreach (var itme in CreateFunction)
+            {
+
+                model.Add(new CreateFunctionInputModel()
+                {
+                   FunctionId = itme.FunctionId,
+                   ProjectNumber = projectnumber.ProjectNumber,
+                   TaskId = itme.TaskId,
+                   FunctionName = itme.FunctionName,
+                   FunctionStart = itme.FunctionStart,
+                   FunctionEnd = itme.FunctionEnd
+
+                });
+            }
+            ViewData["ProjectNuber"] = projectnumber.ProjectNumber;
+            ViewData["TaskId"] = id;
+            return View(model);
+
+
         }
 
     }
