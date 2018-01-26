@@ -7,43 +7,50 @@
 
 <div class="container">
     <h2 class="well">MenuManagenent</h2>
-    <table class="table" id="example">
-        <thead>
-            <tr>
-                <th>MenuName</th>
-                <th>MenuURL</th>
-                <th>MenuIcon</th>
-                <th>Group User</th>
-                <th>
-                    <a asp-action="AddMenu" class="btn btn-primary btn-md" style="margin-left: 15px;">Add Menu</a>
-                    <a asp-action="AddMenu" class="btn btn-primary btn-md" style="margin-left: 15px;">Add Menu Authen</a>
-                </th>
-            </tr>
-        </thead>
-        <tbody>
-            @foreach (var itme in Model)
-            {
-            <tr >
-                
-                <td>@itme.MenuName</td>
-                
-                <td>@itme.MenuUrl</td>
-                <td><i class="@itme.MenuIcon"></i></td>
-                <td>@itme.GroupName</td>
-                <td>
-                    &nbsp; &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
-                    <a asp-action="Edit" class="btn btn-warning btn-sm" asp-route-id="@itme.MenuId">Edit</a>
-                </td>
-            </tr>
+    <table id="example" class="responsive" >
+    <thead>
+        <tr>
+            <th class="all">MenuName</th>
+            <th class="all">MenuURL</th>
+            <th class="all">MenuIcon</th>
+            <th class="none">Group User</th>
+            <th class="all">
+                <a asp-action="AddMenu" class="btn btn-primary btn-md" style="margin-left: 15px;">Add Menu</a>
+                <a asp-action="AddMenu" class="btn btn-primary btn-md" style="margin-left: 15px;">Add Menu Authen</a>
+            </th>
 
-                    
+        </tr>
+    </thead>
+
+  
+    <tbody> 
+        @foreach(var item in Model)
+        {
+        <tr>
+            <td>@item.MenuName</td>
+            <td>@item.MenuUrl</td>
+            <td><i class="@item.MenuIcon"></i></td>
+            <td>@item.GroupName</td>
+            <td>
+                &nbsp; &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+                <a asp-action="Edit" class="btn btn-warning btn-sm" asp-route-id="@item.MenuId">Edit</a>
+            </td>
+
+        </tr>
 
 
-            }
+        }
 
-        </tbody>
-    </table>
+       
+       
+      
+    </tbody>
+</table>
 </div>
+
+
+
+
 
 
 
