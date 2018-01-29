@@ -61,6 +61,37 @@ namespace ProjectSSMP.Controllers
         }
 
         [Authorize]
+        public async Task<IActionResult> EditFunction(string id)
+        {
+
+            ViewBag.userMenu = GetMenu();
+
+            if (id == null)
+            {
+                return NotFound();
+            }
+
+            var Function = await context.Function.SingleOrDefaultAsync(m => m.FunctionId == id);
+
+            var e = new CreateFunctionInputModel
+            {
+                ProjectNumber = Function.ProjectNumber,
+                TaskId = Function.TaskId,
+                FunctionName = Function.FunctionName,
+                FunctionStart = Function.FunctionStart,
+                FunctionEnd = Function.FunctionEnd,
+                FunctionId = Function.FunctionId
+
+            };
+
+            if (Function == null)
+            {
+                return NotFound();
+            }
+            return View(e);
+        }
+
+        [Authorize]
         public async Task<IActionResult> EditTask(string id)
         {
 
@@ -89,6 +120,50 @@ namespace ProjectSSMP.Controllers
             }
             return View(e);
         }
+        [HttpPost]
+        [ValidateAntiForgeryToken]
+        public async Task<IActionResult> EditFunction(string id, CreateFunctionInputModel editModel)
+        {
+            var loggedInUser = HttpContext.User;
+            var loggedInUserName = loggedInUser.Identity.Name;
+            ViewBag.userMenu = GetMenu();
+
+
+            var query = (from x in context.Function where x.FunctionId.Equals(id) select x).FirstOrDefault();
+            if (id != query.FunctionId)
+            {
+                return NotFound();
+            }
+
+            if (ModelState.IsValid)
+            {
+
+                try
+                {
+                    //context.Update(ord);
+                    var addquery = from test in context.Function
+                                   where test.FunctionId.Equals(id)
+                                   select test;
+                    foreach (Models.Function UserUpdate in addquery)
+                    {
+                        UserUpdate.FunctionName = editModel.FunctionName;
+                        UserUpdate.FunctionEnd = editModel.FunctionEnd;
+                        UserUpdate.FunctionStart = editModel.FunctionStart;
+
+                    }
+                    await context.SaveChangesAsync();
+
+                }
+                catch (DbUpdateConcurrencyException)
+                {
+                    throw;
+                }
+                return RedirectToAction(nameof(Index));
+            }
+            return View(query.FunctionId);
+        }
+
+
         [HttpPost]
         [ValidateAntiForgeryToken]
         public async Task<IActionResult> EditTask(string id, CreateTaskInputModel editModel)

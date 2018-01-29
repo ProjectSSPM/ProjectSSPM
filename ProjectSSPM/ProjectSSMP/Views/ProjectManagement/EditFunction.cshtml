@@ -1,0 +1,51 @@
+﻿@model ProjectSSMP.Models.ProjectManagement.CreateFunctionInputModel
+
+
+@{
+    ViewData["Title"] = "Edit Function";
+    Layout = "~/Views/Shared/_LayoutMenu.cshtml";
+}
+
+
+<div class="container">
+    <h2 class="well">Edit Function</h2>
+    <div class="col-lg-12 well">
+    <div class="row">
+            <form asp-controller="ProjectManagement" asp-action="EditFunction" method="post">
+                        <input type="hidden" asp-for="ProjectNumber" />
+                        <input type="hidden" asp-for="TaskId" />
+                        <input type="hidden" asp-for="FunctionId" />
+                                <div class="col-sm-8 form-group">
+                                        <label>Task Name</label>
+                                    <div class="form-group">
+                                        <input type="text" asp-for="FunctionName" name="FunctionName" id="FunctionName" placeholder="Enter Function Name Here.." class="form-control">
+                                    </div>
+                                </div>
+                       
+                                <div class="col-sm-10 form-group">
+                                <label>Estimated Start Date</label>
+                                <div class="form-group">      
+                                        <div class="input-group date form_date col-md-8" data-date="" data-date-format="dd MM yyyy" data-link-field="dtp_input2" data-link-format="yyyy-mm-dd">
+                                            <input class="form-control" size="10" type="text" asp-for="FunctionStart" name="FunctionStart" id="FunctionStart"  readonly>
+                                            <span class="input-group-addon"><span class="glyphicon glyphicon-remove"></span></span>
+                                            <span class="input-group-addon"><span class="glyphicon glyphicon-calendar"></span></span>
+                                        </div>
+                                    </div>
+                            </div>
+
+                            <div class="col-sm-10 form-group">
+                                <label>Estimated End Date</label>
+                                <div class="form-group">      
+                                        <div class="input-group date form_date col-md-8" data-date="" data-date-format="dd MM yyyy" data-link-field="dtp_input2" data-link-format="yyyy-mm-dd">
+                                            <input class="form-control" size="10" type="text" asp-for="FunctionEnd" name="FunctionEnd" id="FunctionEnd"  readonly>
+                                            <span class="input-group-addon"><span class="glyphicon glyphicon-remove"></span></span>
+                                            <span class="input-group-addon"><span class="glyphicon glyphicon-calendar"></span></span>
+                                        </div>
+                                    </div>
+                            </div>
+                            <div class= "col-sm-12 text-right">
+                            <button type="submit" class="btn btn-primary">Submit</button> 
+                        </div>
+                        
+                    </form>
+            
