@@ -10,7 +10,8 @@ namespace ProjectSSMP.Models.Menu
         public string MenuId { get; set; }
         public string MenuName { get; set; }
         public string MenuUrl { get; set; }
-        public string MenuIcon { get; set; }        
-        public List<UserGroup> GroupName { get; set; }
+        public string MenuIcon { get; set; }
+        public string GroupId { get; set; }
+        public string GroupName { get; set; }
     }
 }
