@@ -42,8 +42,8 @@ namespace ProjectSSMP.Controllers
                     MenuName=item.MenuName,
                     MenuUrl=item.MenuUrl,
                     MenuIcon=item.MenuIcon,
-                    GroupId=item.GroupId,
-                    GroupName=item.GroupName
+                    
+                    
                 });
 
             }
@@ -51,17 +51,35 @@ namespace ProjectSSMP.Controllers
                               
                               
                               
-                              select new
+                              select new 
                               {
                                   mg.MenuId,
                                   mg.MenuName,
                                   mg.MenuUrl,
                                   mg.MenuIcon,
-                                  
+                                  groupuser = (from ma in context.MenuAuthentication 
+                                               join ug in context.UserGroup on ma.GroupId equals ug.GroupId
+                                               where ma.MenuId.Equals(mg.MenuId) select new {
+                                                   ug.GroupId,
+                                                   ug.GroupName
+                                               })
 
 
                                   
                               }).ToList();
+            foreach (var item in indexmenu2)
+            {
+                mode.Add(new IndexMenuModel()
+                {
+                    MenuId = item.MenuId,
+                    MenuName = item.MenuName,
+                    MenuUrl = item.MenuUrl,
+                    MenuIcon = item.MenuIcon,
+                   
+
+                });
+
+            }
 
 
             return View(mode);
