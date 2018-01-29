@@ -20,6 +20,7 @@ namespace ProjectSSMP.Controllers
         [Authorize]
         public IActionResult Index()
         {
+            
             ViewBag.userMenu = GetMenu();
             List<IndexUserModel> model = new List<IndexUserModel>();
 
@@ -66,11 +67,12 @@ namespace ProjectSSMP.Controllers
 
         }
 
-
+        [Authorize]
         public IActionResult AddUser()
         {
 
 
+            
             ViewBag.userMenu = GetMenu();
 
             return View();
@@ -80,6 +82,7 @@ namespace ProjectSSMP.Controllers
         [ValidateAntiForgeryToken]
         public async Task<IActionResult> AddUser(AddUserInputModel inputModel)
         {
+            
             ViewBag.userMenu = GetMenu();
 
             try
@@ -160,9 +163,10 @@ namespace ProjectSSMP.Controllers
                 return View();
             }
         }
-
+        [Authorize]
         public async Task<IActionResult> Edit(string id)
         {
+            
             ViewBag.userMenu = GetMenu();
 
             if (id == null)
@@ -200,10 +204,11 @@ namespace ProjectSSMP.Controllers
 
         public async Task<IActionResult> Edit(string id, EditUserInputModel editModel)
         {
-            ViewBag.userMenu = GetMenu();
-
             var loggedInUser = HttpContext.User;
             var loggedInUserName = loggedInUser.Identity.Name;
+            ViewBag.userMenu = GetMenu();
+
+            
 
             var query = (from x in context.UserSspm where x.UserId.Equals(id) select x).FirstOrDefault();
             if (id != query.UserId)
@@ -272,9 +277,10 @@ namespace ProjectSSMP.Controllers
         {
             return context.UserSspm.Any(e => e.UserId == id);
         }
-
+        [Authorize]
         public async Task<IActionResult> Details(string id)
         {
+            
             ViewBag.userMenu = GetMenu();
 
             if (id == null)

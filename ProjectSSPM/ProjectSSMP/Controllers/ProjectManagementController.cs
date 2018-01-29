@@ -21,13 +21,15 @@ namespace ProjectSSMP.Controllers
         [Authorize]
         public async Task<IActionResult> Index()
         {
+            
             ViewBag.userMenu = GetMenu();
 
             return View(await context.Project.ToListAsync());
         }
-
+        [Authorize]
         public async Task<IActionResult> EditProject(string id)
         {
+           
             ViewBag.userMenu = GetMenu();
 
             if (id == null)
@@ -57,26 +59,29 @@ namespace ProjectSSMP.Controllers
             }
             return View(e);
         }
-
+        [Authorize]
         public IActionResult CreateProject()
         {
+            
             ViewBag.userMenu = GetMenu();
             return View();
         }
 
 
-
+        [Authorize]
         public IActionResult CreateAll()
         {
+            
             ViewBag.userMenu = GetMenu();
             return View();
         }
 
 
 
-
+        [Authorize]
         public IActionResult CreateTask(string id)
         {
+            
             ViewBag.userMenu = GetMenu();
 
             if (id == null)
@@ -113,6 +118,7 @@ namespace ProjectSSMP.Controllers
         [ValidateAntiForgeryToken]
         public async Task<IActionResult> CreateTask(string pnum, CreateTaskInputModel inputModel)
         {
+            
             ViewBag.userMenu = GetMenu();
 
             try
@@ -186,11 +192,13 @@ namespace ProjectSSMP.Controllers
         [ValidateAntiForgeryToken]
         public async Task<IActionResult> CreateProject(CreateProjectInputModel inputModel)
         {
+           
             ViewBag.userMenu = GetMenu();
             try
             {
                 var loggedInUser = HttpContext.User;
                 var loggedInUserName = loggedInUser.Identity.Name;
+
                 var id = (from u in context.RunningNumber where u.Type.Equals("ProjectNumber") select u).FirstOrDefault();
 
                 int num;
@@ -267,11 +275,13 @@ namespace ProjectSSMP.Controllers
         [ValidateAntiForgeryToken]
         public async Task<IActionResult> CreateAll(CreateProjectInputModel inputModel)
         {
+           
             ViewBag.userMenu = GetMenu();
             try
             {
                 var loggedInUser = HttpContext.User;
                 var loggedInUserName = loggedInUser.Identity.Name;
+
                 var id = (from u in context.RunningNumber where u.Type.Equals("ProjectNumber") select u).FirstOrDefault();
 
                 int num;
@@ -342,9 +352,10 @@ namespace ProjectSSMP.Controllers
             }
         }
 
-
+        [Authorize]
         public IActionResult CreateFunction(string id)
         {
+            
             ViewBag.userMenu = GetMenu();
 
             if (id == null)
@@ -382,6 +393,7 @@ namespace ProjectSSMP.Controllers
         [ValidateAntiForgeryToken]
         public async Task<IActionResult> CreateFunction(string pnum, CreateFunctionInputModel inputModel)
         {
+            
             ViewBag.userMenu = GetMenu();
 
             try

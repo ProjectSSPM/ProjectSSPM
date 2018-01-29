@@ -18,8 +18,7 @@ namespace ProjectSSMP.Controllers
         [Authorize]
         public IActionResult Index()
         {
-            
-
+                            
             ViewBag.userMenu = GetMenu();
             
             

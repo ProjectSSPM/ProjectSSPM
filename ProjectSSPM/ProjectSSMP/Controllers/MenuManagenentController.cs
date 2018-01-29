@@ -19,6 +19,7 @@ namespace ProjectSSMP.Controllers
         [Authorize]
         public IActionResult Index()
         {
+            
             ViewBag.userMenu = GetMenu();
             List<IndexMenuModel> mode = new List<IndexMenuModel>();
             var indexmenu = (from mg in context.MenuGroup
@@ -46,28 +47,30 @@ namespace ProjectSSMP.Controllers
                 });
 
             }
-            //var indexmenu2 = (from mg in context.MenuGroup
-            //                 join ma in context.MenuAuthentication on mg.MenuId equals ma.MenuId
-            //                 join ug in context.UserGroup on ma.GroupId equals ug.GroupId
-            //                 group ma by ma.MenuId into mag
-            //                 orderby mag.Key
-            //                 select new
-            //                 {
-            //                     mag.Key,
-            //                     mag
-            //                     //MenuId = mgg.MenuId,
-            //                     //MenuName = mg.MenuName,
-            //                     //MenuUrl = mg.MenuUrl,
-            //                     //MenuIcon = mg.MenuIcon,
-            //                     //GroupId = ug.GroupId,
-            //                     //GroupName = ug.GroupName
-            //                 }).ToList();
+            var indexmenu2 = (from mg in context.MenuGroup
+                              
+                              
+                              
+                              select new
+                              {
+                                  mg.MenuId,
+                                  mg.MenuName,
+                                  mg.MenuUrl,
+                                  mg.MenuIcon,
+                                  
+
+
+                                  
+                              }).ToList();
 
 
             return View(mode);
         }
+
+        [Authorize]
         public IActionResult AddMenu()
         {
+            
             ViewBag.userMenu = GetMenu();
             return View();
         }
@@ -75,6 +78,7 @@ namespace ProjectSSMP.Controllers
         [ValidateAntiForgeryToken]
         public async Task<IActionResult> AddMenu(AddMenuModel addMenu)
         {
+            
             ViewBag.userMenu = GetMenu();
             try
             {
@@ -121,8 +125,10 @@ namespace ProjectSSMP.Controllers
 
             return RedirectToAction("Index", "MenuManagenent");
         }
+        [Authorize]
         public IActionResult AddMenuAuthen()
         {
+            
             ViewBag.userMenu = GetMenu();
             ViewData["UserGroup"] = new SelectList(context.UserGroup, "GroupId", "GroupName");
             ViewData["MenuGroup"] = new SelectList(context.MenuGroup, "MenuId", "MenuName");

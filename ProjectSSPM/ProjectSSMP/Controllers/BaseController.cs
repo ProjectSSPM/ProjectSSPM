@@ -16,6 +16,7 @@ namespace ProjectSSMP.Controllers
         
         public List<GetMenuModelcs>  GetMenu()
         {
+
             var loggedInUser = HttpContext.User;
             var loggedInUserName = loggedInUser.Identity.Name;
             var userid = (from u in context.UserSspm where u.Username.Equals(loggedInUserName) select u).FirstOrDefault();
