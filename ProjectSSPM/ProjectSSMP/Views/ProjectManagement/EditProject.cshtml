@@ -8,7 +8,7 @@
 
 
 <div class="container">
-    <h2 class="well">Edit User</h2>
+    <h2 class="well">Edit Project</h2>
     <div class="col-lg-12 well">
     <div class="row">
                 <form asp-controller="ProjectManagement" asp-action="EditProject" method="post">
@@ -50,7 +50,7 @@
                                     </div>
                             </div>
                     
-                        <div class="row">
+                        
                             <div class="col-sm-6 form-group">
                                 <label asp-for="ProjectManager" class="control-label"></label>
                                 <input asp-for="ProjectManager" class="form-control" />
@@ -61,8 +61,7 @@
                                 <input asp-for="ProjectCost" class="form-control" />
                                 <span asp-validation-for="ProjectCost" class="text-danger"></span>
                             </div>
-                        </div>   
-                        <div class="row">
+                        
                             <div class="col-sm-6 form-group">
                                 <label asp-for="CustomerName" class="control-label"></label>
                                 <input asp-for="CustomerName" class="form-control" />
@@ -73,14 +72,14 @@
                                 <input asp-for="CustomerTel" class="form-control" />
                                 <span asp-validation-for="CustomerTel" class="text-danger"></span>
                             </div>
-                        </div>   
+                         
                          
                         
 
 
 
                     
-                    <div class="form-group">
+                    <div class="col-sm-12 form-group">
                         <div class= "text-right" style="margin-right: 10px;">
                             
                             <a asp-action="Index" class="btn btn-danger" >Back</a>
