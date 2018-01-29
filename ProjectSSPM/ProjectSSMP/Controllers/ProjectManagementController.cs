@@ -59,6 +59,134 @@ namespace ProjectSSMP.Controllers
             }
             return View(e);
         }
+
+        [Authorize]
+        public async Task<IActionResult> EditTask(string id)
+        {
+
+            ViewBag.userMenu = GetMenu();
+
+            if (id == null)
+            {
+                return NotFound();
+            }
+
+            var Task = await context.Task.SingleOrDefaultAsync(m => m.TaskId == id);
+
+            var e = new CreateTaskInputModel()
+            {
+                ProjectNumber = Task.ProjectNumber,
+                TaskId = Task.TaskId,
+                TaskName = Task.TaskName,
+                TaskStart = Task.TaskStart,
+                TaskEnd = Task.TaskEnd,
+
+            };
+
+            if (Task == null)
+            {
+                return NotFound();
+            }
+            return View(e);
+        }
+        [HttpPost]
+        [ValidateAntiForgeryToken]
+        public async Task<IActionResult> EditTask(string id, CreateTaskInputModel editModel)
+        {
+            var loggedInUser = HttpContext.User;
+            var loggedInUserName = loggedInUser.Identity.Name;
+            ViewBag.userMenu = GetMenu();
+
+
+            var query = (from x in context.Task where x.TaskId.Equals(id) select x).FirstOrDefault();
+            if (id != query.TaskId)
+            {
+                return NotFound();
+            }
+
+            if (ModelState.IsValid)
+            {
+
+                try
+                {
+                    //context.Update(ord);
+                    var addquery = from test in context.Task
+                                                           where test.TaskId.Equals(id)
+                                   select test;
+                    foreach (Models.Task UserUpdate in addquery)
+                    {
+                        UserUpdate.TaskName = editModel.TaskName;
+                        UserUpdate.TaskEnd = editModel.TaskEnd;
+                        UserUpdate.TaskStart = editModel.TaskStart;
+
+                    }
+                    await context.SaveChangesAsync();
+
+                }
+                catch (DbUpdateConcurrencyException)
+                {
+                    throw;
+                }
+                return RedirectToAction(nameof(Index));
+            }
+            return View(query.TaskId);
+        }
+
+
+
+        [HttpPost]
+        [ValidateAntiForgeryToken]
+        public async Task<IActionResult> EditProject(string id, CreateProjectInputModel editModel)
+        {
+            var loggedInUser = HttpContext.User;
+            var loggedInUserName = loggedInUser.Identity.Name;
+            ViewBag.userMenu = GetMenu();
+
+
+            var query = (from x in context.Project where x.ProjectNumber.Equals(id) select x).FirstOrDefault();
+            if (id != query.ProjectNumber)
+            {
+                return NotFound();
+            }
+
+            if (ModelState.IsValid)
+            {
+
+                try
+                {
+                    //context.Update(ord);
+                    var addquery = from test in context.Project
+                                                           where test.ProjectNumber.Equals(id)
+                                                            select test;
+                    foreach (Project UserUpdate in addquery)
+                    {
+                        UserUpdate.ProjectId = editModel.ProjectId;
+                        UserUpdate.ProjectName = editModel.ProjectName;
+                        UserUpdate.ProjectStart = editModel.ProjectStart;
+                        UserUpdate.ProjectEnd = editModel.ProjectEnd;
+                        UserUpdate.ProjectManager = editModel.ProjectManager;
+                        UserUpdate.ProjectEditBy = loggedInUserName;
+                        UserUpdate.ProjectEditDate = DateTime.Now;
+                        UserUpdate.ProjectCost = editModel.ProjectCost;
+                        UserUpdate.CustomerName = editModel.CustomerName;
+                        UserUpdate.CustomerTel = editModel.CustomerTel;
+
+                    }
+                    await context.SaveChangesAsync();
+
+                }
+                catch (DbUpdateConcurrencyException)
+                {
+                    throw;
+                }
+                return RedirectToAction(nameof(Index));
+            }
+            return View(query.ProjectNumber);
+        }
+
+
+
+
         [Authorize]
         public IActionResult CreateProject()
         {
