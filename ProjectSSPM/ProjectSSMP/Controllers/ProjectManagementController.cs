@@ -72,6 +72,7 @@ namespace ProjectSSMP.Controllers
             }
 
             var Function = await context.Function.SingleOrDefaultAsync(m => m.FunctionId == id);
+            var Teamtask = await context.TeamTask.SingleOrDefaultAsync(m => m.FunctionId == id);
 
             var e = new CreateFunctionInputModel
             {
@@ -80,7 +81,9 @@ namespace ProjectSSMP.Controllers
                 FunctionName = Function.FunctionName,
                 FunctionStart = Function.FunctionStart,
                 FunctionEnd = Function.FunctionEnd,
-                FunctionId = Function.FunctionId
+                FunctionId = Function.FunctionId,
+                UserId = Teamtask.UserId,
+                ProjectResponsible = Teamtask.ProjectResponsible
 
             };
 
@@ -152,6 +155,9 @@ namespace ProjectSSMP.Controllers
 
                     }
                     await context.SaveChangesAsync();
+
+ 
+
 
                 }
                 catch (DbUpdateConcurrencyException)
@@ -656,12 +662,34 @@ namespace ProjectSSMP.Controllers
                 try
                 {
                     await context.SaveChangesAsync();
+                    try
+                    {
+                        Models.TeamTask ord2 = new Models.TeamTask
+                        {
+                            FunctionId = num.ToString(),
+                            UserId = inputModel.UserId,
+                            ProjectResponsible = inputModel.ProjectResponsible,
+                            TaskId = inputModel.TaskId,
+                            ProjectNumber = inputModel.ProjectNumber
+
+                        };
+
+                        context.TeamTask.Add(ord2);
+                        await context.SaveChangesAsync();
+                    }
+                    catch (Exception x)
+                    {
+                        Console.WriteLine(x);
+                    }
                 }
                 catch (Exception e)
                 {
                     Console.WriteLine(e);
                     // Provide for exceptions.
                 }
+
+
+
 
                 return RedirectToAction("CreateFunction", "ProjectManagement");
 

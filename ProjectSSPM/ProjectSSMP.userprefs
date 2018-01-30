@@ -1,8 +1,15 @@
 ﻿<Properties StartupConfiguration="{99528461-6D99-4BA1-9100-7145EEE92C3D}|Default">
-  <MonoDevelop.Ide.Workbench />
+  <MonoDevelop.Ide.Workbench>
+    <Files>
+      <File FileName="ProjectSSMP/Models/ProjectManagement/CreateFunctionInputModel.cs" Line="17" Column="41" />
+      <File FileName="ProjectSSMP/Models/TeamTask.cs" Line="10" Column="41" />
+    </Files>
+  </MonoDevelop.Ide.Workbench>
   <MonoDevelop.Ide.Workspace ActiveConfiguration="Debug" />
   <MonoDevelop.Ide.DebuggingService.Breakpoints>
-    <BreakpointStore />
+    <BreakpointStore>
+      <Breakpoint file="/Users/Palm/Desktop/ProjectSSPM/ProjectSSPM/ProjectSSMP/Controllers/ProjectManagementController.cs" relfile="ProjectSSMP/Controllers/ProjectManagementController.cs" line="675" column="1" />
+    </BreakpointStore>
   </MonoDevelop.Ide.DebuggingService.Breakpoints>
   <MonoDevelop.Ide.DebuggingService.PinnedWatches />
   <MonoDevelop.Ide.ItemProperties.ProjectSSMP PreferredExecutionTarget="MonoDevelop.Default" />
