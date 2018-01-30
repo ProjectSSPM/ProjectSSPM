@@ -1,4 +1,5 @@
 ﻿@model IEnumerable<ProjectSSMP.Models.ProjectManagement.CreateFunctionInputModel>
+
 @{
     ViewData["Title"] = "Create Function";
     Layout = "~/Views/Shared/_LayoutMenu.cshtml";
@@ -100,38 +101,55 @@
                 
 
                     <div class="modal-body col-lg-12">
-                    <form asp-controller="ProjectManagement" asp-action="CreateFunction" method="post">
-                        <input type="hidden" value="@ViewData["ProjectNuber"]" name="ProjectNumber" id="ProjectNumber" />
-                        <input type="hidden" value="@ViewData["TaskId"]" name="TaskId" id="TaskId" />
+                        <form asp-controller="ProjectManagement" asp-action="CreateFunction" method="post">
+                            <input type="hidden" value="@ViewData["ProjectNuber"]" name="ProjectNumber" id="ProjectNumber" />
+                            <input type="hidden" value="@ViewData["TaskId"]" name="TaskId" id="TaskId" />
 
-                                <div class="col-sm-8 form-group">
-                                        <label>Function Name</label>
-                                    <div class="form-group">
-                                        <input type="text" name="FunctionName" id="FunctionName" placeholder="Enter Task Name Here.." class="form-control">
+                            <div class="col-sm-8 form-group">
+                                <label>Function Name</label>
+                                <div class="form-group">
+                                    <input type="text" name="FunctionName" id="FunctionName" placeholder="Enter Task Name Here.." class="form-control">
+                                </div>
+                            </div>
+
+                            <div class="col-sm-10 form-group">
+                                <label>Estimated Start Date</label>
+                                <div class="form-group">
+                                    <div class="input-group date form_date col-md-8" data-date="" data-date-format="dd MM yyyy" data-link-field="dtp_input2" data-link-format="yyyy-mm-dd">
+                                        <input class="form-control" size="10" type="text" name="FunctionStart" id="FunctionStart" readonly>
+                                        <span class="input-group-addon"><span class="glyphicon glyphicon-remove"></span></span>
+                                        <span class="input-group-addon"><span class="glyphicon glyphicon-calendar"></span></span>
                                     </div>
                                 </div>
-                       
-                                <div class="col-sm-10 form-group">
-                                <label>Estimated Start Date</label>
-                                <div class="form-group">      
-                                        <div class="input-group date form_date col-md-8" data-date="" data-date-format="dd MM yyyy" data-link-field="dtp_input2" data-link-format="yyyy-mm-dd">
-                                            <input class="form-control" size="10" type="text" name="FunctionStart" id="FunctionStart"  readonly>
-                                            <span class="input-group-addon"><span class="glyphicon glyphicon-remove"></span></span>
-                                            <span class="input-group-addon"><span class="glyphicon glyphicon-calendar"></span></span>
-                                        </div>
-                                    </div>
                             </div>
 
                             <div class="col-sm-10 form-group">
                                 <label>Estimated End Date</label>
-                                <div class="form-group">      
-                                        <div class="input-group date form_date col-md-8" data-date="" data-date-format="dd MM yyyy" data-link-field="dtp_input2" data-link-format="yyyy-mm-dd">
-                                            <input class="form-control" size="10" type="text" name="FunctionEnd" id="FunctionEnd"  readonly>
-                                            <span class="input-group-addon"><span class="glyphicon glyphicon-remove"></span></span>
-                                            <span class="input-group-addon"><span class="glyphicon glyphicon-calendar"></span></span>
-                                        </div>
+                                <div class="form-group">
+                                    <div class="input-group date form_date col-md-8" data-date="" data-date-format="dd MM yyyy" data-link-field="dtp_input2" data-link-format="yyyy-mm-dd">
+                                        <input class="form-control" size="10" type="text" name="FunctionEnd" id="FunctionEnd" readonly>
+                                        <span class="input-group-addon"><span class="glyphicon glyphicon-remove"></span></span>
+                                        <span class="input-group-addon"><span class="glyphicon glyphicon-calendar"></span></span>
                                     </div>
+                                </div>
                             </div>
+<<<<<<< HEAD
+                            <div class="col-sm-8 form-group">
+                                <label>Function Name</label>
+                                <div class="form-group">
+                                    <select select class="form-control" asp-items="ViewBag.UserSSPM">
+                                        <option>Please select </option>
+                                    </select>
+                                </div>
+                            </div>
+
+
+                            <div class="col-sm-12 text-right">
+                                <button type="submit" class="btn btn-primary">Submit</button>
+                            </div>
+
+                        </form>
+=======
 
                             <div class="col-sm-8 form-group">
                                         <label>UserId</label>
@@ -153,6 +171,7 @@
                         </div>
                         
                     </form>
+>>>>>>> 00dfe7d3702d6eed8aa2358d72a98f6f83b4500c
                  </div>
 
                 <div class="modal-footer">

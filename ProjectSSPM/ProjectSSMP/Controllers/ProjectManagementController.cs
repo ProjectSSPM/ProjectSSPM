@@ -4,6 +4,7 @@ using System.Linq;
 using System.Threading.Tasks;
 using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
+using Microsoft.AspNetCore.Mvc.Rendering;
 using Microsoft.EntityFrameworkCore;
 using ProjectSSMP.Models;
 using ProjectSSMP.Models.ProjectManagement;
@@ -596,6 +597,16 @@ namespace ProjectSSMP.Controllers
             {
                 return NotFound();
             }
+            var user = (from u in context.UserSspm
+                        join ua in context.UserAssignGroup on u.UserId equals ua.UserId
+                        where ua.GroupId.Equals("10")
+                        select new
+                        {
+                            UserId = u.UserId,
+                            Firstname = u.Firstname,
+                            Lastname = u.Lastname
+                        }).Distinct();
+            ViewBag["UserSSPM"] = new SelectList(user, "UserId", "Firstname");
             List<CreateFunctionInputModel> model = new List<CreateFunctionInputModel>();
             var projectnumber = (from t in context.Task where t.TaskId.Equals(id) select t).FirstOrDefault();
 
