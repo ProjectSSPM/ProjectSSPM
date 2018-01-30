@@ -1,19 +1,19 @@
 ﻿<Properties StartupConfiguration="{99528461-6D99-4BA1-9100-7145EEE92C3D}|Default">
-  <MonoDevelop.Ide.Workbench ActiveDocument="ProjectSSMP/Controllers/ProjectManagementController.cs">
+  <MonoDevelop.Ide.Workbench ActiveDocument="ProjectSSMP/Views/ProjectManagement/CreateFunction.cshtml">
     <Files>
       <File FileName="ProjectSSMP/Models/ProjectManagement/CreateFunctionInputModel.cs" Line="1" Column="1" />
       <File FileName="ProjectSSMP/Models/TeamTask.cs" Line="10" Column="41" />
       <File FileName="ProjectSSMP/Views/ProjectManagement/EditFunction.cshtml" Line="54" Column="66" />
-      <File FileName="ProjectSSMP/Controllers/ProjectManagementController.cs" Line="172" Column="1" />
+      <File FileName="ProjectSSMP/Controllers/ProjectManagementController.cs" Line="169" Column="1" />
       <File FileName="ProjectSSMP/Controllers/UserManagenentController.cs" Line="241" Column="1" />
+      <File FileName="ProjectSSMP/Views/ProjectManagement/EditTask.cshtml" Line="1" Column="1" />
+      <File FileName="ProjectSSMP/Views/ProjectManagement/CreateFunction.cshtml" Line="154" Column="68" />
     </Files>
   </MonoDevelop.Ide.Workbench>
   <MonoDevelop.Ide.Workspace ActiveConfiguration="Debug" />
   <MonoDevelop.Ide.DebuggingService.Breakpoints>
     <BreakpointStore>
       <Breakpoint file="/Users/Palm/Desktop/ProjectSSPM/ProjectSSPM/ProjectSSMP/Controllers/ProjectManagementController.cs" relfile="ProjectSSMP/Controllers/ProjectManagementController.cs" line="690" column="1" />
-      <Breakpoint file="/Users/Palm/Desktop/ProjectSSPM/ProjectSSPM/ProjectSSMP/Controllers/ProjectManagementController.cs" relfile="ProjectSSMP/Controllers/ProjectManagementController.cs" line="169" column="1" />
-      <Breakpoint file="/Users/Palm/Desktop/ProjectSSPM/ProjectSSPM/ProjectSSMP/Controllers/ProjectManagementController.cs" relfile="ProjectSSMP/Controllers/ProjectManagementController.cs" line="158" column="1" />
     </BreakpointStore>
   </MonoDevelop.Ide.DebuggingService.Breakpoints>
   <MonoDevelop.Ide.DebuggingService.PinnedWatches />
