@@ -92,6 +92,19 @@ namespace ProjectSSMP.Controllers
             {
                 return NotFound();
             }
+
+            ViewData["UserSSPM"] = new SelectList(context.UserSspm.Join(context.UserAssignGroup,
+                                                u => u.UserId,
+                                                ua => ua.UserId,
+                                                (u, ua) => new {
+                                                    UserId = u.UserId,
+                                                    Firstname = u.Firstname,
+                                                    GroupId = ua.GroupId
+
+                                                }).Where(ua => ua.GroupId.Equals("10"))
+
+                                                , "UserId", "Firstname");
+
             return View(e);
         }
 
@@ -131,6 +144,7 @@ namespace ProjectSSMP.Controllers
             var loggedInUser = HttpContext.User;
             var loggedInUserName = loggedInUser.Identity.Name;
             ViewBag.userMenu = GetMenu();
+
 
 
             var query = (from x in context.Function where x.FunctionId.Equals(id) select x).FirstOrDefault();
