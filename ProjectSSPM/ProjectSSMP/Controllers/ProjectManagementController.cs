@@ -587,8 +587,8 @@ namespace ProjectSSMP.Controllers
                             UserId = u.UserId,
                             Firstname = u.Firstname,
                             Lastname = u.Lastname
-                        }).Distinct();
-            ViewBag["UserSSPM"] = new SelectList(user, "UserId", "Firstname");
+                        }).FirstOrDefault();
+            
             List<CreateFunctionInputModel> model = new List<CreateFunctionInputModel>();
             var projectnumber = (from t in context.Task where t.TaskId.Equals(id) select t).FirstOrDefault();
 
@@ -605,10 +605,22 @@ namespace ProjectSSMP.Controllers
                    TaskId = itme.TaskId,
                    FunctionName = itme.FunctionName,
                    FunctionStart = itme.FunctionStart,
-                   FunctionEnd = itme.FunctionEnd
+                   FunctionEnd = itme.FunctionEnd,
+                   
 
                 });
             }
+            ViewData["UserSSPM"] = new SelectList(context.UserSspm.Join(context.UserAssignGroup,
+                                                                        u => u.UserId,
+                                                                        ua => ua.UserId,
+                                                                        (u,ua) => new {
+                                                                            UserId = u.UserId,
+                                                                            Firstname =  u.Firstname,
+                                                                            GroupId = ua.GroupId
+                                                                            
+                                                                        }).Where(ua => ua.GroupId.Equals("10"))
+                
+                , "UserId", "Firstname");
             ViewData["ProjectNuber"] = projectnumber.ProjectNumber;
             ViewData["TaskId"] = id;
             return View(model);

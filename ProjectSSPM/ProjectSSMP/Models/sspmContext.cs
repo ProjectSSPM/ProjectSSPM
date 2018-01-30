@@ -23,7 +23,7 @@ namespace ProjectSSMP.Models
 
         protected override void OnConfiguring(DbContextOptionsBuilder optionsBuilder)
         {
-           
+            
                 //#warning To protect potentially sensitive information in your connection string, you should move it out of source code. See http://go.microsoft.com/fwlink/?LinkId=723263 for guidance on storing connection strings.
                 optionsBuilder.UseSqlServer(@"Server=den1.mssql5.gear.host;Initial Catalog=sspm;Integrated Security=False;User ID=sspm;Password=Gi90MMTY!H_i;Connect Timeout=30;Encrypt=False;TrustServerCertificate=True;ApplicationIntent=ReadWrite;MultiSubnetFailover=False");
             
@@ -238,19 +238,25 @@ namespace ProjectSSMP.Models
 
             modelBuilder.Entity<TimeSheet>(entity =>
             {
-                entity.HasKey(e => new { e.TimeSheetId, e.TeamTaskId, e.TeamId });
+                entity.HasKey(e => new { e.TimeSheetId, e.UserId, e.FunctionId, e.TaskId, e.ProjectNumber });
 
                 entity.Property(e => e.TimeSheetId)
                     .HasColumnName("TimeSheetID")
+                    .HasColumnType("datetime");
+
+                entity.Property(e => e.UserId)
+                    .HasColumnName("UserID")
                     .HasMaxLength(10);
 
-                entity.Property(e => e.TeamTaskId)
-                    .HasColumnName("TeamTaskID")
+                entity.Property(e => e.FunctionId)
+                    .HasColumnName("FunctionID")
                     .HasMaxLength(10);
 
-                entity.Property(e => e.TeamId)
-                    .HasColumnName("TeamID")
+                entity.Property(e => e.TaskId)
+                    .HasColumnName("TaskID")
                     .HasMaxLength(10);
+
+                entity.Property(e => e.ProjectNumber).HasMaxLength(10);
 
                 entity.Property(e => e.ActionId)
                     .HasColumnName("ActionID")

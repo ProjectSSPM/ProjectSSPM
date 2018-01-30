@@ -14,6 +14,7 @@ namespace ProjectSSMP.Models.ProjectManagement
         public DateTime? FunctionEnd { get; set; }        
         public string ProjectNumber { get; set; }
         public string UserId { get; set; }
+        
         public string ProjectResponsible { get; set; }
     }
 }
