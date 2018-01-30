@@ -7,47 +7,93 @@
 
 <div class="container">
     <h2 class="well">MenuManagenent</h2>
-    
-    <table id="exampleMenu" class="responsive" >
-    <thead>
-        <tr>
-            <th class="all">MenuName</th>
-            <th class="all">MenuURL</th>
-            <th class="all">MenuIcon</th>
-            <th class="none">Group User</th>
-            <th class="all">
-                <a asp-action="AddMenu" class="btn btn-primary btn-md" style="margin-left: 15px;">Add Menu</a>
-                <a asp-action="AddMenu" class="btn btn-primary btn-md" style="margin-left: 15px;">Add Menu Authen</a>
-            </th>
 
-        </tr>
-    </thead>
+    <table id="exampleMenu" class="responsive">
+        <thead>
+            <tr>
+                <th class="all">MenuName</th>
+                <th class="all">MenuURL</th>
+                <th class="all">MenuIcon</th>
+                <th class="none">Group User :</th>
+                <th class="none">Group User : </th>
+                
+                <th class="all">
+                    <a asp-action="AddMenu" class="btn btn-primary btn-md" style="margin-left: 15px;">Add Menu</a>
+                    <a asp-action="AddMenu" class="btn btn-primary btn-md" style="margin-left: 15px;">Add Menu Authen</a>
+                </th>
+
+            </tr>
+        </thead>
+
+
+        <tbody>
+
+            @*@foreach (var item in Model)
+            {
+
+
+                <tr>
+
+                    <td>@item.MenuName</td>
+                    <td>@item.MenuUrl</td>
+                    <td><i class="@item.MenuIcon"></i></td>
+                    <td>@item.GroupName</td>
+                    <td>
+                        &nbsp; &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+                        <a asp-action="Edit" class="btn btn-warning btn-sm" asp-route-id="@item.MenuId">Edit</a>
+                    </td>
+
+                </tr>
+
+
+            }*@
+              @{ 
+                  var group = Model.GroupBy(x => x.MenuName).Select(x => new {
+                      MenuName = x.Key,
+                      menud = x.Last(),
+                      memugroup = x.ToList()
+                  });
+
+                  foreach(var m in group)
+                  {
+                      <tr>
+                          <td>@m.MenuName</td>
+                          <td>@m.menud.MenuUrl</td>
+                          <td><i class="@m.menud.MenuIcon"></i></td>
+                          
+                          @foreach(var ug in m.memugroup)
+                          {                             
+                                  <td>@ug.GroupName</td>                             
+                               
+                          }
+                          @if(m.memugroup.Count == 1)
+                          {
+                                  <td>&nbsp;</td>  
+
+                          }
+                          <td>
+                                &nbsp; &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+                                <a asp-action="Edit" class="btn btn-warning btn-sm" asp-route-id="@m.menud.MenuId">Edit</a>
+                          </td>
+
+                      </tr>
+                      
+
+
+                  }
+
+
+              }
+
+
+
+
+        </tbody>
+    </table>
 
   
-    <tbody> 
-        @foreach(var item in Model)
-        {
-        <tr>
-            <td>@item.MenuName</td>
-            <td>@item.MenuUrl</td>
-            <td><i class="@item.MenuIcon"></i></td>
-            <td>@item.GroupName</td>
-            <td>
-                &nbsp; &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
-                <a asp-action="Edit" class="btn btn-warning btn-sm" asp-route-id="@item.MenuId">Edit</a>
-            </td>
-
-        </tr>
-
-
-        }
-
-       
-       
-      
-    </tbody>
-</table>
 </div>
+
 
 
 

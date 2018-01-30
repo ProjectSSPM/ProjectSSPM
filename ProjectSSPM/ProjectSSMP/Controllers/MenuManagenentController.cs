@@ -49,42 +49,40 @@ namespace ProjectSSMP.Controllers
 
             }
             var indexmenu2 = (from mg in context.MenuGroup
-                              
-                              
-                              
-                              select new 
+                              join ma in context.MenuAuthentication on mg.MenuId equals ma.MenuId
+                              join ug in context.UserGroup on ma.GroupId equals ug.GroupId
+                              select new IndexMenuModel
                               {
-                                  mg.MenuId,
-                                  mg.MenuName,
-                                  mg.MenuUrl,
-                                  mg.MenuIcon,
-                                  groupuser = from ma in context.MenuAuthentication 
-                                               join ug in context.UserGroup on ma.GroupId equals ug.GroupId
-                                               where ma.MenuId.Equals(mg.MenuId) select new {
-                                                   ug.GroupId,
-                                                   ug.GroupName
-                                               }
+                                  MenuId = mg.MenuId,
+                                  MenuName = mg.MenuName,
+                                  MenuUrl = mg.MenuUrl,
+                                  MenuIcon = mg.MenuIcon,
+                                  GroupId = ug.GroupId,
+                                  GroupName = ug.GroupName
+                              }).Distinct();
+
+            var menugroup = from mn in indexmenu2
+                            group mn by mn.MenuId;
 
 
-                                  
-                              }).ToList();
-            foreach (var item in indexmenu2)
+
+            foreach (var item in menugroup)
             {
-                mode.Add(new IndexMenuModel()
+                Console.WriteLine("Group Name {0}", item.Key);
+                foreach (IndexMenuModel m in item)
                 {
-                    MenuId = item.MenuId,
-                    MenuName = item.MenuName,
-                    MenuUrl = item.MenuUrl,
-                    MenuIcon = item.MenuIcon,
-                   
+                    Console.WriteLine("Student Name: {0}", m.GroupName);
 
-                });
+
+                }
+                
 
             }
 
 
             return View(mode);
         }
+        
 
         [Authorize]
         public IActionResult AddMenu()

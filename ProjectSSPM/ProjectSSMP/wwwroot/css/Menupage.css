@@ -149,6 +149,9 @@
     -webkit-font-smoothing: antialiased;
 }
 
+.gn-icon-power::before {
+    content: "\f011";
+}
 .gn-icon-pencil::before {
     content: "\f044";
 }
