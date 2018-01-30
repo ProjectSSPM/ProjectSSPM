@@ -158,7 +158,10 @@ namespace ProjectSSMP.Controllers
                 {
                     throw;
                 }
-                return RedirectToAction(nameof(Index));
+                var baseFormat = "http://localhost:56087/ProjectManagement/CreateFunction/";
+                var segment = query.TaskId.ToString();
+                var url = baseFormat + segment;
+                return Redirect(url);
             }
             return View(query.FunctionId);
         }
@@ -202,7 +205,11 @@ namespace ProjectSSMP.Controllers
                 {
                     throw;
                 }
-                return RedirectToAction(nameof(Index));
+
+                var baseFormat = "http://localhost:56087/ProjectManagement/CreateTask/";
+                var segment = query.ProjectNumber.ToString();
+                var url = baseFormat + segment;
+                return Redirect(url);
             }
             return View(query.TaskId);
         }
@@ -591,6 +598,8 @@ namespace ProjectSSMP.Controllers
 
 
         }
+
+
 
         [HttpPost]
         [ValidateAntiForgeryToken]
