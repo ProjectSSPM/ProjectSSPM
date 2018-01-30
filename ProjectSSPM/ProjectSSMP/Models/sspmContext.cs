@@ -217,7 +217,7 @@ namespace ProjectSSMP.Models
 
             modelBuilder.Entity<TeamTask>(entity =>
             {
-                entity.HasKey(e => new { e.TaskId, e.ProjectNumber, e.FunctionId, e.UserId });
+                entity.HasKey(e => new { e.TaskId, e.ProjectNumber, e.FunctionId });
 
                 entity.Property(e => e.TaskId)
                     .HasColumnName("TaskID")
@@ -229,24 +229,21 @@ namespace ProjectSSMP.Models
                     .HasColumnName("FunctionID")
                     .HasMaxLength(10);
 
+                entity.Property(e => e.ProjectResponsible).HasMaxLength(100);
+
                 entity.Property(e => e.UserId)
+                    .IsRequired()
                     .HasColumnName("UserID")
                     .HasMaxLength(10);
-
-                entity.Property(e => e.ProjectResponsible).HasMaxLength(100);
             });
 
             modelBuilder.Entity<TimeSheet>(entity =>
             {
-                entity.HasKey(e => new { e.TimeSheetId, e.UserId, e.FunctionId, e.TaskId, e.ProjectNumber });
+                entity.HasKey(e => new { e.TimeSheetId, e.FunctionId, e.TaskId, e.ProjectNumber });
 
                 entity.Property(e => e.TimeSheetId)
                     .HasColumnName("TimeSheetID")
                     .HasColumnType("datetime");
-
-                entity.Property(e => e.UserId)
-                    .HasColumnName("UserID")
-                    .HasMaxLength(10);
 
                 entity.Property(e => e.FunctionId)
                     .HasColumnName("FunctionID")
@@ -265,6 +262,11 @@ namespace ProjectSSMP.Models
                 entity.Property(e => e.TimeSheetEnd).HasColumnType("datetime");
 
                 entity.Property(e => e.TimeSheetStart).HasColumnType("datetime");
+
+                entity.Property(e => e.UserId)
+                    .IsRequired()
+                    .HasColumnName("UserID")
+                    .HasMaxLength(10);
             });
 
             modelBuilder.Entity<UserAssignGroup>(entity =>
