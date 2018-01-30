@@ -1,9 +1,15 @@
 {
   "runtimeOptions": {
     "additionalProbingPaths": [
+<<<<<<< HEAD
       "/Users/Palm/.dotnet/store/|arch|/|tfm|",
       "/Users/Palm/.nuget/packages",
       "/usr/local/share/dotnet/sdk/NuGetFallbackFolder"
+=======
+      "C:\\Users\\Ilumi\\.dotnet\\store\\|arch|\\|tfm|",
+      "C:\\Users\\Ilumi\\.nuget\\packages",
+      "C:\\Program Files\\dotnet\\sdk\\NuGetFallbackFolder"
+>>>>>>> 272eb9c30b5eec0fd78bcfed960646354f9df06b
     ]
   }
 }

@@ -15,7 +15,6 @@ namespace ProjectSSMP.Models
         public virtual DbSet<RunningNumber> RunningNumber { get; set; }
         public virtual DbSet<Status> Status { get; set; }
         public virtual DbSet<Task> Task { get; set; }
-        public virtual DbSet<Team> Team { get; set; }
         public virtual DbSet<TeamTask> TeamTask { get; set; }
         public virtual DbSet<TimeSheet> TimeSheet { get; set; }
         public virtual DbSet<UserAssignGroup> UserAssignGroup { get; set; }
@@ -24,13 +23,13 @@ namespace ProjectSSMP.Models
 
         protected override void OnConfiguring(DbContextOptionsBuilder optionsBuilder)
         {
-            
+           
                 //#warning To protect potentially sensitive information in your connection string, you should move it out of source code. See http://go.microsoft.com/fwlink/?LinkId=723263 for guidance on storing connection strings.
                 optionsBuilder.UseSqlServer(@"Server=den1.mssql5.gear.host;Initial Catalog=sspm;Integrated Security=False;User ID=sspm;Password=Gi90MMTY!H_i;Connect Timeout=30;Encrypt=False;TrustServerCertificate=True;ApplicationIntent=ReadWrite;MultiSubnetFailover=False");
             
         }
         public sspmContext(DbContextOptions<sspmContext> options)
-            : base(options){ }
+            : base(options) { }
 
         protected override void OnModelCreating(ModelBuilder modelBuilder)
         {
@@ -216,25 +215,9 @@ namespace ProjectSSMP.Models
                 entity.Property(e => e.TaskStart).HasColumnType("datetime");
             });
 
-            modelBuilder.Entity<Team>(entity =>
-            {
-                entity.Property(e => e.TeamId)
-                    .HasColumnName("TeamID")
-                    .HasMaxLength(10)
-                    .ValueGeneratedNever();
-
-                entity.Property(e => e.Firstname).HasMaxLength(50);
-
-                entity.Property(e => e.Lastname).HasMaxLength(50);
-
-                entity.Property(e => e.UserId)
-                    .HasColumnName("UserID")
-                    .HasMaxLength(10);
-            });
-
             modelBuilder.Entity<TeamTask>(entity =>
             {
-                entity.HasKey(e => new { e.TaskId, e.ProjectNumber, e.FunctionId, e.TeamId });
+                entity.HasKey(e => new { e.TaskId, e.ProjectNumber, e.FunctionId, e.UserId });
 
                 entity.Property(e => e.TaskId)
                     .HasColumnName("TaskID")
@@ -246,8 +229,8 @@ namespace ProjectSSMP.Models
                     .HasColumnName("FunctionID")
                     .HasMaxLength(10);
 
-                entity.Property(e => e.TeamId)
-                    .HasColumnName("TeamID")
+                entity.Property(e => e.UserId)
+                    .HasColumnName("UserID")
                     .HasMaxLength(10);
 
                 entity.Property(e => e.ProjectResponsible).HasMaxLength(100);
