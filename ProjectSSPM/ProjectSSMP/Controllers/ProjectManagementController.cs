@@ -155,15 +155,33 @@ namespace ProjectSSMP.Controllers
 
                     }
                     await context.SaveChangesAsync();
+                    try
+                    {
+                        var addquery2 = from test2 in context.TeamTask
+                                        where test2.FunctionId.Equals(id)
+                                        select test2;
+                        foreach (TeamTask UserUpdate2 in addquery2)
+                        {
+                            UserUpdate2.UserId = editModel.UserId;
+                            UserUpdate2.ProjectResponsible = editModel.ProjectResponsible;
+
+                        }
+                        await context.SaveChangesAsync();
+                    }
+                    catch (Exception e)
+                    {
+                        Console.WriteLine(e);
+                    }
 
  
-
 
                 }
                 catch (DbUpdateConcurrencyException)
                 {
                     throw;
                 }
+
+
                 var baseFormat = "http://localhost:56087/ProjectManagement/CreateFunction/";
                 var segment = query.TaskId.ToString();
                 var url = baseFormat + segment;
