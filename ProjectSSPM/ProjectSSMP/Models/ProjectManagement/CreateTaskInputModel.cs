@@ -8,6 +8,7 @@ namespace ProjectSSMP.Models.ProjectManagement
         public string TaskName { get; set; }
         public DateTime? TaskStart { get; set; }
         public DateTime? TaskEnd { get; set; }
+        public Double Timespan { get; set; }
 
     }
 }
