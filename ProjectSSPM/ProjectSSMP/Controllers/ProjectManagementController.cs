@@ -481,8 +481,17 @@ namespace ProjectSSMP.Controllers
         [ValidateAntiForgeryToken]
         public async Task<IActionResult> CreateProject(CreateProjectInputModel inputModel)
         {
-           
+            if (!ModelState.IsValid)
+            {
+                return View();
+            }
+
             ViewBag.userMenu = GetMenu();
+            if (inputModel.ProjectEnd > inputModel.ProjectStart)
+            {
+                ModelState.AddModelError("ErrorCreatePtoject", "กรุณากรอกเวลาใหม่");
+                return View();
+            }
             try
             {
                 var loggedInUser = HttpContext.User;
