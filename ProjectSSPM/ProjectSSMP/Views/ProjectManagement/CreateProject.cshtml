@@ -54,7 +54,10 @@
                         <div class="col-sm-4">
                             <div class="form-group">
                                 <label>Project Manager</label>
-                                <input type="text" name="ProjectManager" id="ProjectManager" placeholder="Select Manager Name Here.." class="form-control">
+                                @*<input type="text" name="ProjectManager" id="ProjectManager" placeholder="Select Manager Name Here.." class="form-control">*@
+                                <select class="form-control" asp-items="ViewBag.UserSSPM" name="ProjectManager" id="ProjectManager" >
+                                    <option>Please select </option>
+                                </select>
                             </div>
                         </div>
 
