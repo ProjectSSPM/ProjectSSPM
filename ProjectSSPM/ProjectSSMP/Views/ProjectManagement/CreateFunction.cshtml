@@ -7,7 +7,7 @@
 
 
 <div class="container">
-    <h2 class="well">Create Function </h2>
+    <h2 class="well">@ViewData["ProjectName"] <span class="glyphicon glyphicon-chevron-right"></span> @ViewData["Taskname"] <span class="glyphicon glyphicon-chevron-right"></span>   Create Function  </h2>
 
              <div class="col-lg-4">
                <div class= "text-Left">
@@ -47,8 +47,7 @@
                 </th>
                 <th>
 
-                </th>
-                <th>
+                
 
 
 
@@ -78,28 +77,14 @@
                     <td>
 
                         @Convert.ToString(string.Format("{0:dd MMMM yyyy}", item.FunctionEnd))
-                    </td>
-                    @{ 
-                        
-                    }
-
-                    <td>
-                 
+                    
                     
 
-<<<<<<< HEAD
 
-=======
-<<<<<<< HEAD
                     <td>
                     @Html.DisplayFor(modelItem => item.Timespan)
                     </td>
-=======
-<<<<<<< HEAD
-=======
->>>>>>> ea3b4e61162ea2d8aa6114bfed37fbeed8445232
 
->>>>>>> 5961c57067d218c43cbe421c78bcf1f4d9d124e5
                      
                     <td>
                         <div class="text-right" style="margin-right: 10px;">
@@ -112,14 +97,7 @@
                 
             </td>
 
-            <td>
-                <div class="text-right" style="margin-right: 10px;">
-
-                    <a asp-action="EditFunction" class="btn btn-warning btn-sm" asp-route-id="@item.FunctionId">Edit</a>
-                    <a asp-action="Update" class="btn btn-success btn-sm" asp-route-id="@item.FunctionId">Update</a>
-                </div>
-
-            </td>
+           
         </tr>
         autonum++;
 }

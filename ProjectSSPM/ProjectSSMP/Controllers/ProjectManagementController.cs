@@ -367,6 +367,8 @@ namespace ProjectSSMP.Controllers
 
                 });
             }
+            var Proname = (from p in context.Project where p.ProjectNumber.Equals(id) select p).FirstOrDefault();
+            ViewData["ProjectName"] = "  "+Proname.ProjectId;
             ViewData["ProjectNuber"] = id;
             return View(model);
         }
@@ -588,6 +590,12 @@ namespace ProjectSSMP.Controllers
                 , "UserId", "Firstname");
             ViewData["ProjectNuber"] = projectnumber.ProjectNumber;
             ViewData["TaskId"] = id;
+
+            var Proname = (from p in context.Project where p.ProjectNumber.Equals(projectnumber.ProjectNumber) select p).FirstOrDefault();
+            var taskname = (from t in context.Task where t.TaskId.Equals(id) select t).FirstOrDefault();
+
+            ViewData["ProjectName"] = Proname.ProjectId;
+            ViewData["Taskname"] = taskname.TaskName;
             return View(model);
 
 
