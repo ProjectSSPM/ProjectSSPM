@@ -1,6 +1,8 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.Globalization;
 using System.Linq;
+using System.Threading;
 using System.Threading.Tasks;
 using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
@@ -17,7 +19,12 @@ namespace ProjectSSMP.Controllers
     public class ProjectManagementController : BaseController
     {
         // GET: /<controller>/
-        public ProjectManagementController(sspmContext context) => this.context = context;
+        public ProjectManagementController(sspmContext context) //=> this.context = context;
+        {
+            this.context = context;
+            CultureInfo en = new CultureInfo("en-US");
+            Thread.CurrentThread.CurrentCulture = en;
+        }
 
         [Authorize]
         public async Task<IActionResult> Index()
@@ -368,6 +375,9 @@ namespace ProjectSSMP.Controllers
         public async Task<IActionResult> CreateTask(string pnum, CreateTaskInputModel inputModel)
         {
             
+                
+            
+
             ViewBag.userMenu = GetMenu();
 
             try
@@ -391,7 +401,7 @@ namespace ProjectSSMP.Controllers
                 {
                     ProjectNumber = inputModel.ProjectNumber,
                     TaskId = num.ToString(),
-                    TaskName = inputModel.TaskName,
+                    TaskName = inputModel.TaskName ,
                     TaskStart = inputModel.TaskStart,
                     TaskEnd = inputModel.TaskEnd
 
