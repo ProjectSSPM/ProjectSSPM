@@ -60,6 +60,19 @@ namespace ProjectSSMP.Controllers
                 CustomerName = Project.CustomerName
 
             };
+            ViewData["UserSSPM"] = new SelectList(context.UserSspm.Join(context.UserAssignGroup,
+                                                u => u.UserId,
+                                                ua => ua.UserId,
+                                                (u, ua) => new {
+                                                    UserId = u.UserId,
+                                                    Firstname = u.Firstname,
+                                                    GroupId = ua.GroupId,
+                                                    Status = u.Status
+
+                                                }).Where(ua => ua.GroupId.Equals("50") && ua.Status.Equals("A"))
+
+                                                , "UserId", "Firstname");
+            ViewData["naemproject"] = Project.ProjectName;
 
             if (Project == null)
             {
@@ -101,16 +114,18 @@ namespace ProjectSSMP.Controllers
             }
 
             ViewData["UserSSPM"] = new SelectList(context.UserSspm.Join(context.UserAssignGroup,
-                                                u => u.UserId,
-                                                ua => ua.UserId,
-                                                (u, ua) => new {
-                                                    UserId = u.UserId,
-                                                    Firstname = u.Firstname,
-                                                    GroupId = ua.GroupId
+                                                                       u => u.UserId,
+                                                                       ua => ua.UserId,
+                                                                       (u, ua) => new {
+                                                                           UserId = u.UserId,
+                                                                           Firstname = u.Firstname,
+                                                                           GroupId = ua.GroupId,
+                                                                           Status = u.Status
+                                                                       }).Where(ua => ua.GroupId.Equals("10")
+                                                                       && ua.GroupId.Equals("50") && ua.Status.Equals("A"))
 
-                                                }).Where(ua => ua.GroupId.Equals("10"))
-
-                                                , "UserId", "Firstname");
+               , "UserId", "Firstname");
+            ViewData["naemFunction"] = Function.FunctionName;
 
             return View(e);
         }
@@ -137,7 +152,7 @@ namespace ProjectSSMP.Controllers
                 TaskEnd = Task.TaskEnd,
 
             };
-
+            ViewData["naemtask"] = Task.TaskName;
             if (Task == null)
             {
                 return NotFound();
@@ -320,6 +335,18 @@ namespace ProjectSSMP.Controllers
         {
             
             ViewBag.userMenu = GetMenu();
+            ViewData["UserSSPM"] = new SelectList(context.UserSspm.Join(context.UserAssignGroup,
+                                                u => u.UserId,
+                                                ua => ua.UserId,
+                                                (u, ua) => new {
+                                                    UserId = u.UserId,
+                                                    Firstname = u.Firstname,
+                                                    GroupId = ua.GroupId,
+                                                    Status = u.Status
+
+                                                }).Where(ua => ua.GroupId.Equals("50") && ua.Status.Equals("A"))
+
+                                                , "UserId", "Firstname");
             return View();
         }
 
@@ -583,9 +610,10 @@ namespace ProjectSSMP.Controllers
                                                                         (u,ua) => new {
                                                                             UserId = u.UserId,
                                                                             Firstname =  u.Firstname,
-                                                                            GroupId = ua.GroupId
-                                                                            
-                                                                        }).Where(ua => ua.GroupId.Equals("10"))
+                                                                            GroupId = ua.GroupId,
+                                                                            Status = u.Status
+                                                                        }).Where(ua => ua.GroupId.Equals("10")
+                                                                        && ua.GroupId.Equals("50") && ua.Status.Equals("A") )
                 
                 , "UserId", "Firstname");
             ViewData["ProjectNuber"] = projectnumber.ProjectNumber;

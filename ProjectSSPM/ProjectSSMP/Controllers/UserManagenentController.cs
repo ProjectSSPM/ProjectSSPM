@@ -188,7 +188,7 @@ namespace ProjectSSMP.Controllers
                 Status = userSspm.Status,
                 GroupId = userAssign.GroupId,
             };
-
+            ViewData["Username"] = userSspm.Username;
             if (userSspm == null)
             {
                 return NotFound();
@@ -317,7 +317,7 @@ namespace ProjectSSMP.Controllers
                 UserEditBy = userSspm.UserEditBy,
                 GroupName = groupname.GroupName
             };
-
+            ViewData["Username"] = userSspm.Username;
             if (userSspm == null)
             {
                 return NotFound();
