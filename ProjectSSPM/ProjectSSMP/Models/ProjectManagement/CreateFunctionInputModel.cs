@@ -15,5 +15,6 @@ namespace ProjectSSMP.Models.ProjectManagement
         public string ProjectNumber { get; set; }
         public string UserId { get; set; }        
         public string ProjectResponsible { get; set; }
+        public Double Timespan { get; set; }
     }
 }

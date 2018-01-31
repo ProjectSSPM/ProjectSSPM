@@ -324,15 +324,16 @@ namespace ProjectSSMP.Controllers
         }
 
 
-        [Authorize]
-        public IActionResult CreateAll()
+
+
+        public Double DT(DateTime D1 , DateTime D2)
         {
-            
-            ViewBag.userMenu = GetMenu();
-            return View();
+            DateTime d1 = D1;
+            DateTime d2 = D2;
+            Double d3 = d1.Subtract(d2).TotalDays;
+            return d3;
+
         }
-
-
 
         [Authorize]
         public IActionResult CreateTask(string id)
@@ -351,6 +352,7 @@ namespace ProjectSSMP.Controllers
 
             var CreateTaskInputModel = (from x in context.Task where x.ProjectNumber.Equals(id) select x);
 
+
             foreach (var itme in CreateTaskInputModel)
             {
                 
@@ -360,9 +362,8 @@ namespace ProjectSSMP.Controllers
                     TaskId = itme.TaskId,
                     TaskName = itme.TaskName,
                     TaskStart = itme.TaskStart,
-                    TaskEnd = itme.TaskEnd
-
-
+                    TaskEnd = itme.TaskEnd,
+                    Timespan = DT((System.DateTime)itme.TaskEnd, (System.DateTime)itme.TaskStart)
 
                 });
             }
@@ -530,86 +531,7 @@ namespace ProjectSSMP.Controllers
 
 
 
-        [HttpPost]
-        [ValidateAntiForgeryToken]
-        public async Task<IActionResult> CreateAll(CreateProjectInputModel inputModel)
-        {
-           
-            ViewBag.userMenu = GetMenu();
-            try
-            {
-                var loggedInUser = HttpContext.User;
-                var loggedInUserName = loggedInUser.Identity.Name;
 
-                var id = (from u in context.RunningNumber where u.Type.Equals("ProjectNumber") select u).FirstOrDefault();
-
-                int num;
-                if (id.Number == null)
-                {
-                    num = 100001;
-
-                }
-                else
-                {
-                    num = Convert.ToInt32(id.Number);
-                    num = num + 1;
-                }
-
-                Project ord = new Project
-                {
-                    ProjectNumber = num.ToString(),
-                    ProjectId = inputModel.ProjectId,
-                    ProjectName = inputModel.ProjectName,
-                    ProjectStart = inputModel.ProjectStart,
-                    ProjectEnd = inputModel.ProjectEnd,
-                    ProjectCost = inputModel.ProjectCost,
-                    ProjectManager = inputModel.ProjectManager,
-                    ProjectCreateBy = loggedInUserName,
-                    ProjectCreateDate = DateTime.Now,
-                    CustomerName = inputModel.CustomerName,
-                    CustomerTel = inputModel.CustomerTel,
-                    Note = inputModel.Note
-
-                };
-
-
-                // Add the new object to the Orders collection.
-                context.Project.Add(ord);
-                await context.SaveChangesAsync();
-
-
-                var query = from xx in context.RunningNumber
-                            where xx.Type.Equals("ProjectNumber")
-                            select xx;
-
-                foreach (RunningNumber RunUserID in query)
-                {
-                    RunUserID.Number = num.ToString();
-
-                }
-
-                // Submit the changes to the database.
-                try
-                {
-                    await context.SaveChangesAsync();
-                }
-                catch (Exception e)
-                {
-                    Console.WriteLine(e);
-                    // Provide for exceptions.
-                }
-
-                return ViewBag.PID = num.ToString();
-
-
-
-            }
-            catch (Exception ex)
-            {
-                var message = ex.Message;
-                return View();
-            }
-        }
 
         [Authorize]
         public IActionResult CreateFunction(string id)
@@ -648,6 +570,7 @@ namespace ProjectSSMP.Controllers
                    FunctionName = itme.FunctionName,
                    FunctionStart = itme.FunctionStart,
                    FunctionEnd = itme.FunctionEnd,
+                    Timespan = DT((System.DateTime)itme.FunctionEnd, (System.DateTime)itme.FunctionStart)
                    
 
                 });

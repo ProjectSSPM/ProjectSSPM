@@ -1,16 +1,5 @@
 ﻿<Properties StartupConfiguration="{99528461-6D99-4BA1-9100-7145EEE92C3D}|Default">
-  <MonoDevelop.Ide.Workbench ActiveDocument="ProjectSSMP/Views/ProjectManagement/CreateTask.cshtml">
-    <Files>
-      <File FileName="ProjectSSMP/Controllers/ProjectManagementController.cs" Line="706" Column="1" />
-      <File FileName="ProjectSSMP/Controllers/UserManagenentController.cs" Line="241" Column="1" />
-      <File FileName="ProjectSSMP/Views/ProjectManagement/EditTask.cshtml" Line="1" Column="1" />
-      <File FileName="ProjectSSMP/Views/ProjectManagement/CreateFunction.cshtml" Line="45" Column="1" />
-      <File FileName="ProjectSSMP/appsettings.json" Line="1" Column="1" />
-      <File FileName="ProjectSSMP/appsettings.Development.json" Line="1" Column="1" />
-      <File FileName="ProjectSSMP/Program.cs" Line="1" Column="1" />
-      <File FileName="ProjectSSMP/Views/ProjectManagement/CreateTask.cshtml" Line="63" Column="1" />
-    </Files>
-  </MonoDevelop.Ide.Workbench>
+  <MonoDevelop.Ide.Workbench />
   <MonoDevelop.Ide.Workspace ActiveConfiguration="Debug" />
   <MonoDevelop.Ide.DebuggingService.Breakpoints>
     <BreakpointStore />
