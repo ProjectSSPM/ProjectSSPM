@@ -43,46 +43,57 @@
                 </th>
                 <th>
 
+                </th>
+                <th>
+
 
 
                 </th>
             </tr>
         </thead>
         <tbody>
-
+            @{ int autonum = 1; }
 
             @foreach (var item in Model)
-            {
-                <tr>
-                    <td>
+    {
+        <tr>
+            <td>
 
-                        @Html.DisplayFor(modelItem => item.FunctionId)
-                    </td>
-                    <td>
+                @autonum
+            </td>
+            <td>
 
-                        @Html.DisplayFor(modelItem => item.FunctionName)
-                    </td>
+                @Html.DisplayFor(modelItem => item.FunctionName)
+            </td>
 
 
-                    <td>
+            <td>
 
-                        @Convert.ToString(string.Format("{0:dd MMMM yyyy}", item.FunctionStart))
-                    </td>
-                    <td>
+                @Convert.ToString(string.Format("{0:dd MMMM yyyy}", item.FunctionStart))
+            </td>
+            <td>
 
-                        @Convert.ToString(string.Format("{0:dd MMMM yyyy}", item.FunctionEnd))
-                    </td>
+                @Convert.ToString(string.Format("{0:dd MMMM yyyy}", item.FunctionEnd))
+            </td>
+            <td>
+                @{ 
+                    
 
-                    <td>
-                        <div class="text-right" style="margin-right: 10px;">
-                            
-                            <a asp-action="EditFunction" class="btn btn-warning btn-sm" asp-route-id="@item.FunctionId">Edit</a>
-                            <a asp-action="Update" class="btn btn-success btn-sm" asp-route-id="@item.FunctionId">Update</a>
-                        </div>
 
-                    </td>
-                </tr>
-            }
+                }
+            </td>
+
+            <td>
+                <div class="text-right" style="margin-right: 10px;">
+
+                    <a asp-action="EditFunction" class="btn btn-warning btn-sm" asp-route-id="@item.FunctionId">Edit</a>
+                    <a asp-action="Update" class="btn btn-success btn-sm" asp-route-id="@item.FunctionId">Update</a>
+                </div>
+
+            </td>
+        </tr>
+        autonum++;
+}
         </tbody>
 
     </table>
