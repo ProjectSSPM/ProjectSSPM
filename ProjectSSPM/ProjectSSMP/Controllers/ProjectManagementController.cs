@@ -487,7 +487,7 @@ namespace ProjectSSMP.Controllers
             }
 
             ViewBag.userMenu = GetMenu();
-            if (inputModel.ProjectEnd > inputModel.ProjectStart)
+            if (inputModel.ProjectEnd < inputModel.ProjectStart)
             {
                 ModelState.AddModelError("ErrorCreatePtoject", "กรุณากรอกเวลาใหม่");
                 return View();
