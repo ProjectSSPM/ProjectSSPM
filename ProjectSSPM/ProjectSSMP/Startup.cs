@@ -9,6 +9,8 @@ using Microsoft.EntityFrameworkCore;
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
 using ProjectSSMP.Models;
+using Microsoft.AspNetCore.Localization;
+using System.Globalization;
 
 namespace ProjectSSMP
 {
@@ -46,6 +48,20 @@ namespace ProjectSSMP
             app.UseSession();
             app.UseAuthentication();
             app.UseMvcWithDefaultRoute();
+            var supportedCultures = new[]
+            {
+                new CultureInfo("en"),
+                new CultureInfo("en-US"),
+                new CultureInfo("es"),
+                new CultureInfo("es-ES")
+            };
+            app.UseRequestLocalization(new RequestLocalizationOptions
+            {
+                DefaultRequestCulture = new RequestCulture("th-TH"),
+                SupportedCultures = new List<CultureInfo> { new CultureInfo("th-TH")},
+                SupportedUICultures = new List< CultureInfo >{ new CultureInfo("th-TH") }
+
+            });
             if (env.IsDevelopment())
             {
                 app.UseBrowserLink();
