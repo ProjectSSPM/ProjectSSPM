@@ -40,6 +40,9 @@ namespace ProjectSSMP
 
             var connection = @"Server=den1.mssql5.gear.host;Initial Catalog=sspm;Integrated Security=False;User ID=sspm;Password=Gi90MMTY!H_i;Connect Timeout=30;Encrypt=False;TrustServerCertificate=True;ApplicationIntent=ReadWrite;MultiSubnetFailover=False";
             services.AddDbContext<sspmContext>(options => options.UseSqlServer(connection));
+            services.AddMvc(options => options.MaxModelValidationErrors = 50);
+
+
         }
 
         // This method gets called by the runtime. Use this method to configure the HTTP request pipeline.
@@ -48,20 +51,24 @@ namespace ProjectSSMP
             app.UseSession();
             app.UseAuthentication();
             app.UseMvcWithDefaultRoute();
-            var supportedCultures = new[]
-            {
-                new CultureInfo("en"),
-                new CultureInfo("en-US"),
-                new CultureInfo("es"),
-                new CultureInfo("es-ES")
-            };
-            app.UseRequestLocalization(new RequestLocalizationOptions
-            {
-                DefaultRequestCulture = new RequestCulture("th-TH"),
-                SupportedCultures = new List<CultureInfo> { new CultureInfo("th-TH")},
-                SupportedUICultures = new List< CultureInfo >{ new CultureInfo("th-TH") }
+<<<<<<< HEAD
+            //var supportedCultures = new[]
+            //{
+            //    new CultureInfo("en"),
+            //    new CultureInfo("en-US"),
+            //    new CultureInfo("es"),
+            //    new CultureInfo("es-ES")
+            //};
+            //app.UseRequestLocalization(new RequestLocalizationOptions
+            //{
+            //    DefaultRequestCulture = new RequestCulture("th-TH"),
+            //    SupportedCultures = new List<CultureInfo> { new CultureInfo("th-TH")},
+            //    SupportedUICultures = new List< CultureInfo >{ new CultureInfo("th-TH") }
 
-            });
+            //});
+=======
+
+>>>>>>> 5099f663a8b2a83b72173f40393cbb63a965c622
             if (env.IsDevelopment())
             {
                 app.UseBrowserLink();
@@ -73,6 +80,20 @@ namespace ProjectSSMP
             }
 
             app.UseStaticFiles();
+            //var supportedCultures = new[]
+            //{
+            //    new CultureInfo("en"),
+            //    new CultureInfo("en-US"),
+            //    new CultureInfo("es"),
+            //    new CultureInfo("es-ES")
+            //};
+            //app.UseRequestLocalization(new RequestLocalizationOptions
+            //{
+            //    DefaultRequestCulture = new RequestCulture("th-TH"),
+            //    SupportedCultures = new List<CultureInfo> { new CultureInfo("th-TH")},
+            //    SupportedUICultures = new List< CultureInfo >{ new CultureInfo("th-TH") }
+
+            //});
 
             app.UseMvc(routes =>
             {

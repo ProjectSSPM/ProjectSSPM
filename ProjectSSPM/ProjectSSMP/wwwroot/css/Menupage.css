@@ -164,6 +164,9 @@
 .gn-icon-bars::before {
     content: "\f0c9";
 }
+.gn-icon-calendar::before {
+    content: "\f073";
+}
 .gn-icon-help::before {
     content: "";
 }
