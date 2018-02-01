@@ -24,7 +24,7 @@ namespace ProjectSSMP.Controllers
         [Authorize]
         public IActionResult Index()
         {
-<<<<<<< HEAD
+
             var loggedInUser = HttpContext.User;
             var loggedInUserName = loggedInUser.Identity.Name;
             ViewBag.userMenu = GetMenu();
@@ -72,16 +72,13 @@ namespace ProjectSSMP.Controllers
                 });
             }
                 return View(model);
-=======
-            ViewBag.userMenu = GetMenu();
-            var loggedInUser = HttpContext.User;
-            var loggedInUserName = loggedInUser.Identity.Name;
-            var userid = (from u in context.UserSspm where u.Username.Equals(loggedInUserName) select u).FirstOrDefault();
+
+        
             
 
 
-            return View();
->>>>>>> 17d39a0bf9f09b6e1efea143aa7461925f1e47a6
+         
+
         }
     }
 }

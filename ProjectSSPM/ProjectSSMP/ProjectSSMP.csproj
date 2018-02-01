@@ -19,7 +19,4 @@
   <ItemGroup>
     <Compile Remove="Controllers\Project.cs" />
   </ItemGroup>
-  <ItemGroup>
-    <Folder Include="Models\Timesheet\" />
-  </ItemGroup>
 </Project>
