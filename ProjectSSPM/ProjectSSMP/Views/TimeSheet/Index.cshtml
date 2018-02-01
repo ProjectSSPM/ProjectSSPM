@@ -1,8 +1,14 @@
-﻿
+﻿@model IEnumerable<ProjectSSMP.Models.Timesheet.TimeSheetInputModel>
 @{
     ViewData["Title"] = "Index";
     Layout = "~/Views/Shared/_LayoutMenu.cshtml";
 }
 
 <h2>Index</h2>
+@foreach (var item in Model) {
+    @Html.DisplayFor(modelItem => item.ProjectName) <br/>
+    @Html.DisplayFor(modelItem => item.ProjectNumber) <br/>
+    @Html.DisplayFor(modelItem => item.ProjectId) <br/>
+    @Html.DisplayFor(modelItem => item.Note) <br/>
+}
 
