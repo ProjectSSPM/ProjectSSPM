@@ -1,8 +1,10 @@
 ﻿<Properties StartupConfiguration="{99528461-6D99-4BA1-9100-7145EEE92C3D}|Default">
-  <MonoDevelop.Ide.Workbench ActiveDocument="ProjectSSMP/Views/TimeSheet/Index.cshtml">
+  <MonoDevelop.Ide.Workbench ActiveDocument="ProjectSSMP/Views/ProjectManagement/CreateFunction.cshtml">
     <Files>
       <File FileName="ProjectSSMP/Views/Home/Index.cshtml" Line="2" Column="1" />
-      <File FileName="ProjectSSMP/Views/TimeSheet/Index.cshtml" Line="3" Column="1" />
+      <File FileName="ProjectSSMP/Views/TimeSheet/Index.cshtml" Line="24" Column="70" />
+      <File FileName="ProjectSSMP/Views/ProjectManagement/CreateTask.cshtml" Line="123" Column="53" />
+      <File FileName="ProjectSSMP/Views/ProjectManagement/CreateFunction.cshtml" Line="124" Column="31" />
     </Files>
     <Pads>
       <Pad Id="MonoDevelop.Debugger.WatchPad">
@@ -16,7 +18,6 @@
   <MonoDevelop.Ide.DebuggingService.Breakpoints>
     <BreakpointStore>
       <Breakpoint file="/Users/Palm/Desktop/ProjectSSPM/ProjectSSPM/ProjectSSMP/Controllers/ProjectManagementController.cs" relfile="ProjectSSMP/Controllers/ProjectManagementController.cs" line="482" column="1" />
-      <Breakpoint file="/Users/Palm/Desktop/ProjectSSPM/ProjectSSPM/ProjectSSMP/Views/TimeSheet/Index.cshtml" relfile="ProjectSSMP/Views/TimeSheet/Index.cshtml" line="1" column="1" />
     </BreakpointStore>
   </MonoDevelop.Ide.DebuggingService.Breakpoints>
   <MonoDevelop.Ide.DebuggingService.PinnedWatches />

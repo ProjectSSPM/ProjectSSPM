@@ -4,30 +4,22 @@
     Layout = "~/Views/Shared/_LayoutMenu.cshtml";
 }
 
-<<<<<<< HEAD
-<h2>Index</h2>
-@foreach (var item in Model) {
-    @Html.DisplayFor(modelItem => item.ProjectName) <br/>
-    @Html.DisplayFor(modelItem => item.ProjectNumber) <br/>
-    @Html.DisplayFor(modelItem => item.ProjectId) <br/>
-    @Html.DisplayFor(modelItem => item.Note) <br/>
-}
-=======
->>>>>>> 17d39a0bf9f09b6e1efea143aa7461925f1e47a6
 
 <div class="container">
-    <h2 class="well">TimeShee</h2>
+    <h2 class="well">TimeSheet</h2>
+    @foreach (var item in Model) {
     <div class="row">
         <div class="col-sm-6 col-md-4 col-lg-3 mt-4">
             <div class="card">
 
                 <div class="card-block">
-                    <h4 class="card-title">Tawshif Ahsan Khan</h4>
+                    <h4 class="card-title">@Html.DisplayFor(modelItem => item.ProjectName)</h4>
                     <div class="meta">
-                        <a href="#">Friends</a>
+                        <input type="hidden" value="@item.ProjectNumber" name="ProjectNumber" id="ProjectNumber" />
+                        @Html.DisplayFor(modelItem => item.ProjectId)
                     </div>
                     <div class="card-text">
-                        Tawshif is a web designer living in Bangladesh.
+                        @Html.DisplayFor(modelItem => item.Note)
                     </div>
                 </div>
                 <div class="card-footer">
