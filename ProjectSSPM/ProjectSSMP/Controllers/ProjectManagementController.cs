@@ -489,7 +489,7 @@ namespace ProjectSSMP.Controllers
             ViewBag.userMenu = GetMenu();
             if (inputModel.ProjectEnd < inputModel.ProjectStart)
             {
-                ModelState.AddModelError("ErrorCreatePtoject", "Wrong Start Date and End Date");
+                ModelState.AddModelError("ErrorCreatePtoject", "กรุณากรอกเวลาใหม่");
                 return View();
             }
             try

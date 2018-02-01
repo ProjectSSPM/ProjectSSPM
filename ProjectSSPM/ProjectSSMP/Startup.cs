@@ -51,11 +51,7 @@ namespace ProjectSSMP
             app.UseSession();
             app.UseAuthentication();
             app.UseMvcWithDefaultRoute();
-<<<<<<< HEAD
-            
-=======
 
->>>>>>> 3c3268b6787675831945e982cc670f876fc37f92
             if (env.IsDevelopment())
             {
                 app.UseBrowserLink();
