@@ -22,6 +22,13 @@ namespace ProjectSSMP.Controllers
         [Authorize]
         public IActionResult Index()
         {
+            ViewBag.userMenu = GetMenu();
+            var loggedInUser = HttpContext.User;
+            var loggedInUserName = loggedInUser.Identity.Name;
+            var userid = (from u in context.UserSspm where u.Username.Equals(loggedInUserName) select u).FirstOrDefault();
+            
+
+
             return View();
         }
     }

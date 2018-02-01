@@ -114,17 +114,17 @@ namespace ProjectSSMP.Controllers
             }
 
             ViewData["UserSSPM"] = new SelectList(context.UserSspm.Join(context.UserAssignGroup,
-                                                                       u => u.UserId,
-                                                                       ua => ua.UserId,
-                                                                       (u, ua) => new {
-                                                                           UserId = u.UserId,
-                                                                           Firstname = u.Firstname,
-                                                                           GroupId = ua.GroupId,
-                                                                           Status = u.Status
-                                                                       }).Where(ua => ua.GroupId.Equals("10")
-                                                                       && ua.GroupId.Equals("50") && ua.Status.Equals("A"))
+                                                                        u => u.UserId,
+                                                                        ua => ua.UserId,
+                                                                        (u, ua) => new {
+                                                                            UserId = u.UserId,
+                                                                            Firstname = u.Firstname,
+                                                                            GroupId = ua.GroupId,
+                                                                            Status = u.Status
+                                                                        }).Where(ua => ua.GroupId.Equals("10") || ua.GroupId.Equals("50") && ua.Status.Equals("A")
+                                                                        )
 
-               , "UserId", "Firstname");
+                , "UserId", "Firstname");
             ViewData["naemFunction"] = Function.FunctionName;
 
             return View(e);
@@ -621,8 +621,8 @@ namespace ProjectSSMP.Controllers
                                                                             Firstname =  u.Firstname,
                                                                             GroupId = ua.GroupId,
                                                                             Status = u.Status
-                                                                        }).Where(ua => ua.GroupId.Equals("10")
-                                                                        && ua.GroupId.Equals("50") && ua.Status.Equals("A") )
+                                                                        }).Where(ua => ua.GroupId.Equals("10") || ua.GroupId.Equals("50") && ua.Status.Equals("A")
+                                                                        )
                 
                 , "UserId", "Firstname");
             ViewData["ProjectNuber"] = projectnumber.ProjectNumber;
@@ -735,6 +735,12 @@ namespace ProjectSSMP.Controllers
                 return View();
             }
 
+        }
+
+
+        public IActionResult Detail(string id)
+        {
+            return View();
         }
 
     }
