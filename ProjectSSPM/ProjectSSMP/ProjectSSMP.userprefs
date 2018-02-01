@@ -1,0 +1,30 @@
+﻿<Properties StartupConfiguration="{9025B83F-F1E8-44A2-8A65-CEB739754A17}|Default">
+  <MonoDevelop.Ide.Workbench ActiveDocument="Views/Shared/_LayoutMenu.cshtml">
+    <Files>
+      <File FileName="Controllers/TimeSheetController.cs" Line="79" Column="1" />
+      <File FileName="Models/Timesheet/TimeSheetInputModel.cs" Line="20" Column="33" />
+      <File FileName="Views/TimeSheet/Index.cshtml" Line="21" Column="25" />
+      <File FileName="Views/TimeSheet/TimeSheet.cshtml" Line="8" Column="22" />
+      <File FileName="Controllers/ProjectManagementController.cs" Line="160" Column="28" />
+      <File FileName="Views/ProjectManagement/CreateTask.cshtml" Line="104" Column="13" />
+      <File FileName="Views/Shared/_LayoutMenu.cshtml" Line="89" Column="32" />
+    </Files>
+    <Pads>
+      <Pad Id="MonoDevelop.Debugger.WatchPad">
+        <State>
+          <Value>$exception.Message</Value>
+        </State>
+      </Pad>
+    </Pads>
+  </MonoDevelop.Ide.Workbench>
+  <MonoDevelop.Ide.Workspace ActiveConfiguration="Debug" />
+  <MonoDevelop.Ide.DebuggingService.Breakpoints>
+    <BreakpointStore>
+      <Breakpoint file="/Users/Palm/Desktop/ProjectSSPM/ProjectSSPM/ProjectSSMP/Views/TimeSheet/TimeSheet.cshtml" relfile="Views/TimeSheet/TimeSheet.cshtml" line="1" column="1" />
+      <Breakpoint file="/Users/Palm/Desktop/ProjectSSPM/ProjectSSPM/ProjectSSMP/Controllers/TimeSheetController.cs" relfile="Controllers/TimeSheetController.cs" line="78" column="1" />
+    </BreakpointStore>
+  </MonoDevelop.Ide.DebuggingService.Breakpoints>
+  <MonoDevelop.Ide.DebuggingService.PinnedWatches />
+  <MonoDevelop.Ide.ItemProperties.ProjectSSMP PreferredExecutionTarget="MonoDevelop.Default" />
+  <MultiItemStartupConfigurations />
+</Properties>

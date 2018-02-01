@@ -7,12 +7,13 @@
 
 <div class="container">
     <h2 class="well">TimeSheet</h2>
+    <div class="row">
     @foreach (var item in Model)
     {
-    <div class="row">
+
         <div class="col-sm-6 col-md-4 col-lg-3 mt-4">
             <div class="card">
-
+                <img class="card-img-top" src="https://dw9to29mmj727.cloudfront.net/misc/newsletter-naruto3.png">
                 <div class="card-block">
                     <h4 class="card-title">@Html.DisplayFor(modelItem => item.ProjectName)</h4>
                     <div class="meta">
@@ -24,11 +25,15 @@
                     </div>
                 </div>
                 <div class="card-footer">
-                    <small>Last updated 3 mins ago</small>
-                    <button class="btn btn-info float-right btn-sm">Follow</button>
+                    <small>Estimate End: @item.ProjectEnd</small>
+                    <div class="col-sm-6"></div>
+                    <div class="col-sm-4">
+                    <a asp-action="TimeSheet" class="btn btn-info btn-sm" asp-route-id="@item.ProjectNumber">Select</a>
+                        </div>
+                    <div class="col-sm-6">&nbsp;</div>
                 </div>
             </div>
         </div>
-    </div>
     }
+        </div>
 </div>
