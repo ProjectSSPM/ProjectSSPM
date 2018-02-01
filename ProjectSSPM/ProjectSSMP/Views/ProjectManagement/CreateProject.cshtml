@@ -12,7 +12,7 @@
     @if (!ViewData.ModelState.IsValid && ViewData.ModelState["ErrorCreatePtoject"].Errors.Count > 0)
     {
         <div class="alert alert-danger">
-            <strong>Danger!</strong> <span class="text-danger "> &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+            <strong>Warning!</strong> <span class="text-danger "> &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
             @ViewData.ModelState["ErrorCreatePtoject"].Errors.First().ErrorMessage
         </span>
         </div>
