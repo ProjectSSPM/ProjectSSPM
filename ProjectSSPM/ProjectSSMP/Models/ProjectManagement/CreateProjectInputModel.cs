@@ -1,4 +1,6 @@
 ﻿using System;
+using System.ComponentModel.DataAnnotations;
+
 namespace ProjectSSMP.Models.ProjectManagement
 {
     public class CreateProjectInputModel
@@ -9,6 +11,8 @@ namespace ProjectSSMP.Models.ProjectManagement
         public string ProjectManager { get; set; }
         public DateTime? ProjectStart { get; set; }
         public DateTime? ProjectEnd { get; set; }
+        //[Required]
+        //[DataType(DataType.Currency)]
         public int? ProjectCost { get; set; }
         public string ProjectCreateBy { get; set; }
         public DateTime? ProjectCreateDate { get; set; }
