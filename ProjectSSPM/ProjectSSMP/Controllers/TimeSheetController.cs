@@ -47,6 +47,7 @@ namespace ProjectSSMP.Controllers
                               ProjectName = x3.ProjectName,
                               ProjectId = x3.ProjectId,
                               Note = x3.Note,
+                    ProjectEnd = x3.ProjectEnd,
                           });
                 foreach (var item in PJ)
                 {
@@ -57,6 +58,7 @@ namespace ProjectSSMP.Controllers
                         ProjectName = item.ProjectName,
                         ProjectNumber = item.ProjectNumber,
                         Note = item.Note,
+                        ProjectEnd = item.ProjectEnd,
 
                     });
                 }
@@ -165,6 +167,124 @@ namespace ProjectSSMP.Controllers
                 });
             }
           
+            if (Test == null)
+            {
+                return NotFound();
+            }
+            return View(model);
+        }
+
+        [Authorize]
+        public async Task<IActionResult> AddTimeSheet(String id){
+
+            ViewBag.userMenu = GetMenu();
+
+            if (id == null)
+            {
+                return NotFound();
+            }
+
+
+            var Func = await context.Function.SingleOrDefaultAsync(m => m.FunctionId == id);
+            var Tasx = await context.Task.SingleOrDefaultAsync(m => m.TaskId == Func.TaskId);
+            var Proj = await context.Project.SingleOrDefaultAsync(m => m.ProjectNumber == Tasx.ProjectNumber);
+
+            var e = new TimeSheetInputModel()
+            {
+                ProjectNumber = Proj.ProjectNumber,
+                ProjectName = Proj.ProjectName,
+                TaskId = Tasx.TaskId,
+                TaskName = Tasx.TaskName,
+                FunctionId = Func.FunctionId,
+                FunctionName = Func.FunctionName,
+
+            };
+
+            ViewData["ProjectName"] = " "+Proj.ProjectName;
+            if (e == null)
+            {
+                return NotFound();
+            }
+            return View(e);
+          
+        }
+
+        [HttpPost]
+        [ValidateAntiForgeryToken]
+        public async Task<IActionResult> AddTimeSheet(TimeSheetInputModel inputModel)
+        {
+            ViewBag.userMenu = GetMenu();
+
+            var loggedInUser = HttpContext.User;
+            var loggedInUserName = loggedInUser.Identity.Name;
+
+            var uid = (from u in context.UserSspm where u.Username.Equals(loggedInUserName) select u).FirstOrDefault();
+
+            TimeSheet ord = new TimeSheet
+            {
+                ProjectNumber = inputModel.ProjectNumber,
+                TaskId = inputModel.TaskId,
+                FunctionId = inputModel.FunctionId,
+                TimeSheetId = DateTime.Now,
+                TimeSheetStart = inputModel.TimeSheetStart,
+                TimeSheetEnd = inputModel.TimeSheetEnd,
+                UserId = uid.UserId
+            };
+
+            try
+            {
+                context.TimeSheet.Add(ord);
+                await context.SaveChangesAsync();
+            }
+            catch (Exception e)
+            {
+                Console.WriteLine(e);
+                // Provide for exceptions.
+            }
+
+            return RedirectToAction("Index", "TimeSheet");
+
+        }
+
+        [Authorize]
+        public IActionResult UpdateTimeSheet(String id)
+        {
+
+            ViewBag.userMenu = GetMenu();
+            var loggedInUser = HttpContext.User;
+            var loggedInUserName = loggedInUser.Identity.Name;
+
+            var uid = (from u in context.UserSspm where u.Username.Equals(loggedInUserName) select u).FirstOrDefault();
+
+            var Test = (from x in context.TimeSheet join x2 in context.Function on x.FunctionId equals x2.FunctionId
+                        where x.FunctionId.Equals(id) && x.UserId.Equals(uid.UserId)
+                        select new
+                        {
+                            TimeSheetId = x.TimeSheetId,
+                            TimeSheetStart = x.TimeSheetStart,
+                            TimeSheetEnd = x.TimeSheetEnd,
+                            FunctionId = x.FunctionId,
+                            FunctionName = x2.FunctionName,
+                        });
+
+            List<TimeSheetInputModel> model = new List<TimeSheetInputModel>();
+
+
+            foreach (var item in Test)
+            {
+
+                model.Add(new TimeSheetInputModel()
+                {
+                    TimeSheetId = item.TimeSheetId,
+                    TimeSheetStart = item.TimeSheetStart,
+                    TimeSheetEnd = item.TimeSheetEnd,
+                    FunctionId = item.FunctionId,
+                    FunctionName = item.FunctionName,
+
+
+                });
+            }
+
             if (Test == null)
             {
                 return NotFound();

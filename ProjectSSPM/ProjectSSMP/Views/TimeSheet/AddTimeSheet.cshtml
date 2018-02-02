@@ -1,0 +1,86 @@
+﻿@model ProjectSSMP.Models.Timesheet.TimeSheetInputModel
+@{
+    ViewData["Title"] = "Add TimeSheet";
+    Layout = "~/Views/Shared/_LayoutMenu.cshtml";
+}
+
+@*
+@foreach (var item in Model) {
+    @Html.DisplayFor(modelItem => item.FunctionId)  <br />
+    @Html.DisplayFor(modelItem => item.FunctionName)    <br />
+    @Html.DisplayFor(modelItem => item.TaskId)  <br />
+    @Html.DisplayFor(modelItem => item.TaskName)    <br />
+    @Html.DisplayFor(modelItem => item.ProjectId)   <br />
+    @Html.DisplayFor(modelItem => item.ProjectName) <br />
+    @Html.DisplayFor(modelItem => item.UserId)  <br />
+}
+*@
+
+<div class="container">
+    <h2 class="well"> TimeSheet <span class="glyphicon glyphicon-chevron-right"></span>@ViewData["ProjectName"]</h2>
+    <div class="col-lg-12 well">
+        
+            <form asp-controller="TimeSheet" asp-action="AddTimeSheet" method="post">
+                
+                <input type="hidden" asp-for="ProjectNumber" />
+                <input type="hidden" asp-for="TaskId" />
+                <input type="hidden" asp-for="FunctionId" />
+               <dl class="dl-horizontal">
+                    <dt>
+                        @Html.DisplayNameFor(model => model.ProjectName)
+                    </dt>
+                    <dd>
+                        @Html.DisplayFor(model => model.ProjectName)
+                    </dd>
+                    <dt>
+                        @Html.DisplayNameFor(model => model.TaskName)
+                    </dt>
+                    <dd>
+                        @Html.DisplayFor(model => model.TaskName)
+                    </dd>
+                    <dt>
+                        @Html.DisplayNameFor(model => model.FunctionName)
+                    </dt>
+                    <dd>
+                        @Html.DisplayFor(model => model.FunctionName)
+                    </dd>
+               </dl>
+                <div class="col-sm-12">
+                       <div class="col-sm-6 form-group">
+                        <label>Estimated Start Date</label>
+                        <div class="form-group">
+                            <div class="input-group date form_date col-md-8" data-date="" data-date-format="dd MM yyyy" data-link-field="dtp_input2" data-link-format="yyyy-mm-dd">
+                                <input class="form-control" size="10" type="text" name="TimeSheetStart" id="TimeSheetStart" readonly>
+                                <span class="input-group-addon"><span class="glyphicon glyphicon-remove"></span></span>
+                                <span class="input-group-addon"><span class="glyphicon glyphicon-calendar"></span></span>
+                            </div>
+
+                        </div>
+
+                    </div>
+                    <div class="col-sm-6 form-group">
+                        <label>Estimated Stop Date</label>
+                        <div class="form-group">
+                            <div class="input-group date form_date col-md-8" data-date="" data-date-format="dd MM yyyy" data-link-field="dtp_input2" data-link-format="yyyy-mm-dd">
+                                <input class="form-control" size="10" type="text" name="TimeSheetEnd" id="TimeSheetEnd" readonly>
+                                <span class="input-group-addon"><span class="glyphicon glyphicon-remove"></span></span>
+                                <span class="input-group-addon"><span class="glyphicon glyphicon-calendar"></span></span>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="col-sm-12 form-group">
+                            <div class= "text-right" style="margin-right: 10px;">
+                                
+                                <a asp-action="Index" class="btn btn-danger" >Back</a>
+
+                                <input type="submit" value="Save" class="btn btn-default btn-primary" />
+                                </div>
+                         </div>
+                </div>
+            </form>
+        
+    </div>
+</div>
+
+
