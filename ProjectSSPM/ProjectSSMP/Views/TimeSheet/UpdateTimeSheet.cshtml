@@ -1,20 +1,33 @@
 ﻿@model IEnumerable<ProjectSSMP.Models.Timesheet.TimeSheetInputModel>
 @{
-    ViewData["Title"] = "TimeSheet Page";
+    ViewData["Title"] = "Update Status / TimeSheet";
     Layout = "~/Views/Shared/_LayoutMenu.cshtml";
 }
+
 <div class="container">
-<h2 class="well">TimeSheet</h2>
+<h2 class="well">Update TimeSheet</h2>
  <table id="Timesheet" class="responsive" width="100%">
     <thead>
         <tr>
                
                 <th>
-                    Task Name
+                    Function ID
                 </th>
 
                 <th>
                     Function Name
+                </th>
+
+                <th>
+                    TimeSheet ID
+                </th>
+
+                <th>
+                    Start
+                </th>
+
+                <th>
+                    End
                 </th>
 
                  <th>
@@ -32,7 +45,7 @@
             
             <td>
               
-                @Html.DisplayFor(modelItem => item.TaskName)
+                @Html.DisplayFor(modelItem => item.FunctionId)
             </td>
 
 
@@ -41,12 +54,26 @@
                 @Html.DisplayFor(modelItem => item.FunctionName)
             </td>
 
+            <td>
+              
+                @Html.DisplayFor(modelItem => item.TimeSheetId)
+            </td>
 
+
+            <td>
+                
+                @Html.DisplayFor(modelItem => item.TimeSheetStart)
+            </td>
+
+            <td>
+                
+                @Html.DisplayFor(modelItem => item.TimeSheetEnd)
+            </td>
 
                 
             <td>
                 <div class= "text-right" style="margin-right: 10px;">
-                    <a asp-action="AddTimeSheet" class="btn btn-info btn-sm" asp-route-id="@item.FunctionId">Add</a>  
+      
                     <a asp-action="UpdateTimeSheet" class="btn btn-success btn-sm" asp-route-id="@item.FunctionId">Update</a> 
                 </div>
 
@@ -55,6 +82,5 @@
 
 }
     </tbody>
-    </table>
-
-</div>
+        </table>
+    
