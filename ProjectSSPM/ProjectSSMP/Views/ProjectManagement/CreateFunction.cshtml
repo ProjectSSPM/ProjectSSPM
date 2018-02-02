@@ -11,8 +11,10 @@
 
              <div class="col-lg-4">
                <div class= "text-Left">
-                    <a href="javascript: history.go(-1);" class="btn btn-danger btn-md">Back</a>
-
+                    
+                   @Html.ActionLink("Back", "CreateTask",
+                  new { Controller = "ProjectManagement",id= ViewData["ProjectNuber"] },
+                  new { @class="btn btn-danger btn-md"})
                 </div>
         
             </div>
@@ -185,4 +187,4 @@
     </div>
   </div>
 
-
+    </div>

@@ -28,22 +28,85 @@ namespace ProjectSSMP.Controllers
             var loggedInUser = HttpContext.User;
             var loggedInUserName = loggedInUser.Identity.Name;
             ViewBag.userMenu = GetMenu();
+            var checkgroup = (from u in context.UserSspm
+                              join ua in context.UserAssignGroup on u.UserId equals ua.UserId
+                              select new
+                              {
+                                  ua.GroupId
+                              }).FirstOrDefault();
+            List<TimeSheetInputModel> model = new List<TimeSheetInputModel>();
 
-            var checkID = context.UserSspm.SingleOrDefault(m => m.Username == loggedInUserName);
-            var checkTeamTask = context.TeamTask.SingleOrDefault(m => m.UserId == checkID.UserId);
-            //var checkProject = context.Project.SingleOrDefault(m => m.ProjectNumber == checkTeamTask.ProjectNumber);
+            if (checkgroup.GroupId == "50")
+            {
+                var PJ = (from x in context.UserSspm
+                          join x3 in context.Project on x.UserId equals x3.ProjectManager
+                          select new
+                          {
+                              ProjectNumber = x3.ProjectNumber,
+                              ProjectName = x3.ProjectName,
+                              ProjectId = x3.ProjectId,
+                              Note = x3.Note,
+                          });
+                foreach (var item in PJ)
+                {
 
-            var PJ = (from x in context.UserSspm
-                      join x2 in context.TeamTask on x.UserId equals x2.UserId
-                      join x3 in context.Project on x2.ProjectNumber equals x3.ProjectNumber
-                      where x.Username.Equals(loggedInUserName)
-                      select new
-                      {
-                          ProjectNumber = x3.ProjectNumber,
-                          ProjectName = x3.ProjectName,
-                          ProjectId = x3.ProjectId,
-                          Note = x3.Note,
-            });
+                    model.Add(new TimeSheetInputModel()
+                    {
+                        ProjectId = item.ProjectId,
+                        ProjectName = item.ProjectName,
+                        ProjectNumber = item.ProjectNumber,
+                        Note = item.Note,
+
+                    });
+                }
+
+
+            }
+            else if(checkgroup.GroupId == "10")
+            {
+              var   PJ = (from x in context.UserSspm
+                          join x2 in context.TeamTask on x.UserId equals x2.UserId
+                          join x3 in context.Project on x2.ProjectNumber equals x3.ProjectNumber
+                          where x.Username.Equals(loggedInUserName)
+                          select new
+                          {
+                              ProjectNumber = x3.ProjectNumber,
+                              ProjectName = x3.ProjectName,
+                              ProjectId = x3.ProjectId,
+                              Note = x3.Note,
+                          });
+                foreach (var item in PJ)
+                {
+
+                    model.Add(new TimeSheetInputModel()
+                    {
+                        ProjectId = item.ProjectId,
+                        ProjectName = item.ProjectName,
+                        ProjectNumber = item.ProjectNumber,
+                        Note = item.Note,
+
+                    });
+                }
+
+            }
+            else
+            {
+               
+            }
+
+
+
+            ////var PJ = (from x in context.UserSspm
+            ////          join x2 in context.TeamTask on x.UserId equals x2.UserId
+            ////          join x3 in context.Project on x2.ProjectNumber equals x3.ProjectNumber
+            ////          where x.Username.Equals(loggedInUserName)
+            ////          select new
+            ////          {
+            ////              ProjectNumber = x3.ProjectNumber,
+            ////              ProjectName = x3.ProjectName,
+            ////              ProjectId = x3.ProjectId,
+            ////              Note = x3.Note,
+            ////});
             /*
             var e = new TimeSheetInputModel()
             {
@@ -53,24 +116,22 @@ namespace ProjectSSMP.Controllers
                 Note = checkProject.Note
 
             };
-            */
-
-            List<TimeSheetInputModel> model = new List<TimeSheetInputModel>();
+            */        
 
 
 
-            foreach (var item in PJ)
-            {
+            //foreach (var item in PJ)
+            //{
 
-                model.Add(new TimeSheetInputModel()
-                {
-                    ProjectId = item.ProjectId,
-                    ProjectName = item.ProjectName,
-                    ProjectNumber = item.ProjectNumber,
-                    Note = item.Note,
+            //    model.Add(new TimeSheetInputModel()
+            //    {
+            //        ProjectId = item.ProjectId,
+            //        ProjectName = item.ProjectName,
+            //        ProjectNumber = item.ProjectNumber,
+            //        Note = item.Note,
 
-                });
-            }
+            //    });
+            //}
                 return View(model);
 
         
