@@ -16,12 +16,12 @@
                 <th class="all">MenuIcon</th>
                 <th class="none">Group User :</th>
                 <th class="none">Group User : </th>
-                
+                <th class="none">Group User : </th>
+
                 <th class="all">
                     <a asp-action="AddMenu" class="btn btn-primary btn-md" style="margin-left: 15px;">Add Menu</a>
                     <a asp-action="AddMenu" class="btn btn-primary btn-md" style="margin-left: 15px;">Add Menu Authen</a>
                 </th>
-
             </tr>
         </thead>
 
@@ -69,7 +69,12 @@
                           @if(m.memugroup.Count == 1)
                           {
                                   <td>&nbsp;</td>  
+                                  <td>&nbsp;</td>
+                          }
+                          else if(m.memugroup.Count == 2)
+                          {
 
+                              <td>&nbsp;</td>
                           }
                           <td>
                                 &nbsp; &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
