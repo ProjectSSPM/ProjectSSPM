@@ -39,14 +39,16 @@ namespace ProjectSSMP.Controllers
             if (checkgroup.GroupId == "50")
             {
                 var PJ = (from x in context.UserSspm
-                          join x3 in context.Project on x.UserId equals x3.ProjectManager
-                          where x.Username.Equals(loggedInUserName)
+                          join x2 in context.TeamTask on x.UserId equals x2.UserId
+                          join x3 in context.Project on x2.ProjectNumber equals x3.ProjectNumber
+                          where x3.ProjectManager.Equals(x.UserId) || x.Username.Equals(loggedInUserName) 
                           select new
                           {
                               ProjectNumber = x3.ProjectNumber,
                               ProjectName = x3.ProjectName,
                               ProjectId = x3.ProjectId,
                               Note = x3.Note,
+                              ProjectEnd = x3.ProjectEnd
                           });
                 foreach (var item in PJ)
                 {
@@ -57,7 +59,7 @@ namespace ProjectSSMP.Controllers
                         ProjectName = item.ProjectName,
                         ProjectNumber = item.ProjectNumber,
                         Note = item.Note,
-
+                        ProjectEnd = item.ProjectEnd
                     });
                 }
 
@@ -75,6 +77,7 @@ namespace ProjectSSMP.Controllers
                               ProjectName = x3.ProjectName,
                               ProjectId = x3.ProjectId,
                               Note = x3.Note,
+                              ProjectEnd = x3.ProjectEnd
                           });
                 foreach (var item in PJ)
                 {
@@ -85,6 +88,7 @@ namespace ProjectSSMP.Controllers
                         ProjectName = item.ProjectName,
                         ProjectNumber = item.ProjectNumber,
                         Note = item.Note,
+                        ProjectEnd = item.ProjectEnd
 
 
                     });

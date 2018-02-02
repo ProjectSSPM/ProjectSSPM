@@ -4,10 +4,8 @@
     Layout = "~/Views/Shared/_LayoutMenu.cshtml";
 }
 
-
 <div class="container">
     <h2 class="well">MenuManagenent</h2>
-
     <table id="exampleMenu" class="responsive">
         <thead>
             <tr>
@@ -25,85 +23,125 @@
             </tr>
         </thead>
 
-
         <tbody>
-
             @*@foreach (var item in Model)
-            {
+                {
 
 
-                <tr>
+                    <tr>
 
-                    <td>@item.MenuName</td>
-                    <td>@item.MenuUrl</td>
-                    <td><i class="@item.MenuIcon"></i></td>
-                    <td>@item.GroupName</td>
-                    <td>
-                        &nbsp; &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
-                        <a asp-action="Edit" class="btn btn-warning btn-sm" asp-route-id="@item.MenuId">Edit</a>
-                    </td>
+                        <td>@item.MenuName</td>
+                        <td>@item.MenuUrl</td>
+                        <td><i class="@item.MenuIcon"></i></td>
+                        <td>@item.GroupName</td>
+                        <td>
+                            &nbsp; &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+                            <a asp-action="Edit" class="btn btn-warning btn-sm" asp-route-id="@item.MenuId">Edit</a>
+                        </td>
 
-                </tr>
-
-
-            }*@
-              @{ 
-                  var group = Model.GroupBy(x => x.MenuName).Select(x => new {
-                      MenuName = x.Key,
-                      menud = x.Last(),
-                      memugroup = x.ToList()
-                  });
-
-                  foreach(var m in group)
-                  {
-                      <tr>
-                          <td>@m.MenuName</td>
-                          <td>@m.menud.MenuUrl</td>
-                          <td><i class="@m.menud.MenuIcon"></i></td>
-                          
-                          @foreach(var ug in m.memugroup)
-                          {                             
-                                  <td>@ug.GroupName</td>                             
-                               
-                          }
-                          @if(m.memugroup.Count == 1)
-                          {
-                                  <td>&nbsp;</td>  
-                                  <td>&nbsp;</td>
-                          }
-                          else if(m.memugroup.Count == 2)
-                          {
-
-                              <td>&nbsp;</td>
-                          }
-                          <td>
-                                &nbsp; &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
-                                <a asp-action="Edit" class="btn btn-warning btn-sm" asp-route-id="@m.menud.MenuId">Edit</a>
-                          </td>
-
-                      </tr>
-                      
+                    </tr>
 
 
-                  }
+                }*@
+            @{
+                var group = Model.GroupBy(x => x.MenuName).Select(x => new
+                {
+                    MenuName = x.Key,
+                    menud = x.Last(),
+                    memugroup = x.ToList()
+                });
+
+                foreach (var m in group)
+                {
+                    <tr>
+                        <td>@m.MenuName</td>
+                        <td>@m.menud.MenuUrl</td>
+                        <td><i class="@m.menud.MenuIcon"></i></td>
+
+                        @foreach (var ug in m.memugroup)
+                        {
+                            <td>@ug.GroupName</td>
+
+                        }
+                        @if (m.memugroup.Count == 1)
+                        {
+                            <td>&nbsp;</td>
+                            <td>&nbsp;</td>
+                        }
+                        else if (m.memugroup.Count == 2)
+                        {
+
+                            <td>&nbsp;</td>
+                        }
+                        <td>
+                            &nbsp; &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+                            <a asp-action="Edit" class="btn btn-warning btn-sm" asp-route-id="@m.menud.MenuId">Edit</a>
+                            <a href="javascript:void(0);" class="anchorDetail" data-id="@m.menud.MenuId">Details</a>
+                        </td>
+                    </tr>
 
 
-              }
+
+                }
 
 
+            }
 
 
         </tbody>
     </table>
 
-  
 </div>
 
+<div id='myModal' class='modal'>
+    <div class="modal-dialog">
+        <div class="modal-content">
+            <div id='myModalContent'></div>
+        </div>
+    </div>
 
+</div>
 
+@section scripts
+    {
+    
 
+    <script>
 
+        var TeamDetailPostBackURL = '/MenuManagenent/Details/';
+        $(function () {
+            $(".anchorDetail").click(function () {
+                debugger;
+                var $buttonClicked = $(this);
+                var id = $buttonClicked.attr('data-id');
+                var options = { "backdrop": "static", keyboard: true };
+                $.ajax({
+                    type: "GET",
+                    url: TeamDetailPostBackURL,
+                    contentType: "application/json; charset=utf-8",
+                    data: { "Id": id },
+                    datatype: "json",
+                    success: function (data) {
+                        debugger;
+                        $('#myModalContent').html(data);
+                        $('#myModal').modal(options);
+                        $('#myModal').modal('show');
 
+                    },
+                    error: function () {
+                        alert("Dynamic content load failed.");
+                    }
+                });
+            });
+            //$("#closebtn").on('click',function(){
+            //    $('#myModal').modal('hide');
 
+            $("#closbtn").click(function () {
+                $('#myModal').modal('hide');
+            });
+        });
 
+    </script>
+
+}
 

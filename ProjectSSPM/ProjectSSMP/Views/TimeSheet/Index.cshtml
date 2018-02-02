@@ -8,30 +8,72 @@
 <div class="container">
     <h2 class="well">TimeSheet</h2>
     <div class="row">
-    @foreach (var item in Model)
+        @{ 
+            var project = Model.GroupBy(s => s.ProjectName);
+        }
+    @foreach (var item in project)
     {
 
         <div class="col-sm-6 col-md-4 col-lg-3 mt-4">
             <div class="card">
                 <img class="card-img-top" src="https://dw9to29mmj727.cloudfront.net/misc/newsletter-naruto3.png">
                 <div class="card-block">
-                    <h4 class="card-title">@Html.DisplayFor(modelItem => item.ProjectName)</h4>
-                    <div class="meta">
-                        <input type="hidden" value="@item.ProjectNumber" name="ProjectNumber" id="ProjectNumber" />
-                        @Html.DisplayFor(modelItem => item.ProjectId)
+                    <h4 class="card-title">@item.Key</h4>
+                    @{ 
+                        var pronum = item.GroupBy(s => s.ProjectNumber);
+                        var proid = item.GroupBy(s => s.ProjectId);
+                        var pronote = item.GroupBy(s => s.Note);
+                        var proend = item.GroupBy(s => s.ProjectEnd);
+                    }
+                    
+                     <div class="meta">
+                         @foreach (var itemnum in pronum)
+                         {
+                             <input type="hidden" value="@itemnum.Key" name="ProjectNumber" id="ProjectNumber" />
+                         }
+                        @foreach (var itemid in proid)
+                        {
+                            
+                            @itemid.Key
+                        }
+
                     </div>
                     <div class="card-text">
-                        @Html.DisplayFor(modelItem => item.Note)
+                        @foreach (var itemnote in pronote)
+                        {
+                            @itemnote.Key
+
+                        }
                     </div>
+
+                    
                 </div>
-                <div class="card-footer">
-                    <small>Estimate End: @item.ProjectEnd</small>
-                    <div class="col-sm-6"></div>
-                    <div class="col-sm-4">
-                    <a asp-action="TimeSheet" class="btn btn-info btn-sm" asp-route-id="@item.ProjectNumber">Select</a>
+                 
+                     <div class="card-footer">
+                         <div class="col-sm-9">
+                             @foreach (var itemend in proend)
+                                 {
+                                 <small>Estimate End: @Convert.ToString(string.Format("{0:MMMM yyyy}", itemend.Key))</small>
+
+                                 }
+                         </div>                    
+                         
+                    
+                    <div class="col-sm-3">
+                        @foreach (var itemnum in pronum)
+                        {
+                            <a asp-action="TimeSheet" class="btn btn-info btn-sm" asp-route-id="@itemnum.Key">Select</a>
+
+                        }
+                    
                         </div>
-                    <div class="col-sm-6">&nbsp;</div>
+                    <div class="col-sm-12">&nbsp;</div>
                 </div>
+
+
+                 
+                
+                
             </div>
         </div>
     }

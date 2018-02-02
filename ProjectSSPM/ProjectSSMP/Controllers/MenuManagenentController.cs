@@ -48,36 +48,7 @@ namespace ProjectSSMP.Controllers
                 });
 
             }
-            var indexmenu2 = (from mg in context.MenuGroup
-                              join ma in context.MenuAuthentication on mg.MenuId equals ma.MenuId
-                              join ug in context.UserGroup on ma.GroupId equals ug.GroupId
-                              select new IndexMenuModel
-                              {
-                                  MenuId = mg.MenuId,
-                                  MenuName = mg.MenuName,
-                                  MenuUrl = mg.MenuUrl,
-                                  MenuIcon = mg.MenuIcon,
-                                  GroupId = ug.GroupId,
-                                  GroupName = ug.GroupName
-                              }).Distinct();
-
-            var menugroup = from mn in indexmenu2
-                            group mn by mn.MenuId;
-
-
-
-            foreach (var item in menugroup)
-            {
-                Console.WriteLine("Group Name {0}", item.Key);
-                foreach (IndexMenuModel m in item)
-                {
-                    Console.WriteLine("Student Name: {0}", m.GroupName);
-
-
-                }
-                
-
-            }
+            
 
 
             return View(mode);
@@ -151,8 +122,18 @@ namespace ProjectSSMP.Controllers
             ViewData["MenuGroup"] = new SelectList(context.MenuGroup, "MenuId", "MenuName");
             return View();
         }
-        
 
+        public ActionResult Details(string id)
+        {
+            ViewBag.userMenu = GetMenu();
+            MenuGroup menu = new MenuGroup();
+            menu = context.MenuGroup.Find(id);
+
+
+            
+            
+            return PartialView("Details", menu );
+        }
 
     }
 }
