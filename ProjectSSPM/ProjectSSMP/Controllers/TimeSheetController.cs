@@ -238,7 +238,7 @@ namespace ProjectSSMP.Controllers
             var loggedInUserName = loggedInUser.Identity.Name;
 
 
-            var tsFunc = (from x in context.TimeSheet where x.FunctionId.Equals(inputModel.FunctionId) select x).FirstOrDefault();
+            var tsFunc = (from x in context.TimeSheet where x.FunctionId.Equals(inputModel.FunctionId) select x).ToList();
 
             Boolean X = Boolean.ReferenceEquals(tsFunc, null);
 
@@ -250,7 +250,7 @@ namespace ProjectSSMP.Controllers
             }
             else
             {
-                num = Convert.ToInt32(tsFunc.TimeSheetNumber.Max());
+                num = Convert.ToInt32(tsFunc.TimeSheetNumber);
                 num = num + 1;
             }
 
