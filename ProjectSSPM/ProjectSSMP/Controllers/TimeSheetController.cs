@@ -312,9 +312,16 @@ namespace ProjectSSMP.Controllers
         }
 
         [Authorize]
-        public IActionResult ConfirmTimeSheet(DateTime? id)
+        public ActionResult ConfirmTimeSheet(string id)
         {
             ViewBag.userMenu = GetMenu();
+            DateTime TimeSheetid;
+            if (!string.IsNullOrEmpty(id))
+            {
+                TimeSheetid = DateTime.Parse(id.Replace("!", ":"));
+                var tiemsheet = (from t in context.TimeSheet where t.TimeSheetId == TimeSheetid select t).FirstOrDefault();
+            }
+            
             return View();
         }
 
