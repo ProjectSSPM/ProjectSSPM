@@ -44,12 +44,22 @@ namespace ProjectSSMP.Controllers
                           where x3.ProjectManager.Equals(x.UserId) || x.Username.Equals(loggedInUserName) 
                           select new
                           {
+<<<<<<< HEAD
                                   ProjectNumber = x3.ProjectNumber,
                                  ProjectName = x3.ProjectName,
                                   ProjectId = x3.ProjectId,
                                     Note = x3.Note,
                                   ProjectEnd = x3.ProjectEnd,
 
+=======
+                              ProjectNumber = x3.ProjectNumber,
+                              ProjectName = x3.ProjectName,
+                              ProjectId = x3.ProjectId,
+                              Note = x3.Note,
+                              ProjectEnd = x3.ProjectEnd
+
+                   
+>>>>>>> f72714fdfa0d8cad2da6eee2029bd97228f0f8ee
                           });
                 foreach (var item in PJ)
                 {
@@ -60,10 +70,17 @@ namespace ProjectSSMP.Controllers
                         ProjectName = item.ProjectName,
                         ProjectNumber = item.ProjectNumber,
                         Note = item.Note,
+<<<<<<< HEAD
 
                         ProjectEnd = item.ProjectEnd
 
                      
+=======
+                        ProjectEnd = item.ProjectEnd
+
+                      
+
+>>>>>>> f72714fdfa0d8cad2da6eee2029bd97228f0f8ee
 
                     });
                 }

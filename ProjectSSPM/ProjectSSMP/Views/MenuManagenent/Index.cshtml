@@ -76,7 +76,11 @@
                         <td>
                             &nbsp; &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
                             <a asp-action="Edit" class="btn btn-warning btn-sm" asp-route-id="@m.menud.MenuId">Edit</a>
+<<<<<<< HEAD
                             <a href="javascript:void(0);" class="anchorDetail " data-id="@m.menud.MenuId">Details</a>
+=======
+                            <a href="javascript:void(0);" class="anchorDetail btn btn-info btn-sm" data-id="@m.menud.MenuId">Details</a>
+>>>>>>> f72714fdfa0d8cad2da6eee2029bd97228f0f8ee
                         </td>
                     </tr>
 
@@ -111,7 +115,7 @@
         var TeamDetailPostBackURL = '/MenuManagenent/Details/';
         $(function () {
             $(".anchorDetail").click(function () {
-                debugger;
+                //debugger;
                 var $buttonClicked = $(this);
                 var id = $buttonClicked.attr('data-id');
                 var options = { "backdrop": "static", keyboard: true };
@@ -122,7 +126,7 @@
                     data: { "Id": id },
                     datatype: "json",
                     success: function (data) {
-                        debugger;
+                        //debugger;
                         $('#myModalContent').html(data);
                         $('#myModal').modal(options);
                         $('#myModal').modal('show');
