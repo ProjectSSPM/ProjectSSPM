@@ -238,7 +238,16 @@ namespace ProjectSSMP.Controllers
             var loggedInUserName = loggedInUser.Identity.Name;
 
 
+<<<<<<< HEAD
             var tsFunc = (from x in context.TimeSheet where x.FunctionId.Equals(inputModel.FunctionId) select x).ToList();
+=======
+
+            var tsFunc = (from x in context.TimeSheet where x.FunctionId.Equals(inputModel.FunctionId)
+                          orderby x.TimeSheetNumber descending
+                          select x 
+                          
+                          ).FirstOrDefault();
+>>>>>>> d8011fb4465555de092e44a6f37cfa22c80627b0
 
             Boolean X = Boolean.ReferenceEquals(tsFunc, null);
 
