@@ -237,6 +237,23 @@ namespace ProjectSSMP.Controllers
             var loggedInUser = HttpContext.User;
             var loggedInUserName = loggedInUser.Identity.Name;
 
+
+            var tsFunc = (from x in context.TimeSheet where x.FunctionId.Equals(inputModel.FunctionId) select x).FirstOrDefault();
+
+            Boolean X = Boolean.ReferenceEquals(tsFunc, null);
+
+            int num;
+            if (X)
+            {
+                num = 100000;
+
+            }
+            else
+            {
+                num = Convert.ToInt32(tsFunc.TimeSheetNumber.Max());
+                num = num + 1;
+            }
+
             var uid = (from u in context.UserSspm where u.Username.Equals(loggedInUserName) select u).FirstOrDefault();
 
             TimeSheet ord = new TimeSheet
@@ -247,13 +264,15 @@ namespace ProjectSSMP.Controllers
                 TimeSheetId = DateTime.Now,
                 TimeSheetStart = inputModel.TimeSheetStart,
                 TimeSheetEnd = inputModel.TimeSheetEnd,
-                UserId = uid.UserId
+                UserId = uid.UserId,
+                TimeSheetNumber = num.ToString(),
             };
 
             try
             {
                 context.TimeSheet.Add(ord);
                 await context.SaveChangesAsync();
+
             }
             catch (Exception e)
             {
