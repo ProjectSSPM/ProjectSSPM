@@ -125,7 +125,7 @@ namespace ProjectSSMP.Controllers
 
         public ActionResult Details(string id)
         {
-            ViewBag.userMenu = GetMenu();
+            
             MenuGroup menu = new MenuGroup();
             menu = context.MenuGroup.Find(id);
 

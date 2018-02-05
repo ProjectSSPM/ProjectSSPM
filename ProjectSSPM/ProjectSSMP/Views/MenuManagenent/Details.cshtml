@@ -1,15 +1,32 @@
 ﻿@model ProjectSSMP.Models.MenuGroup
 
 
-<div>
 
-    <div class="modal-header">
-        <button type="button" class="close" data-dismiss="modal" aria-hidden="true">×</button>
-        <h4 class="modal-title" id="myModalLabel">FriendsInfo</h4>
-    </div>
 
-    <div class="modal-body">
-        
-    </div>
-    
+<div class="modal-header">
+    <button type="button" class="close" data-dismiss="modal" aria-hidden="true">×</button>
+    <h4 class="modal-title" id="myModalLabel">FriendsInfo</h4>
 </div>
+
+<div class="modal-body">
+    <dl class="dl-horizontal">
+        <dt>
+            @Html.DisplayNameFor(model => model.MenuName)
+        </dt>
+        <dd>
+            @Html.DisplayFor(model => model.MenuName)
+        </dd>
+        <dt>
+            @Html.DisplayNameFor(model => model.MenuUrl)
+        </dt>
+        <dd>
+            @Html.DisplayFor(model => model.MenuUrl)
+        </dd>
+    
+        
+        
+    </dl>
+</div>
+    
+
+

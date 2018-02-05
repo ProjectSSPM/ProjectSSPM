@@ -281,7 +281,7 @@ namespace ProjectSSMP.Controllers
         public async Task<IActionResult> Details(string id)
         {
             
-            ViewBag.userMenu = GetMenu();
+            
 
             if (id == null)
             {
@@ -322,7 +322,7 @@ namespace ProjectSSMP.Controllers
             {
                 return NotFound();
             }
-            return View(e);
+            return PartialView("Details",e);
         }
     }
 }

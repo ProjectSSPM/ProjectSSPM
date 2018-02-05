@@ -48,11 +48,9 @@ namespace ProjectSSMP.Controllers
                               ProjectName = x3.ProjectName,
                               ProjectId = x3.ProjectId,
                               Note = x3.Note,
-<<<<<<< HEAD
                               ProjectEnd = x3.ProjectEnd
-=======
-                    ProjectEnd = x3.ProjectEnd,
->>>>>>> bf052cb947d20a874b7c2846a8e014c8d2b59795
+
+                   
                           });
                 foreach (var item in PJ)
                 {
@@ -63,12 +61,11 @@ namespace ProjectSSMP.Controllers
                         ProjectName = item.ProjectName,
                         ProjectNumber = item.ProjectNumber,
                         Note = item.Note,
-<<<<<<< HEAD
                         ProjectEnd = item.ProjectEnd
-=======
-                        ProjectEnd = item.ProjectEnd,
 
->>>>>>> bf052cb947d20a874b7c2846a8e014c8d2b59795
+                      
+
+
                     });
                 }
 
