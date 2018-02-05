@@ -237,6 +237,8 @@ namespace ProjectSSMP.Controllers
             var loggedInUser = HttpContext.User;
             var loggedInUserName = loggedInUser.Identity.Name;
 
+            
+
             var uid = (from u in context.UserSspm where u.Username.Equals(loggedInUserName) select u).FirstOrDefault();
 
             TimeSheet ord = new TimeSheet
