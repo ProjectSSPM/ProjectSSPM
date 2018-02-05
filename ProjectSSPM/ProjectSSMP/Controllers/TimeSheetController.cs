@@ -237,11 +237,13 @@ namespace ProjectSSMP.Controllers
             var loggedInUser = HttpContext.User;
             var loggedInUserName = loggedInUser.Identity.Name;
 
-<<<<<<< HEAD
-            
-=======
 
-            var tsFunc = (from x in context.TimeSheet where x.FunctionId.Equals(inputModel.FunctionId) select x).FirstOrDefault();
+
+            var tsFunc = (from x in context.TimeSheet where x.FunctionId.Equals(inputModel.FunctionId)
+                          orderby x.TimeSheetNumber descending
+                          select x 
+                          
+                          ).FirstOrDefault();
 
             Boolean X = Boolean.ReferenceEquals(tsFunc, null);
 
@@ -253,10 +255,9 @@ namespace ProjectSSMP.Controllers
             }
             else
             {
-                num = Convert.ToInt32(tsFunc.TimeSheetNumber.Max());
+                num = Convert.ToInt32(tsFunc.TimeSheetNumber);
                 num = num + 1;
             }
->>>>>>> 87281afc4d61496b1cb77821886d6761b640c3d6
 
             var uid = (from u in context.UserSspm where u.Username.Equals(loggedInUserName) select u).FirstOrDefault();
 
