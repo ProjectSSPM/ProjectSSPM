@@ -44,15 +44,12 @@ namespace ProjectSSMP.Controllers
                           where x3.ProjectManager.Equals(x.UserId) || x.Username.Equals(loggedInUserName) 
                           select new
                           {
-                              ProjectNumber = x3.ProjectNumber,
-                              ProjectName = x3.ProjectName,
-                              ProjectId = x3.ProjectId,
-                              Note = x3.Note,
-<<<<<<< HEAD
-                              ProjectEnd = x3.ProjectEnd
-=======
-                    ProjectEnd = x3.ProjectEnd,
->>>>>>> bf052cb947d20a874b7c2846a8e014c8d2b59795
+                                  ProjectNumber = x3.ProjectNumber,
+                                 ProjectName = x3.ProjectName,
+                                  ProjectId = x3.ProjectId,
+                                    Note = x3.Note,
+                                  ProjectEnd = x3.ProjectEnd,
+
                           });
                 foreach (var item in PJ)
                 {
@@ -63,12 +60,11 @@ namespace ProjectSSMP.Controllers
                         ProjectName = item.ProjectName,
                         ProjectNumber = item.ProjectNumber,
                         Note = item.Note,
-<<<<<<< HEAD
-                        ProjectEnd = item.ProjectEnd
-=======
-                        ProjectEnd = item.ProjectEnd,
 
->>>>>>> bf052cb947d20a874b7c2846a8e014c8d2b59795
+                        ProjectEnd = item.ProjectEnd
+
+                     
+
                     });
                 }
 
@@ -301,6 +297,24 @@ namespace ProjectSSMP.Controllers
                 return NotFound();
             }
             return View(model);
+        }
+
+        [Authorize]
+        public IActionResult ConfirmTimeSheet(DateTime id)
+        {
+            ViewBag.userMenu = GetMenu();
+
+            if (id == null)
+            {
+                return NotFound();
+            }
+
+            var e = new TimeSheetInputModel
+            {
+                TimeSheetId = id
+            };
+
+            return PartialView("ConfirmTimeSheet", e);
         }
     }
 }

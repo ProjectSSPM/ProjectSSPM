@@ -74,7 +74,7 @@
             <td>
                 <div class= "text-right" style="margin-right: 10px;">
       
-                    <a asp-action="UpdateTimeSheet" class="btn btn-success btn-sm" asp-route-id="@item.FunctionId">Update</a> 
+                    <a href="javascript:void(0);" class="anchorDetail " data-id="@item.TimeSheetId">Details</a>
                 </div>
 
             </td>
@@ -82,5 +82,58 @@
 
 }
     </tbody>
-        </table>
+</table>
+
+
+<div id='myModal' class='modal'>
+    <div class="modal-dialog">
+        <div class="modal-content">
+            <div id='myModalContent'></div>
+        </div>
+    </div>
+
+</div>
+
+@section scripts
+    {
     
+
+    <script>
+
+        var TeamDetailPostBackURL = '/TimeSheet/ComfirmTimeSheet/';
+        $(function () {
+            $(".anchorDetail").click(function () {
+                debugger;
+                var $buttonClicked = $(this);
+                var id = $buttonClicked.attr('data-id');
+                var options = { "backdrop": "static", keyboard: true };
+                $.ajax({
+                    type: "GET",
+                    url: TeamDetailPostBackURL,
+                    contentType: "application/json; charset=utf-8",
+                    data: { "Id": id },
+                    datatype: "json",
+                    success: function (data) {
+                        debugger;
+                        $('#myModalContent').html(data);
+                        $('#myModal').modal(options);
+                        $('#myModal').modal('show');
+
+                    },
+                    error: function () {
+                        alert("Dynamic content load failed.");
+                    }
+                });
+            });
+            //$("#closebtn").on('click',function(){
+            //    $('#myModal').modal('hide');
+
+            $("#closbtn").click(function () {
+                $('#myModal').modal('hide');
+            });
+        });
+
+    </script>
+
+}
+

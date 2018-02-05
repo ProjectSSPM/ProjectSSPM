@@ -1,20 +1,19 @@
 ﻿<Properties StartupConfiguration="{9025B83F-F1E8-44A2-8A65-CEB739754A17}|Default">
-  <MonoDevelop.Ide.Workbench ActiveDocument="Views/TimeSheet/TimeSheet.cshtml">
+  <MonoDevelop.Ide.Workbench ActiveDocument="Controllers/TimeSheetController.cs">
     <Files>
-      <File FileName="Controllers/TimeSheetController.cs" Line="257" Column="107" />
-      <File FileName="Models/Timesheet/TimeSheetInputModel.cs" Line="20" Column="33" />
-      <File FileName="Views/TimeSheet/UpdateTimeSheet.cshtml" Line="74" Column="7" />
-      <File FileName="Views/TimeSheet/TimeSheet.cshtml" Line="7" Column="1" />
-      <File FileName="Startup.cs" Line="42" Column="1" />
-      <File FileName="Views/UserManagement/Index.cshtml" Line="9" Column="5" />
+      <File FileName="Controllers/TimeSheetController.cs" Line="313" Column="14" />
+      <File FileName="Views/TimeSheet/UpdateTimeSheet.cshtml" Line="103" Column="65" />
+      <File FileName="Views/TimeSheet/ComfirmTimeSheet.cshtml" Line="3" Column="1" />
+      <File FileName="Views/MenuManagenent/Index.cshtml" Line="148" Column="1" />
     </Files>
   </MonoDevelop.Ide.Workbench>
   <MonoDevelop.Ide.Workspace ActiveConfiguration="Debug" />
   <MonoDevelop.Ide.DebuggingService.Breakpoints>
     <BreakpointStore>
-      <Breakpoint file="/Users/Palm/Desktop/ProjectSSPM/ProjectSSPM/ProjectSSMP/Controllers/TimeSheetController.cs" relfile="Controllers/TimeSheetController.cs" line="80" column="1" />
-      <Breakpoint file="/Users/Palm/Desktop/ProjectSSPM/ProjectSSPM/ProjectSSMP/Controllers/TimeSheetController.cs" relfile="Controllers/TimeSheetController.cs" line="234" column="1" />
+      <Breakpoint file="/Users/Palm/Desktop/ProjectSSPM/ProjectSSPM/ProjectSSMP/Controllers/TimeSheetController.cs" relfile="Controllers/TimeSheetController.cs" line="76" column="1" />
+      <Breakpoint file="/Users/Palm/Desktop/ProjectSSPM/ProjectSSPM/ProjectSSMP/Controllers/TimeSheetController.cs" relfile="Controllers/TimeSheetController.cs" line="230" column="1" />
       <Breakpoint file="/Users/Palm/Desktop/ProjectSSPM/ProjectSSPM/ProjectSSMP/Views/TimeSheet/CheckTimeSheet.cshtml" relfile="Views/TimeSheet/CheckTimeSheet.cshtml" line="1" column="1" />
+      <Breakpoint file="/Users/Palm/Desktop/ProjectSSPM/ProjectSSPM/ProjectSSMP/Controllers/TimeSheetController.cs" relfile="Controllers/TimeSheetController.cs" line="303" column="1" />
     </BreakpointStore>
   </MonoDevelop.Ide.DebuggingService.Breakpoints>
   <MonoDevelop.Ide.DebuggingService.PinnedWatches />
