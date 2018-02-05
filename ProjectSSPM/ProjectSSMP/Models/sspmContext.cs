@@ -26,7 +26,7 @@ namespace ProjectSSMP.Models
             
                 //#warning To protect potentially sensitive information in your connection string, you should move it out of source code. See http://go.microsoft.com/fwlink/?LinkId=723263 for guidance on storing connection strings.
                 optionsBuilder.UseSqlServer(@"Server=den1.mssql5.gear.host;Initial Catalog=sspm;Integrated Security=False;User ID=sspm;Password=Gi90MMTY!H_i;Connect Timeout=30;Encrypt=False;TrustServerCertificate=True;ApplicationIntent=ReadWrite;MultiSubnetFailover=False");
-            
+
         }
         public sspmContext(DbContextOptions<sspmContext> options)
             : base(options) { }
@@ -70,11 +70,7 @@ namespace ProjectSSMP.Models
 
             modelBuilder.Entity<FunctionLog>(entity =>
             {
-                entity.HasKey(e => new { e.FunctionId, e.TaskId, e.ProjectNumber, e.FunctionLogId });
-
-                entity.Property(e => e.FunctionId)
-                    .HasColumnName("FunctionID")
-                    .HasMaxLength(10);
+                entity.HasKey(e => new { e.TaskId, e.ProjectNumber, e.FunctionLogId, e.FunctionNumber });
 
                 entity.Property(e => e.TaskId)
                     .HasColumnName("TaskID")
@@ -86,11 +82,18 @@ namespace ProjectSSMP.Models
                     .HasColumnName("FunctionLogID")
                     .HasColumnType("datetime");
 
+                entity.Property(e => e.FunctionNumber).HasMaxLength(10);
+
                 entity.Property(e => e.ActualEnd).HasColumnType("datetime");
 
                 entity.Property(e => e.ActualStart).HasColumnType("datetime");
 
                 entity.Property(e => e.FunctionEnd).HasColumnType("datetime");
+
+                entity.Property(e => e.FunctionId)
+                    .IsRequired()
+                    .HasColumnName("FunctionID")
+                    .HasMaxLength(10);
 
                 entity.Property(e => e.FunctionStart).HasColumnType("datetime");
 
@@ -239,11 +242,7 @@ namespace ProjectSSMP.Models
 
             modelBuilder.Entity<TimeSheet>(entity =>
             {
-                entity.HasKey(e => new { e.TimeSheetId, e.FunctionId, e.TaskId, e.ProjectNumber });
-
-                entity.Property(e => e.TimeSheetId)
-                    .HasColumnName("TimeSheetID")
-                    .HasColumnType("datetime");
+                entity.HasKey(e => new { e.FunctionId, e.TaskId, e.ProjectNumber, e.TimeSheetNumber });
 
                 entity.Property(e => e.FunctionId)
                     .HasColumnName("FunctionID")
@@ -255,11 +254,17 @@ namespace ProjectSSMP.Models
 
                 entity.Property(e => e.ProjectNumber).HasMaxLength(10);
 
+                entity.Property(e => e.TimeSheetNumber).HasMaxLength(10);
+
                 entity.Property(e => e.ActionId)
                     .HasColumnName("ActionID")
                     .HasColumnType("char(1)");
 
                 entity.Property(e => e.TimeSheetEnd).HasColumnType("datetime");
+
+                entity.Property(e => e.TimeSheetId)
+                    .HasColumnName("TimeSheetID")
+                    .HasColumnType("datetime");
 
                 entity.Property(e => e.TimeSheetStart).HasColumnType("datetime");
 
