@@ -7716,8 +7716,18 @@
         "microsoft.visualstudio.web.codegeneration.utils.nuspec"
       ]
     },
+<<<<<<< HEAD
     "Microsoft.VisualStudio.Web.CodeGenerators.Mvc/2.0.2": {
       "sha512": "+H5eqw+SiEZvTzKDJXSUVSQvH/wYN0iSfftA0UL6OgJw+zLfPt6HQ5BZNSrCOBBobDSD/6eBC6PTMzZgsZTUmA==",
+=======
+<<<<<<< HEAD
+    "Microsoft.Win32.Primitives/4.3.0": {
+      "sha512": "9ZQKCWxH7Ijp9BfahvL2Zyf1cJIk8XYLF6Yjzr2yi0b2cOut/HQ31qf1ThHAgCc3WiZMdnWcfJCgN82/0UunxA==",
+=======
+    "runtime.any.System.Resources.ResourceManager/4.3.0": {
+      "sha512": "Lxb89SMvf8w9p9+keBLyL6H6x/TEmc6QVsIIA0T36IuyOY3kNvIdyGddA2qt35cRamzxF8K5p0Opq4G4HjNbhQ==",
+>>>>>>> 2e2c4615cfeb936e20486c6c1615cac86775bccf
+>>>>>>> d159c14ac369fd588c74187542cddac20f3c7a95
       "type": "package",
       "path": "microsoft.visualstudio.web.codegenerators.mvc/2.0.2",
       "files": [
@@ -13126,8 +13136,18 @@
     ]
   },
   "packageFolders": {
+<<<<<<< HEAD
     "C:\\Users\\Ilumi\\.nuget\\packages\\": {},
     "C:\\Program Files\\dotnet\\sdk\\NuGetFallbackFolder": {}
+=======
+<<<<<<< HEAD
+    "C:\\Users\\Admin\\.nuget\\packages\\": {},
+    "C:\\Program Files\\dotnet\\sdk\\NuGetFallbackFolder": {}
+=======
+    "/Users/Palm/.nuget/packages/": {},
+    "/usr/local/share/dotnet/sdk/NuGetFallbackFolder": {}
+>>>>>>> 2e2c4615cfeb936e20486c6c1615cac86775bccf
+>>>>>>> d159c14ac369fd588c74187542cddac20f3c7a95
   },
   "project": {
     "version": "1.0.0",
@@ -13135,18 +13155,43 @@
       "hideWarningsAndErrors": true
     },
     "restore": {
+<<<<<<< HEAD
       "projectUniqueName": "D:\\GitHub\\ProjectSSPM\\ProjectSSPM\\ProjectSSMP\\ProjectSSMP.csproj",
       "projectName": "ProjectSSMP",
       "projectPath": "D:\\GitHub\\ProjectSSPM\\ProjectSSPM\\ProjectSSMP\\ProjectSSMP.csproj",
       "packagesPath": "C:\\Users\\Ilumi\\.nuget\\packages\\",
       "outputPath": "D:\\GitHub\\ProjectSSPM\\ProjectSSPM\\ProjectSSMP\\obj\\",
+=======
+<<<<<<< HEAD
+      "projectUniqueName": "C:\\Users\\Admin\\Documents\\GitHub\\ProjectSSPM\\ProjectSSPM\\ProjectSSMP\\ProjectSSMP.csproj",
+      "projectName": "ProjectSSMP",
+      "projectPath": "C:\\Users\\Admin\\Documents\\GitHub\\ProjectSSPM\\ProjectSSPM\\ProjectSSMP\\ProjectSSMP.csproj",
+      "packagesPath": "C:\\Users\\Admin\\.nuget\\packages\\",
+      "outputPath": "C:\\Users\\Admin\\Documents\\GitHub\\ProjectSSPM\\ProjectSSPM\\ProjectSSMP\\obj\\",
+=======
+      "projectUniqueName": "/Users/Palm/Desktop/ProjectSSPM/ProjectSSPM/ProjectSSMP/ProjectSSMP.csproj",
+      "projectName": "ProjectSSMP",
+      "projectPath": "/Users/Palm/Desktop/ProjectSSPM/ProjectSSPM/ProjectSSMP/ProjectSSMP.csproj",
+      "packagesPath": "/Users/Palm/.nuget/packages/",
+      "outputPath": "/Users/Palm/Desktop/ProjectSSPM/ProjectSSPM/ProjectSSMP/obj",
+>>>>>>> 2e2c4615cfeb936e20486c6c1615cac86775bccf
+>>>>>>> d159c14ac369fd588c74187542cddac20f3c7a95
       "projectStyle": "PackageReference",
       "fallbackFolders": [
         "C:\\Program Files\\dotnet\\sdk\\NuGetFallbackFolder"
       ],
       "configFilePaths": [
+<<<<<<< HEAD
         "C:\\Users\\Ilumi\\AppData\\Roaming\\NuGet\\NuGet.Config",
         "C:\\Program Files (x86)\\NuGet\\Config\\Microsoft.VisualStudio.Offline.config"
+=======
+<<<<<<< HEAD
+        "C:\\Users\\Admin\\AppData\\Roaming\\NuGet\\NuGet.Config",
+        "C:\\Program Files (x86)\\NuGet\\Config\\Microsoft.VisualStudio.Offline.config"
+=======
+        "/Users/Palm/.config/NuGet/NuGet.Config"
+>>>>>>> 2e2c4615cfeb936e20486c6c1615cac86775bccf
+>>>>>>> d159c14ac369fd588c74187542cddac20f3c7a95
       ],
       "originalTargetFrameworks": [
         "netcoreapp2.0"

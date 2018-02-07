@@ -19,6 +19,14 @@ namespace ProjectSSMP.Models.Timesheet
         public string Note { get; set; } 
         public DateTime? ProjectEnd { get; set; }
         public string TimeSheetNumber { get; set; }
+<<<<<<< HEAD
         
+=======
+
+        public string ActionName { get; set; }
+
+        
+
+>>>>>>> 782c04aa61747f11fba2e46868256f125a7846f3
     }
 }

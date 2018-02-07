@@ -71,13 +71,6 @@ namespace ProjectSSMP.Controllers
 
                         ProjectEnd = item.ProjectEnd
 
-                     
-
-
-                      
-
-
-
                     });
                 }
 
@@ -283,6 +276,7 @@ namespace ProjectSSMP.Controllers
                 TimeSheetEnd = inputModel.TimeSheetEnd,
                 UserId = uid.UserId,
                 TimeSheetNumber = num.ToString(),
+                ActionId = "N",
             };
 
             try
@@ -312,7 +306,7 @@ namespace ProjectSSMP.Controllers
             var uid = (from u in context.UserSspm where u.Username.Equals(loggedInUserName) select u).FirstOrDefault();
 
             var Test = (from x in context.TimeSheet join x2 in context.Function on x.FunctionId equals x2.FunctionId
-                        where x.FunctionId.Equals(id) && x.UserId.Equals(uid.UserId)
+                        where x.FunctionId.Equals(id) && x.UserId.Equals(uid.UserId) && x.ActionId.Equals("N")
                         select new
                         {
                             TimeSheetId = x.TimeSheetId,
@@ -357,6 +351,14 @@ namespace ProjectSSMP.Controllers
             var loggedInUser = HttpContext.User;
             var loggedInUserName = loggedInUser.Identity.Name;
 
+<<<<<<< HEAD
+=======
+
+
+
+            
+
+>>>>>>> 782c04aa61747f11fba2e46868256f125a7846f3
             var upTimeSheet = (from t in context.TimeSheet
                                where t.TimeSheetNumber.Equals(tid) && t.FunctionId.Equals(fid)
                                select t).FirstOrDefault();
