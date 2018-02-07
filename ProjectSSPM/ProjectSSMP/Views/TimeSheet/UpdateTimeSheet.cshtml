@@ -75,7 +75,9 @@
                 <div class= "text-right" style="margin-right: 10px;">
       
                     <a asp-action="ConfirmTimeSheet" class="btn btn-success btn-sm" asp-route-id="@item.TimeSheetNumber">Update</a>
-                    @Html.ActionLink("Test", "ConfirmTimeSheet", "TimeSheet",new {tid=item.TimeSheetNumber,fid=item.FunctionId },null)
+                    @Html.ActionLink("Test", "ConfirmTimeSheet", "TimeSheet",
+                   new {tid=item.TimeSheetNumber,fid=item.FunctionId }, 
+                   new { @class = "btn btn-success btn-md" })
                     
                     
                 </div>
@@ -86,6 +88,6 @@
 }
     </tbody>
 </table>
-
+</div>
 
 
