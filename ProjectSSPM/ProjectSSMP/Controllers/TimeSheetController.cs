@@ -338,12 +338,12 @@ namespace ProjectSSMP.Controllers
         }
 
         [Authorize]
-        public ActionResult ConfirmTimeSheet(string tid ,string fid)
+        public ActionResult ConfirmTimeSheet(string idt ,string idf)
         {
 
-            var upTimeSheet = (from t in context.TimeSheet
-                               where t.TimeSheetNumber.Equals(tid) && t.FunctionId.Equals(fid)
-                               select t).FirstOrDefault();
+            //var upTimeSheet = (from t in context.TimeSheet
+            //                   where t.TimeSheetNumber.Equals(tid) && t.FunctionId.Equals(fid)
+            //                   select t).FirstOrDefault();
 
             ViewBag.userMenu = GetMenu();
             
