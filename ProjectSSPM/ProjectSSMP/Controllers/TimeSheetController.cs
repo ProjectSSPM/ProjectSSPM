@@ -347,6 +347,15 @@ namespace ProjectSSMP.Controllers
         public ActionResult ConfirmTimeSheet(string tid, string fid)
         {
 
+<<<<<<< HEAD
+            var loggedInUser = HttpContext.User;
+            var loggedInUserName = loggedInUser.Identity.Name;
+
+
+            //var upTimeSheet = (from t in context.TimeSheet
+            //                   where t.TimeSheetNumber.Equals(tid) && t.FunctionId.Equals(fid)
+            //                   select t).FirstOrDefault();
+=======
 
             var loggedInUser = HttpContext.User;
             var loggedInUserName = loggedInUser.Identity.Name;
@@ -354,7 +363,11 @@ namespace ProjectSSMP.Controllers
 <<<<<<< HEAD
 =======
 <<<<<<< HEAD
+<<<<<<< HEAD
 =======
+=======
+>>>>>>> ceff062031082a763ad2a4a6ae22345a42c1ed2d
+>>>>>>> abd1f090b36cdf0c851fc74f1148dfc31aad3abc
 
 
 
