@@ -341,15 +341,57 @@ namespace ProjectSSMP.Controllers
         public ActionResult ConfirmTimeSheet(string tid ,string fid)
         {
 
-            
+            var loggedInUser = HttpContext.User;
+            var loggedInUserName = loggedInUser.Identity.Name;
 
             ViewBag.userMenu = GetMenu();
-            
+
+            var uid = (from u in context.UserSspm where u.Username.Equals(loggedInUserName) select u).FirstOrDefault();
+            var update = (from x in context.TimeSheet
+                          where x.FunctionId.Equals(fid)
+                          && x.UserId.Equals(uid.UserId) && x.TimeSheetNumber.Equals(tid)
+                          select x).FirstOrDefault();
+
+            var e = new TimeSheetInputModel()
+            {
+                TimeSheetNumber = tid,
+                FunctionId = fid,
+                UserId = uid.UserId,
+                ActionId = update.ActionId,
+
+            };
            
             
-            return View();
+            return View(e);
         }
 
+        [HttpPost]
+        [ValidateAntiForgeryToken]
+        public async Task<IActionResult> ConfirmTimeSheet(string tid, string fid, TimeSheetInputModel inputModel)
+        {
+
+            var loggedInUser = HttpContext.User;
+            var loggedInUserName = loggedInUser.Identity.Name;
+
+            ViewBag.userMenu = GetMenu();
+            try
+            {
+                var update = (from x in context.TimeSheet
+                              where x.FunctionId.Equals(inputModel.FunctionId)
+                              && x.UserId.Equals(inputModel.UserId) && x.TimeSheetNumber.Equals(inputModel.TimeSheetNumber)
+                              select x);
+                foreach (Models.TimeSheet TUpdate in update)
+                {
+                    TUpdate.ActionId = inputModel.ActionId;
+                }
+                await context.SaveChangesAsync();
+            }
+            catch (Exception e)
+            {
+                Console.WriteLine(e);
+            }
+            return RedirectToAction("Index", "TimeSheet");
+        }
 
 
 
