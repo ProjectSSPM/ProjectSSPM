@@ -56,14 +56,40 @@ D:/GitHub/ProjectSSPM/ProjectSSPM/ProjectSSMP/obj/Debug/netcoreapp2.0/ProjectSSM
 D:/GitHub/ProjectSSPM/ProjectSSPM/ProjectSSMP/obj/Debug/netcoreapp2.0/ProjectSSMP.csprojResolveAssemblyReference.cache
 =======
 >>>>>>> 4e0b86962f08b910e989acc0e177695312f79797
+<<<<<<< HEAD
+=======
+<<<<<<< HEAD
+C:\Users\Admin\Documents\GitHub\ProjectSSPM\ProjectSSPM\ProjectSSMP\bin\Debug\netcoreapp2.0\ProjectSSMP.deps.json
+C:\Users\Admin\Documents\GitHub\ProjectSSPM\ProjectSSPM\ProjectSSMP\bin\Debug\netcoreapp2.0\ProjectSSMP.runtimeconfig.json
+C:\Users\Admin\Documents\GitHub\ProjectSSPM\ProjectSSPM\ProjectSSMP\bin\Debug\netcoreapp2.0\ProjectSSMP.runtimeconfig.dev.json
+C:\Users\Admin\Documents\GitHub\ProjectSSPM\ProjectSSPM\ProjectSSMP\bin\Debug\netcoreapp2.0\ProjectSSMP.dll
+C:\Users\Admin\Documents\GitHub\ProjectSSPM\ProjectSSPM\ProjectSSMP\bin\Debug\netcoreapp2.0\ProjectSSMP.pdb
+C:\Users\Admin\Documents\GitHub\ProjectSSPM\ProjectSSPM\ProjectSSMP\obj\Debug\netcoreapp2.0\ProjectSSMP.csprojResolveAssemblyReference.cache
+C:\Users\Admin\Documents\GitHub\ProjectSSPM\ProjectSSPM\ProjectSSMP\obj\Debug\netcoreapp2.0\ProjectSSMP.csproj.CoreCompileInputs.cache
+C:\Users\Admin\Documents\GitHub\ProjectSSPM\ProjectSSPM\ProjectSSMP\obj\Debug\netcoreapp2.0\ProjectSSMP.AssemblyInfoInputs.cache
+C:\Users\Admin\Documents\GitHub\ProjectSSPM\ProjectSSPM\ProjectSSMP\obj\Debug\netcoreapp2.0\ProjectSSMP.AssemblyInfo.cs
+C:\Users\Admin\Documents\GitHub\ProjectSSPM\ProjectSSPM\ProjectSSMP\obj\Debug\netcoreapp2.0\ProjectSSMP.dll
+C:\Users\Admin\Documents\GitHub\ProjectSSPM\ProjectSSPM\ProjectSSMP\obj\Debug\netcoreapp2.0\ProjectSSMP.pdb
 D:\GitHub\ProjectSSPM\ProjectSSPM\ProjectSSMP\bin\Debug\netcoreapp2.0\ProjectSSMP.deps.json
 D:\GitHub\ProjectSSPM\ProjectSSPM\ProjectSSMP\bin\Debug\netcoreapp2.0\ProjectSSMP.runtimeconfig.json
 D:\GitHub\ProjectSSPM\ProjectSSPM\ProjectSSMP\bin\Debug\netcoreapp2.0\ProjectSSMP.runtimeconfig.dev.json
 D:\GitHub\ProjectSSPM\ProjectSSPM\ProjectSSMP\bin\Debug\netcoreapp2.0\ProjectSSMP.dll
 D:\GitHub\ProjectSSPM\ProjectSSPM\ProjectSSMP\bin\Debug\netcoreapp2.0\ProjectSSMP.pdb
+>>>>>>> d159c14ac369fd588c74187542cddac20f3c7a95
 D:\GitHub\ProjectSSPM\ProjectSSPM\ProjectSSMP\obj\Debug\netcoreapp2.0\ProjectSSMP.csprojResolveAssemblyReference.cache
 D:\GitHub\ProjectSSPM\ProjectSSPM\ProjectSSMP\obj\Debug\netcoreapp2.0\ProjectSSMP.csproj.CoreCompileInputs.cache
 D:\GitHub\ProjectSSPM\ProjectSSPM\ProjectSSMP\obj\Debug\netcoreapp2.0\ProjectSSMP.AssemblyInfoInputs.cache
 D:\GitHub\ProjectSSPM\ProjectSSPM\ProjectSSMP\obj\Debug\netcoreapp2.0\ProjectSSMP.AssemblyInfo.cs
 D:\GitHub\ProjectSSPM\ProjectSSPM\ProjectSSMP\obj\Debug\netcoreapp2.0\ProjectSSMP.dll
 D:\GitHub\ProjectSSPM\ProjectSSPM\ProjectSSMP\obj\Debug\netcoreapp2.0\ProjectSSMP.pdb
+<<<<<<< HEAD
+D:\GitHub\ProjectSSPM\ProjectSSPM\ProjectSSMP\bin\Debug\netcoreapp2.0\ProjectSSMP.deps.json
+D:\GitHub\ProjectSSPM\ProjectSSPM\ProjectSSMP\bin\Debug\netcoreapp2.0\ProjectSSMP.runtimeconfig.json
+D:\GitHub\ProjectSSPM\ProjectSSPM\ProjectSSMP\bin\Debug\netcoreapp2.0\ProjectSSMP.runtimeconfig.dev.json
+D:\GitHub\ProjectSSPM\ProjectSSPM\ProjectSSMP\bin\Debug\netcoreapp2.0\ProjectSSMP.dll
+D:\GitHub\ProjectSSPM\ProjectSSPM\ProjectSSMP\bin\Debug\netcoreapp2.0\ProjectSSMP.pdb
+=======
+>>>>>>> 87be2c24e3a70d72836a14e16d30b87011c4ac55
+=======
+>>>>>>> 2e2c4615cfeb936e20486c6c1615cac86775bccf
+>>>>>>> d159c14ac369fd588c74187542cddac20f3c7a95

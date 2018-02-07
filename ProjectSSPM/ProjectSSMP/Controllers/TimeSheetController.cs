@@ -71,13 +71,6 @@ namespace ProjectSSMP.Controllers
 
                         ProjectEnd = item.ProjectEnd
 
-                     
-
-
-                      
-
-
-
                     });
                 }
 
@@ -283,6 +276,7 @@ namespace ProjectSSMP.Controllers
                 TimeSheetEnd = inputModel.TimeSheetEnd,
                 UserId = uid.UserId,
                 TimeSheetNumber = num.ToString(),
+                ActionId = "N",
             };
 
             try
@@ -312,7 +306,7 @@ namespace ProjectSSMP.Controllers
             var uid = (from u in context.UserSspm where u.Username.Equals(loggedInUserName) select u).FirstOrDefault();
 
             var Test = (from x in context.TimeSheet join x2 in context.Function on x.FunctionId equals x2.FunctionId
-                        where x.FunctionId.Equals(id) && x.UserId.Equals(uid.UserId)
+                        where x.FunctionId.Equals(id) && x.UserId.Equals(uid.UserId) && x.ActionId.Equals("N")
                         select new
                         {
                             TimeSheetId = x.TimeSheetId,
@@ -353,10 +347,40 @@ namespace ProjectSSMP.Controllers
         public ActionResult ConfirmTimeSheet(string tid, string fid)
         {
 
+<<<<<<< HEAD
+=======
+<<<<<<< HEAD
+            var loggedInUser = HttpContext.User;
+            var loggedInUserName = loggedInUser.Identity.Name;
+
+
+            //var upTimeSheet = (from t in context.TimeSheet
+            //                   where t.TimeSheetNumber.Equals(tid) && t.FunctionId.Equals(fid)
+            //                   select t).FirstOrDefault();
+=======
+>>>>>>> 65544ba639252bd4f6cba14415ac78ef5ff8ad49
 
             var loggedInUser = HttpContext.User;
             var loggedInUserName = loggedInUser.Identity.Name;
 
+<<<<<<< HEAD
+=======
+<<<<<<< HEAD
+=======
+<<<<<<< HEAD
+<<<<<<< HEAD
+=======
+=======
+>>>>>>> ceff062031082a763ad2a4a6ae22345a42c1ed2d
+>>>>>>> abd1f090b36cdf0c851fc74f1148dfc31aad3abc
+
+
+
+            
+
+>>>>>>> 782c04aa61747f11fba2e46868256f125a7846f3
+>>>>>>> ceff062031082a763ad2a4a6ae22345a42c1ed2d
+>>>>>>> 65544ba639252bd4f6cba14415ac78ef5ff8ad49
             var upTimeSheet = (from t in context.TimeSheet
                                where t.TimeSheetNumber.Equals(tid) && t.FunctionId.Equals(fid)
                                select t).FirstOrDefault();
