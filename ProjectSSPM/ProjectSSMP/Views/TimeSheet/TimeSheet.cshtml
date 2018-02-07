@@ -25,14 +25,16 @@
         </tr>
     </thead>
     <tbody>
-
+        @{ 
+            var timesheet = Model.GroupBy(f => f.FunctionId);
+        }
         
 @foreach (var item in Model) {
         <tr>
             
             <td>
               
-                @Html.DisplayFor(modelItem => item.TaskName)
+                
             </td>
 
 
