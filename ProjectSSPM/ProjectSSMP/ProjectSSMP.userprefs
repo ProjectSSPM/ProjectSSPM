@@ -1,16 +1,20 @@
 ﻿<Properties StartupConfiguration="{9025B83F-F1E8-44A2-8A65-CEB739754A17}|Default">
-  <MonoDevelop.Ide.Workbench ActiveDocument="Views/ProjectManagement/Index.cshtml">
+  <MonoDevelop.Ide.Workbench ActiveDocument="Controllers/TimeSheetController.cs">
     <Files>
-      <File FileName="Models/Timesheet/TimeSheetInputModel.cs" Line="21" Column="52" />
-      <File FileName="Models/TimeSheet.cs" Line="16" Column="1" />
-      <File FileName="Controllers/TimeSheetController.cs" Line="246" Column="46" />
-      <File FileName="Views/ProjectManagement/Detail.cshtml" Line="1" Column="1" />
+      <File FileName="Controllers/TimeSheetController.cs" Line="370" Column="83" />
       <File FileName="Views/ProjectManagement/Index.cshtml" Line="33" Column="21" />
+      <File FileName="Controllers/ProjectManagementController.cs" Line="175" Column="35" />
+      <File FileName="Views/TimeSheet/ConfirmTimeSheet.cshtml" Line="15" Column="75" />
+      <File FileName="Views/TimeSheet/UpdateTimeSheet.cshtml" Line="1" Column="1" />
+      <File FileName="Views/UserManagement/AddUser.cshtml" Line="49" Column="21" />
     </Files>
   </MonoDevelop.Ide.Workbench>
   <MonoDevelop.Ide.Workspace ActiveConfiguration="Debug" />
   <MonoDevelop.Ide.DebuggingService.Breakpoints>
-    <BreakpointStore />
+    <BreakpointStore>
+      <Breakpoint file="/Users/Palm/Desktop/ProjectSSPM/ProjectSSPM/ProjectSSMP/Controllers/TimeSheetController.cs" relfile="Controllers/TimeSheetController.cs" line="368" column="1" />
+      <Breakpoint file="/Users/Palm/Desktop/ProjectSSPM/ProjectSSPM/ProjectSSMP/Views/TimeSheet/ConfirmTimeSheet.cshtml" relfile="Views/TimeSheet/ConfirmTimeSheet.cshtml" line="15" column="75" />
+    </BreakpointStore>
   </MonoDevelop.Ide.DebuggingService.Breakpoints>
   <MonoDevelop.Ide.DebuggingService.PinnedWatches />
   <MonoDevelop.Ide.ItemProperties.ProjectSSMP PreferredExecutionTarget="MonoDevelop.Default" />
