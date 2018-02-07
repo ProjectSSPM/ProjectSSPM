@@ -70,13 +70,6 @@ namespace ProjectSSMP.Controllers
 
                         ProjectEnd = item.ProjectEnd
 
-                     
-
-
-                      
-
-
-
                     });
                 }
 
@@ -271,6 +264,7 @@ namespace ProjectSSMP.Controllers
                 TimeSheetEnd = inputModel.TimeSheetEnd,
                 UserId = uid.UserId,
                 TimeSheetNumber = num.ToString(),
+                ActionId = "N",
             };
 
             try
@@ -300,7 +294,7 @@ namespace ProjectSSMP.Controllers
             var uid = (from u in context.UserSspm where u.Username.Equals(loggedInUserName) select u).FirstOrDefault();
 
             var Test = (from x in context.TimeSheet join x2 in context.Function on x.FunctionId equals x2.FunctionId
-                        where x.FunctionId.Equals(id) && x.UserId.Equals(uid.UserId)
+                        where x.FunctionId.Equals(id) && x.UserId.Equals(uid.UserId) && x.ActionId.Equals("N")
                         select new
                         {
                             TimeSheetId = x.TimeSheetId,
@@ -341,14 +335,9 @@ namespace ProjectSSMP.Controllers
         public ActionResult ConfirmTimeSheet(string tid ,string fid)
         {
 
-<<<<<<< HEAD
             var loggedInUser = HttpContext.User;
             var loggedInUserName = loggedInUser.Identity.Name;
-=======
-            var upTimeSheet = (from t in context.TimeSheet
-                               where t.TimeSheetNumber.Equals(tid) && t.FunctionId.Equals(fid)
-                               select t).FirstOrDefault();
->>>>>>> 87be2c24e3a70d72836a14e16d30b87011c4ac55
+
 
             ViewBag.userMenu = GetMenu();
 
@@ -373,7 +362,7 @@ namespace ProjectSSMP.Controllers
 
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public async Task<IActionResult> ConfirmTimeSheet(string tid, string fid, TimeSheetInputModel inputModel)
+        public async Task<ActionResult> ConfirmTimeSheet(string tid, string fid, TimeSheetInputModel inputModel)
         {
 
             var loggedInUser = HttpContext.User;
