@@ -33,9 +33,9 @@
                     Last Edited
                 </th>
                 <th>
-
-                    <a asp-action="AddUser" class="btn btn-primary btn-md" style="margin-left: 15px;">Add User</a>
-
+                    <div class= "text-center">
+                        <a asp-action="AddUser" class="btn btn-primary btn-md" style="margin-left: 15px;">Add User</a>
+                    </div>
                 </th>
             </tr>
         </thead>
@@ -66,10 +66,11 @@
                     </td>
 
                     <td>
-                        <a asp-action="Edit" class="btn btn-warning btn-sm" asp-route-id="@item.UserId">Edit</a>
-                        
-                        <a href="javascript:void(0);" class="anchorDetail btn btn-info btn-sm" data-id="@item.UserId">Details</a>
-
+                        <div class= "text-center">
+                            <a asp-action="Edit" class="btn btn-warning btn-sm" asp-route-id="@item.UserId">Edit</a>
+                            
+                            <a href="javascript:void(0);" class="anchorDetail btn btn-info btn-sm" data-id="@item.UserId">Details</a>
+                        </div>
                     </td>
                 </tr>
             }
