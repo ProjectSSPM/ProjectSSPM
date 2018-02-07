@@ -5,11 +5,11 @@
 }
 
 <div class="container">
-<h2 class="well">Update TimeSheet</h2>
- <table id="Timesheet" class="responsive" width="100%">
-    <thead>
-        <tr>
-               
+    <h2 class="well">Update TimeSheet</h2>
+    <table id="Timesheet" class="responsive" width="100%">
+        <thead>
+            <tr>
+
                 <th>
                     Function ID
                 </th>
@@ -30,64 +30,117 @@
                     End
                 </th>
 
-                 <th>
-                    
-                 
-                   
+                <th>
+
+
+
                 </th>
-        </tr>
-    </thead>
-    <tbody>
-
-        
-@foreach (var item in Model) {
-        <tr>
-            
-            <td>
-              
-                @Html.DisplayFor(modelItem => item.FunctionId)
-            </td>
+            </tr>
+        </thead>
+        <tbody>
 
 
-            <td>
-                
-                @Html.DisplayFor(modelItem => item.FunctionName)
-            </td>
+            @foreach (var item in Model)
+            {
+                <tr>
 
-            <td>
-              
-                @Html.DisplayFor(modelItem => item.TimeSheetId)
-            </td>
+                    <td>
+
+                        @Html.DisplayFor(modelItem => item.FunctionId)
+                    </td>
 
 
-            <td>
-                
-                @Html.DisplayFor(modelItem => item.TimeSheetStart)
-            </td>
+                    <td>
 
-            <td>
-                
-                @Html.DisplayFor(modelItem => item.TimeSheetEnd)
-            </td>
+                        @Html.DisplayFor(modelItem => item.FunctionName)
+                    </td>
 
-                
-            <td>
-                <div class= "text-right" style="margin-right: 10px;">
-      
-                    <a asp-action="ConfirmTimeSheet" class="btn btn-success btn-sm" asp-route-id="@item.TimeSheetNumber">Update</a>
-                    @Html.ActionLink("Test", "ConfirmTimeSheet", "TimeSheet",
-                   new {tid=item.TimeSheetNumber,fid=item.FunctionId }, 
-                   new { @class = "btn btn-success btn-md" })
-                    
-                    
-                </div>
+                    <td>
 
-            </td>
-        </tr>
+                        @Html.DisplayFor(modelItem => item.TimeSheetId)
+                    </td>
 
-}
-    </tbody>
-</table>
+
+                    <td>
+
+                        @Html.DisplayFor(modelItem => item.TimeSheetStart)
+                    </td>
+
+                    <td>
+
+                        @Html.DisplayFor(modelItem => item.TimeSheetEnd)
+                    </td>
+
+
+                    <td>
+                        <div class="text-right" style="margin-right: 10px;">
+
+
+                            @Html.ActionLink("Test", "ConfirmTimeSheet", "TimeSheet",
+                                new { tid = item.TimeSheetNumber, fid = item.FunctionId },
+                                new { @class = "btn btn-success btn-md" })
+                            <a href="javascript:void(0);" class="anchorDetail btn btn-info btn-sm"
+                               data-id-t="@item.TimeSheetNumber" data-id-f="@item.FunctionId">Details</a>
+
+                        </div>
+
+                    </td>
+                </tr>
+
+            }
+        </tbody>
+    </table>
+</div>
+<div id='myModal' class='modal'>
+    <div class="modal-dialog">
+        <div class="modal-content">
+            <div id='myModalContent'></div>
+        </div>
+    </div>
+
 </div>
 
+@section scripts
+    {
+
+
+    <script>
+
+        var TeamDetailPostBackURL = '/TimeSheet/ConfirmTimeSheet/';
+        $(function () {
+            $(".anchorDetail").click(function () {
+                //debugger;
+                var $buttonClicked = $(this);
+                var idt = $buttonClicked.attr('data-id-t');
+                var idf = $buttonClicked.attr('data-id-f');
+                var options = { "backdrop": "static", keyboard: true };
+                $.ajax({
+                    type: "GET",
+                    url: TeamDetailPostBackURL,
+                    contentType: "application/json; charset=utf-8",
+                    data: { "Idt": idt, "Idf": idf },
+                    datatype: "json",
+                    success: function (data) {
+                        //debugger;
+                        $('#myModalContent').html(data);
+                        $('#myModal').modal(options);
+                        $('#myModal').modal('show');
+
+                    },
+                    error: function () {
+                        alert("Dynamic content load failed.");
+                    }
+                });
+            });
+            //$("#closebtn").on('click',function(){
+            //    $('#myModal').modal('hide');
+
+            $("#closbtn").click(function () {
+                $('#myModal').modal('hide');
+            });
+        });
+
+    </script>
+
+}
 

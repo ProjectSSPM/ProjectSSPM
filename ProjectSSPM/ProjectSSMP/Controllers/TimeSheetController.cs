@@ -338,20 +338,72 @@ namespace ProjectSSMP.Controllers
         }
 
         [Authorize]
-        public ActionResult ConfirmTimeSheet(string tid ,string fid)
+        public ActionResult ConfirmTimeSheet(string idt ,string idf)
         {
 
+<<<<<<< HEAD
+            //var upTimeSheet = (from t in context.TimeSheet
+            //                   where t.TimeSheetNumber.Equals(tid) && t.FunctionId.Equals(fid)
+            //                   select t).FirstOrDefault();
+=======
+<<<<<<< HEAD
+            var loggedInUser = HttpContext.User;
+            var loggedInUserName = loggedInUser.Identity.Name;
+=======
             var upTimeSheet = (from t in context.TimeSheet
                                where t.TimeSheetNumber.Equals(tid) && t.FunctionId.Equals(fid)
                                select t).FirstOrDefault();
+>>>>>>> 87be2c24e3a70d72836a14e16d30b87011c4ac55
+>>>>>>> 524ddd669e025ad3e6a05d179adb637d486f4df9
 
             ViewBag.userMenu = GetMenu();
-            
+
+            var uid = (from u in context.UserSspm where u.Username.Equals(loggedInUserName) select u).FirstOrDefault();
+            var update = (from x in context.TimeSheet
+                          where x.FunctionId.Equals(fid)
+                          && x.UserId.Equals(uid.UserId) && x.TimeSheetNumber.Equals(tid)
+                          select x).FirstOrDefault();
+
+            var e = new TimeSheetInputModel()
+            {
+                TimeSheetNumber = tid,
+                FunctionId = fid,
+                UserId = uid.UserId,
+                ActionId = update.ActionId,
+
+            };
            
             
-            return View();
+            return View(e);
         }
 
+        [HttpPost]
+        [ValidateAntiForgeryToken]
+        public async Task<IActionResult> ConfirmTimeSheet(string tid, string fid, TimeSheetInputModel inputModel)
+        {
+
+            var loggedInUser = HttpContext.User;
+            var loggedInUserName = loggedInUser.Identity.Name;
+
+            ViewBag.userMenu = GetMenu();
+            try
+            {
+                var update = (from x in context.TimeSheet
+                              where x.FunctionId.Equals(inputModel.FunctionId)
+                              && x.UserId.Equals(inputModel.UserId) && x.TimeSheetNumber.Equals(inputModel.TimeSheetNumber)
+                              select x);
+                foreach (Models.TimeSheet TUpdate in update)
+                {
+                    TUpdate.ActionId = inputModel.ActionId;
+                }
+                await context.SaveChangesAsync();
+            }
+            catch (Exception e)
+            {
+                Console.WriteLine(e);
+            }
+            return RedirectToAction("Index", "TimeSheet");
+        }
 
 
 
