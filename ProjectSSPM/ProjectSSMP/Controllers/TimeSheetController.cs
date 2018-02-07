@@ -308,6 +308,7 @@ namespace ProjectSSMP.Controllers
                             TimeSheetEnd = x.TimeSheetEnd,
                             FunctionId = x.FunctionId,
                             FunctionName = x2.FunctionName,
+                            TimeSheetNumber = x.TimeSheetNumber
                         });
 
             List<TimeSheetInputModel> model = new List<TimeSheetInputModel>();
@@ -323,6 +324,7 @@ namespace ProjectSSMP.Controllers
                     TimeSheetEnd = item.TimeSheetEnd,
                     FunctionId = item.FunctionId,
                     FunctionName = item.FunctionName,
+                    TimeSheetNumber = item.TimeSheetNumber
 
 
                 });
@@ -336,7 +338,7 @@ namespace ProjectSSMP.Controllers
         }
 
         [Authorize]
-        public ActionResult ConfirmTimeSheet(string id)
+        public ActionResult ConfirmTimeSheet(string tid ,string fid)
         {
 
             

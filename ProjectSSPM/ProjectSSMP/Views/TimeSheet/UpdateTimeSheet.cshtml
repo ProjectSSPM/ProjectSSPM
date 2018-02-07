@@ -74,8 +74,8 @@
             <td>
                 <div class= "text-right" style="margin-right: 10px;">
       
-                    <a asp-action="ConfirmTimeSheet" class="btn btn-success btn-sm" asp-route-id="@item.TimeSheetId.ToString("MM-dd-yyyy HH!mm!ss")">Update</a>
-                    
+                    <a asp-action="ConfirmTimeSheet" class="btn btn-success btn-sm" asp-route-id="@item.TimeSheetNumber">Update</a>
+                    @Html.ActionLink("Test", "ConfirmTimeSheet", "TimeSheet",new {tid=item.TimeSheetNumber,fid=item.FunctionId },null)
                     
                     
                 </div>
