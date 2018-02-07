@@ -17,6 +17,7 @@
                     Function Name
                 </th>
 
+          
                  <th>
                     
                  
@@ -26,30 +27,44 @@
     </thead>
     <tbody>
         @{ 
-            var timesheet = Model.GroupBy(f => f.FunctionId);
+            var timesheet = Model.Where(a => a.ActionId.Equals("N")).GroupBy(f =>
+            f.FunctionId);
         }
         
-@foreach (var item in Model) {
+@foreach (var item in timesheet) {
         <tr>
+           
+            @{ 
+                var funna = item.GroupBy(f => f.FunctionName);
+                var tasna = item.GroupBy(t => t.TaskName); 
+            }
+
+            <td>
+             @foreach(var item1 in tasna)
+             {
+                 @item1.Key
+
+             }
+
+            </td>
             
-            <td>
-              
-                
-            </td>
-
 
             <td>
-                
-                @Html.DisplayFor(modelItem => item.FunctionName)
+                @foreach(var item2 in funna)
+            {
+                @item2.Key
+
+            }
             </td>
 
-
+           
+            
 
                 
             <td>
                 <div class= "text-right" style="margin-right: 10px;">
-                    <a asp-action="AddTimeSheet" class="btn btn-info btn-sm" asp-route-id="@item.FunctionId">Add</a>  
-                    <a asp-action="UpdateTimeSheet" class="btn btn-success btn-sm" asp-route-id="@item.FunctionId">Update</a> 
+                    <a asp-action="AddTimeSheet" class="btn btn-info btn-sm" asp-route-id="@item.Key">Add</a>  
+                    <a asp-action="UpdateTimeSheet" class="btn btn-success btn-sm" asp-route-id="@item.Key">Update</a> 
                 </div>
 
             </td>
