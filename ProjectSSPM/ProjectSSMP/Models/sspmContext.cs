@@ -12,7 +12,7 @@ namespace ProjectSSMP.Models
         public virtual DbSet<MenuAuthentication> MenuAuthentication { get; set; }
         public virtual DbSet<MenuGroup> MenuGroup { get; set; }
         public virtual DbSet<Project> Project { get; set; }
-        public virtual DbSet<ProjectTimline> ProjectTimline { get; set; }
+        public virtual DbSet<ProjectTimeline> ProjectTimeline { get; set; }
         public virtual DbSet<RunningNumber> RunningNumber { get; set; }
         public virtual DbSet<Status> Status { get; set; }
         public virtual DbSet<Task> Task { get; set; }
@@ -24,13 +24,12 @@ namespace ProjectSSMP.Models
 
         protected override void OnConfiguring(DbContextOptionsBuilder optionsBuilder)
         {
-            
-                //#warning To protect potentially sensitive information in your connection string, you should move it out of source code. See http://go.microsoft.com/fwlink/?LinkId=723263 for guidance on storing connection strings.
+            if (!optionsBuilder.IsConfigured)
+            {
+#warning To protect potentially sensitive information in your connection string, you should move it out of source code. See http://go.microsoft.com/fwlink/?LinkId=723263 for guidance on storing connection strings.
                 optionsBuilder.UseSqlServer(@"Server=den1.mssql5.gear.host;Initial Catalog=sspm;Integrated Security=False;User ID=sspm;Password=Gi90MMTY!H_i;Connect Timeout=30;Encrypt=False;TrustServerCertificate=True;ApplicationIntent=ReadWrite;MultiSubnetFailover=False");
-            
+            }
         }
-        public sspmContext(DbContextOptions<sspmContext> options)
-            : base(options) { }
 
         protected override void OnModelCreating(ModelBuilder modelBuilder)
         {
@@ -175,7 +174,7 @@ namespace ProjectSSMP.Models
                 entity.Property(e => e.ProjectStatus).HasColumnType("char(1)");
             });
 
-            modelBuilder.Entity<ProjectTimline>(entity =>
+            modelBuilder.Entity<ProjectTimeline>(entity =>
             {
                 entity.HasKey(e => e.TimelineId);
 
@@ -184,7 +183,7 @@ namespace ProjectSSMP.Models
                     .HasMaxLength(10)
                     .ValueGeneratedNever();
 
-                entity.Property(e => e.Hader).HasMaxLength(50);
+                entity.Property(e => e.Header).HasMaxLength(50);
 
                 entity.Property(e => e.Note).HasColumnType("text");
 

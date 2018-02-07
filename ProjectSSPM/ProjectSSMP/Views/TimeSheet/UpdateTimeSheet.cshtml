@@ -38,7 +38,10 @@
             </tr>
         </thead>
         <tbody>
+            @{ 
+                var Timesheet = Model.GroupBy(f => f.FunctionId);
 
+            }
 
             @foreach (var item in Model)
             {
@@ -76,11 +79,9 @@
                         <div class="text-right" style="margin-right: 10px;">
 
 
-                            @Html.ActionLink("Test", "ConfirmTimeSheet", "TimeSheet",
-                                new { tid = item.TimeSheetNumber, fid = item.FunctionId },
-                                new { @class = "btn btn-success btn-md" })
+                            
                             <a href="javascript:void(0);" class="anchorDetail btn btn-info btn-sm"
-                               data-id-t="@item.TimeSheetNumber" data-id-f="@item.FunctionId">Details</a>
+                               data-id-t="@item.TimeSheetNumber" data-id-f="@item.FunctionId">Updata</a>
 
                         </div>
 
@@ -118,7 +119,7 @@
                     type: "GET",
                     url: TeamDetailPostBackURL,
                     contentType: "application/json; charset=utf-8",
-                    data: { "Idt": idt, "Idf": idf },
+                    data: { "tid": idt, "fid": idf },
                     datatype: "json",
                     success: function (data) {
                         //debugger;
