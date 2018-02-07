@@ -332,12 +332,29 @@ namespace ProjectSSMP.Controllers
         }
 
         [Authorize]
-        public ActionResult ConfirmTimeSheet(string tid ,string fid)
+        public ActionResult ConfirmTimeSheet(string idt ,string idf)
         {
 
+<<<<<<< HEAD
             var loggedInUser = HttpContext.User;
             var loggedInUserName = loggedInUser.Identity.Name;
 
+=======
+<<<<<<< HEAD
+            //var upTimeSheet = (from t in context.TimeSheet
+            //                   where t.TimeSheetNumber.Equals(tid) && t.FunctionId.Equals(fid)
+            //                   select t).FirstOrDefault();
+=======
+<<<<<<< HEAD
+            var loggedInUser = HttpContext.User;
+            var loggedInUserName = loggedInUser.Identity.Name;
+=======
+            var upTimeSheet = (from t in context.TimeSheet
+                               where t.TimeSheetNumber.Equals(tid) && t.FunctionId.Equals(fid)
+                               select t).FirstOrDefault();
+>>>>>>> 87be2c24e3a70d72836a14e16d30b87011c4ac55
+>>>>>>> 524ddd669e025ad3e6a05d179adb637d486f4df9
+>>>>>>> 06dd6601c5b3e609986336800f07bdc95ab17859
 
             ViewBag.userMenu = GetMenu();
 
