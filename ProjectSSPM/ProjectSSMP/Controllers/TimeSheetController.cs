@@ -312,7 +312,7 @@ namespace ProjectSSMP.Controllers
             var uid = (from u in context.UserSspm where u.Username.Equals(loggedInUserName) select u).FirstOrDefault();
 
             var Test = (from x in context.TimeSheet join x2 in context.Function on x.FunctionId equals x2.FunctionId
-                        where x.FunctionId.Equals(id) && x.UserId.Equals(uid.UserId)
+                        where x.FunctionId.Equals(id) && x.UserId.Equals(uid.UserId) && x.ActionId.Equals("N")
                         select new
                         {
                             TimeSheetId = x.TimeSheetId,
