@@ -12,7 +12,7 @@ namespace ProjectSSMP.Models
         public virtual DbSet<MenuAuthentication> MenuAuthentication { get; set; }
         public virtual DbSet<MenuGroup> MenuGroup { get; set; }
         public virtual DbSet<Project> Project { get; set; }
-        public virtual DbSet<ProjectTimline> ProjectTimline { get; set; }
+        public virtual DbSet<ProjectTimeline> ProjectTimeline { get; set; }
         public virtual DbSet<RunningNumber> RunningNumber { get; set; }
         public virtual DbSet<Status> Status { get; set; }
         public virtual DbSet<Task> Task { get; set; }
@@ -175,7 +175,7 @@ namespace ProjectSSMP.Models
                 entity.Property(e => e.ProjectStatus).HasColumnType("char(1)");
             });
 
-            modelBuilder.Entity<ProjectTimline>(entity =>
+            modelBuilder.Entity<ProjectTimeline>(entity =>
             {
                 entity.HasKey(e => e.TimelineId);
 
@@ -184,7 +184,7 @@ namespace ProjectSSMP.Models
                     .HasMaxLength(10)
                     .ValueGeneratedNever();
 
-                entity.Property(e => e.Hader).HasMaxLength(50);
+                entity.Property(e => e.Header).HasMaxLength(50);
 
                 entity.Property(e => e.Note).HasColumnType("text");
 
