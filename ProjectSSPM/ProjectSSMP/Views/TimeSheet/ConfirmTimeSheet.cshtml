@@ -1,20 +1,27 @@
 ﻿@model ProjectSSMP.Models.Timesheet.TimeSheetInputModel
-@{
-    ViewData["Title"] = "ConfirmTimeSheet";
-    Layout = "~/Views/Shared/_LayoutMenu.cshtml";
-}
 
-<div class="container">
-    <h2 class="well">Confirm TimeSheet</h2>
-    <div class="col-lg-12 well">
-        <form asp-controller="TimeSheet" asp-action="ComfirmTimeSheet" method="post">
-                        <input type="hidden" asp-for="TimeSheetNumber" name="TimeSheetNumber" id="TimeSheetNumber" />
-                        <input type="hidden" asp-for="UserId" name="UserId" id="UserId" />
-                        <input type="hidden" asp-for="FunctionId" name="FunctionId" id="FunctionId" />
 
-                     <div class= "text-right" style="margin-right: 10px;">
-                        <button type="submit" class="btn btn-primary">Submit</button> 
-                    </div>
-        </form>
-    </div>
+<div class="modal-header">
+    <button type="button" class="close" data-dismiss="modal" aria-hidden="true">×</button>
+    <h4 class="modal-title" id="myModalLabel">Confirm TimeSheet</h4>
 </div>
+<div class="modal-body">
+    
+        
+            <form asp-controller="TimeSheet" asp-action="ConfirmTimeSheet" method="post">
+                <input type="hidden" asp-for="TimeSheetNumber" name="TimeSheetNumber" id="TimeSheetNumber" />
+                <input type="hidden" asp-for="UserId" name="UserId" id="UserId" />
+                <input type="hidden" asp-for="FunctionId" name="FunctionId" id="FunctionId" />
+                 <label>Function Name</label>
+                                <div class="form-group" >
+                                    <select class="form-control" asp-items="@ViewBag.Action"  name="ActionId" id="ActionId">
+                                        <option>Please select </option>
+                                    </select>
+                                </div>
+                            
+                <div class="text-right" style="margin-right: 10px;">
+                    <button type="submit" class="btn btn-primary">Submit</button>
+                </div>
+            </form>
+</div>
+
