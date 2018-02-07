@@ -6,6 +6,7 @@ using System.Threading;
 using System.Threading.Tasks;
 using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
+using Microsoft.AspNetCore.Mvc.Rendering;
 using Microsoft.EntityFrameworkCore;
 using ProjectSSMP.Models;
 using ProjectSSMP.Models.Timesheet;
@@ -144,21 +145,30 @@ namespace ProjectSSMP.Controllers
         {
 
             ViewBag.userMenu = GetMenu();
+            var loggedInUser = HttpContext.User;
+            var loggedInUserName = loggedInUser.Identity.Name;
 
+            var uid = (from u in context.UserSspm where u.Username.Equals(loggedInUserName) select u).FirstOrDefault();
 
             var Test = (from x in context.Function
                         join x2 in context.Task on x.TaskId equals x2.TaskId
                         join x3 in context.Project on x2.ProjectNumber equals x3.ProjectNumber
-                        where x.ProjectNumber.Equals(id)
+                        join x4 in context.TimeSheet on x.FunctionId equals x4.FunctionId
+                        join x5 in context.TeamTask on x.FunctionId equals x5.FunctionId
+                        
+                        where x.ProjectNumber.Equals(id) && x4.ActionId != "F" && x5.UserId.Equals(uid.UserId)
+                        
+                        
                         select new
                         {
                             ProjectNumber = x3.ProjectNumber,
-                            ProjectName = x3.ProjectName,
-                            TaskId = x2.TaskId,
+                            ProjectName = x3.ProjectName ,
+                            TaskId = x2.TaskId ,
+                            ActionId = x4.ActionId,
                             TaskName = x2.TaskName,
-                            FunctionId = x.FunctionId,
+                            FunctionId = x.FunctionId ,
                             FunctionName = x.FunctionName,
-            });
+                        }).ToList();
 
             List<TimeSheetInputModel> model = new List<TimeSheetInputModel>();
 
@@ -174,7 +184,9 @@ namespace ProjectSSMP.Controllers
                     FunctionId = item.FunctionId,
                     FunctionName = item.FunctionName,
                     TaskId = item.TaskId,
-                    TaskName = item.TaskName
+                    TaskName = item.TaskName,
+                    ActionId = item.ActionId
+                    
 
                 });
             }
@@ -332,9 +344,10 @@ namespace ProjectSSMP.Controllers
         }
 
         [Authorize]
-        public ActionResult ConfirmTimeSheet(string idt ,string idf)
+        public ActionResult ConfirmTimeSheet(string tid, string fid)
         {
 
+<<<<<<< HEAD
 <<<<<<< HEAD
             var loggedInUser = HttpContext.User;
             var loggedInUserName = loggedInUser.Identity.Name;
@@ -346,15 +359,22 @@ namespace ProjectSSMP.Controllers
             //                   select t).FirstOrDefault();
 =======
 <<<<<<< HEAD
+=======
+
+>>>>>>> e6196db4deecb0efde9245b0b49df7fc71dc54c5
             var loggedInUser = HttpContext.User;
             var loggedInUserName = loggedInUser.Identity.Name;
-=======
+
             var upTimeSheet = (from t in context.TimeSheet
                                where t.TimeSheetNumber.Equals(tid) && t.FunctionId.Equals(fid)
                                select t).FirstOrDefault();
+<<<<<<< HEAD
 >>>>>>> 87be2c24e3a70d72836a14e16d30b87011c4ac55
 >>>>>>> 524ddd669e025ad3e6a05d179adb637d486f4df9
 >>>>>>> 06dd6601c5b3e609986336800f07bdc95ab17859
+=======
+
+>>>>>>> e6196db4deecb0efde9245b0b49df7fc71dc54c5
 
             ViewBag.userMenu = GetMenu();
 
@@ -372,9 +392,9 @@ namespace ProjectSSMP.Controllers
                 ActionId = update.ActionId,
 
             };
-           
-            
-            return View(e);
+            ViewData["Action"] = new SelectList(context.Action, "ActionId", "ActionName");
+
+            return PartialView("ConfirmTimeSheet", e);
         }
 
         [HttpPost]
