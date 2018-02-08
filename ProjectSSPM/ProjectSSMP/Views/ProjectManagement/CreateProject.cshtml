@@ -1,6 +1,4 @@
-﻿@*
-    For more information on enabling MVC for empty projects, visit https://go.microsoft.com/fwlink/?LinkID=397860
-*@
+﻿@model ProjectSSMP.Models.ProjectManagement.CreateProjectInputModel
 @{
     ViewData["Title"] = "Create Project";
     Layout = "~/Views/Shared/_LayoutMenu.cshtml";
@@ -90,6 +88,7 @@
                 <div class="form-group">
                     <label>Customer Name</label>
                     <input type="text" name="CustomerName" id="CustomerName" placeholder="Select Customer Name Here.." class="form-control">
+                    
                 </div>
             </div>
 
@@ -101,6 +100,7 @@
                 <div class="form-group">
                     <label>Customer Tel.</label>
                     <input type="text" name="CustomerTel" id="CustomerTel" placeholder="Enter Customer Tel. Here.." class="form-control">
+                    
                 </div>
             </div>
 

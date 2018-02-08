@@ -404,11 +404,21 @@ namespace ProjectSSMP.Controllers
         [ValidateAntiForgeryToken]
         public async Task<IActionResult> CreateTask(string pnum, CreateTaskInputModel inputModel)
         {
-            
-                
-            
+            if (!ModelState.IsValid)
+            {
+                return View();
+            }
 
             ViewBag.userMenu = GetMenu();
+            if (inputModel.TaskEnd < inputModel.TaskStart)
+            {
+                ModelState.AddModelError("ErrorCreateTask", "กรุณากรอกเวลาใหม่");
+                return View();
+            }
+
+
+
+            
 
             try
             {

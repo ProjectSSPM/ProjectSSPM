@@ -12,85 +12,85 @@
 
 <div class="modal-body">
     <div class="row">
-                <form asp-controller="ProjectManagement" asp-action="EditProject" method="post">
-                    <input type="hidden" asp-for="ProjectNumber" />
-                    <div class="col-sm-12">
-                        
-                            <div class="col-sm-6 form-group">
-                                <label asp-for="ProjectId" class="control-label"></label>
-                                <input asp-for="ProjectId" class="form-control" />
-                                <span asp-validation-for="ProjectId" class="text-danger"></span>
-                            </div>
-                            <div class="col-sm-8 form-group">
-                                <label asp-for="ProjectName" class="control-label"></label>
-                                <input asp-for="ProjectName" class="form-control" />
-                                <span asp-validation-for="ProjectName" class="text-danger"></span>
-                            </div>
+        <form asp-controller="ProjectManagement" asp-action="EditProject" method="post">
+            <input type="hidden" asp-for="ProjectNumber" />
+            <div class="col-sm-12">
 
-                            <div class="col-sm-6 form-group">
-                                <label>Estimated Start Date</label>
-                                <div class="form-group">      
-                                        <div class="input-group date form_date col-md-8" data-date="" data-date-format="dd MM yyyy" data-link-field="dtp_input2" data-link-format="yyyy-mm-dd">
-                                            <input asp-for="ProjectStart" class="form-control" size="10" type="text">
-                                            <span asp-validation-for="ProjectStart" class="text-danger"></span>
-                                            <span class="input-group-addon"><span class="glyphicon glyphicon-remove"></span></span>
-                                            <span class="input-group-addon"><span class="glyphicon glyphicon-calendar"></span></span>
-                                        </div>
-                                    </div>
-                            </div>
-
-                            <div class="col-sm-6 form-group">
-                                <label>Estimated End Date</label>
-                                <div class="form-group">      
-                                        <div class="input-group date form_date col-md-8" data-date="" data-date-format="dd MM yyyy" data-link-field="dtp_input2" data-link-format="yyyy-mm-dd">
-                                            <input asp-for="ProjectEnd" class="form-control" size="10" type="text">
-                                            <span asp-validation-for="ProjectEnd" class="text-danger"></span>
-                                            <span class="input-group-addon"><span class="glyphicon glyphicon-remove"></span></span>
-                                            <span class="input-group-addon"><span class="glyphicon glyphicon-calendar"></span></span>
-                                        </div>
-                                    </div>
-                            </div>
-                    
-                        
-                            <div class="col-sm-6 form-group">
-                                <label asp-for="ProjectManager" class="control-label"></label>
-
-
-                                <select class="form-control" asp-items="ViewBag.UserSSPM" asp-for="ProjectManager" name="ProjectManager" id="ProjectManager">
-                                    <option>Please select </option>
-                                </select>
-                                <span asp-validation-for="ProjectManager" class="text-danger"></span>
-                            </div>
-                            <div class="col-sm-6 form-group">
-                                <label asp-for="ProjectCost" class="control-label"></label>
-                                <input asp-for="ProjectCost" class="form-control" />
-                                <span asp-validation-for="ProjectCost" class="text-danger"></span>
-                            </div>
-                        
-                            <div class="col-sm-6 form-group">
-                                <label asp-for="CustomerName" class="control-label"></label>
-                                <input asp-for="CustomerName" class="form-control" />
-                                <span asp-validation-for="CustomerName" class="text-danger"></span>
-                            </div>
-                            <div class="col-sm-6 form-group">
-                                <label asp-for="CustomerTel" class="control-label"></label>
-                                <input asp-for="CustomerTel" class="form-control" />
-                                <span asp-validation-for="CustomerTel" class="text-danger"></span>
-                            </div>
-                         
-                         
-                        
-
-
-
-                    
-                    <div class="col-sm-12 form-group">
-                        <div class= "text-right" style="margin-right: 10px;">
-
-                            <input type="submit" value="Save" class="btn btn-default btn-primary" />
-                            </div>
-                     </div>              
-                    </div>
-                </form> 
+                <div class="col-sm-6 form-group">
+                    <label asp-for="ProjectId" class="control-label"></label>
+                    <input asp-for="ProjectId" class="form-control" />
+                    <span asp-validation-for="ProjectId" class="text-danger"></span>
                 </div>
+                <div class="col-sm-8 form-group">
+                    <label asp-for="ProjectName" class="control-label"></label>
+                    <input asp-for="ProjectName" class="form-control" />
+                    <span asp-validation-for="ProjectName" class="text-danger"></span>
+                </div>
+
+                <div class="col-sm-6 form-group">
+                    <label>Estimated Start Date</label>
+                    <div class="form-group">
+                        <div class="input-group date form_date col-md-8" data-date="" data-date-format="dd MM yyyy" data-link-field="dtp_input2" data-link-format="yyyy-mm-dd">
+                            <input asp-for="ProjectStart" class="form-control" size="10" type="text">
+                            <span asp-validation-for="ProjectStart" class="text-danger"></span>
+                            <span class="input-group-addon"><span class="glyphicon glyphicon-remove"></span></span>
+                            <span class="input-group-addon"><span class="glyphicon glyphicon-calendar"></span></span>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="col-sm-6 form-group">
+                    <label>Estimated End Date</label>
+                    <div class="form-group">
+                        <div class="input-group date form_date col-md-8" data-date="" data-date-format="dd MM yyyy" data-link-field="dtp_input2" data-link-format="yyyy-mm-dd">
+                            <input asp-for="ProjectEnd" class="form-control" size="10" type="text">
+                            <span asp-validation-for="ProjectEnd" class="text-danger"></span>
+                            <span class="input-group-addon"><span class="glyphicon glyphicon-remove"></span></span>
+                            <span class="input-group-addon"><span class="glyphicon glyphicon-calendar"></span></span>
+                        </div>
+                    </div>
+                </div>
+
+
+                <div class="col-sm-6 form-group">
+                    <label asp-for="ProjectManager" class="control-label"></label>
+
+
+                    <select class="form-control" asp-items="ViewBag.UserSSPM" asp-for="ProjectManager" name="ProjectManager" id="ProjectManager">
+                        <option>Please select </option>
+                    </select>
+                    <span asp-validation-for="ProjectManager" class="text-danger"></span>
+                </div>
+                <div class="col-sm-6 form-group">
+                    <label asp-for="ProjectCost" class="control-label"></label>
+                    <input asp-for="ProjectCost" class="form-control" />
+                    <span asp-validation-for="ProjectCost" class="text-danger"></span>
+                </div>
+
+                <div class="col-sm-6 form-group">
+                    <label asp-for="CustomerName" class="control-label"></label>
+                    <input asp-for="CustomerName" class="form-control" />
+                    <span asp-validation-for="CustomerName" class="text-danger"></span>
+                </div>
+                <div class="col-sm-6 form-group">
+                    <label asp-for="CustomerTel" class="control-label"></label>
+                    <input asp-for="CustomerTel" class="form-control" />
+                    <span asp-validation-for="CustomerTel" class="text-danger"></span>
+                </div>
+
+
+
+
+
+
+
+                <div class="col-sm-12 form-group">
+                    <div class="text-right" style="margin-right: 10px;">
+
+                        <input type="submit" value="Save" class="btn btn-default btn-primary" />
+                    </div>
+                </div>
+            </div>
+        </form>
     </div>
+</div>
