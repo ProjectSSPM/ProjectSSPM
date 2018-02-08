@@ -283,6 +283,7 @@ namespace ProjectSSMP.Controllers
                 TimeSheetEnd = inputModel.TimeSheetEnd,
                 UserId = uid.UserId,
                 TimeSheetNumber = num.ToString(),
+                ActionId = "N",
             };
 
             try
