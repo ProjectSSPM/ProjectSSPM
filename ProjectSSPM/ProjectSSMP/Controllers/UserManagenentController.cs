@@ -71,8 +71,6 @@ namespace ProjectSSMP.Controllers
         public IActionResult AddUser()
         {
 
-
-            
             ViewBag.userMenu = GetMenu();
 
             return View();
@@ -114,7 +112,9 @@ namespace ProjectSSMP.Controllers
                     JobResponsible = inputModel.JobResponsible,
                     UserCreateBy = loggedInUserName,
                     UserCreateDate = DateTime.Now,
-                    Status = "A"
+                    Status = "A",
+                    UserTel = inputModel.UserTel,
+                    LineId = inputModel.LineId,
                         
                 };
 
@@ -187,6 +187,9 @@ namespace ProjectSSMP.Controllers
                 JobResponsible = userSspm.JobResponsible,
                 Status = userSspm.Status,
                 GroupId = userAssign.GroupId,
+                UserTel = userSspm.UserTel,
+                LineId = userSspm.LineId
+
             };
             ViewData["Username"] = userSspm.Username;
             if (userSspm == null)
@@ -235,6 +238,8 @@ namespace ProjectSSMP.Controllers
                         UserUpdate.UserEditBy = loggedInUserName;
                         UserUpdate.UserEditDate = DateTime.Now;
                         UserUpdate.Status = editModel.Status;
+                        UserUpdate.LineId = editModel.LineId;
+                        UserUpdate.UserTel = editModel.UserTel;
 
                     }
                     await context.SaveChangesAsync();
@@ -280,9 +285,7 @@ namespace ProjectSSMP.Controllers
         [Authorize]
         public async Task<IActionResult> Details(string id)
         {
-            
-            
-
+          
             if (id == null)
             {
                 return NotFound();
@@ -315,7 +318,9 @@ namespace ProjectSSMP.Controllers
                 UserEditDate = userSspm.UserEditDate,
                 UserCreateBy = userSspm.UserCreateBy,
                 UserEditBy = userSspm.UserEditBy,
-                GroupName = groupname.GroupName
+                GroupName = groupname.GroupName,
+                UserTel = userSspm.UserTel,
+                LineId = userSspm.LineId,
             };
             ViewData["Username"] = userSspm.Username;
             if (userSspm == null)

@@ -21,7 +21,7 @@
             <div class="col-lg-4"></div>
             <div class="col-lg-4">
                 <div class= "text-right" style="margin-right: 10px;">
-                    <button type="button" class="btn btn-primary btn-md" data-toggle="modal" data-target="#myModal">Add Function</button>
+                    <button type="button" class="btn btn-primary btn-md" data-toggle="modal" data-target="#myModalAdd">Add Function</button>
                 </div>
             </div>
     
@@ -90,8 +90,7 @@
                      
                     <td>
                         <div class="text-right" style="margin-right: 10px;">
-                            
-                            <a asp-action="EditFunction" class="btn btn-warning btn-sm" asp-route-id="@item.FunctionId">Edit</a>
+                            <a href="javascript:void(0);" class="anchorDetail btn btn-warning btn-sm" data-id="@item.FunctionId">Edit</a>
                             <a asp-action="Update" class="btn btn-success btn-sm" asp-route-id="@item.FunctionId">Update</a>
                         </div>
 
@@ -109,7 +108,7 @@
 
 
   <!-- Modal -->
-  <div class="modal fade" id="myModal" role="dialog">
+  <div class="modal fade" id="myModalAdd" role="dialog">
     <div class="modal-dialog">
     
       <!-- Modal content-->
@@ -186,5 +185,62 @@
       
     </div>
   </div>
+</div>
 
+
+
+<div id='myModal' class='modal'>
+    <div class="modal-dialog">
+        <div class="modal-content">
+            <div id='myModalContent'></div>
+        </div>
     </div>
+
+</div>
+
+@section scripts
+    {
+    
+
+    <script>
+
+        var TeamDetailPostBackURL = '/ProjectManagement/EditFunction/';
+        $(function () {
+            $(".anchorDetail").click(function () {
+                //debugger;
+                var $buttonClicked = $(this);
+                var id = $buttonClicked.attr('data-id');
+                var options = { "backdrop": "static", keyboard: true };
+                $.ajax({
+                    type: "GET",
+                    url: TeamDetailPostBackURL,
+                    contentType: "application/json; charset=utf-8",
+                    data: { "Id": id },
+                    datatype: "json",
+                    success: function (data) {
+                        //debugger;
+                        $('#myModalContent').html(data);
+                        $('#myModal').modal(options);
+                        $('#myModal').modal('show');
+
+                    },
+                    error: function () {
+                        alert("Dynamic content load failed.");
+                    }
+                });
+            });
+            //$("#closebtn").on('click',function(){
+            //    $('#myModal').modal('hide');
+
+            $("#closbtn").click(function () {
+                $('#myModal').modal('hide');
+            });
+        });
+
+    </script>
+
+}
+
+
+
+
