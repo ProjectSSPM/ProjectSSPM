@@ -15,6 +15,8 @@ namespace ProjectSSMP.Controllers
 {
     public class TimeSheetController : BaseController
     {
+        
+
         public TimeSheetController(sspmContext context) //=> this.context = context;
         {
             this.context = context;
@@ -156,52 +158,102 @@ namespace ProjectSSMP.Controllers
             var loggedInUserName = loggedInUser.Identity.Name;
 
             var uid = (from u in context.UserSspm where u.Username.Equals(loggedInUserName) select u).FirstOrDefault();
-
-            var Test = (from x in context.Function
-                        join x2 in context.Task on x.TaskId equals x2.TaskId
-                        join x3 in context.Project on x2.ProjectNumber equals x3.ProjectNumber
-                        join x4 in context.TimeSheet on x.FunctionId equals x4.FunctionId
-                        join x5 in context.TeamTask on x.FunctionId equals x5.FunctionId
-                        
-                        where x.ProjectNumber.Equals(id) && x4.ActionId != "F" && x5.UserId.Equals(uid.UserId)
-                        
-                        
-                        select new
-                        {
-                            ProjectNumber = x3.ProjectNumber,
-                            ProjectName = x3.ProjectName ,
-                            TaskId = x2.TaskId ,
-                            ActionId = x4.ActionId,
-                            TaskName = x2.TaskName,
-                            FunctionId = x.FunctionId ,
-                            FunctionName = x.FunctionName,
-                        }).ToList();
-
+            var checkAC = (from fc in context.Function
+                           join ts in context.TimeSheet on fc.FunctionId equals ts.FunctionId
+                           where ts.ActionId.Equals("F")
+                           group fc by fc.FunctionId into f
+                           select new {
+                               FunctionId =    f.Key
+                               
+                           }).ToList();
             List<TimeSheetInputModel> model = new List<TimeSheetInputModel>();
-
-
-            foreach (var item in Test)
+            if (checkAC != null)
             {
+                var Test = (from x in context.Function
+                            join x2 in context.Task on x.TaskId equals x2.TaskId
+                            join x3 in context.Project on x2.ProjectNumber equals x3.ProjectNumber
+                            join x4 in context.TimeSheet on x.FunctionId equals x4.FunctionId
+                            join x5 in context.TeamTask on x.FunctionId equals x5.FunctionId
 
-                model.Add(new TimeSheetInputModel()
+                            where x.ProjectNumber.Equals(id) && x5.UserId.Equals(uid.UserId)
+                            && !(checkAC.Select(p => p.FunctionId).Contains(x.FunctionId))
+
+                            select new
+                            {
+                                ProjectNumber = x3.ProjectNumber,
+                                ProjectName = x3.ProjectName,
+                                TaskId = x2.TaskId,
+                                ActionId = x4.ActionId,
+                                TaskName = x2.TaskName,
+                                FunctionId = x.FunctionId,
+                                FunctionName = x.FunctionName,
+                            }).ToList();
+                foreach (var item in Test)
                 {
 
-                    ProjectName = item.ProjectName,
-                    ProjectNumber = item.ProjectNumber,
-                    FunctionId = item.FunctionId,
-                    FunctionName = item.FunctionName,
-                    TaskId = item.TaskId,
-                    TaskName = item.TaskName,
-                    ActionId = item.ActionId
-                    
+                    model.Add(new TimeSheetInputModel()
+                    {
 
-                });
+                        ProjectName = item.ProjectName,
+                        ProjectNumber = item.ProjectNumber,
+                        FunctionId = item.FunctionId,
+                        FunctionName = item.FunctionName,
+                        TaskId = item.TaskId,
+                        TaskName = item.TaskName,
+                        ActionId = item.ActionId
+
+
+                    });
+                }
             }
-          
-            if (Test == null)
+            else
             {
-                return NotFound();
+                var Test = (from x in context.Function
+                            join x2 in context.Task on x.TaskId equals x2.TaskId
+                            join x3 in context.Project on x2.ProjectNumber equals x3.ProjectNumber
+                            join x4 in context.TimeSheet on x.FunctionId equals x4.FunctionId
+                            join x5 in context.TeamTask on x.FunctionId equals x5.FunctionId
+
+                            where x.ProjectNumber.Equals(id) && x5.UserId.Equals(uid.UserId)
+                            
+
+                            select new
+                            {
+                                ProjectNumber = x3.ProjectNumber,
+                                ProjectName = x3.ProjectName,
+                                TaskId = x2.TaskId,
+                                ActionId = x4.ActionId,
+                                TaskName = x2.TaskName,
+                                FunctionId = x.FunctionId,
+                                FunctionName = x.FunctionName,
+                            }).ToList();
+
+                foreach (var item in Test)
+                {
+
+                    model.Add(new TimeSheetInputModel()
+                    {
+
+                        ProjectName = item.ProjectName,
+                        ProjectNumber = item.ProjectNumber,
+                        FunctionId = item.FunctionId,
+                        FunctionName = item.FunctionName,
+                        TaskId = item.TaskId,
+                        TaskName = item.TaskName,
+                        ActionId = item.ActionId
+
+
+                    });
+                }
             }
+            
+
+            
+
+
+            
+          
+           
             return View(model);
         }
 

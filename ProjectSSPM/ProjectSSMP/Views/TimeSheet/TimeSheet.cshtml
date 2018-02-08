@@ -27,7 +27,7 @@
     </thead>
     <tbody>
         @{ 
-            var timesheet = Model.Where(a => a.ActionId.Equals("N")).GroupBy(f =>
+            var timesheet = Model.GroupBy(f =>
             f.FunctionId);
         }
         
