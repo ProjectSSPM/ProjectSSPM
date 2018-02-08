@@ -13,6 +13,7 @@ namespace ProjectSSMP.Models.UserManagenent
             public DateTime? UserEditDate { get; set; }
             public string GroupId { get; set; }
             public string Status { get; set; }
-
+            public string UserTel { get; set; }
+            public string LineId { get; set; }
     }
 }

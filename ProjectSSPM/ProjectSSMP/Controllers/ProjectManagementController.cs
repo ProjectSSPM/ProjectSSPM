@@ -78,7 +78,7 @@ namespace ProjectSSMP.Controllers
             {
                 return NotFound();
             }
-            return View(e);
+            return PartialView("EditProject",e);
         }
 
         [Authorize]
@@ -127,7 +127,7 @@ namespace ProjectSSMP.Controllers
                 , "UserId", "Firstname");
             ViewData["naemFunction"] = Function.FunctionName;
 
-            return View(e);
+            return PartialView("EditFunction", e);
         }
 
         [Authorize]
@@ -157,7 +157,7 @@ namespace ProjectSSMP.Controllers
             {
                 return NotFound();
             }
-            return View(e);
+            return PartialView("EditTask", e);
         }
         [HttpPost]
         [ValidateAntiForgeryToken]
@@ -169,8 +169,8 @@ namespace ProjectSSMP.Controllers
 
 
 
-            var query = (from x in context.Function where x.FunctionId.Equals(id) select x).FirstOrDefault();
-            if (id != query.FunctionId)
+            var query = (from x in context.Function where x.FunctionId.Equals(editModel.FunctionId) select x).FirstOrDefault();
+            if (editModel.FunctionId != query.FunctionId)
             {
                 return NotFound();
             }
@@ -182,7 +182,7 @@ namespace ProjectSSMP.Controllers
                 {
                     //context.Update(ord);
                     var addquery = from test in context.Function
-                                   where test.FunctionId.Equals(id)
+                                   where test.FunctionId.Equals(editModel.FunctionId)
                                    select test;
                     foreach (Models.Function UserUpdate in addquery)
                     {
@@ -195,7 +195,7 @@ namespace ProjectSSMP.Controllers
                     try
                     {
                         var addquery2 = from test2 in context.TeamTask
-                                        where test2.FunctionId.Equals(id)
+                                        where test2.FunctionId.Equals(editModel.FunctionId)
                                         select test2;
                         foreach (TeamTask UserUpdate2 in addquery2)
                         {
@@ -237,8 +237,8 @@ namespace ProjectSSMP.Controllers
             ViewBag.userMenu = GetMenu();
 
 
-            var query = (from x in context.Task where x.TaskId.Equals(id) select x).FirstOrDefault();
-            if (id != query.TaskId)
+            var query = (from x in context.Task where x.TaskId.Equals(editModel.TaskId) select x).FirstOrDefault();
+            if (editModel.TaskId != query.TaskId)
             {
                 return NotFound();
             }
@@ -250,7 +250,7 @@ namespace ProjectSSMP.Controllers
                 {
                     //context.Update(ord);
                     var addquery = from test in context.Task
-                                                           where test.TaskId.Equals(id)
+                                                           where test.TaskId.Equals(editModel.TaskId)
                                    select test;
                     foreach (Models.Task UserUpdate in addquery)
                     {
@@ -286,8 +286,8 @@ namespace ProjectSSMP.Controllers
             ViewBag.userMenu = GetMenu();
 
 
-            var query = (from x in context.Project where x.ProjectNumber.Equals(id) select x).FirstOrDefault();
-            if (id != query.ProjectNumber)
+            var query = (from x in context.Project where x.ProjectNumber.Equals(editModel.ProjectNumber) select x).FirstOrDefault();
+            if (editModel.ProjectNumber != query.ProjectNumber)
             {
                 return NotFound();
             }
@@ -299,7 +299,7 @@ namespace ProjectSSMP.Controllers
                 {
                     //context.Update(ord);
                     var addquery = from test in context.Project
-                                                           where test.ProjectNumber.Equals(id)
+                                                           where test.ProjectNumber.Equals(editModel.ProjectNumber)
                                                             select test;
                     foreach (Project UserUpdate in addquery)
                     {

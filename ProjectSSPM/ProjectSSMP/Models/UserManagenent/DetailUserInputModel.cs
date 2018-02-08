@@ -16,6 +16,7 @@ namespace ProjectSSMP.Models.UserManagenent
         public DateTime? UserCreateDate { get; set; }
         public string UserCreateBy { get; set; }
         public string GroupName { get; set; }
-
+        public string UserTel { get; set; }
+        public string LineId { get; set; }
     }
 }
