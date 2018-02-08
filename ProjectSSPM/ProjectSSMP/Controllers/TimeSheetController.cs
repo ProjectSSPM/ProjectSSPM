@@ -283,6 +283,7 @@ namespace ProjectSSMP.Controllers
                 TimeSheetEnd = inputModel.TimeSheetEnd,
                 UserId = uid.UserId,
                 TimeSheetNumber = num.ToString(),
+                ActionId = "N"
             };
 
             try
@@ -378,7 +379,7 @@ namespace ProjectSSMP.Controllers
                 ActionId = update.ActionId,
 
             };
-            ViewData["Action"] = new SelectList(context.Action, "ActionId", "ActionName");
+            ViewData["Action"] = new SelectList(context.Action.Where(a => a.ActionId != "N"), "ActionId", "ActionName");
 
             return PartialView("ConfirmTimeSheet", e);
         }

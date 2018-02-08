@@ -10,9 +10,7 @@
         <thead>
             <tr>
 
-                <th>
-                    Function ID
-                </th>
+                
 
                 <th>
                     Function Name
@@ -44,11 +42,7 @@
             {
                 <tr>
 
-                    <td>
-
-                        @Html.DisplayFor(modelItem => item.FunctionId)
-                    </td>
-
+                   
 
                     <td>
 
@@ -56,19 +50,19 @@
                     </td>
 
                     <td>
-
-                        @Html.DisplayFor(modelItem => item.TimeSheetId)
+                        @Convert.ToString(string.Format("{0:dd MMMM yyyy H:mm}", item.TimeSheetId))
+                        
                     </td>
 
 
                     <td>
-
-                        @Html.DisplayFor(modelItem => item.TimeSheetStart)
+                        @Convert.ToString(string.Format("{0:H:mm}", item.TimeSheetStart))
+                        
                     </td>
 
                     <td>
 
-                        @Html.DisplayFor(modelItem => item.TimeSheetEnd)
+                        @Convert.ToString(string.Format("{0: H:mm}", item.TimeSheetEnd))
                     </td>
 
 
@@ -78,7 +72,7 @@
 
                             
                             <a href="javascript:void(0);" class="anchorDetail btn btn-info btn-sm"
-                               data-id-t="@item.TimeSheetNumber" data-id-f="@item.FunctionId">Updata</a>
+                               data-id-t="@item.TimeSheetNumber" data-id-f="@item.FunctionId">Update</a>
 
                         </div>
 
