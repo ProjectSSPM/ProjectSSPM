@@ -8,12 +8,16 @@ namespace ProjectSSMP.Models.UserManagement
 
 
         public string UserId { get; set; }
+<<<<<<< HEAD
         [RegularExpression(@"^[a-zA-Z0-9]",ErrorMessage = "กรุณากรอกภาษาอังกฤษ")]
         [StringLength(30, MinimumLength = 5, ErrorMessage = "Min")]        
         [Required(ErrorMessage ="กรุณาใส่")]
         public string Username { get; set; }
         [RegularExpression(@"^[a-zA-Z0-9]", ErrorMessage = "กรุณากรอกภาษาอังกฤษ")]
         [StringLength(30, MinimumLength = 5, ErrorMessage = "Min")]
+=======
+        [StringLength(30, MinimumLength = 5, ErrorMessage = "Username must be 5-30 letters.")]
+>>>>>>> 94bc0a21e360fc2dfabd1717a66fbb210181f62b
         [Required]
         public string Password { get; set; }
         [RegularExpression(@"^[a-zA-Z]", ErrorMessage = "กรุณากรอกภาษาอังกฤษ")]
