@@ -11,7 +11,7 @@ namespace ProjectSSMP.Models
         public string ProjectManager { get; set; }
         public DateTime? ProjectStart { get; set; }
         public DateTime? ProjectEnd { get; set; }
-        public decimal? ProjectCost { get; set; }
+        public long? ProjectCost { get; set; }
         public string ProjectCreateBy { get; set; }
         public DateTime? ProjectCreateDate { get; set; }
         public string ProjectEditBy { get; set; }
