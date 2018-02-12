@@ -14,27 +14,26 @@
                             <div class="col-sm-6 form-group">
                                 <label>Username</label>
                                 <input type="text" asp-for="Username" name="Username" id="Username" placeholder="Enter Username Here.." class="form-control">
-                                @*@if (!ViewData.ModelState.IsValid )
-                                {
-                                    @Html.ValidationMessageFor(m => m.Username, "")
-
-                                }*@
+                               
                                 @Html.ValidationMessageFor(m => m.Username,"", new { @class = "text-danger" })
                                 
                             </div>
                             <div class="col-sm-6 form-group">
                                 <label>Password</label>
                                 <input type="text" name="Password" id="Password" placeholder="Enter Password Here.." class="form-control">
+                                @Html.ValidationMessageFor(m => m.Password, "", new { @class = "text-danger" })
                             </div>
                         </div> 
                         <div class="row">
                             <div class="col-sm-6 form-group">
                                 <label>First Name</label>
                                 <input type="text" name="Firstname" id="Firstname" placeholder="Enter First Name Here.." class="form-control">
+                                @Html.ValidationMessageFor(m => m.Firstname, "", new { @class = "text-danger" })
                             </div>
                             <div class="col-sm-6 form-group">
                                 <label>Last Name</label>
                                 <input type="text" name="Lastname" id="Lastname" placeholder="Enter Last Name Here.." class="form-control">
+                                @Html.ValidationMessageFor(m => m.Lastname, "", new { @class = "text-danger" })
                             </div>
                         </div>                  
                          
@@ -43,14 +42,16 @@
                             <div class="col-sm-6 form-group">
                                 <label>Job Title</label>
                                 <input type="text" name="JobResponsible" id="JobResponsible" placeholder="Enter Designation Here.." class="form-control">
+                                @Html.ValidationMessageFor(m => m.JobResponsible, "", new { @class = "text-danger" })
                             </div>      
                             <div class="col-sm-6 form-sgroup">
                                 <label>Group</label>
                                 <div class="form-group">
-                                             <select class="form-control" name="GroupID" id="GroupID" >
-                                             <option value="50">Project Manager</option>
-                                             <option value="10">Team</option>
-                                             </select>
+                                    <select class="form-control" name="GroupID" id="GroupID">
+                                        <option>Please select </option>
+                                        <option value="50">Project Manager</option>
+                                        <option value="10">Team</option>
+                                    </select>
                                         </div>
                             </div>  
                         </div>     
@@ -59,10 +60,12 @@
                             <div class="col-sm-6 form-group">
                                 <label>Tel.</label>
                                 <input type="text" name="UserTel" id="UserTel" placeholder="Enter Telephone Number Here.." class="form-control">
+                                @Html.ValidationMessageFor(m => m.UserTel, "", new { @class = "text-danger" })
                             </div>      
                             <div class="col-sm-6 form-group">
                                 <label>Line ID</label>
                                 <input type="text" name="LineId" id="LineId" placeholder="Enter Line ID Here.." class="form-control">
+                                @Html.ValidationMessageFor(m => m.LineId, "", new { @class = "text-danger" })
                             </div> 
                         </div>  
                     

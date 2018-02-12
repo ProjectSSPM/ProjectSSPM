@@ -168,87 +168,7 @@ namespace ProjectSSMP.Controllers
                                
                            }).ToList();
             List<TimeSheetInputModel> model = new List<TimeSheetInputModel>();
-            if (checkAC.Count != 0 && checkts.Count != 0)
-            {
-                var Test = (from x in context.Function
-                            join x2 in context.Task on x.TaskId equals x2.TaskId
-                            join x3 in context.Project on x2.ProjectNumber equals x3.ProjectNumber
-                            join x4 in context.TimeSheet on x.FunctionId equals x4.FunctionId
-                            join x5 in context.TeamTask on x.FunctionId equals x5.FunctionId
-
-                            where x.ProjectNumber.Equals(id) && x5.UserId.Equals(uid.UserId)
-                            && !(checkAC.Select(p => p.FunctionId).Contains(x.FunctionId))
-
-                            select new
-                            {
-                                ProjectNumber = x3.ProjectNumber,
-                                ProjectName = x3.ProjectName,
-                                TaskId = x2.TaskId,
-                                ActionId = x4.ActionId,
-                                TaskName = x2.TaskName,
-                                FunctionId = x.FunctionId,
-                                FunctionName = x.FunctionName,
-                            }).ToList();
-                foreach (var item in Test)
-                {
-
-                    model.Add(new TimeSheetInputModel()
-                    {
-
-                        ProjectName = item.ProjectName,
-                        ProjectNumber = item.ProjectNumber,
-                        FunctionId = item.FunctionId,
-                        FunctionName = item.FunctionName,
-                        TaskId = item.TaskId,
-                        TaskName = item.TaskName,
-                        ActionId = item.ActionId
-
-
-                    });
-                }
-            }
-            else if(checkAC.Count == 0 && checkts.Count != 0)
-            {
-                var Test = (from x in context.Function
-                            join x2 in context.Task on x.TaskId equals x2.TaskId
-                            join x3 in context.Project on x2.ProjectNumber equals x3.ProjectNumber
-                            join x4 in context.TimeSheet on x.FunctionId equals x4.FunctionId
-                            join x5 in context.TeamTask on x.FunctionId equals x5.FunctionId
-
-                            where x.ProjectNumber.Equals(id) && x5.UserId.Equals(uid.UserId)
-                            
-
-                            select new
-                            {
-                                ProjectNumber = x3.ProjectNumber,
-                                ProjectName = x3.ProjectName,
-                                TaskId = x2.TaskId,
-                                ActionId = x4.ActionId,
-                                TaskName = x2.TaskName,
-                                FunctionId = x.FunctionId,
-                                FunctionName = x.FunctionName,
-                            }).ToList();
-
-                foreach (var item in Test)
-                {
-
-                    model.Add(new TimeSheetInputModel()
-                    {
-
-                        ProjectName = item.ProjectName,
-                        ProjectNumber = item.ProjectNumber,
-                        FunctionId = item.FunctionId,
-                        FunctionName = item.FunctionName,
-                        TaskId = item.TaskId,
-                        TaskName = item.TaskName,
-                        ActionId = item.ActionId
-
-
-                    });
-                }
-            }
-            else
-            {
+            
                 var Test = (from x in context.Function
                             join x2 in context.Task on x.TaskId equals x2.TaskId
                             join x3 in context.Project on x2.ProjectNumber equals x3.ProjectNumber
@@ -287,7 +207,7 @@ namespace ProjectSSMP.Controllers
                     });
                 }
 
-            }
+            
             
 
             
