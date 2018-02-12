@@ -144,27 +144,28 @@ namespace ProjectSSMP.Controllers
 
 
 
-            List<TimelineInputModel> model = new List<TimelineInputModel>();
+            //List<TimelineInputModel> model = new List<TimelineInputModel>();
 
-            var tl = context.ProjectTimeline.Where(x => x.ProjectNumber == id).OrderByDescending(x=>x.TimelineDate).ToList();
+            //var tl = context.ProjectTimeline.Where(x => x.ProjectNumber == id).OrderByDescending(x => x.TimelineDate).ToList();
 
-            foreach(var item in tl){
+            //foreach (var item in tl)
+            //{
 
-                model.Add(new TimelineInputModel()
-                {
-                    TimelineId = item.TimelineId,
-                    Header = item.Header,
-                    TimelineDate = item.TimelineDate,
-                    Note = item.Note,
-                    ProjectNumber = id.ToString(),
-                });
-            }
+            //    model.Add(new TimelineInputModel()
+            //    {
+            //        TimelineId = item.TimelineId,
+            //        Header = item.Header,
+            //        TimelineDate = item.TimelineDate,
+            //        Note = item.Note,
+            //        ProjectNumber = id.ToString(),
+            //    });
+            //}
 
 
 
-            ViewData["ProjectName"] = pname.ProjectName.ToString();
-            ViewData["ProjectNumber"] = pname.ProjectNumber.ToString();
-            return View(model);
+            //ViewData["ProjectName"] = pname.ProjectName.ToString();
+            //ViewData["ProjectNumber"] = pname.ProjectNumber.ToString();
+            return View();
         }
 
     }

@@ -530,7 +530,7 @@ namespace ProjectSSMP.Controllers
                     ProjectEnd = inputModel.ProjectEnd,
                     ProjectCost = inputModel.ProjectCost,
                     ProjectManager = inputModel.ProjectManager,
-                    ProjectCreateBy = loggedInUserName,
+                    //ProjectCreateBy = loggedInUserName,
                     ProjectCreateDate = DateTime.Now,
                     CustomerName = inputModel.CustomerName,
                     CustomerTel = inputModel.CustomerTel,
