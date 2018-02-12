@@ -1,10 +1,15 @@
 ﻿using System;
+using System.ComponentModel.DataAnnotations;
 
 namespace ProjectSSMP.Models.UserManagement
 {
     public class AddUserInputModel
     {
+
+        
         public string UserId { get; set; }
+        [StringLength(30, MinimumLength = 5, ErrorMessage = "Min")]
+        [Required]
         public string Username { get; set; }
         public string Password { get; set; }
         public string Firstname { get; set; }

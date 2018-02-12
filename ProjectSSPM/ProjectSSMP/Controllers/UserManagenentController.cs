@@ -82,86 +82,95 @@ namespace ProjectSSMP.Controllers
         {
             
             ViewBag.userMenu = GetMenu();
-
-            try
+            if (ModelState.IsValid)
             {
-                var loggedInUser = HttpContext.User;
-                var loggedInUserName = loggedInUser.Identity.Name;
-
-                var id = (from u in context.RunningNumber where u.Type.Equals("UserID") select u).FirstOrDefault();
-
-                int userid;
-                if (id.Number == null)
-                {
-                    userid = 100001;
-
-                }
-                else
-                {
-                    userid = Convert.ToInt32(id.Number);
-                    userid = userid + 1;
-                }
-
-                UserSspm ord = new UserSspm
-                {
-                    UserId = userid.ToString(),
-                    Username = inputModel.Username,
-                    Password = inputModel.Password,
-                    Firstname = inputModel.Firstname,
-                    Lastname = inputModel.Lastname,
-                    JobResponsible = inputModel.JobResponsible,
-                    UserCreateBy = loggedInUserName,
-                    UserCreateDate = DateTime.Now,
-                    Status = "A",
-                    UserTel = inputModel.UserTel,
-                    LineId = inputModel.LineId,
-                        
-                };
-
-                UserAssignGroup ord2 = new UserAssignGroup
-                {
-                    UserId = userid.ToString(),
-                    GroupId = inputModel.GroupId,
-
-                };
-
-                // Add the new object to the Orders collection.
-                context.UserSspm.Add(ord);
-                await context.SaveChangesAsync();
-                context.UserAssignGroup.Add(ord2);
-                await context.SaveChangesAsync();
-
-                var query = from num in context.RunningNumber
-                                           where num.Type.Equals("UserID") 
-                                                select num;
-
-                foreach (RunningNumber RunUserID in query)
-                {
-                    RunUserID.Number = userid.ToString();
-
-                }
-
-                // Submit the changes to the database.
                 try
                 {
+
+                    var loggedInUser = HttpContext.User;
+                    var loggedInUserName = loggedInUser.Identity.Name;
+
+                    var id = (from u in context.RunningNumber where u.Type.Equals("UserID") select u).FirstOrDefault();
+
+                    int userid;
+                    if (id.Number == null)
+                    {
+                        userid = 100001;
+
+                    }
+                    else
+                    {
+                        userid = Convert.ToInt32(id.Number);
+                        userid = userid + 1;
+                    }
+
+                    UserSspm ord = new UserSspm
+                    {
+                        UserId = userid.ToString(),
+                        Username = inputModel.Username,
+                        Password = inputModel.Password,
+                        Firstname = inputModel.Firstname,
+                        Lastname = inputModel.Lastname,
+                        JobResponsible = inputModel.JobResponsible,
+                        UserCreateBy = loggedInUserName,
+                        UserCreateDate = DateTime.Now,
+                        Status = "A",
+                        UserTel = inputModel.UserTel,
+                        LineId = inputModel.LineId,
+
+                    };
+
+                    UserAssignGroup ord2 = new UserAssignGroup
+                    {
+                        UserId = userid.ToString(),
+                        GroupId = inputModel.GroupId,
+
+                    };
+
+                    // Add the new object to the Orders collection.
+
+                    context.UserSspm.Add(ord);
                     await context.SaveChangesAsync();
+                    context.UserAssignGroup.Add(ord2);
+                    await context.SaveChangesAsync();
+
+
+
+                    var query = from num in context.RunningNumber
+                                where num.Type.Equals("UserID")
+                                select num;
+
+                    foreach (RunningNumber RunUserID in query)
+                    {
+                        RunUserID.Number = userid.ToString();
+
+                    }
+
+                    // Submit the changes to the database.
+                    try
+                    {
+                        await context.SaveChangesAsync();
+                    }
+                    catch (Exception e)
+                    {
+                        Console.WriteLine(e);
+                        // Provide for exceptions.
+                    }
+
+                    return RedirectToAction("Index", "Home");
+
+
+
                 }
-                catch (Exception e)
+                catch (Exception ex)
                 {
-                    Console.WriteLine(e);
-                    // Provide for exceptions.
+                    var message = ex.Message;
+                    return View();
                 }
 
-                return RedirectToAction("Index", "Home");
-
-
-
             }
-            catch (Exception ex)
-            {
-                var message = ex.Message;
-                return View();
-            }
+            return View(inputModel);
+            
         }
         [Authorize]
         public async Task<IActionResult> Edit(string id)
