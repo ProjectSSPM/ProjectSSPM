@@ -16,6 +16,7 @@ using ProjectSSMP.Models.UserManagenent;
 
 namespace ProjectSSMP.Controllers
 {
+    
     public class ProjectManagementController : BaseController
     {
         // GET: /<controller>/
@@ -26,7 +27,6 @@ namespace ProjectSSMP.Controllers
             Thread.CurrentThread.CurrentCulture = en;
         }
 
-        [Authorize]
         public async Task<IActionResult> Index()
         {
             
@@ -530,7 +530,7 @@ namespace ProjectSSMP.Controllers
                     ProjectEnd = inputModel.ProjectEnd,
                     ProjectCost = inputModel.ProjectCost,
                     ProjectManager = inputModel.ProjectManager,
-                    //ProjectCreateBy = loggedInUserName,
+                    ProjectCreateBy = loggedInUserName,
                     ProjectCreateDate = DateTime.Now,
                     CustomerName = inputModel.CustomerName,
                     CustomerTel = inputModel.CustomerTel,

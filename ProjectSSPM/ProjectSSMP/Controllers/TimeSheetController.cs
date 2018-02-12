@@ -498,6 +498,76 @@ namespace ProjectSSMP.Controllers
                     TUpdate.ActionId = inputModel.ActionId;
                 }
                 await context.SaveChangesAsync();
+
+                try{
+                    var addLog = (from x in context.TimeSheet
+                                  where x.FunctionId.Equals(inputModel.FunctionId)
+                                  && x.UserId.Equals(inputModel.UserId) && x.TimeSheetNumber.Equals(inputModel.TimeSheetNumber)
+                                  select x).FirstOrDefault();
+                    var stat = "";
+
+                    if(addLog.ActionId.Equals("F")){
+                        stat = "F";
+                       
+                    }else{
+                        stat = "P";
+
+                    }
+                    FunctionLog ord = new FunctionLog
+                    {
+                        ProjectNumber = addLog.ProjectNumber,
+                        FunctionLogId = addLog.TimeSheetId,
+                        FunctionId = addLog.FunctionId,
+                        FunctionStart = addLog.TimeSheetStart,
+                        FunctionEnd = addLog.TimeSheetEnd,
+                        FunctionNumber = addLog.TimeSheetNumber,
+                        StatusId = stat,
+                        TaskId = addLog.TaskId,
+                    };
+
+                    context.FunctionLog.Add(ord);
+                    await context.SaveChangesAsync();
+
+                    try{
+                        var update2 = (from x in context.FunctionLog
+                                      where x.FunctionId.Equals(inputModel.FunctionId)
+                                      && x.FunctionNumber.Equals(inputModel.TimeSheetNumber)
+                                      select x);
+                        if (inputModel.ActionId.Equals("F"))
+                        {
+                            foreach (Models.FunctionLog FUpdate in update2)
+                            {
+                                FUpdate.StatusId = "F";
+                                FUpdate.ActualEnd = inputModel.TimeSheetEnd;
+                            }
+                            await context.SaveChangesAsync();
+                        }
+                        else{
+                            if(inputModel.TimeSheetNumber.Equals("100000")){
+                                foreach (Models.FunctionLog FUpdate in update2)
+                                {
+                                    FUpdate.ActualStart = inputModel.TimeSheetStart;
+                                }
+
+                            }
+
+                            foreach (Models.FunctionLog FUpdate in update2)
+                            {
+                                FUpdate.StatusId = "P";
+                            }
+                            await context.SaveChangesAsync();
+                        }
+
+
+                    } catch (Exception e){
+                        Console.WriteLine(e);
+                    }
+
+
+                }catch(Exception e)
+                {
+                    Console.WriteLine(e);
+                }
             }
             catch (Exception e)
             {
