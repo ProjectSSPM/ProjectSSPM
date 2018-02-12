@@ -151,8 +151,6 @@ namespace ProjectSSMP.Models
 
                 entity.Property(e => e.Note).HasColumnType("text");
 
-                entity.Property(e => e.ProjectCost).HasColumnType("decimal(2, 0)");
-
                 entity.Property(e => e.ProjectCreateBy).HasMaxLength(30);
 
                 entity.Property(e => e.ProjectCreateDate).HasColumnType("datetime");
