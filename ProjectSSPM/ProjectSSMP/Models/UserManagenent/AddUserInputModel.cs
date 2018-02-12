@@ -8,7 +8,7 @@ namespace ProjectSSMP.Models.UserManagement
 
         
         public string UserId { get; set; }
-        [StringLength(30, MinimumLength = 5, ErrorMessage = "Min")]
+        [StringLength(30, MinimumLength = 5, ErrorMessage = "Username must be 5-30 letters.")]
         [Required]
         public string Username { get; set; }
         public string Password { get; set; }

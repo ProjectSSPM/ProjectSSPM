@@ -556,6 +556,38 @@ namespace ProjectSSMP.Controllers
                                     FUpdate.ActualEnd = check1.ActualEnd;
                                 }
                                 await context.SaveChangesAsync();
+
+                                var AllTask = (from x in context.Function where x.TaskId.Equals(check1.TaskId) select x).Count();
+                                var CheckTask = (from x in context.FunctionLog where x.TaskId.Equals(check1.TaskId) && x.StatusId.Equals("F") select x).FirstOrDefault();
+
+                                Boolean CT = Boolean.ReferenceEquals(AllTask, CheckTask);
+
+                                if(CT){
+                                    var update4 = (from x in context.Task
+                                                   where x.TaskId.Equals(addLog.TaskId)
+                                                   select x);
+                                    foreach (Models.Task FUpdate in update4)
+                                    {
+                                        
+                                        FUpdate.ActualEnd = check1.ActualEnd;
+                                    }
+                                    await context.SaveChangesAsync();
+
+                                    var AllProject = (from x in context.Task where x.ProjectNumber.Equals(check1.ProjectNumber) select x).Count();
+                                    var CheckProject = (from x in context.FunctionLog where x.ProjectNumber.Equals(check1.ProjectNumber) && x.StatusId.Equals("F") select x).FirstOrDefault();
+                                    if (AllTask.Equals(CheckTask))
+                                    {
+                                        var update5 = (from x in context.Project
+                                                       where x.ProjectNumber.Equals(addLog.ProjectNumber)
+                                                       select x);
+                                        foreach (Models.Project FUpdate in update5)
+                                        {
+
+                                            FUpdate.ActualEnd = check1.ActualEnd;
+                                        }
+                                        await context.SaveChangesAsync();
+                                    }
+                                }
                             }
                             catch (Exception e)
                             {
@@ -570,8 +602,36 @@ namespace ProjectSSMP.Controllers
                                     FUpdate.ActualStart = addLog.TimeSheetStart;
                                 }
                                 await context.SaveChangesAsync();
+
+                                var c2 = (from x in context.TimeSheet where x.TaskId.Equals(addLog.TaskId) select x).Count();
+                                if (c2 == 1){
+                                    var update4 = (from x in context.Task
+                                                   where x.TaskId.Equals(addLog.TaskId)
+                                                   select x);
+                                    foreach (Models.Task FUpdate in update4)
+                                    {
+
+                                        FUpdate.ActualStart = addLog.TimeSheetStart;
+                                    }
+                                    await context.SaveChangesAsync();
+
+                                    var c3 = (from x in context.TimeSheet where x.ProjectNumber.Equals(addLog.ProjectNumber) select x).Count();
+                                    if (c2 == 1)
+                                    {
+                                        var update5 = (from x in context.Project
+                                                       where x.ProjectNumber.Equals(addLog.ProjectNumber)
+                                                       select x);
+                                        foreach (Models.Project FUpdate in update5)
+                                        {
+
+                                            FUpdate.ActualStart = addLog.TimeSheetStart;
+                                        }
+                                        await context.SaveChangesAsync();
+                                    }
+                                }
+
                             }
-                            var checkss = (from x in context.FunctionLog where x.FunctionNumber.Equals("100000") select x).FirstOrDefault();
+                            var checkss = (from x in context.FunctionLog where x.FunctionNumber.Equals("100000") && x.FunctionId.Equals(addLog.FunctionId) select x).FirstOrDefault();
 
                             foreach (Models.FunctionLog FUpdate in update2)
                             {
