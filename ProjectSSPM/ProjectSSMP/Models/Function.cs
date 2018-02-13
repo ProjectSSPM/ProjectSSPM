@@ -14,5 +14,6 @@ namespace ProjectSSMP.Models
         public DateTime? ActualEnd { get; set; }
         public int? Variant { get; set; }
         public string ProjectNumber { get; set; }
+        public int? Age { get; set; }
     }
 }

@@ -478,12 +478,16 @@ namespace ProjectSSMP.Controllers
                                 }
                                 await context.SaveChangesAsync();
 
+                                
+
+
                                 var AllTask = (from x in context.Function where x.TaskId.Equals(check1.TaskId) select x).Count();
                                 var CheckTask = (from x in context.FunctionLog where x.TaskId.Equals(check1.TaskId) && x.StatusId.Equals("F") select x).Count();
 
-                                Boolean CT = Boolean.ReferenceEquals(AllTask, CheckTask);
+                                
 
-                                if(CT){
+                                if(AllTask == CheckTask)
+                                {
                                     var update4 = (from x in context.Task
                                                    where x.TaskId.Equals(addLog.TaskId)
                                                    select x);
@@ -494,9 +498,9 @@ namespace ProjectSSMP.Controllers
                                     }
                                     await context.SaveChangesAsync();
 
-                                    var AllProject = (from x in context.Task where x.ProjectNumber.Equals(check1.ProjectNumber) select x).Count();
-                                    var CheckProject = (from x in context.FunctionLog where x.ProjectNumber.Equals(check1.ProjectNumber) && x.StatusId.Equals("F") select x).Count();
-                                    if (AllTask.Equals(CheckTask))
+                                    var AllProject = (from x in context.Task where x.TaskId.Equals(check1.TaskId) select x).Count();
+                                    var CheckProject = (from x in context.FunctionLog where x.TaskId.Equals(check1.TaskId) && x.StatusId.Equals("F") select x).Count();
+                                    if (AllProject == CheckProject)
                                     {
                                         var update5 = (from x in context.Project
                                                        where x.ProjectNumber.Equals(addLog.ProjectNumber)
