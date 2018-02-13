@@ -176,6 +176,7 @@ namespace ProjectSSMP.Controllers
                             join x5 in context.TeamTask on x.FunctionId equals x5.FunctionId
 
                             where x.ProjectNumber.Equals(id) && x5.UserId.Equals(uid.UserId)
+                             && !(checkAC.Select(p => p.FunctionId).Contains(x.FunctionId))
 
 
                             select new
@@ -478,7 +479,7 @@ namespace ProjectSSMP.Controllers
                                 await context.SaveChangesAsync();
 
                                 var AllTask = (from x in context.Function where x.TaskId.Equals(check1.TaskId) select x).Count();
-                                var CheckTask = (from x in context.FunctionLog where x.TaskId.Equals(check1.TaskId) && x.StatusId.Equals("F") select x).FirstOrDefault();
+                                var CheckTask = (from x in context.FunctionLog where x.TaskId.Equals(check1.TaskId) && x.StatusId.Equals("F") select x).Count();
 
                                 Boolean CT = Boolean.ReferenceEquals(AllTask, CheckTask);
 
@@ -494,7 +495,7 @@ namespace ProjectSSMP.Controllers
                                     await context.SaveChangesAsync();
 
                                     var AllProject = (from x in context.Task where x.ProjectNumber.Equals(check1.ProjectNumber) select x).Count();
-                                    var CheckProject = (from x in context.FunctionLog where x.ProjectNumber.Equals(check1.ProjectNumber) && x.StatusId.Equals("F") select x).FirstOrDefault();
+                                    var CheckProject = (from x in context.FunctionLog where x.ProjectNumber.Equals(check1.ProjectNumber) && x.StatusId.Equals("F") select x).Count();
                                     if (AllTask.Equals(CheckTask))
                                     {
                                         var update5 = (from x in context.Project
