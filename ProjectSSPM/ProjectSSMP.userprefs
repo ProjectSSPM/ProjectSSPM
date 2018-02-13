@@ -1,14 +1,11 @@
 ﻿<Properties StartupConfiguration="{99528461-6D99-4BA1-9100-7145EEE92C3D}|Default">
-  <MonoDevelop.Ide.Workbench ActiveDocument="ProjectSSMP/Views/Home/CheckTimeline.cshtml">
+  <MonoDevelop.Ide.Workbench ActiveDocument="ProjectSSMP/Controllers/ProjectManagementController.cs">
     <Files>
-      <File FileName="ProjectSSMP/Models/UserManagenent/AddUserInputModel.cs" Line="19" Column="19" />
-      <File FileName="ProjectSSMP/Controllers/TimeSheetController.cs" Line="40" Column="75" />
-      <File FileName="ProjectSSMP/Controllers/HomeController.cs" Line="176" Column="45" />
-      <File FileName="ProjectSSMP/Views/Home/CheckTimeline.cshtml" Line="30" Column="48" />
-      <File FileName="ProjectSSMP/Models/Timeline/TimelineInputModel.cs" Line="20" Column="45" />
-      <File FileName="ProjectSSMP/Views/TimeSheet/Index.cshtml" Line="1" Column="1" />
-      <File FileName="ProjectSSMP/Models/Function.cs" Line="12" Column="51" />
-      <File FileName="ProjectSSMP/Models/UserSspm.cs" Line="11" Column="9" />
+      <File FileName="ProjectSSMP/Models/UserManagenent/AddUserInputModel.cs" Line="38" Column="9" />
+      <File FileName="ProjectSSMP/Views/UserManagement/AddUser.cshtml" Line="1" Column="1" />
+      <File FileName="ProjectSSMP/Models/ProjectManagement/CreateProjectInputModel.cs" Line="16" Column="9" />
+      <File FileName="ProjectSSMP/Views/ProjectManagement/CreateProject.cshtml" Line="105" Column="66" />
+      <File FileName="ProjectSSMP/Controllers/ProjectManagementController.cs" Line="493" Column="1" />
     </Files>
   </MonoDevelop.Ide.Workbench>
   <MonoDevelop.Ide.Workspace ActiveConfiguration="Debug" />

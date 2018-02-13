@@ -1,4 +1,4 @@
-﻿
+﻿@model ProjectSSMP.Models.ProjectManagement.CreateProjectInputModel
 @{
     ViewData["Title"] = "Create Project";
     Layout = "~/Views/Shared/_LayoutMenu.cshtml";
@@ -24,7 +24,8 @@
             <div class="col-sm-6 form-group">
                 <label>Project ID</label>
                 <div class="form-group">
-                    <input type="text" name="ProjectId" id="ProjectId" placeholder="Enter Project ID Here.." class="form-control" required>
+                    <input type="text" asp-for="ProjectId" name="ProjectId" id="ProjectId" placeholder="Enter Project ID Here.." class="form-control" >
+                    @Html.ValidationMessageFor(m => m.ProjectId,"", new { @class = "text-danger" })
                 </div>
             </div>
 
@@ -32,8 +33,8 @@
             <div class="col-sm-8 form-group">
                 <label>Project Name</label>
                 <div class="form-group">
-                    <input type="text" name="ProjectName" id="ProjectName" placeholder="Enter Project Name Here.." class="form-control" required>
-
+                    <input type="text" asp-for="ProjectName" name="ProjectName" id="ProjectName" placeholder="Enter Project Name Here.." class="form-control" >
+                    @Html.ValidationMessageFor(m => m.ProjectName,"", new { @class = "text-danger" })
 
                 </div>
             </div>
@@ -66,7 +67,7 @@
                 <div class="form-group">
                     <label>Project Manager</label>
                     @*<input type="text" name="ProjectManager" id="ProjectManager" placeholder="Select Manager Name Here.." class="form-control">*@
-                    <select class="form-control" asp-items="ViewBag.UserSSPM" name="ProjectManager" id="ProjectManager" required>
+                    <select class="form-control" asp-items="ViewBag.UserSSPM" name="ProjectManager" id="ProjectManager" >
                         <option>Please select </option>
                     </select>
                 </div>
@@ -80,16 +81,16 @@
             <div class="col-sm-4">
                 <div class="form-group">
                     <label  >Estimated Cost</label>
-                    <input type="text" name="ProjectCost" id="ProjectCost" placeholder="Enter Project Cost Here.." class="form-control">
-                    @*<span asp-validation-for="ProjectCost"  class="text-danger"></span>*@
+                    <input type="text" asp-for="ProjectCost" name="ProjectCost" id="ProjectCost" placeholder="Enter Project Cost Here.." class="form-control">
+                    @Html.ValidationMessageFor(m => m.ProjectCost,"", new { @class = "text-danger" })
                 </div>
             </div>
 
             <div class="col-sm-4">
                 <div class="form-group">
                     <label>Customer Name</label>
-                    <input type="text" name="CustomerName" id="CustomerName" placeholder="Select Customer Name Here.." class="form-control">
-                    
+                    <input type="text" asp-for="CustomerName" name="CustomerName" id="CustomerName" placeholder="Select Customer Name Here.." class="form-control" >
+                    @Html.ValidationMessageFor(m => m.CustomerName,"", new { @class = "text-danger" })
                 </div>
             </div>
 
@@ -100,8 +101,8 @@
             <div class="col-sm-4">
                 <div class="form-group">
                     <label>Customer Tel.</label>
-                    <input type="text" name="CustomerTel" id="CustomerTel" placeholder="Enter Customer Tel. Here.." class="form-control">
-                    
+                    <input type="text" asp-for="CustomerTel" name="CustomerTel" id="CustomerTel" placeholder="Enter Customer Tel. Here.." class="form-control">
+                    @Html.ValidationMessageFor(m => m.CustomerTel,"", new { @class = "text-danger" })
                 </div>
             </div>
 
