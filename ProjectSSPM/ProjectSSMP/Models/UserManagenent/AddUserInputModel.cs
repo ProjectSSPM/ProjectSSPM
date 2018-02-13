@@ -34,10 +34,10 @@ namespace ProjectSSMP.Models.UserManagement
         public DateTime? UserEditDate { get; set; }
         [Required]
         public string GroupId { get; set; }
-        [StringLength(50, MinimumLength = 9, ErrorMessage = "Min")]
-        [Phone]
+        [StringLength(50, MinimumLength = 9, ErrorMessage = "Tel must be 9-15 letters.")]
         [Required]
         public string UserTel { get; set; }
+        
         [Required]
         public string LineId { get; set; }
     }

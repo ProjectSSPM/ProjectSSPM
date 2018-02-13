@@ -753,6 +753,15 @@ namespace ProjectSSMP.Controllers
             return View();
         }
 
+        public IActionResult VarifyDate(DateTime TaskStart, DateTime TaskEnd)
+        {
+            if (TaskEnd < TaskStart)
+            {
+                return Json(data: $"เวลาไม่ถูกต้อง");
+            }
+            return Json(data: true);
+        }
+
     }
 
 
