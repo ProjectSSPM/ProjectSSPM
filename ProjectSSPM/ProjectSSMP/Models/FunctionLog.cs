@@ -16,5 +16,6 @@ namespace ProjectSSMP.Models
         public string TaskId { get; set; }
         public string ProjectNumber { get; set; }
         public string FunctionNumber { get; set; }
+
     }
 }

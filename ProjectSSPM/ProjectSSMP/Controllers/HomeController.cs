@@ -8,6 +8,7 @@ using Microsoft.AspNetCore.Mvc;
 using ProjectSSMP.Models;
 using Newtonsoft.Json;
 using ProjectSSMP.Models.Timeline;
+using ProjectSSMP.Models.Timesheet;
 
 namespace ProjectSSMP.Controllers
 {
@@ -28,7 +29,7 @@ namespace ProjectSSMP.Controllers
                               {
                                   ua.GroupId
                               }).FirstOrDefault();
-            List<TimelineInputModel> model = new List<TimelineInputModel>();
+            List<TimeSheetInputModel> model = new List<TimeSheetInputModel>();
 
             if (checkgroup.GroupId == "50")
             {
@@ -49,7 +50,7 @@ namespace ProjectSSMP.Controllers
                 foreach (var item in PJ)
                 {
 
-                    model.Add(new TimelineInputModel()
+                    model.Add(new TimeSheetInputModel()
                     {
                         ProjectId = item.ProjectId,
                         ProjectName = item.ProjectName,
@@ -79,7 +80,7 @@ namespace ProjectSSMP.Controllers
                 foreach (var item in PJ)
                 {
 
-                    model.Add(new TimelineInputModel()
+                    model.Add(new TimeSheetInputModel()
                     {
                         ProjectId = item.ProjectId,
                         ProjectName = item.ProjectName,
@@ -142,30 +143,46 @@ namespace ProjectSSMP.Controllers
 
             var pname = context.Project.FirstOrDefault(m => m.ProjectNumber == id);
 
+            var check = (from x in context.FunctionLog join x2 in context.Task on x.TaskId equals x2.TaskId
+                         join x3 in context.Function on x.FunctionId equals x3.FunctionId
+                         join x4 in context.TeamTask on x.FunctionId equals x4.FunctionId
+                         join x5 in context.UserSspm on x4.UserId equals x5.UserId
+                         where x.ProjectNumber.Equals(id) && x.StatusId.Equals("F") select new{
+                                TaskId = x.TaskId,
+                                TaskName = x2.TaskName,
+                                FunctionName = x3.FunctionName,
+                                ActualEnd = x.ActualEnd,
+                                FunctionEnd = x3.FunctionEnd,
+                                Firstname = x5.Firstname,
+                                Lastname = x5.Lastname
+                            }).OrderByDescending(x => x.ActualEnd).ToList();
 
 
-            //List<TimelineInputModel> model = new List<TimelineInputModel>();
-
-            //var tl = context.ProjectTimeline.Where(x => x.ProjectNumber == id).OrderByDescending(x => x.TimelineDate).ToList();
-
-            //foreach (var item in tl)
-            //{
-
-            //    model.Add(new TimelineInputModel()
-            //    {
-            //        TimelineId = item.TimelineId,
-            //        Header = item.Header,
-            //        TimelineDate = item.TimelineDate,
-            //        Note = item.Note,
-            //        ProjectNumber = id.ToString(),
-            //    });
-            //}
+            List<TimelineInputModel> model = new List<TimelineInputModel>();
 
 
 
-            //ViewData["ProjectName"] = pname.ProjectName.ToString();
-            //ViewData["ProjectNumber"] = pname.ProjectNumber.ToString();
-            return View();
+            foreach (var item in check)
+            {
+
+                model.Add(new TimelineInputModel()
+                {
+                    TaskId = item.TaskId,
+                    ActualEnd = item.ActualEnd,
+                    TaskName = item.TaskName,
+                    FunctionName = item.FunctionName,
+                    FunctionEnd = item.FunctionEnd,
+                    Firstname = item.Firstname,
+                    Lastname = item.Lastname
+
+                });
+            }
+
+
+
+            ViewData["ProjectName"] = pname.ProjectName.ToString();
+            ViewData["ProjectNumber"] = pname.ProjectNumber.ToString();
+            return View(model);
         }
 
     }
