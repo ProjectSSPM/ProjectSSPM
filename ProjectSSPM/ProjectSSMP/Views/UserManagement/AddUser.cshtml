@@ -52,14 +52,15 @@
                                         <option value="50">Project Manager</option>
                                         <option value="10">Team</option>
                                     </select>
-                                        </div>
+                                    @Html.ValidationMessageFor(m => m.GroupId, "", new { @class = "text-danger" })
+                                </div>
                             </div>  
                         </div>     
 
                         <div class="row">
                             <div class="col-sm-6 form-group">
                                 <label>Tel.</label>
-                                <input type="text" asp-for="UserTel" name="UserTel" id="UserTel" placeholder="Enter Telephone Number Here.." class="form-control">
+                                <input type="tel" asp-for="UserTel" name="UserTel" id="UserTel" placeholder="Enter Telephone Number Here.." class="form-control">
                                 @Html.ValidationMessageFor(m => m.UserTel, "", new { @class = "text-danger" })
                             </div>      
                             <div class="col-sm-6 form-group">

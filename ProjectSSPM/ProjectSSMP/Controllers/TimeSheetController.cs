@@ -15,8 +15,8 @@ namespace ProjectSSMP.Controllers
 {
     public class TimeSheetController : BaseController
     {
-        
 
+        
         public TimeSheetController(sspmContext context) //=> this.context = context;
         {
             this.context = context;
@@ -408,6 +408,8 @@ namespace ProjectSSMP.Controllers
             var loggedInUserName = loggedInUser.Identity.Name;
 
             ViewBag.userMenu = GetMenu();
+
+            
             try
             {
                 var update = (from x in context.TimeSheet
@@ -457,12 +459,17 @@ namespace ProjectSSMP.Controllers
                         if (inputModel.ActionId.Equals("Z"))
                         {
                             var checkss = (from x in context.FunctionLog where x.FunctionNumber.Equals("100000") select x).FirstOrDefault();
-                            
+
+                            DateTime alstat = (DateTime)checkss.ActualStart;
+                            DateTime alend = (DateTime)addLog.TimeSheetEnd;                           
+
                             foreach (Models.FunctionLog FUpdate in update2)
                             {
                                 FUpdate.StatusId = "F";
                                 FUpdate.ActualStart = checkss.ActualStart;
                                 FUpdate.ActualEnd = addLog.TimeSheetEnd;
+                                FUpdate.Variant = (int)alend.Subtract(alstat).TotalDays;
+
                             }
                             await context.SaveChangesAsync();
                             try
@@ -471,10 +478,16 @@ namespace ProjectSSMP.Controllers
                                 var update3 = (from x in context.Function
                                                where x.FunctionId.Equals(inputModel.FunctionId)
                                                select x);
+                                DateTime afstat = (DateTime)check1.ActualStart;
+                                DateTime afend = (DateTime)check1.ActualEnd;
+                               
+
                                 foreach (Models.Function FUpdate in update3)
                                 {
                                     FUpdate.ActualStart = check1.ActualStart;
                                     FUpdate.ActualEnd = check1.ActualEnd;
+                                    FUpdate.Variant = (int)afend.Subtract(afstat).TotalDays;
+
                                 }
                                 await context.SaveChangesAsync();
 
@@ -491,10 +504,17 @@ namespace ProjectSSMP.Controllers
                                     var update4 = (from x in context.Task
                                                    where x.TaskId.Equals(addLog.TaskId)
                                                    select x);
+                                    var at = (from x in context.Task
+                                                   where x.TaskId.Equals(addLog.TaskId)
+                                                   select x).FirstOrDefault();
+                                    DateTime atstat =(DateTime)at.ActualStart;
+                                    DateTime atend = (DateTime)check1.ActualEnd;                                    
                                     foreach (Models.Task FUpdate in update4)
                                     {
                                         
                                         FUpdate.ActualEnd = check1.ActualEnd;
+                                        FUpdate.Variant = (int)atend.Subtract(atstat).TotalDays;
+
                                     }
                                     await context.SaveChangesAsync();
 
@@ -505,10 +525,16 @@ namespace ProjectSSMP.Controllers
                                         var update5 = (from x in context.Project
                                                        where x.ProjectNumber.Equals(addLog.ProjectNumber)
                                                        select x);
+                                        var ap = (from x in context.Project
+                                                  where x.ProjectNumber.Equals(addLog.ProjectNumber)
+                                                  select x).FirstOrDefault();
+                                        DateTime apstat = (DateTime)ap.ActualStart;
+                                        DateTime apend = (DateTime)check1.ActualEnd;
                                         foreach (Models.Project FUpdate in update5)
                                         {
 
                                             FUpdate.ActualEnd = check1.ActualEnd;
+                                            FUpdate.Variant = (int)apend.Subtract(apstat).TotalDays;
                                         }
                                         await context.SaveChangesAsync();
                                     }
@@ -587,4 +613,5 @@ namespace ProjectSSMP.Controllers
 
 
     }
+   
 }
