@@ -38,14 +38,14 @@
                 </th>
 
                 <th>
-                    Estimated Start
+                    <center>Estimated Start</center>
                 </th>
                 <th>
-                    Estimated End
+                    <center>Estimated End</center>
                 </th>
 
                 <th>
-                    Estimated Variant
+                    <center>Estimated Variant</center>
                 </th>
                 <th>
 
@@ -78,18 +78,13 @@
 
 
                     <td>
-
-                        @Convert.ToString(string.Format("{0:dd MMMM yyyy}", item.FunctionStart))
+                        <center>@Convert.ToString(string.Format("{0:dd MMMM yyyy}", item.FunctionStart))</center>
                     </td>
                     <td>
-
-                        @Convert.ToString(string.Format("{0:dd MMMM yyyy}", item.FunctionEnd))
+                        <center>@Convert.ToString(string.Format("{0:dd MMMM yyyy}", item.FunctionEnd))</center>
                     
-                    
-
-
                     <td>
-                    @Html.DisplayFor(modelItem => item.Timespan)
+                        <center>@Html.DisplayFor(modelItem => item.Timespan)</center>
                     </td>
 
                      
