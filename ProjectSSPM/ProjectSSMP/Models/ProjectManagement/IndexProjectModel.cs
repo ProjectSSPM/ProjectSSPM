@@ -21,5 +21,6 @@ namespace ProjectSSMP.Models.ProjectManagement
         public string Note { get; set; }
         public int? Variant { get; set; }
         public string ProjectStatus { get; set; }
+        public string Percent { get; set; }
     }
 }

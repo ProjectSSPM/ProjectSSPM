@@ -32,7 +32,40 @@ namespace ProjectSSMP.Controllers
             
             ViewBag.userMenu = GetMenu();
 
-            return View(await context.Project.ToListAsync());
+            List<IndexProjectModel> model = new List<IndexProjectModel>();
+
+
+            var IndexProInputModel = await (from x in context.Project select x).ToListAsync();
+
+
+            foreach (var item in IndexProInputModel)
+            {
+                var check = (from x in context.FunctionLog where x.ProjectNumber.Equals(item.ProjectNumber) && x.StatusId.Equals("F") select x).Count();
+                var all = (from x in context.Function where x.ProjectNumber.Equals(item.ProjectNumber) select x).Count();
+                double percent = ((double)check / (double)all) * 100.0;
+                double f = Math.Floor(percent);
+                var ans = "";
+                if(f == 100){
+                    ans = "Finished!";
+                }
+                else{
+                    ans = percent.ToString() + "%";
+                }
+
+                model.Add(new IndexProjectModel()
+                {
+                    ProjectNumber = item.ProjectNumber,
+                    ProjectId = item.ProjectId,
+                    ProjectName = item.ProjectName,
+                    ProjectStart = item.ProjectStart,
+                    ProjectEnd = item.ProjectEnd,
+                    Percent = ans,
+
+                });
+            }
+
+            return View(model);
+            //return View(await context.Project.ToListAsync());
         }
         [Authorize]
         public async Task<IActionResult> EditProject(string id)

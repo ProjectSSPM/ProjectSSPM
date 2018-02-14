@@ -1,20 +1,14 @@
 ﻿<Properties StartupConfiguration="{99528461-6D99-4BA1-9100-7145EEE92C3D}|Default">
-  <MonoDevelop.Ide.Workbench ActiveDocument="ProjectSSMP/Models/ProjectManagement/CreateProjectInputModel.cs">
-    <Files>
-      <File FileName="ProjectSSMP/Controllers/ProjectManagementController.cs" Line="761" Column="76" />
-      <File FileName="ProjectSSMP/Models/UserManagenent/AddUserInputModel.cs" Line="26" Column="67" />
-      <File FileName="ProjectSSMP/Models/ProjectManagement/IndexProjectModel.cs" Line="1" Column="1" />
-      <File FileName="ProjectSSMP/Models/ProjectManagement/CreateProjectInputModel.cs" Line="16" Column="9" />
-    </Files>
-  </MonoDevelop.Ide.Workbench>
+  <MonoDevelop.Ide.Workbench />
   <MonoDevelop.Ide.Workspace ActiveConfiguration="Debug" />
   <MonoDevelop.Ide.DebuggingService.Breakpoints>
     <BreakpointStore>
-      <Breakpoint file="/Users/Palm/Desktop/ProjectSSPM/ProjectSSPM/ProjectSSMP/Views/ProjectManagement/Index.cshtml" relfile="ProjectSSMP/Views/ProjectManagement/Index.cshtml" line="98" column="1" />
-      <Breakpoint file="/Users/Palm/Desktop/ProjectSSPM/ProjectSSPM/ProjectSSMP/Controllers/ProjectManagementController.cs" relfile="ProjectSSMP/Controllers/ProjectManagementController.cs" line="282" column="1" />
-      <Breakpoint file="/Users/Palm/Desktop/ProjectSSPM/ProjectSSPM/ProjectSSMP/Controllers/ProjectManagementController.cs" relfile="ProjectSSMP/Controllers/ProjectManagementController.cs" line="233" column="1" />
-      <Breakpoint file="/Users/Palm/Desktop/ProjectSSPM/ProjectSSPM/ProjectSSMP/Controllers/ProjectManagementController.cs" relfile="ProjectSSMP/Controllers/ProjectManagementController.cs" line="539" column="1" />
-      <Breakpoint file="/Users/Palm/Desktop/ProjectSSPM/ProjectSSPM/ProjectSSMP/Controllers/ProjectManagementController.cs" relfile="ProjectSSMP/Controllers/ProjectManagementController.cs" line="492" column="49" />
+      <Breakpoint file="/Users/Palm/Desktop/ProjectSSPM/ProjectSSPM/ProjectSSMP/Views/ProjectManagement/Index.cshtml" relfile="ProjectSSMP/Views/ProjectManagement/Index.cshtml" line="97" column="1" />
+      <Breakpoint file="/Users/Palm/Desktop/ProjectSSPM/ProjectSSPM/ProjectSSMP/Controllers/ProjectManagementController.cs" relfile="ProjectSSMP/Controllers/ProjectManagementController.cs" line="315" column="1" />
+      <Breakpoint file="/Users/Palm/Desktop/ProjectSSPM/ProjectSSPM/ProjectSSMP/Controllers/ProjectManagementController.cs" relfile="ProjectSSMP/Controllers/ProjectManagementController.cs" line="266" column="1" />
+      <Breakpoint file="/Users/Palm/Desktop/ProjectSSPM/ProjectSSPM/ProjectSSMP/Controllers/ProjectManagementController.cs" relfile="ProjectSSMP/Controllers/ProjectManagementController.cs" line="572" column="1" />
+      <Breakpoint file="/Users/Palm/Desktop/ProjectSSPM/ProjectSSPM/ProjectSSMP/Controllers/ProjectManagementController.cs" relfile="ProjectSSMP/Controllers/ProjectManagementController.cs" line="525" column="49" />
+      <Breakpoint file="/Users/Palm/Desktop/ProjectSSPM/ProjectSSPM/ProjectSSMP/Controllers/ProjectManagementController.cs" relfile="ProjectSSMP/Controllers/ProjectManagementController.cs" line="45" column="1" />
     </BreakpointStore>
   </MonoDevelop.Ide.DebuggingService.Breakpoints>
   <MonoDevelop.Ide.DebuggingService.PinnedWatches />
