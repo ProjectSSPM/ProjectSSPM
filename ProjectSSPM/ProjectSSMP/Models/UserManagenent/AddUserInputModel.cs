@@ -19,11 +19,11 @@ namespace ProjectSSMP.Models.UserManagement
         [Required]
         public string Password { get; set; }
         
-        [StringLength(50, MinimumLength = 5, ErrorMessage = "Firstname must be 5-30 letters.")]
+        [StringLength(50, MinimumLength = 5, ErrorMessage = "FirstName must be 5-30 letters.")]
         [Required]
         public string Firstname { get; set; }
         
-        [StringLength(50, MinimumLength = 5, ErrorMessage = "Lastname must be 5-30 letters.")]
+        [StringLength(50, MinimumLength = 5, ErrorMessage = "LastName must be 5-30 letters.")]
         [Required]
         public string Lastname { get; set; }
         [Required]
@@ -34,7 +34,7 @@ namespace ProjectSSMP.Models.UserManagement
         public DateTime? UserEditDate { get; set; }
         [Required]
         public string GroupId { get; set; }
-        [StringLength(50, MinimumLength = 9, ErrorMessage = "Tel must be 9-15 letters.")]
+        [StringLength(50, MinimumLength = 9, ErrorMessage = "Tel. must be 9-15 letters.")]
         [Required]
         public string UserTel { get; set; }
         

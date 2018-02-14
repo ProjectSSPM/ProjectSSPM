@@ -499,7 +499,7 @@ namespace ProjectSSMP.Controllers
             ViewBag.userMenu = GetMenu();
             if (inputModel.ProjectEnd < inputModel.ProjectStart)
             {
-                ModelState.AddModelError("ErrorCreatePtoject", "กรุณากรอกเวลาใหม่");
+                ModelState.AddModelError("ErrorCreatePtoject", "Estimate Date is incorrect. Please Re Input");
                 return View();
             }
             try
@@ -758,7 +758,7 @@ namespace ProjectSSMP.Controllers
         {
             if (ProjectEnd < ProjectStart)
             {
-                return Json(data: $"เวลาไม่ถูกต้อง");
+                return Json(data: $"The Estimate End is greater than Start.");
             }
             return Json(data: true);
         }
