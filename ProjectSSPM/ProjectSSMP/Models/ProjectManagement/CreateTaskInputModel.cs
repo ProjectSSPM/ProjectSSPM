@@ -9,6 +9,7 @@ namespace ProjectSSMP.Models.ProjectManagement
     {
         public string TaskId { get; set; }
         public string ProjectNumber { get; set; }
+        [Required]
         public string TaskName { get; set; }
         
         [Required]

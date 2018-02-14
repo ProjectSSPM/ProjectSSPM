@@ -75,7 +75,7 @@
                     <label>Project Manager</label>
                     @*<input type="text" name="ProjectManager" id="ProjectManager" placeholder="Select Manager Name Here.." class="form-control">*@
                     <select class="form-control" asp-items="ViewBag.UserSSPM" name="ProjectManager" id="ProjectManager"
-                            asp-for="ProjectManager"  >
+                            asp-for="ProjectManager" required >
                         <option>Please select </option>
                     </select>
                     @Html.ValidationMessageFor(m => m.ProjectManager,"", new { @class = "text-danger" })

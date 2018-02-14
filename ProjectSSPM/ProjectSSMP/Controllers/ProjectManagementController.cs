@@ -756,7 +756,7 @@ namespace ProjectSSMP.Controllers
         [AcceptVerbs("Get", "Post")]
         public IActionResult VarifyDate(DateTime ProjectStart, DateTime ProjectEnd)
         {
-            if (ProjectEnd > ProjectStart)
+            if (ProjectEnd < ProjectStart)
             {
                 return Json(data: $"เวลาไม่ถูกต้อง");
             }
