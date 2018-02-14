@@ -433,7 +433,9 @@ namespace ProjectSSMP.Controllers
             var Proname = (from p in context.Project where p.ProjectNumber.Equals(id) select p).FirstOrDefault();
             ViewData["ProjectName"] = "  "+Proname.ProjectId;
             ViewData["ProjectNuber"] = id;
-            return View(model);
+            ViewData["CreateTask"] = model;
+            
+            return View();
         }
 
         [HttpPost]
@@ -679,7 +681,9 @@ namespace ProjectSSMP.Controllers
 
             ViewData["ProjectName"] = Proname.ProjectId;
             ViewData["Taskname"] = taskname.TaskName;
-            return View(model);
+
+            ViewData["CreateFunction"] = model;
+            return View();
 
 
         }
@@ -787,16 +791,6 @@ namespace ProjectSSMP.Controllers
         public IActionResult Detail(string id)
         {
             return View();
-        }
-
-        [AcceptVerbs("Get", "Post")]
-        public IActionResult VarifyDate(DateTime ProjectStart, DateTime ProjectEnd)
-        {
-            if (ProjectEnd < ProjectStart)
-            {
-                return Json(data: $"The Estimate End is greater than Start.");
-            }
-            return Json(data: true);
         }
 
     }

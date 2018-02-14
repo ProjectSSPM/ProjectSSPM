@@ -1,4 +1,5 @@
-﻿using System;
+﻿using Microsoft.AspNetCore.Mvc;
+using System;
 using System.Collections.Generic;
 using System.ComponentModel.DataAnnotations;
 using System.Linq;
@@ -10,12 +11,16 @@ namespace ProjectSSMP.Models.ProjectManagement
     {
         public string FunctionId { get; set; }
         public string TaskId { get; set; }
+        [Required]
         public string FunctionName { get; set; }
         [Required]
         public DateTime? FunctionStart { get; set; }
+
+        [Remote(action: "VarifyDateFunction", controller: "validation", AdditionalFields = nameof(FunctionStart) + "," + nameof(FunctionEnd))]
         [Required]
         public DateTime? FunctionEnd { get; set; }        
         public string ProjectNumber { get; set; }
+        [Required]
         public string UserId { get; set; }        
         public string ProjectResponsible { get; set; }
         public Double Timespan { get; set; }
