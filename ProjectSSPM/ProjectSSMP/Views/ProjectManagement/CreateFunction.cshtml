@@ -127,7 +127,11 @@
                             <div class="col-sm-8 form-group">
                                 <label>Function Name</label>
                                 <div class="form-group">
-                                    <input type="text" name="FunctionName" id="FunctionName" placeholder="Enter Task Name Here.." class="form-control">
+                                    <input type="text" name="FunctionName" id="FunctionName"
+                                           data-val="true" data-val-required="The Function Name field is required."
+                                           placeholder="Enter Task Name Here.." class="form-control">
+                                    <span class="text-danger field-validation-valid"
+                                          data-valmsg-for="FunctionName" data-valmsg-replace="true"></span>
                                 </div>
                             </div>
 
@@ -135,10 +139,13 @@
                                 <label>Estimated Start Date</label>
                                 <div class="form-group">
                                     <div class="input-group date form_date col-md-8" data-date="" data-date-format="dd MM yyyy" data-link-field="dtp_input2" data-link-format="yyyy-mm-dd">
-                                        <input class="form-control" size="10" type="text" name="FunctionStart" id="FunctionStart" readonly>
+                                        <input class="form-control" size="10" type="text" name="FunctionStart" id="FunctionStart"
+                                               data-val="true" data-val-required="The Estimated Start Date field is required" >
                                         <span class="input-group-addon"><span class="glyphicon glyphicon-remove"></span></span>
                                         <span class="input-group-addon"><span class="glyphicon glyphicon-calendar"></span></span>
                                     </div>
+                                    <span class="text-danger field-validation-valid"
+                                          data-valmsg-for="FunctionStart" data-valmsg-replace="true"></span>
                                 </div>
                             </div>
 
@@ -146,15 +153,18 @@
                                 <label>Estimated End Date</label>
                                 <div class="form-group">
                                     <div class="input-group date form_date col-md-8" data-date="" data-date-format="dd MM yyyy" data-link-field="dtp_input2" data-link-format="yyyy-mm-dd">
-                                        <input class="form-control" size="10" type="text" name="FunctionEnd" id="FunctionEnd" readonly>
+                                        <input class="form-control" size="10" type="text" name="FunctionEnd" id="FunctionEnd" 
+                                               data-val="true" data-val-required="The Estimated Start Date field is required" >
                                         <span class="input-group-addon"><span class="glyphicon glyphicon-remove"></span></span>
                                         <span class="input-group-addon"><span class="glyphicon glyphicon-calendar"></span></span>
                                     </div>
+                                    <span class="text-danger field-validation-valid"
+                                          data-valmsg-for="FunctionEnd" data-valmsg-replace="true"></span>
                                 </div>
                             </div>
 
                             <div class="col-sm-8 form-group" >
-                                <label>Function Name</label>
+                                <label>Responsible User</label>
                                 <div class="form-group" >
                                     <select class="form-control" asp-items="ViewBag.UserSSPM"  name="UserId" id="UserId">
                                         <option>Please select </option>
