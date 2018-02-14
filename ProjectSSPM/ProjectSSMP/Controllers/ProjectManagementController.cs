@@ -34,7 +34,7 @@ namespace ProjectSSMP.Controllers
 
             List<IndexProjectModel> model = new List<IndexProjectModel>();
 
-
+          
             var IndexProInputModel = await (from x in context.Project select x).ToListAsync();
 
 
