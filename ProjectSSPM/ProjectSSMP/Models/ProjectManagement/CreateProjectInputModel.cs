@@ -19,7 +19,7 @@ namespace ProjectSSMP.Models.ProjectManagement
         
         [Required]
         public DateTime? ProjectStart { get; set; }
-        [Remote(action: "VarifyDate", controller: "ProjectManagement", AdditionalFields = nameof(ProjectStart) +","+nameof(ProjectEnd))]
+        [Remote(action: "VarifyDate", controller: "validation", AdditionalFields = nameof(ProjectStart) +","+nameof(ProjectEnd))]
         [Required]
         public DateTime? ProjectEnd { get; set; }
         [DataType(DataType.Currency)]

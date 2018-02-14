@@ -1,4 +1,4 @@
-﻿@model IEnumerable<ProjectSSMP.Models.ProjectManagement.CreateTaskInputModel>
+﻿@model ProjectSSMP.Models.ProjectManagement.CreateTaskInputModel
 
 @{
     ViewData["Title"] = "Project Management";
@@ -62,9 +62,15 @@
         </thead>
         <tbody>
 
-            @{ int autonum = 1; }
+            @{
+                IEnumerable<ProjectSSMP.Models.ProjectManagement.CreateTaskInputModel> createTask =
+                    ViewData["CreateTask"] as IEnumerable<ProjectSSMP.Models.ProjectManagement.CreateTaskInputModel>;
 
-            @foreach (var item in Model)
+                int autonum = 1;
+
+            }
+
+            @foreach (var item in createTask)
             {
                 <tr>
                     <td>
@@ -107,131 +113,128 @@
 
     </table>
 
+</div>
 
-    <!-- Modal -->
-    <div class="modal fade" id="myModalAdd" role="dialog">
-        <div class="modal-dialog">
+<!-- Modal -->
+<div class="modal fade" id="myModalAdd" role="dialog">
+    <div class="modal-dialog">
 
-            <!-- Modal content-->
-            <div class="modal-content">
-                <div class="modal-header">
-                    <button type="button" class="close" data-dismiss="modal">&times;</button>
-                    <h4 class="modal-title">Create Task</h4>
-                </div>
+        <!-- Modal content-->
+        <div class="modal-content">
+            <div class="modal-header">
+                <button type="button" class="close" data-dismiss="modal">&times;</button>
+                <h4 class="modal-title">Create Task</h4>
+            </div>
 
 
-                <div class="modal-body col-lg-12">
-                    <form asp-controller="ProjectManagement" asp-action="CreateTask" method="post">
-                        <input type="hidden" value="@ViewData["ProjectNuber"]" name="ProjectNumber" id="ProjectNumber" />
+            <div class="modal-body col-lg-12">
+                <form asp-controller="ProjectManagement" asp-action="CreateTask" method="post">
+                    <input type="hidden" value="@ViewData["ProjectNuber"]" name="ProjectNumber" id="ProjectNumber" />
 
-                        <div class="col-sm-8 form-group">
-                            <label>Task Name</label>
-                            <div class="form-group">
-                                <input type="text"  name="TaskName" id="TaskName" 
-                                       data-val="true" data-val-required="The Task Name field is required."
-                                       placeholder="Enter Task Name Here.." class="form-control">
+                    <div class="col-sm-8 form-group">
+                        <label>Task Name</label>
+                        <div class="form-group">
+                            <input type="text" asp-for="TaskName"  name="TaskName" id="TaskName" placeholder="Enter Task Name Here.." class="form-control">
+                            @Html.ValidationMessageFor(m => m.TaskName, "", new { @class = "text-danger" })
 
-                                <span class="text-danger field-validation-valid"
-                                      data-valmsg-for="TaskName" data-valmsg-replace="true"></span>
 
+                        </div>
+                    </div>
+
+                    <div class="col-sm-10 form-group">
+                        <label>Estimated Start Date</label>
+                        <div class="form-group">
+                            <div class="input-group date form_date col-md-8" data-date="" data-date-format="dd MM yyyy" data-link-field="dtp_input2" data-link-format="yyyy-mm-dd">
+                                <input class="form-control" size="10" type="text" asp-for="TaskStart" name="TaskStart" id="TaskStart"  >
+                                <span class="input-group-addon"><span class="glyphicon glyphicon-remove"></span></span>
+                                <span class="input-group-addon"><span class="glyphicon glyphicon-calendar"></span></span>
                             </div>
+                            @Html.ValidationMessageFor(m => m.TaskStart, "", new { @class = "text-danger" })
                         </div>
+                    </div>
 
-                        <div class="col-sm-10 form-group">
-                            <label>Estimated Start Date</label>
-                            <div class="form-group">
-                                <div class="input-group date form_date col-md-8" data-date="" data-date-format="dd MM yyyy" data-link-field="dtp_input2" data-link-format="yyyy-mm-dd">
-                                    <input class="form-control" size="10" type="text" name="TaskStart" id="TaskStart" 
-                                           data-val="true" data-val-required="The Estimated Start Date field is required." >
-                                    <span class="input-group-addon"><span class="glyphicon glyphicon-remove"></span></span>
-                                    <span class="input-group-addon"><span class="glyphicon glyphicon-calendar"></span></span>
-                                </div>
-                                <span class="text-danger field-validation-valid"
-                                      data-valmsg-for="TaskStart" data-valmsg-replace="true"></span>
+                    <div class="col-sm-10 form-group">
+                        <label>Estimated End Date</label>
+                        <div class="form-group">
+                            <div class="input-group date form_date col-md-8" data-date="" data-date-format="dd MM yyyy" data-link-field="dtp_input2" data-link-format="yyyy-mm-dd">
+                                <input class="form-control" size="10" type="text" name="TaskEnd" id="TaskEnd" asp-for="TaskEnd" >
+                                <span class="input-group-addon"><span class="glyphicon glyphicon-remove"></span></span>
+                                <span class="input-group-addon"><span class="glyphicon glyphicon-calendar"></span></span>
                             </div>
+                            @Html.ValidationMessageFor(m => m.TaskEnd, "", new { @class = "text-danger" })
                         </div>
+                    </div>
+                    <div class="col-sm-12 text-right">
+                        <button type="submit" class="btn btn-primary">Submit</button>
+                    </div>
 
-                        <div class="col-sm-10 form-group">
-                            <label>Estimated End Date</label>
-                            <div class="form-group">
-                                <div class="input-group date form_date col-md-8" data-date="" data-date-format="dd MM yyyy" data-link-field="dtp_input2" data-link-format="yyyy-mm-dd">
-                                    <input class="form-control" size="10" type="text" name="TaskEnd" id="TaskEnd" 
-                                           data-val="true" data-val-required="The Estimated End Date field is required." >
-                                    <span class="input-group-addon"><span class="glyphicon glyphicon-remove"></span></span>
-                                    <span class="input-group-addon"><span class="glyphicon glyphicon-calendar"></span></span>
-                                </div>
-                                <span class="text-danger field-validation-valid"
-                                      data-valmsg-for="TaskEnd" data-valmsg-replace="true"></span>
-                            </div>
-                        </div>
-                        <div class="col-sm-12 text-right">
-                            <button type="submit" class="btn btn-primary">Submit</button>
-                        </div>
+                </form>
+            </div>
 
-                    </form>
-                </div>
-
-                <div class="modal-footer">
-
-                </div>
+            <div class="modal-footer">
 
             </div>
 
         </div>
+
     </div>
+</div>
 
 
-    <div id='myModal' class='modal'>
-        <div class="modal-dialog">
-            <div class="modal-content">
-                <div id='myModalContent'></div>
-            </div>
+
+
+
+<div id='myModal' class='modal'>
+    <div class="modal-dialog">
+        <div class="modal-content">
+            <div id='myModalContent'></div>
         </div>
-
     </div>
 
-    @section scripts
-        {
+</div>
+
+@section scripts
+    {
 
 
-        <script>
+    <script>
 
-            var TeamDetailPostBackURL = '/ProjectManagement/EditTask/';
-            $(function () {
-                $(".anchorDetail").click(function () {
-                    //debugger;
-                    var $buttonClicked = $(this);
-                    var id = $buttonClicked.attr('data-id');
-                    var options = { "backdrop": "static", keyboard: true };
-                    $.ajax({
-                        type: "GET",
-                        url: TeamDetailPostBackURL,
-                        contentType: "application/json; charset=utf-8",
-                        data: { "Id": id },
-                        datatype: "json",
-                        success: function (data) {
-                            //debugger;
-                            $('#myModalContent').html(data);
-                            $('#myModal').modal(options);
-                            $('#myModal').modal('show');
+        var TeamDetailPostBackURL = '/ProjectManagement/EditTask/';
+        $(function () {
+            $(".anchorDetail").click(function () {
+                //debugger;
+                var $buttonClicked = $(this);
+                var id = $buttonClicked.attr('data-id');
+                var options = { "backdrop": "static", keyboard: true };
+                $.ajax({
+                    type: "GET",
+                    url: TeamDetailPostBackURL,
+                    contentType: "application/json; charset=utf-8",
+                    data: { "Id": id },
+                    datatype: "json",
+                    success: function (data) {
+                        //debugger;
+                        $('#myModalContent').html(data);
+                        $('#myModal').modal(options);
+                        $('#myModal').modal('show');
 
-                        },
-                        error: function () {
-                            alert("Dynamic content load failed.");
-                        }
-                    });
-                });
-                //$("#closebtn").on('click',function(){
-                //    $('#myModal').modal('hide');
-
-                $("#closbtn").click(function () {
-                    $('#myModal').modal('hide');
+                    },
+                    error: function () {
+                        alert("Dynamic content load failed.");
+                    }
                 });
             });
+            //$("#closebtn").on('click',function(){
+            //    $('#myModal').modal('hide');
 
-        </script>
+            $("#closbtn").click(function () {
+                $('#myModal').modal('hide');
+            });
+        });
 
-    }
+    </script>
+
+}
 
 
 

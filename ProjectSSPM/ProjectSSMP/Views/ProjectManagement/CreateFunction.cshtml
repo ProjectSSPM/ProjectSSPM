@@ -1,4 +1,4 @@
-﻿@model IEnumerable<ProjectSSMP.Models.ProjectManagement.CreateFunctionInputModel>
+﻿@model ProjectSSMP.Models.ProjectManagement.CreateFunctionInputModel
 
 @{
     ViewData["Title"] = "Create Function";
@@ -57,9 +57,14 @@
             </tr>
         </thead>
         <tbody>
-            @{ int autonum = 1; }
+            @{ 
+                IEnumerable<ProjectSSMP.Models.ProjectManagement.CreateFunctionInputModel> createFunction =
+                    ViewData["CreateFunction"] as IEnumerable<ProjectSSMP.Models.ProjectManagement.CreateFunctionInputModel>;
+                int autonum = 1;
 
-            @foreach (var item in Model)
+                }
+
+            @foreach (var item in createFunction)
             {
                 <tr>
                     <td>
@@ -127,11 +132,9 @@
                             <div class="col-sm-8 form-group">
                                 <label>Function Name</label>
                                 <div class="form-group">
-                                    <input type="text" name="FunctionName" id="FunctionName"
-                                           data-val="true" data-val-required="The Function Name field is required."
-                                           placeholder="Enter Task Name Here.." class="form-control">
-                                    <span class="text-danger field-validation-valid"
-                                          data-valmsg-for="FunctionName" data-valmsg-replace="true"></span>
+                                    <input type="text" asp-for="FunctionName" name="FunctionName" id="FunctionName" placeholder="Enter Task Name Here.." class="form-control">
+                                    @Html.ValidationMessageFor(m => m.FunctionName, "", new { @class = "text-danger" })
+
                                 </div>
                             </div>
 
@@ -139,13 +142,11 @@
                                 <label>Estimated Start Date</label>
                                 <div class="form-group">
                                     <div class="input-group date form_date col-md-8" data-date="" data-date-format="dd MM yyyy" data-link-field="dtp_input2" data-link-format="yyyy-mm-dd">
-                                        <input class="form-control" size="10" type="text" name="FunctionStart" id="FunctionStart"
-                                               data-val="true" data-val-required="The Estimated Start Date field is required" >
+                                        <input class="form-control" size="10" type="text" name="FunctionStart" id="FunctionStart" asp-for="FunctionStart" >
                                         <span class="input-group-addon"><span class="glyphicon glyphicon-remove"></span></span>
                                         <span class="input-group-addon"><span class="glyphicon glyphicon-calendar"></span></span>
                                     </div>
-                                    <span class="text-danger field-validation-valid"
-                                          data-valmsg-for="FunctionStart" data-valmsg-replace="true"></span>
+                                    @Html.ValidationMessageFor(m => m.FunctionStart, "", new { @class = "text-danger" })
                                 </div>
                             </div>
 
@@ -153,13 +154,11 @@
                                 <label>Estimated End Date</label>
                                 <div class="form-group">
                                     <div class="input-group date form_date col-md-8" data-date="" data-date-format="dd MM yyyy" data-link-field="dtp_input2" data-link-format="yyyy-mm-dd">
-                                        <input class="form-control" size="10" type="text" name="FunctionEnd" id="FunctionEnd" 
-                                               data-val="true" data-val-required="The Estimated Start Date field is required" >
+                                        <input class="form-control" size="10" type="text" name="FunctionEnd" id="FunctionEnd" asp-for="FunctionEnd">
                                         <span class="input-group-addon"><span class="glyphicon glyphicon-remove"></span></span>
                                         <span class="input-group-addon"><span class="glyphicon glyphicon-calendar"></span></span>
                                     </div>
-                                    <span class="text-danger field-validation-valid"
-                                          data-valmsg-for="FunctionEnd" data-valmsg-replace="true"></span>
+                                    @Html.ValidationMessageFor(m => m.FunctionEnd, "", new { @class = "text-danger" })
                                 </div>
                             </div>
 
