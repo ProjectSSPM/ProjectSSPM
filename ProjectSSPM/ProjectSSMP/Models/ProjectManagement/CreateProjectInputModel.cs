@@ -1,4 +1,5 @@
-﻿using System;
+﻿using Microsoft.AspNetCore.Mvc;
+using System;
 using System.ComponentModel.DataAnnotations;
 
 namespace ProjectSSMP.Models.ProjectManagement
@@ -15,7 +16,11 @@ namespace ProjectSSMP.Models.ProjectManagement
         public string ProjectName { get; set; }
 
         public string ProjectManager { get; set; }
+        
+        [Required]
         public DateTime? ProjectStart { get; set; }
+        [Remote(action: "VarifyDate", controller: "ProjectManagement", AdditionalFields = nameof(ProjectStart) +","+nameof(ProjectEnd))]
+        [Required]
         public DateTime? ProjectEnd { get; set; }
         [DataType(DataType.Currency)]
         [Required]

@@ -44,32 +44,41 @@
                 <label>Estimated Start Date</label>
                 <div class="form-group">
                     <div class="input-group date form_date col-md-8" data-date="" data-date-format="dd MM yyyy" data-link-field="dtp_input2" data-link-format="yyyy-mm-dd">
-                        <input class="form-control" size="10" type="text" name="ProjectStart" id="ProjectStart" readonly>
+                        <input class="form-control" size="10" type="text" name="ProjectStart" id="ProjectStart" asp-for="ProjectStart">
+
                         <span class="input-group-addon"><span class="glyphicon glyphicon-remove"></span></span>
                         <span class="input-group-addon"><span class="glyphicon glyphicon-calendar"></span></span>
-                    </div>
 
+                    </div>
+                    @Html.ValidationMessageFor(m => m.ProjectStart, "", new { @class = "text-danger" })
                 </div>
+                
 
             </div>
             <div class="col-sm-6 form-group">
                 <label>Estimated Stop Date</label>
                 <div class="form-group">
                     <div class="input-group date form_date col-md-8" data-date="" data-date-format="dd MM yyyy" data-link-field="dtp_input2" data-link-format="yyyy-mm-dd">
-                        <input class="form-control" size="10" type="text" name="ProjectEnd" id="ProjectEnd" readonly>
+                        <input class="form-control" size="10" type="text" name="ProjectEnd" id="ProjectEnd" asp-for="ProjectEnd">
+
                         <span class="input-group-addon"><span class="glyphicon glyphicon-remove"></span></span>
                         <span class="input-group-addon"><span class="glyphicon glyphicon-calendar"></span></span>
+
                     </div>
+                    @Html.ValidationMessageFor(m => m.ProjectEnd, "", new { @class = "text-danger" })
                 </div>
+               
             </div>
 
             <div class="col-sm-4">
                 <div class="form-group">
                     <label>Project Manager</label>
                     @*<input type="text" name="ProjectManager" id="ProjectManager" placeholder="Select Manager Name Here.." class="form-control">*@
-                    <select class="form-control" asp-items="ViewBag.UserSSPM" name="ProjectManager" id="ProjectManager" >
+                    <select class="form-control" asp-items="ViewBag.UserSSPM" name="ProjectManager" id="ProjectManager"
+                            asp-for="ProjectManager"  >
                         <option>Please select </option>
                     </select>
+                    @Html.ValidationMessageFor(m => m.ProjectManager,"", new { @class = "text-danger" })
                 </div>
             </div>
 
