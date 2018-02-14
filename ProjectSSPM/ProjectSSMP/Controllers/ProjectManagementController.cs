@@ -49,9 +49,12 @@ namespace ProjectSSMP.Controllers
                     ans = "Finished!";
                 }
                 else{
-                    ans = percent.ToString() + "%";
+                    ans = f.ToString() + "%";
                 }
 
+                if(ans.Equals("NaN%")){
+                    ans = "-";
+                }
                 model.Add(new IndexProjectModel()
                 {
                     ProjectNumber = item.ProjectNumber,
