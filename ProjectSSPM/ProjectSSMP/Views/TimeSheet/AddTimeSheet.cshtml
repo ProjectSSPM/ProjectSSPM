@@ -45,12 +45,18 @@
                         @Html.DisplayFor(model => model.FunctionName)
                     </dd>
                </dl>
+
+                @{ 
+
+                    var datanow = ViewData["datenow"];
+                }
+
                 <div class="col-sm-12">
                        <div class="col-sm-6 form-group">
                         <label>Estimated Start Date</label>
                         <div class="form-group">
-                                <div class="input-group date form_time col-md-8" data-date="" data-date-format="hh:ii" data-link-field="dtp_input3" data-link-format="hh:ii">
-                                <input class="form-control" size="10" type="text" name="TimeSheetStart" id="TimeSheetStart" readonly>
+                                <div class="input-group date form_time col-md-8" data-date="@datanow" data-date-format="hh:ii" data-link-field="dtp_input3" data-link-format="hh:ii">
+                                <input class="form-control" size="10" type="text" name="TimeSheetStart" id="TimeSheetStart" value="@ViewData["datetimenow"]" readonly>
                                 <span class="input-group-addon"><span class="glyphicon glyphicon-remove"></span></span>
                                 <span class="input-group-addon"><span class="glyphicon glyphicon-calendar"></span></span>
                             </div>
@@ -61,7 +67,7 @@
                     <div class="col-sm-6 form-group">
                         <label>Estimated Stop Date</label>
                         <div class="form-group">
-                            <div class="input-group date form_time col-md-8" data-date="" data-date-format="hh:ii" data-link-field="dtp_input3" data-link-format="hh:ii">
+                            <div class="input-group date form_time col-md-8" data-date="@datanow" data-date-format="hh:ii" data-link-field="dtp_input3" data-link-format="hh:ii">
                                 <input class="form-control" size="10" type="text" name="TimeSheetEnd" id="TimeSheetEnd" readonly>
                                 <span class="input-group-addon"><span class="glyphicon glyphicon-remove"></span></span>
                                 <span class="input-group-addon"><span class="glyphicon glyphicon-calendar"></span></span>
