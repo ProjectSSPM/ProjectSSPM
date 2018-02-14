@@ -20,14 +20,14 @@
                 </th>
 
                 <th>
-                    Status
+                    <center>Status<center>
                 </th>
 
                 <th>
-                    Estimated Start
+                    <center>Estimated Start</center>
                 </th>
                 <th>
-                    Estimated End
+                    <center>Estimated End</center>
                 </th>
                  <th>
                     <div class= "text-right" style="margin-right: 10px;">
@@ -52,17 +52,20 @@
                 @Html.DisplayFor(modelItem => item.ProjectName)
             </td>
 
-            <td>
-                @Html.DisplayFor(modelItem => item.Percent)
+            <td >
+                    
+                        <center>@Html.DisplayFor(modelItem => item.Percent)</center>
+
+                
             </td>
 
             <td>
                 
-                @Convert.ToString(string.Format("{0:dd MMMM yyyy}", item.ProjectStart))
+                <center>@Convert.ToString(string.Format("{0:dd MMMM yyyy}", item.ProjectStart))</center>
             </td>
             <td>
                 
-                @Convert.ToString(string.Format("{0:dd MMMM yyyy}", item.ProjectEnd))
+                <center>@Convert.ToString(string.Format("{0:dd MMMM yyyy}", item.ProjectEnd))</center>
             </td>
             
             <td>
