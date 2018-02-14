@@ -11,10 +11,11 @@ namespace ProjectSSMP.Models.ProjectManagement
         public string ProjectNumber { get; set; }
         [Required]
         public string TaskName { get; set; }
-        [Remote(action: "VarifyCheckdateProject", controller: "validation", AdditionalFields = nameof(TaskStart) + "," + nameof(ProjectNumber))]
+        [Remote(action: "VarifyCheckdateProjectStart", controller: "validation", AdditionalFields = nameof(TaskStart) + "," + nameof(ProjectNumber))]
         [Required]
         public DateTime? TaskStart { get; set; }
-        [Remote(action: "VarifyDateTsak", controller: "validation", AdditionalFields = nameof(TaskStart) + "," + nameof(TaskEnd))]
+
+        [Remote(action: "VarifyDateTsak", controller: "validation", AdditionalFields = nameof(TaskStart) + "," + nameof(TaskEnd)+","+nameof(ProjectNumber))]
         [Required]
         public DateTime? TaskEnd { get; set; }
         public Double Timespan { get; set; }
