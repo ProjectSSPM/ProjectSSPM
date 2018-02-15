@@ -1,11 +1,17 @@
-﻿using System;
+﻿using Microsoft.AspNetCore.Mvc;
+using System;
+using System.ComponentModel.DataAnnotations;
+
 namespace ProjectSSMP.Models.Timesheet
 {
     public class TimeSheetInputModel
     {
         public DateTime TimeSheetId { get; set; }
         public string ActionId { get; set; }
+        [Required]
         public DateTime? TimeSheetStart { get; set; }
+        [Remote(action: "VarifyDateTimeSheet", controller: "validation", AdditionalFields = nameof(TimeSheetStart) + "," + nameof(TimeSheetEnd) + "," + nameof(FunctionId))]
+        [Required]
         public DateTime? TimeSheetEnd { get; set; }
         public string UserId { get; set; }
         public string Firstname { get; set; }

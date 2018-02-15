@@ -13,7 +13,7 @@ namespace ProjectSSMP.Models.ProjectManagement
         public string TaskId { get; set; }
         [Required]
         public string FunctionName { get; set; }
-        [Remote(action: "VarifyCheckdateProjectStartFu", controller: "validation", AdditionalFields = nameof(FunctionStart) + "," + nameof(TaskId))]
+        [Remote(action: "VarifyCheckdateFunctionStartFu", controller: "validation", AdditionalFields = nameof(FunctionStart) + "," + nameof(TaskId))]
         [Required]
         public DateTime? FunctionStart { get; set; }
 
