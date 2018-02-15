@@ -9,6 +9,7 @@ using ProjectSSMP.Models;
 using Newtonsoft.Json;
 using ProjectSSMP.Models.Timeline;
 using ProjectSSMP.Models.Timesheet;
+using ProjectSSMP.Models.Home;
 
 namespace ProjectSSMP.Controllers
 {
@@ -130,6 +131,64 @@ namespace ProjectSSMP.Controllers
 
 
             return View();
+        }
+
+        [Authorize]
+        public ActionResult Result(string id)
+        {
+            ViewBag.userMenu = GetMenu();
+
+            var joinyub = (from TT in context.TeamTask
+                           join FC in context.Function on TT.FunctionId equals FC.FunctionId
+                           join TSK in context.Task on FC.TaskId equals TSK.TaskId
+                           join PJ in context.Project on TSK.ProjectNumber equals PJ.ProjectNumber
+                           join USR in context.UserSspm on TT.UserId equals USR.UserId
+                           where PJ.ProjectNumber.Equals(id)
+                           select new
+                           {
+                                TaskName = TSK.TaskName,
+                                TaskId = TSK.TaskId,
+                                TaskStart = TSK.TaskStart,
+                                TaskEnd = TSK.TaskEnd,
+                                TActualStart = TSK.ActualStart,
+                                TActualEnd = TSK.ActualEnd,
+
+                                FunctionName = FC.FunctionName,
+                                FunctionId = FC.FunctionId,
+                                FunctionStart = FC.FunctionStart,
+                                FunctionEnd = FC.FunctionEnd,
+                                FActualStart = FC.ActualStart,
+                                FActualEnd = FC.ActualEnd,
+                                Username = USR.Username,
+
+                           }).ToList();
+
+            List<ResultModel> model = new List<ResultModel>();
+
+            foreach (var item in joinyub)
+            {
+
+                model.Add(new ResultModel()
+                {
+                    TaskName = item.TaskName,
+                    TaskId = item.TaskId,
+                    TaskStart = item.TaskStart,
+                    TaskEnd = item.TaskEnd,
+                    TActualStart = item.TActualStart,
+                    TActualEnd = item.TActualEnd,
+
+                    FunctionName = item.FunctionName,
+                    FunctionId = item.FunctionId,
+                    FunctionStart = item.FunctionStart,
+                    FunctionEnd = item.FunctionEnd,
+                    FActualStart = item.FActualStart,
+                    FActualEnd = item.FActualEnd,
+                    Username = item.Username,
+
+                });
+            }
+
+            return View(model);
         }
 
         [Authorize]

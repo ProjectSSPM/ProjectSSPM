@@ -21,5 +21,6 @@
   </ItemGroup>
   <ItemGroup>
     <Folder Include="Models\Timeline\" />
+    <Folder Include="Models\Home\" />
   </ItemGroup>
 </Project>
