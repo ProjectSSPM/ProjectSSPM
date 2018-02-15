@@ -15,6 +15,7 @@ namespace ProjectSSMP.Models.ProjectManagement
         [Required]
         public string ProjectName { get; set; }
 
+        [Required]
         public string ProjectManager { get; set; }
         
         [Required]
