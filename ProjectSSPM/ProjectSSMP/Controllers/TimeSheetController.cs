@@ -255,7 +255,7 @@ namespace ProjectSSMP.Controllers
             string datepik = Convert.ToString(string.Format("{0:yyyy-MM-dd}", DateTime.Now));
             string datetimenow = Convert.ToString(string.Format("{0:HH:mm}", DateTime.Now));
             ViewData["datenow"] = datepik;
-            ViewData["datetimenow"] = datetimenow;
+            ViewData["datetime"] = datetimenow;
             return View(e);
           
         }
