@@ -48,20 +48,19 @@
 
                         </div>
                         <div class="social">
+                            @foreach(var itemnum in pronum){
                             <ul>
-                                @foreach(var itemnum in pronum){
                                 <li class="google-plus" style="width:33%;"><a asp-action = "CheckTimeline" asp-route-id="@itemnum.Key"><span class="fa fa-arrow-right"></span></a></li>
-                                }
                             </ul>
                             <ul>
                                 <li class="facebook" style="width:33%;"><a href="/ProjectManagement/"><span class="fa fa-gear"></span></a></li>
                             </ul>
 
                             <ul>
-                                <li class="twitter" style="width:33%;"><a href="#facebook"><span class="fa fa-file-text-o"></span></a></li>
+                                <li class="twitter" style="width:33%;"><a asp-action = "Result" asp-route-id="@itemnum.Key"><span class="fa fa-file-text-o"></span></a></li>
                             </ul>
 
-                            
+                            }
                         </div>
                     </li>
 
