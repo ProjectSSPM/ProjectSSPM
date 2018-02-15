@@ -90,7 +90,7 @@
             <div class="col-sm-4">
                 <div class="form-group">
                     <label  >Estimated Cost</label>
-                    <input type="text" asp-for="ProjectCost" name="ProjectCost" id="ProjectCost" placeholder="Enter Project Cost Here.." class="form-control">
+                    <input type="number" asp-for="ProjectCost" name="ProjectCost" id="ProjectCost" placeholder="Enter Project Cost Here.." class="form-control">
                     @Html.ValidationMessageFor(m => m.ProjectCost,"", new { @class = "text-danger" })
                 </div>
             </div>

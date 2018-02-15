@@ -4,11 +4,11 @@
     Layout = "~/Views/Shared/_LayoutMenu.cshtml";
 }
 <div class="container">
-<h2 class="well">TimeSheet</h2>
- <table id="Timesheet" class="responsive" width="100%">
-    <thead>
-        <tr>
-               
+    <h2 class="well">TimeSheet</h2>
+    <table id="Timesheet" class="responsive" width="100%">
+        <thead>
+            <tr>
+
                 <th>
                     Task Name
                 </th>
@@ -17,61 +17,140 @@
                     Function Name
                 </th>
 
-          
-                 <th>
-                    
-                 
-                   
+
+                <th>
+
+
+
                 </th>
-        </tr>
-    </thead>
-    <tbody>
-        @{ 
-            var timesheet = Model.GroupBy(f =>
-            f.FunctionId);
-        }
-        
-@foreach (var item in timesheet) {
-        <tr>
-           
-            @{ 
-                var funna = item.GroupBy(f => f.FunctionName);
-                var tasna = item.GroupBy(t => t.TaskName); 
+            </tr>
+        </thead>
+        <tbody>
+            @{
+                var timesheet = Model.GroupBy(f =>
+                f.FunctionId);
             }
 
-            <td>
-             @foreach(var item1 in tasna)
-             {
-                 @item1.Key
-
-             }
-
-            </td>
-            
-
-            <td>
-                @foreach(var item2 in funna)
+            @foreach (var item in timesheet)
             {
-                @item2.Key
+                <tr>
+
+                    @{
+                        var funna = item.GroupBy(f => f.FunctionName);
+                        var tasna = item.GroupBy(t => t.TaskName);
+                    }
+
+                    <td>
+                        @foreach (var item1 in tasna)
+                        {
+                            @item1.Key
+
+                        }
+
+                    </td>
+
+
+                    <td>
+                        @foreach (var item2 in funna)
+                        {
+                            @item2.Key
+
+                        }
+                    </td>
+
+
+
+
+
+                    <td>
+                        <div class="text-right" style="margin-right: 10px;">
+
+
+                            <a href="javascript:void(0);" class="anchorDetail btn btn-info btn-sm"
+                               data-id="@item.Key">Add</a>
+
+                            <a asp-action="UpdateTimeSheet" class="btn btn-success btn-sm" asp-route-id="@item.Key">Update</a>
+                        </div>
+
+                    </td>
+                </tr>
 
             }
-            </td>
-
-           
-            
-
-                
-            <td>
-                <div class= "text-right" style="margin-right: 10px;">
-                    <a asp-action="AddTimeSheet" class="btn btn-info btn-sm" asp-route-id="@item.Key">Add</a>  
-                    <a asp-action="UpdateTimeSheet" class="btn btn-success btn-sm" asp-route-id="@item.Key">Update</a> 
-                </div>
-
-            </td>
-        </tr>
-
-}
-    </tbody>
+        </tbody>
     </table>
 
 </div>
+
+<div id='myModal' class='modal'>
+    <div class="modal-dialog">
+        <div class="modal-content">
+            <div id='myModalContent'></div>
+        </div>
+    </div>
+
+</div>
+
+@section scripts
+    {
+
+    <script type="text/javascript" src="~/js/bootstrap-datetimepicker.js" charset="UTF-8"></script>
+    <script type="text/javascript" src="~/js/locales/bootstrap-datetimepicker.fr.js" charset="UTF-8"></script>
+
+    <script>
+        var d = new Date();
+        var month = d.getMonth();
+        var day = d.getDate();
+        var year = d.getFullYear();
+        var cd = new Date(year, month, day, 12, 00);
+        var check = cd.getTime();
+
+
+        var itme = d.getTime();
+        if (itme < check) {
+            $("#TimeSheetStart").val("09:00");
+            $("#TimeSheetEnd").val("12:00");
+        }
+        else if (itme > check) {
+
+            $("#TimeSheetStart").val("13:00");
+            $("#TimeSheetEnd").val("18:00");
+        }
+        
+
+        var TeamDetailPostBackURL = '/TimeSheet/AddTimeSheet/';
+        $(function () {
+            $(".anchorDetail").click(function () {
+                //debugger;
+                var $buttonClicked = $(this);
+                var id = $buttonClicked.attr('data-id');
+
+                var options = { "backdrop": "static", keyboard: true };
+                $.ajax({
+                    type: "GET",
+                    url: TeamDetailPostBackURL,
+                    contentType: "application/json; charset=utf-8",
+                    data: { "Id": id },
+                    datatype: "json",
+                    success: function (data) {
+                        //debugger;
+                        $('#myModalContent').html(data);
+                        $('#myModal').modal(options);
+                        $('#myModal').modal('show');
+
+                    },
+                    error: function () {
+                        alert("Dynamic content load failed.");
+                    }
+                });
+            });
+            //$("#closebtn").on('click',function(){
+            //    $('#myModal').modal('hide');
+
+            $("#closbtn").click(function () {
+                $('#myModal').modal('hide');
+            });
+        });
+
+    </script>
+
+}

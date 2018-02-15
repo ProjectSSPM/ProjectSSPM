@@ -252,12 +252,8 @@ namespace ProjectSSMP.Controllers
                 return NotFound();
             }
             
-            string datepik = Convert.ToString(string.Format("{0:yyyy-MM-dd}", DateTime.Now));
-            DateTime datetimenow = Convert.ToDateTime(string.Format("{0:HH:mm}", DateTime.Now));
-            TimeSpan time = DateTime.Now.TimeOfDay;
-            ViewData["datenow"] = datepik;
-            ViewData["datetime"] = datetimenow;
-            return View(e);
+           
+            return PartialView("AddTimeSheet", e);
           
         }
 
