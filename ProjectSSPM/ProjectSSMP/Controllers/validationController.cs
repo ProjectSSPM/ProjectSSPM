@@ -71,13 +71,25 @@ namespace ProjectSSMP.Controllers
             return Json(data: true);
         }
         [AcceptVerbs("Get", "Post")]
-        public IActionResult VarifyCheckdateProjectStartFu(DateTime TaskStart, string TaskId)
+        public IActionResult VarifyCheckdateFunctionStartFu(DateTime FunctionStart, string TaskId)
         {
             var checkdate = (from t in context.Task where t.TaskId.Equals(TaskId) select t).FirstOrDefault();
-            if (TaskStart <= checkdate.TaskStart)
+            if (FunctionStart <= checkdate.TaskStart)
             {
-                return Json(data: $"Your Task Start is Least than Project Start");
+                return Json(data: $"Your Function Start is Least than Project Start");
             }
+
+            return Json(data: true);
+        }
+
+
+        public IActionResult VarifyDateTimeSheet(DateTime TimeSheetStart, DateTime TimeSheetEnd, string FunctionId)
+        {
+            if (TimeSheetEnd < TimeSheetStart)
+            {
+                return Json(data: $"The Estimate End is greater than Start.");
+            }
+            
 
             return Json(data: true);
         }

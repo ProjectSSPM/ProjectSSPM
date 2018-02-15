@@ -57,15 +57,20 @@
                         <label>Estimated Start Date</label>
                         <div class="form-group">
 <<<<<<< HEAD
+                            <div class="input-group date form_time col-md-8" data-date="" data-date-format="hh:ii" data-link-field="dtp_input3" data-link-format="hh:ii">
+                                <input class="form-control" size="10" asp-for="TimeSheetStart" type="text" name="TimeSheetStart" id="TimeSheetStart" value="@ViewData["datetimenow"]" readonly>
+=======
+<<<<<<< HEAD
                                 <div class="input-group date form_time col-md-8" data-date="@ViewData["datenow"]" data-date-format="hh:ii" data-link-field="dtp_input3" data-link-format="hh:ii">
 =======
                                 <div class="input-group date form_time col-md-8" data-date="" data-date-format="hh:ii" data-link-field="dtp_input3" data-link-format="hh:ii">
 >>>>>>> b29b87d91e63a4953a5f140431181a6d7c00dc8a
                                 <input class="form-control" size="10" type="text" name="TimeSheetStart" id="TimeSheetStart" value="@ViewData["datetimenow"]" readonly>
+>>>>>>> 8f3ee737d57362f113ab1ddd52a520bd7ca75aa5
                                 <span class="input-group-addon"><span class="glyphicon glyphicon-remove"></span></span>
                                 <span class="input-group-addon"><span class="glyphicon glyphicon-calendar"></span></span>
                             </div>
-
+                            @Html.ValidationMessageFor(m => m.TimeSheetStart, "", new { @class = "text-danger" })
                         </div>
 
                     </div>
@@ -76,11 +81,16 @@
                             <div class="input-group date form_time col-md-8" data-date="@ViewData["datenow"]" data-date-format="hh:ii" data-link-field="dtp_input3" data-link-format="hh:ii">
 =======
                             <div class="input-group date form_time col-md-8" data-date="" data-date-format="hh:ii" data-link-field="dtp_input3" data-link-format="hh:ii">
+<<<<<<< HEAD
+                                <input class="form-control" size="10" asp-for="TimeSheetEnd" type="text" name="TimeSheetEnd" id="TimeSheetEnd" readonly>
+=======
 >>>>>>> b29b87d91e63a4953a5f140431181a6d7c00dc8a
                                 <input class="form-control" size="10" type="text" name="TimeSheetEnd" id="TimeSheetEnd" readonly>
+>>>>>>> 8f3ee737d57362f113ab1ddd52a520bd7ca75aa5
                                 <span class="input-group-addon"><span class="glyphicon glyphicon-remove"></span></span>
                                 <span class="input-group-addon"><span class="glyphicon glyphicon-calendar"></span></span>
                             </div>
+                            @Html.ValidationMessageFor(m => m.TimeSheetEnd, "", new { @class = "text-danger" })
                         </div>
                     </div>
 
