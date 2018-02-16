@@ -6,12 +6,44 @@
 
 <div class="container">
     <div class="row">
-        @{
-        IEnumerable<ProjectSSMP.Models.Project> project = ViewData["projectDetile"] as IEnumerable<ProjectSSMP.Models.Project>;
-
-        var tackgrop = Model.GroupBy(t => t.TaskId);
+        @{ 
+            ProjectSSMP.Models.Project project = ViewData["projectDetile"] as ProjectSSMP.Models.Project;
 
         }
+        <div class="col-lg-12 well">
+            <div class="row">
+                <div class="col-sm-4">Project ID : @project.ProjectId</div>
+                <div class="col-sm-8">Projext Name : @project.ProjectName</div>
+            </div>
+            <div class="row">
+                <div class="col-sm-12">&nbsp;</div>
+            </div>
+            <div class="row">
+                <div class="col-sm-4">Estimated Cost : @Convert.ToString(string.Format("{0:C}", project.ProjectCost))</div>
+                <div class="col-sm-4">Customer Name  : @project.CustomerName</div>
+                <div class="col-sm-4">Customer Tel.  : @project.CustomerTel</div>
+            </div>
+            <div class="row">
+                <div class="col-sm-12">&nbsp;</div>
+            </div>
+            <div class="row">
+                <div class="col-sm-6">Estimated Start Date  : @Convert.ToString(string.Format("{0:dd MMMM yyyy}", project.ProjectStart))</div>
+                <div class="col-sm-6">Estimated Stop Date   : @Convert.ToString(string.Format("{0:dd MMMM yyyy}", project.ProjectEnd))</div>
+                
+            </div>
+
+        </div>
+
+
+    </div>
+
+
+    <div class="row">
+        @{
+            var tackgrop = Model.GroupBy(t => t.TaskId);
+
+        }
+        
         @foreach (var item in tackgrop)
         {
 
@@ -69,8 +101,9 @@
                     <br />
                   <div class="panel-group" id="accordion2">
                     @foreach( var funtion in task )
-                    {    
-                        @foreach(var fun in funtion)
+                    {
+                        var fstat = funtion.GroupBy(s => s.FunctionStart,s => s.FunctionId);
+                        @foreach (var fun in funtion)
                         {
                               <div class="panel panel-default">
                                   <div class="panel-heading">
@@ -80,19 +113,27 @@
                                           </a>
                                       </h4>
                                   </div>
+                          
                                   <div id="@fun.TaskId@fun.FunctionId" class="panel-collapse collapse in">
+                            
                                       <div class="panel-body">
-                                          @fun.FunctionName
+                                         <div class="row">
+                                             @foreach (var fs in fstat)
+                                             {
+                                                 <div class="col-sm-6">@fs.Key</div>
+
+                                             }
+                                         </div>
                                       </div>
                                   </div>
                               </div>
 
+
+
+                            }
+
+
                         }
-                        
-
-
-
-                    }
                       </div> 
 
                 </div>
