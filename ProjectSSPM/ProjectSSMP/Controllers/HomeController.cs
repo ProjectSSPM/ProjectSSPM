@@ -139,8 +139,27 @@ namespace ProjectSSMP.Controllers
             ViewBag.userMenu = GetMenu();
 
 
-            var pjd = (from p in context.Project where p.ProjectNumber.Equals(id) select p).FirstOrDefault();
+            var pjd = (from p in context.Project join u in context.UserSspm on p.ProjectManager equals u.UserId
+                       where p.ProjectNumber.Equals(id) 
+                       select new ResultProjectModel
+                       {
+                           ProjectNumber = p.ProjectNumber,
+                           ProjectId = p.ProjectId,
+                           ProjectName= p.ProjectName,
+                           ProjectManager = u.Firstname + " "+ u.Lastname,
+                           ProjectCost = p.ProjectCost,
+                           CustomerName = p.CustomerName,
+                           CustomerTel = p.CustomerTel,
+                           ProjectStart =p.ProjectStart,
+                           ProjectEnd =p.ProjectEnd,
+                           ActualStart = p.ActualStart,
+                           ActualEnd = p.ActualEnd
+                       }
+                       ).FirstOrDefault();
             ViewData["projectDetile"] = pjd;
+
+
+
             var joinyub = (from TT in context.TeamTask
                            join FC in context.Function on TT.FunctionId equals FC.FunctionId
                            join TSK in context.Task on FC.TaskId equals TSK.TaskId
