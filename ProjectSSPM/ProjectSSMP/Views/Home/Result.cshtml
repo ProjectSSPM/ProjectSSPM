@@ -5,11 +5,102 @@
 }
 
 <div class="container">
+    <div class="row">
+        @{
+        IEnumerable<ProjectSSMP.Models.Project> project = ViewData["projectDetile"] as IEnumerable<ProjectSSMP.Models.Project>;
 
-    @foreach(var item in Model)
-        {
-            @item.TaskName
+        var tackgrop = Model.GroupBy(t => t.TaskId);
+
         }
+        @foreach (var item in tackgrop)
+        {
 
-    
+
+            
+
+        <div class="panel panel-default">
+            <div class="panel-heading">
+                <h4 class="panel-title">
+                    <a data-toggle="collapse" data-parent="#accordion" href="#@item.Key">
+                        @{ 
+                            var task = item.GroupBy(t => t.TaskName);
+
+                        }
+                        @foreach (var itme2 in task)
+                        {
+                            @itme2.Key
+
+                        }
+                    </a>
+                </h4>
+            </div>
+            <div id="@item.Key" class="panel-collapse collapse">
+                <div class="panel-body">
+                    @foreach(var item3 in task)
+                    {
+                        var tstart = item3.GroupBy(s => s.TaskStart);
+                        var tend = item3.GroupBy(s => s.TaskEnd);
+                        var tastart = item3.GroupBy(s => s.TActualStart);
+                        var taend = item3.GroupBy(s => s.TActualEnd);
+
+
+                           <div class="row">
+                               @foreach(var ts in tstart){
+                                   <div class="col-sm-3">@ts.Key</div>  
+
+                               }
+                                @foreach(var te in tend){
+                                   <div class="col-sm-3">@te.Key</div>  
+
+                               }
+                                @foreach(var tas in tastart)
+                                {
+                                   <div class="col-sm-3"> @tas.Key</div>  
+
+                               }
+                               @foreach(var tas in tastart)
+                                {
+                                   <div class="col-sm-3"> @tas.Key</div>  
+
+                               }                             
+                              
+                            </div>
+                    }
+                    <br />
+                  <div class="panel-group" id="accordion2">
+                    @foreach( var funtion in task )
+                    {    
+                        @foreach(var fun in funtion)
+                        {
+                              <div class="panel panel-default">
+                                  <div class="panel-heading">
+                                      <h4 class="panel-title">
+                                          <a data-toggle="collapse" data-parent="#accordion2" href="#@fun.TaskId@fun.FunctionId ">
+                                              @fun.FunctionName
+                                          </a>
+                                      </h4>
+                                  </div>
+                                  <div id="@fun.TaskId@fun.FunctionId" class="panel-collapse collapse in">
+                                      <div class="panel-body">
+                                          @fun.FunctionName
+                                      </div>
+                                  </div>
+                              </div>
+
+                        }
+                        
+
+
+
+                    }
+                      </div> 
+
+                </div>
+            </div>
+        </div>
+
+}
+    </div>
+
+
 </div>

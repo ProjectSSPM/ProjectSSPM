@@ -138,6 +138,9 @@ namespace ProjectSSMP.Controllers
         {
             ViewBag.userMenu = GetMenu();
 
+
+            var pjd = (from p in context.Project where p.ProjectNumber.Equals(id) select p).FirstOrDefault();
+            ViewData["projectDetile"] = pjd;
             var joinyub = (from TT in context.TeamTask
                            join FC in context.Function on TT.FunctionId equals FC.FunctionId
                            join TSK in context.Task on FC.TaskId equals TSK.TaskId

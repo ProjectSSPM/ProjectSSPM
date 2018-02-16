@@ -7,6 +7,7 @@ using System.Threading.Tasks;
 using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.Mvc.Rendering;
+using Microsoft.AspNetCore.Routing;
 using Microsoft.EntityFrameworkCore;
 using ProjectSSMP.Models;
 using ProjectSSMP.Models.Timesheet;
@@ -315,7 +316,8 @@ namespace ProjectSSMP.Controllers
                 // Provide for exceptions.
             }
 
-            return RedirectToAction("Index", "TimeSheet");
+            return RedirectToAction("TimeSheet", "TimeSheet",new RouteValueDictionary(
+                new { Controller= "TimeSheet",Action = "TimeSheet",id = inputModel.ProjectNumber }));
 
         }
 
