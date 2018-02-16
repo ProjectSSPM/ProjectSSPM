@@ -32,6 +32,7 @@ namespace ProjectSSMP.Models.UserManagement
         public DateTime? UserCreateDate { get; set; }
         public string UserEditBy { get; set; }
         public DateTime? UserEditDate { get; set; }
+
         [Required]
         public string GroupId { get; set; }
         [StringLength(50, MinimumLength = 9, ErrorMessage = "Tel. must be 9-15 letters.")]

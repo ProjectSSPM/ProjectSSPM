@@ -134,7 +134,7 @@ namespace ProjectSSMP.Controllers
         }
 
         [Authorize]
-        public ActionResult Result(string id)
+        public IActionResult Result(string id)
         {
             ViewBag.userMenu = GetMenu();
 
