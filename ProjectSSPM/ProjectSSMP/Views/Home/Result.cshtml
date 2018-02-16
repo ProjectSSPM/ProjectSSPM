@@ -97,45 +97,56 @@
                                }                             
                               
                             </div>
-                    }
-                    <br />
-                  <div class="panel-group" id="accordion2">
-                    @foreach( var funtion in task )
-                    {
-                        var fstat = funtion.GroupBy(s => s.FunctionStart,s => s.FunctionId);
-                        @foreach (var fun in funtion)
-                        {
-                              <div class="panel panel-default">
-                                  <div class="panel-heading">
-                                      <h4 class="panel-title">
-                                          <a data-toggle="collapse" data-parent="#accordion2" href="#@fun.TaskId@fun.FunctionId ">
-                                              @fun.FunctionName
-                                          </a>
-                                      </h4>
-                                  </div>
-                          
-                                  <div id="@fun.TaskId@fun.FunctionId" class="panel-collapse collapse in">
-                            
-                                      <div class="panel-body">
-                                         <div class="row">
-                                             @foreach (var fs in fstat)
-                                             {
-                                                 <div class="col-sm-6">@fs.Key</div>
+                        var funt = from f in item3
+                                   group f by new { f.FunctionId, f.TaskId } into grf
+                                   select new
+                                   {
+                                       FunctionId = grf.Key.FunctionId,
+                                       TaskId = grf.Key.TaskId,
+                                       FunctionName = grf.ToList()
 
-                                             }
-                                         </div>
+
+                                   };
+
+                        @foreach(var fun in funt){
+                            <div class="panel-group" id="accordion2">
+                                @foreach (var fund in fun.FunctionName)
+                                {
+
+
+                                  <div class="panel panel-default">
+                                      <div class="panel-heading">
+                                          <h4 class="panel-title">
+                                              <a data-toggle="collapse" data-parent="#accordion2" href="#@fun.FunctionId@fun.TaskId">
+                                                @fund.FunctionName
+                                              </a>
+                                          </h4>
+                                      </div>
+                          
+                                      <div id="@fun.FunctionId@fun.TaskId" class="panel-collapse collapse in">
+                            
+                                          <div class="panel-body">
+                                              <div class="row">
+                                                  <div class="col-sm-3">@fund.FunctionStart</div>
+                                                  <div class="col-sm-3">@fund.FunctionEnd</div>
+                                                  <div class="col-sm-3">@fund.TActualStart</div>
+                                                  <div class="col-sm-3">@fund.TActualEnd</div>
+                                              </div>
+                                          </div>
                                       </div>
                                   </div>
-                              </div>
+                                }
 
-
-
-                            }
-
+                            </div> 
 
                         }
-                      </div> 
+                             
 
+
+
+                    }
+                    <br />
+                 
                 </div>
             </div>
         </div>
