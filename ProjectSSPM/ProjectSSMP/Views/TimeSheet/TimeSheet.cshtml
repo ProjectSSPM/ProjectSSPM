@@ -27,36 +27,37 @@
         </thead>
         <tbody>
             @{
-                var timesheet = Model.GroupBy(f =>
-                f.FunctionId);
+               
+                var timesheet = from t in Model
+                                 group t by t.FunctionId into tgp
+                                 select new
+                                 {
+                                     Key = tgp.Key,
+                                     timesheet = tgp.ToList()
+
+                                 };
             }
 
             @foreach (var item in timesheet)
             {
                 <tr>
 
-                    @{
-                        var funna = item.GroupBy(f => f.FunctionName);
-                        var tasna = item.GroupBy(t => t.TaskName);
-                    }
+                    @foreach(var itme2 in item.timesheet)
+                    {
+                        <td>
+                        
+                            @itme2.TaskName
 
-                    <td>
-                        @foreach (var item1 in tasna)
-                        {
-                            @item1.Key
-
-                        }
-
-                    </td>
+                        </td>
 
 
-                    <td>
-                        @foreach (var item2 in funna)
-                        {
-                            @item2.Key
+                        <td>
+                            @itme2.FunctionName
+                        </td>
 
-                        }
-                    </td>
+                    
+
+                    
 
 
 
@@ -65,15 +66,45 @@
                     <td>
                         <div class="text-right" style="margin-right: 10px;">
 
+                            @{ 
+                                var gropid = ViewData["gropid"];
+                                var UserId =ViewData["UserId"];
+                                if (gropid.ToString() == "50")
+                                {
+                                    if(itme2.UserId == UserId.ToString())
+                                    {
+                                        <a href="javascript:void(0);" class="anchorDetail btn btn-info btn-sm"
+                                        data-id="@item.Key">Add</a>
+                                        <a asp-action="UpdateTimeSheet" class="btn btn-success btn-sm" asp-route-id="@item.Key">Update</a>
 
-                            <a href="javascript:void(0);" class="anchorDetail btn btn-info btn-sm"
-                               data-id="@item.Key">Add</a>
 
-                            <a asp-action="UpdateTimeSheet" class="btn btn-success btn-sm" asp-route-id="@item.Key">Update</a>
+                                    }
+                                    
+
+                                }
+                                else if(gropid.ToString() == "10")
+                                {
+                                    <a href="javascript:void(0);" class="anchorDetail btn btn-info btn-sm"
+                                    data-id="@item.Key">Add</a>
+                                    <a asp-action="UpdateTimeSheet" class="btn btn-success btn-sm" asp-route-id="@item.Key">Update</a>
+
+                                }
+
+                                else if(gropid.ToString() == "99")
+                                {
+
+
+                                }
+                            }
+                           
+
+                            
                         </div>
 
                     </td>
+                    }
                 </tr>
+                
 
             }
         </tbody>

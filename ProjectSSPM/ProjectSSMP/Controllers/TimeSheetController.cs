@@ -34,32 +34,26 @@ namespace ProjectSSMP.Controllers
             ViewBag.userMenu = GetMenu();
             var checkgroup = (from u in context.UserSspm
                               join ua in context.UserAssignGroup on u.UserId equals ua.UserId
+                              where u.Username.Equals(loggedInUserName)
                               select new
                               {
-                                  ua.GroupId
+                                  ua.GroupId,
+                                  u.UserId
                               }).FirstOrDefault();
             List<TimeSheetInputModel> model = new List<TimeSheetInputModel>();
 
             if (checkgroup.GroupId == "50")
             {
-                var PJ = (from x in context.UserSspm
-                          join x2 in context.TeamTask on x.UserId equals x2.UserId
+                var PJ = (from  x2 in context.TeamTask 
                           join x3 in context.Project on x2.ProjectNumber equals x3.ProjectNumber
-                          where x3.ProjectManager.Equals(x.UserId) || x.Username.Equals(loggedInUserName) 
+                          where x3.ProjectManager.Equals(checkgroup.UserId) || x2.UserId.Equals(checkgroup.UserId)
                           select new
                           {
-
                                   ProjectNumber = x3.ProjectNumber,
                                  ProjectName = x3.ProjectName,
                                   ProjectId = x3.ProjectId,
                                     Note = x3.Note,
                                   ProjectEnd = x3.ProjectEnd,
-
-
-                         
-
-                   
-
                           });
                 foreach (var item in PJ)
                 {
@@ -70,17 +64,7 @@ namespace ProjectSSMP.Controllers
                         ProjectName = item.ProjectName,
                         ProjectNumber = item.ProjectNumber,
                         Note = item.Note,
-
-
                         ProjectEnd = item.ProjectEnd
-
-                     
-
-
-                      
-
-
-
                     });
                 }
 
@@ -88,10 +72,9 @@ namespace ProjectSSMP.Controllers
             }
             else if(checkgroup.GroupId == "10")
             {
-              var   PJ = (from x in context.UserSspm
-                          join x2 in context.TeamTask on x.UserId equals x2.UserId
+              var   PJ = (from  x2 in context.TeamTask
                           join x3 in context.Project on x2.ProjectNumber equals x3.ProjectNumber
-                          where x.Username.Equals(loggedInUserName)
+                          where x2.UserId.Equals(checkgroup.UserId)
                           select new
                           {
                               ProjectNumber = x3.ProjectNumber,
@@ -118,33 +101,32 @@ namespace ProjectSSMP.Controllers
             }
             else
             {
-               
+                var PJ = (from x in context.UserSspm
+                          join x2 in context.TeamTask on x.UserId equals x2.UserId
+                          join x3 in context.Project on x2.ProjectNumber equals x3.ProjectNumber
+                          //where x3.ProjectManager.Equals(x.UserId) || x.Username.Equals(loggedInUserName)
+                          select new
+                          {
+                              ProjectNumber = x3.ProjectNumber,
+                              ProjectName = x3.ProjectName,
+                              ProjectId = x3.ProjectId,
+                              Note = x3.Note,
+                              ProjectEnd = x3.ProjectEnd,
+                          });
+                foreach (var item in PJ)
+                {
+
+                    model.Add(new TimeSheetInputModel()
+                    {
+                        ProjectId = item.ProjectId,
+                        ProjectName = item.ProjectName,
+                        ProjectNumber = item.ProjectNumber,
+                        Note = item.Note,
+                        ProjectEnd = item.ProjectEnd
+                    });
+                }
+
             }
-
-
-
-            ////var PJ = (from x in context.UserSspm
-            ////          join x2 in context.TeamTask on x.UserId equals x2.UserId
-            ////          join x3 in context.Project on x2.ProjectNumber equals x3.ProjectNumber
-            ////          where x.Username.Equals(loggedInUserName)
-            ////          select new
-            ////          {
-            ////              ProjectNumber = x3.ProjectNumber,
-            ////              ProjectName = x3.ProjectName,
-            ////              ProjectId = x3.ProjectId,
-            ////              Note = x3.Note,
-            ////}); 
-            //foreach (var item in PJ)
-            //{
-
-            //    model.Add(new TimeSheetInputModel()
-            //    {
-            //        ProjectId = item.ProjectId,
-            //        ProjectName = item.ProjectName,
-            //        ProjectNumber = item.ProjectNumber,
-            //        Note = item.Note,
-
-            
             return View(model);
 
         }
@@ -157,9 +139,12 @@ namespace ProjectSSMP.Controllers
             ViewBag.userMenu = GetMenu();
             var loggedInUser = HttpContext.User;
             var loggedInUserName = loggedInUser.Identity.Name;
+            
 
             var uid = (from u in context.UserSspm where u.Username.Equals(loggedInUserName) select u).FirstOrDefault();
-            var checkts = (from ts in context.TimeSheet select ts).ToList();
+            var gropid = (from g in context.UserAssignGroup where g.UserId.Equals(uid.UserId)select g).FirstOrDefault();
+            ViewData["UserId"] = uid.UserId;
+            ViewData["gropid"] = gropid.GroupId;
             var checkAC = (from fc in context.Function
                            join ts in context.TimeSheet on fc.FunctionId equals ts.FunctionId
                            where ts.ActionId.Equals("Z")
@@ -168,14 +153,53 @@ namespace ProjectSSMP.Controllers
                                FunctionId =    f.Key
                                
                            }).ToList();
+
             List<TimeSheetInputModel> model = new List<TimeSheetInputModel>();
-            
+            if(gropid.GroupId == "50")
+            {
                 var Test = (from x in context.Function
                             join x2 in context.Task on x.TaskId equals x2.TaskId
                             join x3 in context.Project on x2.ProjectNumber equals x3.ProjectNumber
-                            
                             join x5 in context.TeamTask on x.FunctionId equals x5.FunctionId
+                            where x.ProjectNumber.Equals(id) /*&& x5.UserId.Equals(uid.UserId)*/
+                             && !(checkAC.Select(p => p.FunctionId).Contains(x.FunctionId))
+                            select new
+                            {
+                                ProjectNumber = x3.ProjectNumber,
+                                ProjectName = x3.ProjectName,
+                                TaskId = x2.TaskId,
+                                TaskName = x2.TaskName,
+                                FunctionId = x.FunctionId,
+                                FunctionName = x.FunctionName,
+                                UserId = x5.UserId
+                            }).ToList();
 
+                foreach (var item in Test)
+                {
+
+                    model.Add(new TimeSheetInputModel()
+                    {
+
+                        ProjectName = item.ProjectName,
+                        ProjectNumber = item.ProjectNumber,
+                        FunctionId = item.FunctionId,
+                        FunctionName = item.FunctionName,
+                        TaskId = item.TaskId,
+                        TaskName = item.TaskName,
+                        UserId = item.UserId
+
+
+
+                    });
+                }
+
+            }
+            else if(gropid.GroupId == "10")
+            {
+                var Test = (from x in context.Function
+                            join x2 in context.Task on x.TaskId equals x2.TaskId
+                            join x3 in context.Project on x2.ProjectNumber equals x3.ProjectNumber
+                            join x5 in context.TeamTask on x.FunctionId equals x5.FunctionId
                             where x.ProjectNumber.Equals(id) && x5.UserId.Equals(uid.UserId)
                              && !(checkAC.Select(p => p.FunctionId).Contains(x.FunctionId))
 
@@ -185,7 +209,6 @@ namespace ProjectSSMP.Controllers
                                 ProjectNumber = x3.ProjectNumber,
                                 ProjectName = x3.ProjectName,
                                 TaskId = x2.TaskId,
-                                
                                 TaskName = x2.TaskName,
                                 FunctionId = x.FunctionId,
                                 FunctionName = x.FunctionName,
@@ -203,11 +226,51 @@ namespace ProjectSSMP.Controllers
                         FunctionName = item.FunctionName,
                         TaskId = item.TaskId,
                         TaskName = item.TaskName,
-                        
+
 
 
                     });
                 }
+            }
+            else
+            {
+                var Test = (from x in context.Function
+                            join x2 in context.Task on x.TaskId equals x2.TaskId
+                            join x3 in context.Project on x2.ProjectNumber equals x3.ProjectNumber
+                            join x5 in context.TeamTask on x.FunctionId equals x5.FunctionId
+                            where x.ProjectNumber.Equals(id) 
+
+
+                            select new
+                            {
+                                ProjectNumber = x3.ProjectNumber,
+                                ProjectName = x3.ProjectName,
+                                TaskId = x2.TaskId,
+                                TaskName = x2.TaskName,
+                                FunctionId = x.FunctionId,
+                                FunctionName = x.FunctionName,
+                            }).ToList();
+
+                foreach (var item in Test)
+                {
+
+                    model.Add(new TimeSheetInputModel()
+                    {
+
+                        ProjectName = item.ProjectName,
+                        ProjectNumber = item.ProjectNumber,
+                        FunctionId = item.FunctionId,
+                        FunctionName = item.FunctionName,
+                        TaskId = item.TaskId,
+                        TaskName = item.TaskName,
+
+
+
+                    });
+                }
+
+            }
+                
 
             
             

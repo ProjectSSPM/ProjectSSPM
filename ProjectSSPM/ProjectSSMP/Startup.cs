@@ -35,7 +35,9 @@ namespace ProjectSSMP
                      
                  });
             services.AddMvc()
-                .AddSessionStateTempDataProvider();
+                .AddSessionStateTempDataProvider()
+                ;
+
             services.AddSession();
 
             var connection = @"Server=den1.mssql5.gear.host;Initial Catalog=sspm;Integrated Security=False;User ID=sspm;Password=Gi90MMTY!H_i;Connect Timeout=30;Encrypt=False;TrustServerCertificate=True;ApplicationIntent=ReadWrite;MultiSubnetFailover=False";
