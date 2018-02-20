@@ -8,6 +8,7 @@ namespace ProjectSSMP.Models
     {
         public virtual DbSet<Action> Action { get; set; }
         public virtual DbSet<Bulletin> Bulletin { get; set; }
+        public virtual DbSet<BulletinChat> BulletinChat { get; set; }
         public virtual DbSet<DeviceNumber> DeviceNumber { get; set; }
         public virtual DbSet<Function> Function { get; set; }
         public virtual DbSet<FunctionLog> FunctionLog { get; set; }
@@ -33,7 +34,6 @@ namespace ProjectSSMP.Models
         }
         public sspmContext(DbContextOptions<sspmContext> options)
             : base(options) { }
-
         protected override void OnModelCreating(ModelBuilder modelBuilder)
         {
             modelBuilder.Entity<Action>(entity =>
@@ -58,6 +58,27 @@ namespace ProjectSSMP.Models
                 entity.Property(e => e.Subject).HasMaxLength(100);
 
                 entity.Property(e => e.Time).HasColumnType("datetime");
+
+                entity.Property(e => e.UserId)
+                    .HasColumnName("UserID")
+                    .HasMaxLength(10);
+            });
+
+            modelBuilder.Entity<BulletinChat>(entity =>
+            {
+                entity.HasKey(e => new { e.Bnumber, e.Bchat });
+
+                entity.Property(e => e.Bnumber)
+                    .HasColumnName("BNumber")
+                    .HasMaxLength(10);
+
+                entity.Property(e => e.Bchat)
+                    .HasColumnName("BChat")
+                    .HasMaxLength(10);
+
+                entity.Property(e => e.Ctime)
+                    .HasColumnName("CTime")
+                    .HasColumnType("datetime");
 
                 entity.Property(e => e.UserId)
                     .HasColumnName("UserID")

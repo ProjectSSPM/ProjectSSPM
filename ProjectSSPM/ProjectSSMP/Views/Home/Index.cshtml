@@ -1,19 +1,22 @@
 ﻿@model IEnumerable<ProjectSSMP.Models.Timesheet.TimeSheetInputModel>
 @{
     ViewData["Title"] = "Home Page";
-        Layout = "~/Views/Shared/_LayoutMenu.cshtml";
+    Layout = "~/Views/Shared/_LayoutMenu.cshtml";
+}
+@section Styles {
+    <link rel="stylesheet" href="~/css/sortableKanbanBoards.css" />
 }
 
 <div class="container">
-    
+    @*@await Component.InvokeAsync("NToastNotify.Toastr")*@
     <h2 class="well">DashBoard</h2>
     <div class="col-lg-2">
         <div id="sortableKanbanBoards" class="row">
-            @{ 
+            @{
                 IEnumerable<ProjectSSMP.Models.Home.CreateBulletinModel> Bulletin =
                     ViewData["Bulletin"] as IEnumerable<ProjectSSMP.Models.Home.CreateBulletinModel>;
 
-                }
+            }
             <!--sütun başlangıç-->
             <div class="panel panel-primary kanban-col">
                 <div class="panel-heading">
@@ -23,33 +26,33 @@
                     <div id="DOING" class="kanban-centered">
                         @foreach (var item in Bulletin)
                         {
-                        <article class="kanban-entry grab" id="@item.Bnumber" draggable="true">
-                            <div class="kanban-entry-inner">
+                            <article class="kanban-entry grab" id="@item.Bnumber" draggable="true">
+                                <div class="kanban-entry-inner">
 
-                                <div class="kanban-label">
-                               
-                                    <h2>@item.Subject</h2>
-                                    <p>@item.Note</p>
-                                    <p><small class="text-muted"><i class="glyphicon glyphicon-pencil"></i> @item.Username &nbsp <i class="glyphicon glyphicon-time"></i> @item.Time </small></p>
+                                    <div class="kanban-label">
+
+                                        <h2>@item.Subject</h2>
+                                        <p>@item.Note</p>
+                                        <p><small class="text-muted"><i class="glyphicon glyphicon-pencil"></i> @item.Username &nbsp <i class="glyphicon glyphicon-time"></i> @item.Time </small></p>
+                                    </div>
                                 </div>
-                            </div>
-                        </article>
+                            </article>
                         }
 
 
                     </div>
                 </div>
                 <div class="panel-footer">
-                    <a href="javascript:void(0);" class="anchorDetail btn btn-warning btn-sm" >Add New...</a>
+                    <a href="javascript:void(0);" class="anchorDetail btn btn-warning btn-sm">Add New...</a>
                 </div>
             </div>
             <!--sütun bitiş-->
 
-            </div>
+        </div>
     </div>
 
 
-    
+
     <div class="col-lg-10">
         <div class="row">
             @{
@@ -128,7 +131,7 @@
 
 @section scripts
     {
-
+    <script src="~/js/bulletin.js"></script>
 
     <script>
 
