@@ -1,0 +1,36 @@
+﻿@model ProjectSSMP.Models.Home.CreateBulletinModel
+
+
+
+<div class="modal-header">
+    <button type="button" class="close" data-dismiss="modal" aria-hidden="true">×</button>
+    <h4 class="modal-title" id="myModal">Add Bulletin</h4>
+</div>
+
+
+
+<div class="modal-body">
+    <div class="row">
+        <form asp-controller="Home" asp-action="AddBulletin" method="post">
+            
+            <div class="col-sm-8 form-group">
+                <label>Subject</label>
+                <div class="form-group">
+                    <input type="text" asp-for="Subject" name="Subject" id="Subject" placeholder="Enter Subject Here.." class="form-control">
+                </div>
+            </div>
+
+            <div class="col-sm-10">
+                <label>Note</label>
+                <textarea placeholder="Enter Desc Here.." name="Note" id="Note" rows="3" class="form-control"></textarea>
+            </div>
+
+            <div class="col-sm-12 text-right">
+                <button type="submit" class="btn btn-primary">Submit</button>
+            </div>
+
+        </form>
+    </div>
+</div>
+
+    

@@ -7,8 +7,50 @@
 <div class="container">
     
     <h2 class="well">DashBoard</h2>
-    <div class="col-lg-2"></div>
-    <div class="col-lg-10 ">
+    <div class="col-lg-2">
+        <div id="sortableKanbanBoards" class="row">
+            @{ 
+                IEnumerable<ProjectSSMP.Models.Home.CreateBulletinModel> Bulletin =
+                    ViewData["Bulletin"] as IEnumerable<ProjectSSMP.Models.Home.CreateBulletinModel>;
+
+                }
+            <!--sütun başlangıç-->
+            <div class="panel panel-primary kanban-col">
+                <div class="panel-heading">
+                    Bulletin
+                </div>
+                <div class="panel-body">
+                    <div id="DOING" class="kanban-centered">
+                        @foreach (var item in Bulletin)
+                        {
+                        <article class="kanban-entry grab" id="@item.Bnumber" draggable="true">
+                            <div class="kanban-entry-inner">
+
+                                <div class="kanban-label">
+                               
+                                    <h2>@item.Subject</h2>
+                                    <p>@item.Note</p>
+                                    <p><small class="text-muted"><i class="glyphicon glyphicon-pencil"></i> @item.Username &nbsp <i class="glyphicon glyphicon-time"></i> @item.Time </small></p>
+                                </div>
+                            </div>
+                        </article>
+                        }
+
+
+                    </div>
+                </div>
+                <div class="panel-footer">
+                    <a href="javascript:void(0);" class="anchorDetail btn btn-warning btn-sm" >Add New...</a>
+                </div>
+            </div>
+            <!--sütun bitiş-->
+
+            </div>
+    </div>
+
+
+    
+    <div class="col-lg-10">
         <div class="row">
             @{
                 var project = Model.GroupBy(s => s.ProjectName);
@@ -66,14 +108,67 @@
                             </div>
                         </li>
 
-
-
                     </ul>
                 </div>
             }
         </div>
     </div>
 </div>
+
+
+
+<div id='myModal' class='modal'>
+    <div class="modal-dialog">
+        <div class="modal-content">
+            <div id='myModalContent'></div>
+        </div>
+    </div>
+
+</div>
+
+@section scripts
+    {
+
+
+    <script>
+
+        var TeamDetailPostBackURL = '/Home/AddBulletin/';
+        $(function () {
+            $(".anchorDetail").click(function () {
+                //debugger;
+                var $buttonClicked = $(this);
+                var id = $buttonClicked.attr('data-id');
+                var options = { "backdrop": "static", keyboard: true };
+                $.ajax({
+                    type: "GET",
+                    url: TeamDetailPostBackURL,
+                    contentType: "application/json; charset=utf-8",
+                    data: { "Id": id },
+                    datatype: "json",
+                    success: function (data) {
+                        //debugger;
+                        $('#myModalContent').html(data);
+                        $('#myModal').modal(options);
+                        $('#myModal').modal('show');
+
+                    },
+                    error: function () {
+                        alert("Dynamic content load failed.");
+                    }
+                });
+            });
+            //$("#closebtn").on('click',function(){
+            //    $('#myModal').modal('hide');
+
+            $("#closbtn").click(function () {
+                $('#myModal').modal('hide');
+            });
+        });
+
+    </script>
+
+}
+
 
 
 
