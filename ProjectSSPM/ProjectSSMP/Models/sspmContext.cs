@@ -8,6 +8,7 @@ namespace ProjectSSMP.Models
     {
         public virtual DbSet<Action> Action { get; set; }
         public virtual DbSet<Bulletin> Bulletin { get; set; }
+        public virtual DbSet<DeviceNumber> DeviceNumber { get; set; }
         public virtual DbSet<Function> Function { get; set; }
         public virtual DbSet<FunctionLog> FunctionLog { get; set; }
         public virtual DbSet<MenuAuthentication> MenuAuthentication { get; set; }
@@ -20,6 +21,7 @@ namespace ProjectSSMP.Models
         public virtual DbSet<TimeSheet> TimeSheet { get; set; }
         public virtual DbSet<UserAssignGroup> UserAssignGroup { get; set; }
         public virtual DbSet<UserGroup> UserGroup { get; set; }
+        public virtual DbSet<UserImage> UserImage { get; set; }
         public virtual DbSet<UserSspm> UserSspm { get; set; }
 
         protected override void OnConfiguring(DbContextOptionsBuilder optionsBuilder)
@@ -29,8 +31,8 @@ namespace ProjectSSMP.Models
                 optionsBuilder.UseSqlServer(@"Server=den1.mssql5.gear.host;Initial Catalog=sspm;Integrated Security=False;User ID=sspm;Password=Gi90MMTY!H_i;Connect Timeout=30;Encrypt=False;TrustServerCertificate=True;ApplicationIntent=ReadWrite;MultiSubnetFailover=False");
             
         }
-        public sspmContext(DbContextOptions<sspmContext> options)
-            : base(options) { }
+        public sspmContext(DbContextOptions<sspmContext> options) 
+            :base(options) { }
 
         protected override void OnModelCreating(ModelBuilder modelBuilder)
         {
@@ -62,6 +64,20 @@ namespace ProjectSSMP.Models
                 entity.Property(e => e.UserId)
                     .HasColumnName("UserID")
                     .HasMaxLength(10);
+            });
+
+            modelBuilder.Entity<DeviceNumber>(entity =>
+            {
+                entity.HasKey(e => e.UserId);
+
+                entity.Property(e => e.UserId)
+                    .HasColumnName("UserID")
+                    .HasMaxLength(10)
+                    .ValueGeneratedNever();
+
+                entity.Property(e => e.DeviceId).HasMaxLength(50);
+
+                entity.Property(e => e.Status).HasMaxLength(10);
             });
 
             modelBuilder.Entity<Function>(entity =>
@@ -328,6 +344,18 @@ namespace ProjectSSMP.Models
                     .ValueGeneratedNever();
 
                 entity.Property(e => e.GroupName).HasMaxLength(30);
+            });
+
+            modelBuilder.Entity<UserImage>(entity =>
+            {
+                entity.HasKey(e => e.UserId);
+
+                entity.Property(e => e.UserId)
+                    .HasColumnName("UserID")
+                    .HasMaxLength(10)
+                    .ValueGeneratedNever();
+
+                entity.Property(e => e.Image).HasColumnType("binary(255)");
             });
 
             modelBuilder.Entity<UserSspm>(entity =>
