@@ -144,9 +144,9 @@
             forceParse: 0
         });
     </script>
-    
 
 
+    @await Component.InvokeAsync("NToastNotify.Toastr")
 
     @RenderSection("Scripts", required: false)
 </body>
