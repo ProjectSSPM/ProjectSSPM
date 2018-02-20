@@ -47,35 +47,8 @@ namespace ProjectSSMP.Controllers
                                   ua.GroupId,
                                   u.UserId
                               }).FirstOrDefault();
-<<<<<<< HEAD
-            
-=======
-            var checkdate = (from tt in context.TeamTask
-                             join f in context.Function on tt.FunctionId equals f.FunctionId
-                             where tt.UserId.Equals(checkgroup.UserId)
-                             select new
-                             {
-                                 f.FunctionName,
-                                 f.FunctionEnd,
-                                 f.ActualStart
-                                 
-                             });
-            foreach(var cdete in checkdate)
-            {
-                DateTime fend =  (DateTime)cdete.FunctionEnd;
-                DateTime datenow = DateTime.Now;
-                int checkfundae = (int)datenow.Subtract(fend).TotalDays;
-                if(checkfundae <= 1)
-                {
-                    /*
-                    _toastNotification.AddToastMessage("Warning", cdete.FunctionName + " ", Enums.ToastType.Error, new ToastOption()
-                    {
-                        ProgressBar = false,
-                        PositionClass = ToastPositions.TopRight
-                    }); */
-                }
-            }
->>>>>>> aa9ef8fdcd14a763944695017d14bd8dcf436e02
+
+
 
 
 
@@ -174,7 +147,7 @@ namespace ProjectSSMP.Controllers
 
 
             }
-<<<<<<< HEAD
+
             var checkdate = (from tt in context.TeamTask
                              join f in context.Function on tt.FunctionId equals f.FunctionId
                              where tt.UserId.Equals(checkgroup.UserId)
@@ -199,7 +172,7 @@ namespace ProjectSSMP.Controllers
                     });
                 }
             }
-=======
+
             var bulle = (from x in context.Bulletin join x2 in context.UserSspm on x.UserId equals x2.UserId select new{
                             Subject = x.Subject,
                             Bnumber = x.Bnumber,
@@ -221,7 +194,7 @@ namespace ProjectSSMP.Controllers
                     Time = item.Time,
                     UserId = item.UserId,
                     Username = item.Username
->>>>>>> aa9ef8fdcd14a763944695017d14bd8dcf436e02
+
 
 
                 });
