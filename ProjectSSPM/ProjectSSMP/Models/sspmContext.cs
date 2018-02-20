@@ -7,6 +7,7 @@ namespace ProjectSSMP.Models
     public partial class sspmContext : DbContext
     {
         public virtual DbSet<Action> Action { get; set; }
+        public virtual DbSet<Bulletin> Bulletin { get; set; }
         public virtual DbSet<Function> Function { get; set; }
         public virtual DbSet<FunctionLog> FunctionLog { get; set; }
         public virtual DbSet<MenuAuthentication> MenuAuthentication { get; set; }
@@ -26,7 +27,7 @@ namespace ProjectSSMP.Models
             
                 //#warning To protect potentially sensitive information in your connection string, you should move it out of source code. See http://go.microsoft.com/fwlink/?LinkId=723263 for guidance on storing connection strings.
                 optionsBuilder.UseSqlServer(@"Server=den1.mssql5.gear.host;Initial Catalog=sspm;Integrated Security=False;User ID=sspm;Password=Gi90MMTY!H_i;Connect Timeout=30;Encrypt=False;TrustServerCertificate=True;ApplicationIntent=ReadWrite;MultiSubnetFailover=False");
-          
+            
         }
         public sspmContext(DbContextOptions<sspmContext> options)
             : base(options) { }
@@ -41,6 +42,26 @@ namespace ProjectSSMP.Models
                     .ValueGeneratedNever();
 
                 entity.Property(e => e.ActionName).HasMaxLength(30);
+            });
+
+            modelBuilder.Entity<Bulletin>(entity =>
+            {
+                entity.HasKey(e => e.Bnumber);
+
+                entity.Property(e => e.Bnumber)
+                    .HasColumnName("BNumber")
+                    .HasMaxLength(10)
+                    .ValueGeneratedNever();
+
+                entity.Property(e => e.Note).HasColumnType("text");
+
+                entity.Property(e => e.Subject).HasMaxLength(100);
+
+                entity.Property(e => e.Time).HasColumnType("datetime");
+
+                entity.Property(e => e.UserId)
+                    .HasColumnName("UserID")
+                    .HasMaxLength(10);
             });
 
             modelBuilder.Entity<Function>(entity =>
@@ -87,6 +108,10 @@ namespace ProjectSSMP.Models
                 entity.Property(e => e.ActualEnd).HasColumnType("datetime");
 
                 entity.Property(e => e.ActualStart).HasColumnType("datetime");
+
+                entity.Property(e => e.Approve1).HasMaxLength(10);
+
+                entity.Property(e => e.Approve2).HasMaxLength(10);
 
                 entity.Property(e => e.FunctionEnd).HasColumnType("datetime");
 
@@ -259,6 +284,10 @@ namespace ProjectSSMP.Models
                 entity.Property(e => e.ActionId)
                     .HasColumnName("ActionID")
                     .HasColumnType("char(1)");
+
+                entity.Property(e => e.Approve1).HasMaxLength(10);
+
+                entity.Property(e => e.Approve2).HasMaxLength(10);
 
                 entity.Property(e => e.TimeSheetEnd).HasColumnType("datetime");
 

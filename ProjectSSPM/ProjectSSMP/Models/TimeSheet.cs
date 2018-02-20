@@ -14,5 +14,7 @@ namespace ProjectSSMP.Models
         public string TaskId { get; set; }
         public string ProjectNumber { get; set; }
         public string TimeSheetNumber { get; set; }
+        public string Approve1 { get; set; }
+        public string Approve2 { get; set; }
     }
 }
