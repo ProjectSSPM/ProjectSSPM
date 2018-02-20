@@ -31,8 +31,8 @@ namespace ProjectSSMP.Models
                 optionsBuilder.UseSqlServer(@"Server=den1.mssql5.gear.host;Initial Catalog=sspm;Integrated Security=False;User ID=sspm;Password=Gi90MMTY!H_i;Connect Timeout=30;Encrypt=False;TrustServerCertificate=True;ApplicationIntent=ReadWrite;MultiSubnetFailover=False");
             
         }
-        public sspmContext(DbContextOptions<sspmContext> options) 
-            :base(options) { }
+        public sspmContext(DbContextOptions<sspmContext> options)
+            : base(options) { }
 
         protected override void OnModelCreating(ModelBuilder modelBuilder)
         {
@@ -54,8 +54,6 @@ namespace ProjectSSMP.Models
                     .HasColumnName("BNumber")
                     .HasMaxLength(10)
                     .ValueGeneratedNever();
-
-                entity.Property(e => e.Note).HasColumnType("text");
 
                 entity.Property(e => e.Subject).HasMaxLength(100);
 

@@ -20,7 +20,7 @@
         <link href="~/css/bootstrap-datetimepicker.min.css" rel="stylesheet" media="screen">
         <link rel="stylesheet" href="https://cdn.datatables.net/1.10.9/css/jquery.dataTables.min.css" />
         <link rel="stylesheet" href="https://cdn.datatables.net/rowgroup/1.0.2/css/rowGroup.dataTables.min.css" />
-        <link href="~/lib/toastr/toastr.css" rel="stylesheet" />
+
 
     </environment>
     <environment exclude="Development">
@@ -29,6 +29,8 @@
               asp-fallback-test-class="sr-only" asp-fallback-test-property="position" asp-fallback-test-value="absolute" />
         <link rel="stylesheet" href="~/css/site.min.css" asp-append-version="true" />
     </environment>
+
+    <link href="~/lib/toastr/toastr.css" rel="stylesheet" />
 </head>
 <body>
     <div class="container">
@@ -61,7 +63,7 @@
         <script src="https://ajax.aspnetcdn.com/ajax/jquery.validate/1.16.0/jquery.validate.min.js"></script>
         <script src="https://ajax.aspnetcdn.com/ajax/jquery.validation.unobtrusive/3.2.6/jquery.validate.unobtrusive.min.js"></script>
         <script src="~/js/bulletin.js"></script>
-        <script src="~/lib/toastr/toastr.min.js"></script>
+
     </environment>
     <environment exclude="Development">
         <script src="https://ajax.aspnetcdn.com/ajax/jquery/jquery-2.2.0.min.js"
@@ -81,7 +83,7 @@
     </environment>
 
 
-
+    <script src="~/lib/toastr/toastr.min.js"></script>
 
     <script type="text/javascript" src="~/js/bootstrap-datetimepicker.js" charset="UTF-8"></script>
     <script type="text/javascript" src="~/js/locales/bootstrap-datetimepicker.fr.js" charset="UTF-8"></script>
@@ -146,11 +148,11 @@
     </script>
 
 
-
+    
 
     @RenderSection("Scripts", required: false)
 
-    
+
 
 </body>
 </html>
