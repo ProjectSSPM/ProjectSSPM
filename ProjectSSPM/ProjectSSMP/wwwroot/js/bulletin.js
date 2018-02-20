@@ -16,10 +16,7 @@
         function draggableInit() {
             var sourceId;
 
-            //$('[draggable=true]').bind('dragstart', function (event) {
-            //    sourceId = $(this).parent().attr('id');
-            //    event.originalEvent.dataTransfer.setData("text/plain", event.target.getAttribute('id'));
-            //});
+           
 
             $('.panel-body').bind('dragover', function (event) {
                 event.preventDefault();

@@ -36,10 +36,10 @@ namespace ProjectSSMP
                      
                  });
             services.AddMvc()
-                .AddSessionStateTempDataProvider()
+                //.AddSessionStateTempDataProvider()
                 .AddNToastNotify();
 
-            services.AddSession();
+            //services.AddSession();
 
             var connection = @"Server=den1.mssql5.gear.host;Initial Catalog=sspm;Integrated Security=False;User ID=sspm;Password=Gi90MMTY!H_i;Connect Timeout=30;Encrypt=False;TrustServerCertificate=True;ApplicationIntent=ReadWrite;MultiSubnetFailover=False";
             services.AddDbContext<sspmContext>(options => options.UseSqlServer(connection));
@@ -48,7 +48,7 @@ namespace ProjectSSMP
         // This method gets called by the runtime. Use this method to configure the HTTP request pipeline.
         public void Configure(IApplicationBuilder app, IHostingEnvironment env)
         {
-            app.UseSession();
+            //app.UseSession();
             app.UseAuthentication();
             app.UseMvcWithDefaultRoute();
             
@@ -64,7 +64,7 @@ namespace ProjectSSMP
             }
 
             app.UseStaticFiles();
-            
+            app.UseNToastNotify();
 
             app.UseMvc(routes =>
             {

@@ -165,18 +165,23 @@ namespace ProjectSSMP.Controllers
                 int checkfundae = (int)datenow.Subtract(fend).TotalDays;
                 if (checkfundae <= 1)
                 {
-                   
+                    _toastNotification.AddToastMessage("Warning", cdete.FunctionName + "", Enums.ToastType.Error, new ToastOption()
+                    {
+                        PositionClass = ToastPositions.BottomRight
+                    });
                 }
             }
 
-            var bulle = (from x in context.Bulletin join x2 in context.UserSspm on x.UserId equals x2.UserId select new{
+            var bulle = (from x in context.Bulletin join x2 in context.UserSspm on x.UserId equals x2.UserId
+                         orderby x.Time descending
+                         select new{
                             Subject = x.Subject,
                             Bnumber = x.Bnumber,
                             Note = x.Note,
                             Time = x.Time,
                             UserId = x.UserId,
                             Username = x2.Username
-                        }).ToList();
+                        }).Take(5).ToList();
             List<CreateBulletinModel> modelx = new List<CreateBulletinModel>();
 
             foreach (var item in bulle)
