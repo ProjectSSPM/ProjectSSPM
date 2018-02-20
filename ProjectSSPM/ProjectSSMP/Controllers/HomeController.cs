@@ -64,11 +64,12 @@ namespace ProjectSSMP.Controllers
                 int checkfundae = (int)datenow.Subtract(fend).TotalDays;
                 if(checkfundae <= 1)
                 {
+                    /*
                     _toastNotification.AddToastMessage("Warning", cdete.FunctionName + " ", Enums.ToastType.Error, new ToastOption()
                     {
                         ProgressBar = false,
                         PositionClass = ToastPositions.TopRight
-                    });
+                    }); */
                 }
             }
 
@@ -169,7 +170,34 @@ namespace ProjectSSMP.Controllers
 
 
             }
+            var bulle = (from x in context.Bulletin join x2 in context.UserSspm on x.UserId equals x2.UserId select new{
+                            Subject = x.Subject,
+                            Bnumber = x.Bnumber,
+                            Note = x.Note,
+                            Time = x.Time,
+                            UserId = x.UserId,
+                            Username = x2.Username
+                        }).ToList();
+            List<CreateBulletinModel> modelx = new List<CreateBulletinModel>();
 
+            foreach (var item in bulle)
+            {
+
+                modelx.Add(new CreateBulletinModel()
+                {
+                    Subject = item.Subject,
+                    Bnumber = item.Bnumber,
+                    Note = item.Note,
+                    Time = item.Time,
+                    UserId = item.UserId,
+                    Username = item.Username
+
+
+                });
+            }
+
+
+            ViewData["Bulletin"] = modelx;
             return View(model);
 
         }
@@ -195,14 +223,93 @@ namespace ProjectSSMP.Controllers
         }
 
         [Authorize]
-        public ActionResult AddTimeline(string id)
+        public ActionResult AddBulletin()
         {
-            ViewBag.userMenu = GetMenu();
 
-
-
-            return View();
+            return PartialView("AddBulletin");;
         }
+
+        [HttpPost]
+        [ValidateAntiForgeryToken]
+        public async Task<IActionResult> AddBulletin(CreateBulletinModel inputModel)
+        {
+            if (!ModelState.IsValid)
+            {
+                return View();
+            }
+
+
+            try
+            {
+                var loggedInUser = HttpContext.User;
+                var loggedInUserName = loggedInUser.Identity.Name;
+
+                var id = (from u in context.RunningNumber where u.Type.Equals("BNumber") select u).FirstOrDefault();
+                var user = (from u in context.UserSspm where u.Username.Equals(loggedInUserName) select u).FirstOrDefault();
+
+                int num;
+                if (id.Number == null)
+                {
+                    num = 100001;
+
+                }
+                else
+                {
+                    num = Convert.ToInt32(id.Number);
+                    num = num + 1;
+                }
+
+                Models.Bulletin ord = new Models.Bulletin
+                {
+                    UserId = user.UserId,
+                    Subject = inputModel.Subject,
+                    Note = inputModel.Note,
+                    Time = DateTime.Now,
+                    Bnumber = num.ToString(),
+
+                };
+
+
+                // Add the new object to the Orders collection.
+                context.Bulletin.Add(ord);
+                await context.SaveChangesAsync();
+
+
+                var query = from xx in context.RunningNumber
+                            where xx.Type.Equals("BNumber")
+                            select xx;
+
+                foreach (RunningNumber RunTaskID in query)
+                {
+                    RunTaskID.Number = num.ToString();
+
+                }
+
+                // Submit the changes to the database.
+                try
+                {
+                    await context.SaveChangesAsync();
+                }
+                catch (Exception e)
+                {
+                    Console.WriteLine(e);
+                    // Provide for exceptions.
+                }
+
+                return RedirectToAction("Index", "Home");
+
+
+
+            }
+            catch (Exception ex)
+            {
+                var message = ex.Message;
+                return View();
+            }
+
+        }
+
+
 
         [Authorize]
         public IActionResult Result(string id)
