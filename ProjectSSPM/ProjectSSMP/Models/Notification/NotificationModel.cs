@@ -7,5 +7,10 @@ namespace ProjectSSMP.Models.Notification
 {
     public class NotificationModel
     {
+        public string FunctionId { get; set; }
+        public string TaskId { get; set; }
+        public string FunctionName { get; set; }
+        public DateTime? FunctionStart { get; set; }
+        public DateTime? FunctionEnd { get; set; }
     }
 }

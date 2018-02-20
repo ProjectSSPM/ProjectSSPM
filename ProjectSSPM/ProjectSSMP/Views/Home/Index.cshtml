@@ -135,7 +135,7 @@
         var TeamDetailPostBackURL = '/Home/AddBulletin/';
         $(function () {
             $(".anchorDetail").click(function () {
-                //debugger;
+                debugger;
                 var $buttonClicked = $(this);
                 var id = $buttonClicked.attr('data-id');
                 var options = { "backdrop": "static", keyboard: true };
@@ -146,7 +146,7 @@
                     data: { "Id": id },
                     datatype: "json",
                     success: function (data) {
-                        //debugger;
+                        debugger;
                         $('#myModalContent').html(data);
                         $('#myModal').modal(options);
                         $('#myModal').modal('show');

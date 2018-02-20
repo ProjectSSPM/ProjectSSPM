@@ -165,11 +165,7 @@ namespace ProjectSSMP.Controllers
                 int checkfundae = (int)datenow.Subtract(fend).TotalDays;
                 if (checkfundae <= 1)
                 {
-                    _toastNotification.AddToastMessage("Warning", cdete.FunctionName + " ", Enums.ToastType.Error, new ToastOption()
-                    {
-                        ProgressBar = false,
-                        PositionClass = ToastPositions.TopRight
-                    });
+                   
                 }
             }
 
