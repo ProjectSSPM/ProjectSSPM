@@ -47,30 +47,7 @@ namespace ProjectSSMP.Controllers
                                   ua.GroupId,
                                   u.UserId
                               }).FirstOrDefault();
-            var checkdate = (from tt in context.TeamTask
-                             join f in context.Function on tt.FunctionId equals f.FunctionId
-                             where tt.UserId.Equals(checkgroup.UserId)
-                             select new
-                             {
-                                 f.FunctionName,
-                                 f.FunctionEnd,
-                                 f.ActualStart
-                                 
-                             });
-            foreach(var cdete in checkdate)
-            {
-                DateTime fend =  (DateTime)cdete.FunctionEnd;
-                DateTime datenow = DateTime.Now;
-                int checkfundae = (int)datenow.Subtract(fend).TotalDays;
-                if(checkfundae <= 1)
-                {
-                    _toastNotification.AddToastMessage("Warning", cdete.FunctionName + " ", Enums.ToastType.Error, new ToastOption()
-                    {
-                        ProgressBar = false,
-                        PositionClass = ToastPositions.TopRight
-                    });
-                }
-            }
+            
 
 
 
@@ -168,6 +145,30 @@ namespace ProjectSSMP.Controllers
                 }
 
 
+            }
+            var checkdate = (from tt in context.TeamTask
+                             join f in context.Function on tt.FunctionId equals f.FunctionId
+                             where tt.UserId.Equals(checkgroup.UserId)
+                             select new
+                             {
+                                 f.FunctionName,
+                                 f.FunctionEnd,
+                                 f.ActualStart
+
+                             });
+            foreach (var cdete in checkdate)
+            {
+                DateTime fend = (DateTime)cdete.FunctionEnd;
+                DateTime datenow = DateTime.Now;
+                int checkfundae = (int)datenow.Subtract(fend).TotalDays;
+                if (checkfundae <= 1)
+                {
+                    _toastNotification.AddToastMessage("Warning", cdete.FunctionName + " ", Enums.ToastType.Error, new ToastOption()
+                    {
+                        ProgressBar = false,
+                        PositionClass = ToastPositions.TopRight
+                    });
+                }
             }
 
             return View(model);
