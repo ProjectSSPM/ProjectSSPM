@@ -40,6 +40,12 @@ namespace ProjectSSMP.Controllers
                                   ua.GroupId,
                                   u.UserId
                               }).FirstOrDefault();
+            
+
+
+
+
+
             List<TimeSheetInputModel> model = new List<TimeSheetInputModel>();
 
             if (checkgroup.GroupId == "50")

@@ -10,34 +10,77 @@ using Newtonsoft.Json;
 using ProjectSSMP.Models.Timeline;
 using ProjectSSMP.Models.Timesheet;
 using ProjectSSMP.Models.Home;
+using System.Globalization;
+using System.Threading;
+using NToastNotify;
 
 namespace ProjectSSMP.Controllers
 {
     public class HomeController : BaseController         
     {
-        public HomeController(sspmContext context) => this.context = context;
+        private readonly IToastNotification _toastNotification;
 
+        
+        public HomeController(sspmContext context ,IToastNotification toastNotification) //=> this.context = context;
+        {
+            this.context = context;
+            CultureInfo en = new CultureInfo("en-US");
+            Thread.CurrentThread.CurrentCulture = en;
+            _toastNotification = toastNotification;
+
+        }
         [Authorize]
         public IActionResult Index()
         {
+           
 
             var loggedInUser = HttpContext.User;
             var loggedInUserName = loggedInUser.Identity.Name;
             ViewBag.userMenu = GetMenu();
+           
+
             var checkgroup = (from u in context.UserSspm
                               join ua in context.UserAssignGroup on u.UserId equals ua.UserId
+                              where u.Username.Equals(loggedInUserName)
                               select new
                               {
-                                  ua.GroupId
+                                  ua.GroupId,
+                                  u.UserId
                               }).FirstOrDefault();
+            var checkdate = (from tt in context.TeamTask
+                             join f in context.Function on tt.FunctionId equals f.FunctionId
+                             where tt.UserId.Equals(checkgroup.UserId)
+                             select new
+                             {
+                                 f.FunctionName,
+                                 f.FunctionEnd,
+                                 f.ActualStart
+                                 
+                             });
+            foreach(var cdete in checkdate)
+            {
+                DateTime fend =  (DateTime)cdete.FunctionEnd;
+                DateTime datenow = DateTime.Now;
+                int checkfundae = (int)datenow.Subtract(fend).TotalDays;
+                if(checkfundae <= 1)
+                {
+                    //_toastNotification.AddToastMessage("Warning", cdete.FunctionName + " ", Enums.ToastType.Error, new ToastOption()
+                    //{
+                    //    ProgressBar = false,
+                    //    PositionClass = ToastPositions.TopRight
+                    //});
+                }
+            }
+
+
+
             List<TimeSheetInputModel> model = new List<TimeSheetInputModel>();
 
             if (checkgroup.GroupId == "50")
             {
-                var PJ = (from x in context.UserSspm
-                          join x2 in context.TeamTask on x.UserId equals x2.UserId
+                var PJ = (from x2 in context.TeamTask
                           join x3 in context.Project on x2.ProjectNumber equals x3.ProjectNumber
-                          where x3.ProjectManager.Equals(x.UserId) || x.Username.Equals(loggedInUserName)
+                          where x3.ProjectManager.Equals(checkgroup.UserId) || x2.UserId.Equals(checkgroup.UserId)
                           select new
                           {
 
@@ -46,10 +89,14 @@ namespace ProjectSSMP.Controllers
                               ProjectId = x3.ProjectId,
                               Note = x3.Note,
                               ProjectEnd = x3.ProjectEnd,
+                              ProjectStart = x3.ProjectStart
 
                           });
+
                 foreach (var item in PJ)
                 {
+                    
+                   
 
                     model.Add(new TimeSheetInputModel()
                     {
@@ -66,10 +113,9 @@ namespace ProjectSSMP.Controllers
             }
             else if (checkgroup.GroupId == "10")
             {
-                var PJ = (from x in context.UserSspm
-                          join x2 in context.TeamTask on x.UserId equals x2.UserId
+                var PJ = (from x2 in context.TeamTask
                           join x3 in context.Project on x2.ProjectNumber equals x3.ProjectNumber
-                          where x.Username.Equals(loggedInUserName)
+                          where x2.UserId.Equals(checkgroup.UserId)
                           select new
                           {
                               ProjectNumber = x3.ProjectNumber,
@@ -96,6 +142,31 @@ namespace ProjectSSMP.Controllers
             }
             else
             {
+                var PJ = (from x in context.UserSspm
+                          join x2 in context.TeamTask on x.UserId equals x2.UserId
+                          join x3 in context.Project on x2.ProjectNumber equals x3.ProjectNumber
+                          //where x3.ProjectManager.Equals(x.UserId) || x.Username.Equals(loggedInUserName)
+                          select new
+                          {
+                              ProjectNumber = x3.ProjectNumber,
+                              ProjectName = x3.ProjectName,
+                              ProjectId = x3.ProjectId,
+                              Note = x3.Note,
+                              ProjectEnd = x3.ProjectEnd,
+                          });
+                foreach (var item in PJ)
+                {
+
+                    model.Add(new TimeSheetInputModel()
+                    {
+                        ProjectId = item.ProjectId,
+                        ProjectName = item.ProjectName,
+                        ProjectNumber = item.ProjectNumber,
+                        Note = item.Note,
+                        ProjectEnd = item.ProjectEnd
+                    });
+                }
+
 
             }
 

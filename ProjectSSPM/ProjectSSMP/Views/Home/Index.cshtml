@@ -4,74 +4,76 @@
         Layout = "~/Views/Shared/_LayoutMenu.cshtml";
 }
 
-    <div class="container">
-
+<div class="container">
+    @await Component.InvokeAsync("NToastNotify.Toastr")
     <h2 class="well">DashBoard</h2>
     <div class="col-lg-2"></div>
-    <div class="col-lg-10 "> 
+    <div class="col-lg-10 ">
         <div class="row">
-        @{ 
-            var project = Model.GroupBy(s => s.ProjectName);
-        }
-            @foreach(var item in project)
-        {
+            @{
+                var project = Model.GroupBy(s => s.ProjectName);
+            }
+            @foreach (var item in project)
+            {
 
-            <div class="[ col-xs-12 col-sm-offset-2 col-sm-8 ]">
-                <ul class="event-list">
-                    <li>
-                        @{ 
-                              var pronum = item.GroupBy(s => s.ProjectNumber);
-                              var proid = item.GroupBy(s => s.ProjectId);
-                              var pronote = item.GroupBy(s => s.Note);
-                              var proend = item.GroupBy(s => s.ProjectEnd);
-                         }
-                        
-                        <time datetime="2014-07-20">
-                            <span class="day">4</span>
-                            <span class="month">Jul</span>
-                            <span class="year">2014</span>
-                            <span class="time">ALL DAY</span>
-                        </time>
-                        <div class="info">
-                            <h2 class="title">@item.Key</h2>
-                                
-                                @foreach(var itemnum in pronum)
-                                    {
-                                     <input type = "hidden" value = "@itemnum.Key" name = "ProjectNumber" id = "ProjectNumber" />
-                                    }
-
-                            <p class="desc">
-                                @foreach(var itemnote in pronote){
-                                         @itemnote.Key
-                                }
-                            </p>
-
-                        </div>
-                        <div class="social">
-                            @foreach(var itemnum in pronum){
-                            <ul>
-                                <li class="google-plus" style="width:33%;"><a asp-action = "CheckTimeline" asp-route-id="@itemnum.Key"><span class="fa fa-arrow-right"></span></a></li>
-                            </ul>
-                            <ul>
-                                <li class="facebook" style="width:33%;"><a href="/ProjectManagement/"><span class="fa fa-gear"></span></a></li>
-                            </ul>
-
-                            <ul>
-                                <li class="twitter" style="width:33%;"><a asp-action = "Result" asp-route-id="@itemnum.Key"><span class="fa fa-file-text-o"></span></a></li>
-                            </ul>
-
+                <div class="[ col-xs-12 col-sm-offset-2 col-sm-8 ]">
+                    <ul class="event-list">
+                        <li>
+                            @{
+                                var pronum = item.GroupBy(s => s.ProjectNumber);
+                                var proid = item.GroupBy(s => s.ProjectId);
+                                var pronote = item.GroupBy(s => s.Note);
+                                var proend = item.GroupBy(s => s.ProjectEnd);
                             }
-                        </div>
-                    </li>
+
+                            <time datetime="2014-07-20">
+                                <span class="day">4</span>
+                                <span class="month">Jul</span>
+                                <span class="year">2014</span>
+                                <span class="time">ALL DAY</span>
+                            </time>
+                            <div class="info">
+                                <h2 class="title">@item.Key</h2>
+
+                                @foreach (var itemnum in pronum)
+                                {
+                                    <input type="hidden" value="@itemnum.Key" name="ProjectNumber" id="ProjectNumber" />
+                                }
+
+                                <p class="desc">
+                                    @foreach (var itemnote in pronote)
+                                    {
+                                        @itemnote.Key
+                                    }
+                                </p>
+
+                            </div>
+                            <div class="social">
+                                @foreach (var itemnum in pronum)
+                                {
+                                    <ul>
+                                        <li class="google-plus" style="width:33%;"><a asp-action="CheckTimeline" asp-route-id="@itemnum.Key"><span class="fa fa-arrow-right"></span></a></li>
+                                    </ul>
+                                    <ul>
+                                        <li class="facebook" style="width:33%;"><a href="/ProjectManagement/"><span class="fa fa-gear"></span></a></li>
+                                    </ul>
+
+                                    <ul>
+                                        <li class="twitter" style="width:33%;"><a asp-action="Result" asp-route-id="@itemnum.Key"><span class="fa fa-file-text-o"></span></a></li>
+                                    </ul>
+
+                                }
+                            </div>
+                        </li>
 
 
 
-                </ul>
-            </div>
+                    </ul>
+                </div>
             }
         </div>
     </div>
-    </div>
+</div>
 
 
 

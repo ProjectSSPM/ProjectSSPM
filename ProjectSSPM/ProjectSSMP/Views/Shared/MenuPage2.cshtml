@@ -4,7 +4,7 @@
         <nav class="gn-menu-wrapper">
             <div class="gn-scroller">
                 <ul class="gn-menu">
-                    @{ 
+                    @{
                         var userMenu = ViewBag.userMenu;
                         foreach (var data in userMenu)
                         {
@@ -15,19 +15,41 @@
 
                         }
                     }
-                    
+
                     @*<li>
-                        <a class="gn-icon gn-icon-pencil">Settings</a>
-                    </li>*@
-                    
-                    
+                            <a class="gn-icon gn-icon-pencil">Settings</a>
+                        </li>*@
+
+
                 </ul>
             </div>
             <!-- /gn-scroller -->
         </nav>
     </li>
-    
+    <li class="dropdown">
+        <a class="dropdown-toggle" data-toggle="dropdown" href="#" aria-expanded="false">
+            <i class="fa fa-envelope fa-fw"></i> <i class="fa fa-caret-down"></i>
+        </a>
+        <ul class="dropdown-menu dropdown-messages">
+            <li>
+                <a href="#">
+                    <div>
+                        <strong>John Smith</strong>
+                        <span class="pull-right text-muted">
+                            <em>Yesterday</em>
+                        </span>
+                    </div>
+                    <div>Lorem ipsum dolor sit amet, consectetur adipiscing elit. Pellentesque eleifend...</div>
+                </a>
+            </li>
+            <li class="divider"></li>
+
+
+        </ul>
+        <!-- /.dropdown-messages -->
+    </li>
+
     <li>
-        <a class=" gn-icon gn-icon-power" asp-controller="Security" asp-action="Logout" ><span>logout</span></a>
+        <a class=" gn-icon gn-icon-power" asp-controller="Security" asp-action="Logout"><span>logout</span></a>
     </li>
 </ul>

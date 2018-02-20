@@ -11,6 +11,7 @@ using Microsoft.Extensions.DependencyInjection;
 using ProjectSSMP.Models;
 using Microsoft.AspNetCore.Localization;
 using System.Globalization;
+using NToastNotify;
 
 namespace ProjectSSMP
 {
@@ -36,7 +37,7 @@ namespace ProjectSSMP
                  });
             services.AddMvc()
                 .AddSessionStateTempDataProvider()
-                ;
+                .AddNToastNotify();
 
             services.AddSession();
 
@@ -50,6 +51,7 @@ namespace ProjectSSMP
             app.UseSession();
             app.UseAuthentication();
             app.UseMvcWithDefaultRoute();
+            app.UseNToastNotify();
             //var supportedCultures = new[]
             //{
             //    new CultureInfo("en"),
@@ -75,6 +77,7 @@ namespace ProjectSSMP
             }
 
             app.UseStaticFiles();
+            
 
             app.UseMvc(routes =>
             {
