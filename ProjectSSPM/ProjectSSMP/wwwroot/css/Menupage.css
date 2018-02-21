@@ -70,12 +70,7 @@
         border-right: none;
         border-left: 1px solid #ececec;
     }
-    .gn-menu-main > li:nth-last-child(1)   {
-        float: right;
-        border-right: none;
-        border-left: 1px solid #ececec;
-    }
-    .gn-menu-main > li:nth-last-child(2) {
+     .gn-menu-main > li:nth-last-child(2) {
         float: right;
         border-right: none;
         border-left: 1px solid #ececec;
@@ -264,6 +259,11 @@
         height: 60px;
     }
 
-
+.badge-notify {
+    background: red;
+    position: relative;
+    top: -10px;
+    left: -10px;
+}
 
 

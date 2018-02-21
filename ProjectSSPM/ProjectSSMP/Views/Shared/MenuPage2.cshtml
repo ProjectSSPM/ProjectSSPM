@@ -10,6 +10,7 @@
                         {
                             <li>
                                 <a href="@data.MenuUrl" class="@data.MenuIcon">@data.MenuName</a>
+
                             </li>
 
 
@@ -31,35 +32,50 @@
 
     </li>
 
-    <li class="dropdown" >
-        <a class="dropdown-toggle" data-toggle="dropdown" href="#" aria-expanded="true">
-            <i class="fa fa-envelope fa-fw"></i> <i class="fa fa-caret-down"></i>
-        </a>
-        <ul class="dropdown-menu" style="width: 310px;">
-            <li>
-                <a href="#">
-                    <div>
-                        <strong>John Smith</strong>
-                        <span class="pull-right text-muted">
-                            <em>Yesterday</em>
-                        </span>
-                    </div>
-                    <div>Lorem </div>
-                </a>
-            </li>
-
-        </ul>
-    </li>
-    
+    @{
+        var nothi = ViewBag.nothi;
+        IEnumerable<ProjectSSMP.Models.Notification.NotificationModel> nothi2 =
+            ViewBag.nothi as IEnumerable<ProjectSSMP.Models.Notification.NotificationModel>;
+        var counothi = nothi2.Count();
+    }
     <li>
 
 
-        
-                <a class=" gn-icon gn-icon-power" asp-controller="Security" asp-action="Logout"><span>logout</span></a>
-        
-        
+
+        <a class=" gn-icon gn-icon-power" asp-controller="Security" asp-action="Logout"><span>logout</span></a>
+
+
 
 
     </li>
+    <li class="dropdown ">
+        <a class="dropdown-toggle" data-toggle="dropdown" href="#" aria-expanded="true">
+            <i class="fa fa-bell fa-fw"></i> <span class="badge badge-notify">@counothi.ToString()</span>
+            
+        </a>
+        <ul class="dropdown-menu dropdown-menu-left"  >
+            @foreach (var itme in nothi2)
+            {
+
+                <li>
+                    <a asp-action="TimeSheet" asp-controller="TimeSheet" asp-route-id="@itme.ProjectNumber">
+                        
+                        <div>
+                            <strong>Function นี้ไกล้สิ้นสุด</strong>
+                            <span class="pull-right text-muted">
+                                <em>@Convert.ToString(string.Format("{0:dd MMMM yyyy}", itme.FunctionEnd))</em>
+                            </span>
+                        </div>
+                        <div>@itme.FunctionName</div>
+                    </a>
+                </li>
+
+            }
+
+
+        </ul>
+    </li>
+
+
 
 </ul>

@@ -32,6 +32,7 @@ namespace ProjectSSMP.Controllers
             var loggedInUser = HttpContext.User;
             var loggedInUserName = loggedInUser.Identity.Name;
             ViewBag.userMenu = GetMenu();
+            ViewBag.nothi = Nothi();
             var checkgroup = (from u in context.UserSspm
                               join ua in context.UserAssignGroup on u.UserId equals ua.UserId
                               where u.Username.Equals(loggedInUserName)
@@ -143,6 +144,7 @@ namespace ProjectSSMP.Controllers
         {
 
             ViewBag.userMenu = GetMenu();
+            ViewBag.nothi = Nothi();
             var loggedInUser = HttpContext.User;
             var loggedInUserName = loggedInUser.Identity.Name;
             
@@ -294,7 +296,7 @@ namespace ProjectSSMP.Controllers
         public async Task<IActionResult> AddTimeSheet(String id){
 
             ViewBag.userMenu = GetMenu();
-
+            ViewBag.nothi = Nothi();
             if (id == null)
             {
                 return NotFound();
@@ -395,6 +397,7 @@ namespace ProjectSSMP.Controllers
         {
 
             ViewBag.userMenu = GetMenu();
+            ViewBag.nothi = Nothi();
             var loggedInUser = HttpContext.User;
             var loggedInUserName = loggedInUser.Identity.Name;
 

@@ -12,5 +12,6 @@ namespace ProjectSSMP.Models.Notification
         public string FunctionName { get; set; }
         public DateTime? FunctionStart { get; set; }
         public DateTime? FunctionEnd { get; set; }
+        public string ProjectNumber { get; set; }
     }
 }

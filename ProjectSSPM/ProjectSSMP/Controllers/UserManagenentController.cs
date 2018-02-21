@@ -22,6 +22,7 @@ namespace ProjectSSMP.Controllers
         {
             
             ViewBag.userMenu = GetMenu();
+            ViewBag.nothi = Nothi();
             List<IndexUserModel> model = new List<IndexUserModel>();
 
             var indexUserModel = (from x in context.UserSspm
@@ -72,7 +73,7 @@ namespace ProjectSSMP.Controllers
         {
 
             ViewBag.userMenu = GetMenu();
-
+            ViewBag.nothi = Nothi();
             return View();
         }
 
@@ -177,7 +178,7 @@ namespace ProjectSSMP.Controllers
         {
             
             ViewBag.userMenu = GetMenu();
-
+            ViewBag.nothi = Nothi();
             if (id == null)
             {
                 return NotFound();
@@ -219,8 +220,8 @@ namespace ProjectSSMP.Controllers
             var loggedInUser = HttpContext.User;
             var loggedInUserName = loggedInUser.Identity.Name;
             ViewBag.userMenu = GetMenu();
+            ViewBag.nothi = Nothi();
 
-            
 
             var query = (from x in context.UserSspm where x.UserId.Equals(id) select x).FirstOrDefault();
             if (id != query.UserId)

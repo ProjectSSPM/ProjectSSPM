@@ -29,7 +29,7 @@ namespace ProjectSSMP.Controllers
 
         public async Task<IActionResult> Index()
         {
-            
+            ViewBag.nothi = Nothi();
             ViewBag.userMenu = GetMenu();
 
             List<IndexProjectModel> model = new List<IndexProjectModel>();
@@ -371,6 +371,7 @@ namespace ProjectSSMP.Controllers
         {
             
             ViewBag.userMenu = GetMenu();
+            ViewBag.nothi = Nothi();
             ViewData["UserSSPM"] = new SelectList(context.UserSspm.Join(context.UserAssignGroup,
                                                 u => u.UserId,
                                                 ua => ua.UserId,
@@ -403,6 +404,7 @@ namespace ProjectSSMP.Controllers
         {
             
             ViewBag.userMenu = GetMenu();
+            ViewBag.nothi = Nothi();
 
             if (id == null)
             {
@@ -624,6 +626,7 @@ namespace ProjectSSMP.Controllers
         {
             
             ViewBag.userMenu = GetMenu();
+            ViewBag.nothi = Nothi();
 
             if (id == null)
             {

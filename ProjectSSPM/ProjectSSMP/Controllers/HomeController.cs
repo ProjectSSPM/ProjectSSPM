@@ -37,7 +37,10 @@ namespace ProjectSSMP.Controllers
             var loggedInUser = HttpContext.User;
             var loggedInUserName = loggedInUser.Identity.Name;
             ViewBag.userMenu = GetMenu();
-           
+            ViewBag.nothi = Nothi();
+            
+
+
 
             var checkgroup = (from u in context.UserSspm
                               join ua in context.UserAssignGroup on u.UserId equals ua.UserId
@@ -50,7 +53,7 @@ namespace ProjectSSMP.Controllers
 
 
 
-
+           
 
             List<TimeSheetInputModel> model = new List<TimeSheetInputModel>();
 
@@ -241,7 +244,7 @@ namespace ProjectSSMP.Controllers
             var b = (from x in context.Bulletin
                      join x2 in context.UserSspm on x.UserId equals x2.UserId
                      where x.Bnumber.Equals(bid)
-                     select new
+                     select new CreateBulletinModel
                      {
                          Subject = x.Subject,
                          Bnumber = x.Bnumber,
@@ -249,25 +252,25 @@ namespace ProjectSSMP.Controllers
                          Time = x.Time,
                          UserId = x.UserId,
                          Username = x2.Username
-                     }).SingleOrDefault();
+                     }).FirstOrDefault();
 
-            var bc = (from c in context.Bulletin
-                      join c1 in context.BulletinChat on c.Bnumber equals c1.Bnumber
-                      join u in context.UserSspm on c1.UserId equals u.UserId
-                      where c.Bnumber.Equals(bid)
-                      select new
-                      {
-                          CUserId = c1.UserId,
-                          Bnumber = c.Bnumber,
-                          CUsername = u.Username,
-                          BChat = c1.Bchat,
-                          CTime = c1.Ctime,
-                          Chat = c1.Chat,
-                      }).ToList();
+            //var bc = (from c in context.Bulletin
+            //          join c1 in context.BulletinChat on c.Bnumber equals c1.Bnumber
+            //          join u in context.UserSspm on c1.UserId equals u.UserId
+            //          where c.Bnumber.Equals(bid)
+            //          select new
+            //          {
+            //              CUserId = c1.UserId,
+            //              Bnumber = c.Bnumber,
+            //              CUsername = u.Username,
+            //              BChat = c1.Bchat,
+            //              CTime = c1.Ctime,
+            //              Chat = c1.Chat,
+            //          }).ToList();
 
 
             ViewData["Subject"] = b;
-            ViewData["Chat"] = bc;
+            //ViewData["Chat"] = bc;
             return PartialView("ChatBulletin") ;
         }
 
@@ -357,6 +360,7 @@ namespace ProjectSSMP.Controllers
         public IActionResult Result(string id)
         {
             ViewBag.userMenu = GetMenu();
+            ViewBag.nothi = Nothi();
 
 
             var pjd = (from p in context.Project join u in context.UserSspm on p.ProjectManager equals u.UserId
@@ -437,6 +441,7 @@ namespace ProjectSSMP.Controllers
         public IActionResult CheckTimeline(string id)
         {
             ViewBag.userMenu = GetMenu();
+            ViewBag.nothi = Nothi();
             if (id == null)
             {
                 return NotFound();

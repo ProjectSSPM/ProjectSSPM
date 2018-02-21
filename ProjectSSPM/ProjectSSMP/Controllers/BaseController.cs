@@ -43,14 +43,27 @@ namespace ProjectSSMP.Controllers
             var loggedInUser = HttpContext.User;
             var loggedInUserName = loggedInUser.Identity.Name;
             var userid = (from u in context.UserSspm where u.Username.Equals(loggedInUserName) select u).FirstOrDefault();
+            var checkfri = (from ts in context.TimeSheet
+                            where ts.ActionId.Equals("Z")
+                            group ts by ts.FunctionId into tsgr
+                            select new {
+                                Key = tsgr.Key
+                            }).ToList();
+
+
             var checkdate = (from tt in context.TeamTask
                              join f in context.Function on tt.FunctionId equals f.FunctionId
-                             where tt.UserId.Equals(userid.UserId)
+
+                             where tt.UserId.Equals(userid.UserId) && !(checkfri.Select(p => p.Key).Contains(f.FunctionId))
                              select new
                              {
                                  f.FunctionName,
                                  f.FunctionEnd,
-                                 f.ActualStart
+                                 f.ActualStart,
+                                 f.TaskId,
+                                 f.FunctionId,
+                                 f.ProjectNumber
+
 
                              });
             List<NotificationModel> model = new List<NotificationModel>();
@@ -61,7 +74,15 @@ namespace ProjectSSMP.Controllers
                 int checkfundae = (int)datenow.Subtract(fend).TotalDays;
                 if (checkfundae <= 1)
                 {
+                    model.Add(new NotificationModel() {
+                        TaskId =cdete.TaskId,
+                        FunctionName = cdete.FunctionName,
+                        FunctionId = cdete.FunctionId,
+                        FunctionStart = cdete.ActualStart,
+                        FunctionEnd = cdete.FunctionEnd,
+                        ProjectNumber = cdete.ProjectNumber
 
+                    });
                    
                 }
 
