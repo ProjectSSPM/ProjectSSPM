@@ -46,6 +46,7 @@
             text-transform: uppercase;
             letter-spacing: 1px;
             font-weight: bold;
+            
         }
         
 
@@ -65,6 +66,16 @@
     }
 
     .gn-menu-main > li:last-child {
+        float: right;
+        border-right: none;
+        border-left: 1px solid #ececec;
+    }
+    .gn-menu-main > li:nth-last-child(1)   {
+        float: right;
+        border-right: none;
+        border-left: 1px solid #ececec;
+    }
+    .gn-menu-main > li:nth-last-child(2) {
         float: right;
         border-right: none;
         border-left: 1px solid #ececec;
