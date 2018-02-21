@@ -236,26 +236,27 @@ namespace ProjectSSMP.Controllers
         }
 
         [Authorize]
-        public ActionResult ChatBulletin(String bid)
+        public ActionResult ChatBulletin(String Id)
         {
             var b = (from x in context.Bulletin
                      join x2 in context.UserSspm on x.UserId equals x2.UserId
-                     where x.Bnumber.Equals(bid)
-                     select new
+                     where x.Bnumber.Equals(Id)
+                     select new CreateBulletinModel
                      {
                          Subject = x.Subject,
                          Bnumber = x.Bnumber,
                          Note = x.Note,
                          Time = x.Time,
                          UserId = x.UserId,
-                         Username = x2.Username
+                         Username = x2.Username,
+                        Name = x2.Firstname+" "+x2.Lastname
                      }).SingleOrDefault();
 
             var bc = (from c in context.Bulletin
                       join c1 in context.BulletinChat on c.Bnumber equals c1.Bnumber
                       join u in context.UserSspm on c1.UserId equals u.UserId
-                      where c.Bnumber.Equals(bid)
-                      select new
+                      where c.Bnumber.Equals(Id)
+                      select new 
                       {
                           CUserId = c1.UserId,
                           Bnumber = c.Bnumber,
@@ -263,12 +264,99 @@ namespace ProjectSSMP.Controllers
                           BChat = c1.Bchat,
                           CTime = c1.Ctime,
                           Chat = c1.Chat,
+                CFullname = u.Firstname+" "+u.Lastname
                       }).ToList();
+
+            List<ChatBulletinModel> model = new List<ChatBulletinModel>();
+
+            foreach (var item in bc)
+            {
+
+                model.Add(new ChatBulletinModel()
+                {
+                    Bchat = item.BChat,
+                    Bnumber = item.Bnumber,
+                    Ctime = item.CTime,
+                    CUserId = item.CUserId,
+                    CUsername = item.CUsername,
+                    Chat = item.Chat,
+                    CFullname = item.CFullname
+
+                });
+            }
+
 
 
             ViewData["Subject"] = b;
-            ViewData["Chat"] = bc;
+            ViewData["Chat"] = model;
             return PartialView("ChatBulletin") ;
+        }
+
+        [HttpPost]
+        [ValidateAntiForgeryToken]
+        public async Task<IActionResult> ChatBulletin(CreateBulletinModel inputModel)
+        {
+
+            if (!ModelState.IsValid)
+            {
+                return View();
+            }
+
+
+            try
+            {
+                var loggedInUser = HttpContext.User;
+                var loggedInUserName = loggedInUser.Identity.Name;
+
+                var user = (from u in context.UserSspm where u.Username.Equals(loggedInUserName) select u).FirstOrDefault();
+
+                var ChatNum = (from x in context.BulletinChat
+                               where x.Bnumber.Equals(inputModel.Bnumber)
+                               orderby x.Bchat descending
+                              select x
+
+                          ).FirstOrDefault();
+
+                Boolean X = Boolean.ReferenceEquals(ChatNum, null);
+
+                int num;
+                if (X)
+                {
+                    num = 100000;
+
+                }
+                else
+                {
+                    num = Convert.ToInt32(ChatNum.Bchat);
+                    num = num + 1;
+                }
+
+                Models.BulletinChat ord = new Models.BulletinChat
+                {
+                    UserId = user.UserId,
+                    Chat = inputModel.Chat,
+                    Ctime = DateTime.Now,
+                    Bnumber = inputModel.Bnumber,
+                    Bchat = num.ToString(),
+                };
+
+
+                // Add the new object to the Orders collection.
+                context.BulletinChat.Add(ord);
+                await context.SaveChangesAsync();
+
+
+                return RedirectToAction("Index", "Home");
+
+
+
+            }
+            catch (Exception ex)
+            {
+                var message = ex.Message;
+                return View();
+            }
+
         }
 
         [HttpPost]

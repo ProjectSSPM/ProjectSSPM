@@ -2,26 +2,101 @@
 
 
 
+
 <div class="modal-header">
     <button type="button" class="close" data-dismiss="modal" aria-hidden="true">×</button>
-    <h4 class="modal-title" id="myModal">Bulletin</h4>
+    @{
+        ProjectSSMP.Models.Home.CreateBulletinModel Subject =
+        ViewData["Subject"] as ProjectSSMP.Models.Home.CreateBulletinModel;
+    }
+    <h4 class="modal-title" id="myModal">@Subject.Subject</h4>
 </div>
 
 
 
 <div class="modal-body">
     <div class="container">
-    <div class="row">
-            <div class="well">
+        <div class="row">
+                <!-- HEAD -->
+                <div class="col-sm-6">
+                    <div id="Head" class="testimonial testimonial-primary-filled">
+                        <div class="testimonial-section">
+                            @Subject.Note
+                        </div>
+                        <div class="testimonial-desc">
+                            <img src="https://benmo.re/narutoroyal/wp-content/uploads/2014/07/Naruto_.png" alt="" />
+                            <div class="testimonial-writer">
+                                <div class="testimonial-writer-name">@Subject.Name</div>
+                                <div class="testimonial-writer-designation"><i class="glyphicon glyphicon-time"></i> @Subject.Time</div>
+                                <a href="#" class="testimonial-writer-company">หมู่บ้านโคโนฮะ.Inc</a>
+                            </div>
+                        </div>
+                    </div>   
+                </div>
+                <!-- HEAD -->
+        </div>
             @{
-                ProjectSSMP.Models.Home.CreateBulletinModel Subject =
-                ViewData["Subject"] as ProjectSSMP.Models.Home.CreateBulletinModel;
-             }
-                <h2>@Subject.Subject</h2>
+                IEnumerable<ProjectSSMP.Models.Home.ChatBulletinModel> BC =
+                ViewData["Chat"] as IEnumerable<ProjectSSMP.Models.Home.ChatBulletinModel>;
+            }
 
+        @foreach (var item in BC)
+        {
+         if (Subject.UserId == item.CUserId){
+            <div class="row">
+            <div class="col-sm-6">
+                    <div id="Head" class="testimonial testimonial-primary-filled">
+                        <div class="testimonial-section">
+                            @item.Chat
+                        </div>
+                        <div class="testimonial-desc">
+                            <img src="https://benmo.re/narutoroyal/wp-content/uploads/2014/07/Naruto_.png" alt="" />
+                            <div class="testimonial-writer">
+                                <div class="testimonial-writer-name">@item.CFullname</div>
+                                <div class="testimonial-writer-designation"><i class="glyphicon glyphicon-time"></i> @item.Ctime</div>
+                                <a href="#" class="testimonial-writer-company">หมู่บ้านโคโนฮะ.Inc</a>
+                            </div>
+                        </div>
+                    </div>   
+                </div>
             </div>
-    </div>
+            }
+        else {
+            <div class="row">
+                    <div class="col-sm-2">
+                        &nbsp;
+                    </div>
+                    <div class="col-sm-6" style="margin-left: 50px;">
+                        <div id="tb-testimonial" class="testimonial testimonial-warning-filled">
+                            <div class="testimonial-section">
+                                 @item.Chat
+                            </div>
+                            <div class="testimonial-desc">
+                                <img src="http://pirun.ku.ac.th/~b5510102951/images/300px-Sasuke_Shippuden.png" alt="" />
+                                <div class="testimonial-writer">
+                                    <div class="testimonial-writer-name">@item.CFullname</div>
+                                    <div class="testimonial-writer-designation"><i class="glyphicon glyphicon-time"></i> @item.Ctime</div>
+                                    <a href="#" class="testimonial-writer-company">แสงอุษา.Inc</a>
+                                </div>
+                            </div>
+                        </div>   
+                    </div>
+             </div>
+            }
+        }
     </div>
 </div>
 
-    
+<div class="modal-footer">
+    <form asp-controller="Home" asp-action="ChatBulletin" method="post">
+            <div class="col-sm-10">
+                <textarea placeholder="Enter Desc Here.." name="Chat" id="Chat" rows="2" class="form-control"></textarea>
+            </div>
+            <input type="hidden" id="Bnumber" name="Bnumber" value="@Subject.Bnumber">
+            <div class="col-sm-2">
+                <br/>
+                <button type="submit" class="btn btn-primary">Submit</button>
+            </div>
+
+    </form>
+</div>

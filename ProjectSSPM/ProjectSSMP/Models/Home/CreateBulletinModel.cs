@@ -9,5 +9,8 @@ namespace ProjectSSMP.Models.Home
         public DateTime? Time { get; set; }
         public string Bnumber { get; set; }
         public string Username { get; set; }
+        public string Name { get; set; }
+
+        public string Chat { get; set; }
     }
 }
