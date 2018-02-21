@@ -1,4 +1,4 @@
-﻿
+﻿@model ProjectSSMP.Models.Home.CreateBulletinModel
 
 
 
@@ -17,22 +17,6 @@
 <div class="modal-body">
     <div class="container">
         <div class="row">
-<<<<<<< HEAD
-            
-                @{
-
-                    ProjectSSMP.Models.Home.CreateBulletinModel bulletin = ViewData["Subject"] as ProjectSSMP.Models.Home.CreateBulletinModel;
-
-
-                }
-                
-            <h1>@bulletin.Subject</h1>
-            
-            
-
-            
-        </div>
-=======
                 <!-- HEAD -->
                 <div class="col-sm-6">
                     <div id="Head" class="testimonial testimonial-primary-filled">
@@ -100,14 +84,13 @@
              </div>
             }
         }
->>>>>>> 673088f58cd3c7738be70ab8e81fe0795e0be594
     </div>
 </div>
 
 <div class="modal-footer">
     <form asp-controller="Home" asp-action="ChatBulletin" method="post">
             <div class="col-sm-10">
-                <textarea placeholder="Enter Desc Here.." name="Chat" id="Chat" rows="2" class="form-control"></textarea>
+                <textarea placeholder="Reply Here.." name="Chat" id="Chat" rows="2" class="form-control"></textarea>
             </div>
             <input type="hidden" id="Bnumber" name="Bnumber" value="@Subject.Bnumber">
             <div class="col-sm-2">

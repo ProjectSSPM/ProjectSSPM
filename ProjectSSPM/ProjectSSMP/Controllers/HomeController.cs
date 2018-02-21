@@ -241,13 +241,11 @@ namespace ProjectSSMP.Controllers
         [Authorize]
         public ActionResult ChatBulletin(String Id)
         {
+            ViewBag.userMenu = GetMenu();
+            ViewBag.nothi = Nothi();
             var b = (from x in context.Bulletin
                      join x2 in context.UserSspm on x.UserId equals x2.UserId
-<<<<<<< HEAD
-                     where x.Bnumber.Equals(bid)
-=======
                      where x.Bnumber.Equals(Id)
->>>>>>> 673088f58cd3c7738be70ab8e81fe0795e0be594
                      select new CreateBulletinModel
                      {
                          Subject = x.Subject,
@@ -255,33 +253,15 @@ namespace ProjectSSMP.Controllers
                          Note = x.Note,
                          Time = x.Time,
                          UserId = x.UserId,
-<<<<<<< HEAD
-                         Username = x2.Username
-                     }).FirstOrDefault();
-
-            //var bc = (from c in context.Bulletin
-            //          join c1 in context.BulletinChat on c.Bnumber equals c1.Bnumber
-            //          join u in context.UserSspm on c1.UserId equals u.UserId
-            //          where c.Bnumber.Equals(bid)
-            //          select new
-            //          {
-            //              CUserId = c1.UserId,
-            //              Bnumber = c.Bnumber,
-            //              CUsername = u.Username,
-            //              BChat = c1.Bchat,
-            //              CTime = c1.Ctime,
-            //              Chat = c1.Chat,
-            //          }).ToList();
-=======
                          Username = x2.Username,
-                        Name = x2.Firstname+" "+x2.Lastname
+                         Name = x2.Firstname + " " + x2.Lastname
                      }).SingleOrDefault();
 
             var bc = (from c in context.Bulletin
                       join c1 in context.BulletinChat on c.Bnumber equals c1.Bnumber
                       join u in context.UserSspm on c1.UserId equals u.UserId
                       where c.Bnumber.Equals(Id)
-                      select new 
+                      select new
                       {
                           CUserId = c1.UserId,
                           Bnumber = c.Bnumber,
@@ -289,9 +269,8 @@ namespace ProjectSSMP.Controllers
                           BChat = c1.Bchat,
                           CTime = c1.Ctime,
                           Chat = c1.Chat,
-                CFullname = u.Firstname+" "+u.Lastname
+                          CFullname = u.Firstname + " " + u.Lastname
                       }).ToList();
->>>>>>> 673088f58cd3c7738be70ab8e81fe0795e0be594
 
             List<ChatBulletinModel> model = new List<ChatBulletinModel>();
 
@@ -314,18 +293,16 @@ namespace ProjectSSMP.Controllers
 
 
             ViewData["Subject"] = b;
-<<<<<<< HEAD
-            //ViewData["Chat"] = bc;
-=======
             ViewData["Chat"] = model;
->>>>>>> 673088f58cd3c7738be70ab8e81fe0795e0be594
-            return PartialView("ChatBulletin") ;
+            return PartialView("ChatBulletin");
         }
 
         [HttpPost]
         [ValidateAntiForgeryToken]
         public async Task<IActionResult> ChatBulletin(CreateBulletinModel inputModel)
         {
+            ViewBag.userMenu = GetMenu();
+            ViewBag.nothi = Nothi();
 
             if (!ModelState.IsValid)
             {
