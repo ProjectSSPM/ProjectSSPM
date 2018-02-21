@@ -71,7 +71,7 @@ namespace ProjectSSMP.Controllers
             {
                 DateTime fend = (DateTime)cdete.FunctionEnd;
                 DateTime datenow = DateTime.Now;
-                int checkfundae = (int)datenow.Subtract(fend).TotalDays;
+                int checkfundae = (int)fend.Subtract(datenow).TotalDays;
                 if (checkfundae <= 1)
                 {
                     model.Add(new NotificationModel() {

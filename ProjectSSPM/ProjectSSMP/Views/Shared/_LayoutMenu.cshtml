@@ -39,7 +39,7 @@
         @Html.Partial("~/Views/Shared/MenuPage2.cshtml")
 
         @RenderBody()
-       
+
     </div>
 
 
@@ -66,7 +66,7 @@
         <script src="https://ajax.aspnetcdn.com/ajax/jquery.validate/1.16.0/jquery.validate.min.js"></script>
         <script src="https://ajax.aspnetcdn.com/ajax/jquery.validation.unobtrusive/3.2.6/jquery.validate.unobtrusive.min.js"></script>
 
-        <script src="~/lib/toastr/toastr.min.js"></script>
+
 
     </environment>
     <environment exclude="Development">
@@ -155,8 +155,8 @@
 
 
     @RenderSection("Scripts", required: false)
-
-
+    <script src="~/lib/toastr/toastr.min.js"></script>
     
+
 </body>
 </html>

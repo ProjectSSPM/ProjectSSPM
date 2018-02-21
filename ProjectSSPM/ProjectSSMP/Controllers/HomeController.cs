@@ -151,14 +151,28 @@ namespace ProjectSSMP.Controllers
 
             }
 
+            var checkfri = (from ts in context.TimeSheet
+                            where ts.ActionId.Equals("Z")
+                            group ts by ts.FunctionId into tsgr
+                            select new
+                            {
+                                Key = tsgr.Key
+                            }).ToList();
+
+
             var checkdate = (from tt in context.TeamTask
                              join f in context.Function on tt.FunctionId equals f.FunctionId
-                             where tt.UserId.Equals(checkgroup.UserId)
+
+                             where tt.UserId.Equals(checkgroup.UserId) && !(checkfri.Select(p => p.Key).Contains(f.FunctionId))
                              select new
                              {
                                  f.FunctionName,
                                  f.FunctionEnd,
-                                 f.ActualStart
+                                 f.ActualStart,
+                                 f.TaskId,
+                                 f.FunctionId,
+                                 f.ProjectNumber
+
 
                              });
             foreach (var cdete in checkdate)
