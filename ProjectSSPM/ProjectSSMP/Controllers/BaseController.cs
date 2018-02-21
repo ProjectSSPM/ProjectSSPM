@@ -61,8 +61,10 @@ namespace ProjectSSMP.Controllers
                 int checkfundae = (int)datenow.Subtract(fend).TotalDays;
                 if (checkfundae <= 1)
                 {
+
                    
                 }
+
             }
 
             return model;
