@@ -61,15 +61,16 @@
                     <a asp-action="TimeSheet" asp-controller="TimeSheet" asp-route-id="@itme.ProjectNumber">
                         
                         <div>
-                            <strong>Function นี้ไกล้สิ้นสุด</strong>
+                            <strong class="text-danger">Function นี้ใกล้ถึงเวลาสิ้นสุด</strong>
+                            <div class="pull-right">Function Name : @itme.FunctionName</div>
                             <span class="pull-right text-muted">
-                                <em>@Convert.ToString(string.Format("{0:dd MMMM yyyy}", itme.FunctionEnd))</em>
+                                    <em>End : @Convert.ToString(string.Format("{0:dd MMMM yyyy}", itme.FunctionEnd))</em>
                             </span>
+                            <br/>
                         </div>
-                        <div>@itme.FunctionName</div>
                     </a>
                 </li>
-
+               
             }
 
 

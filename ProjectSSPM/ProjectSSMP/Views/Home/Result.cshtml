@@ -15,7 +15,7 @@
         <div class="col-lg-12 well">
             <div class="row">
                 <div class="col-sm-4">Project ID : @project.ProjectId</div>
-                <div class="col-sm-8">Projext Name : @project.ProjectName</div>
+                <div class="col-sm-8">Project Name : @project.ProjectName</div>
             </div>
             <div class="row">
                 <div class="col-sm-12">&nbsp;</div>
@@ -79,26 +79,38 @@
 
 
                            <div class="row">
-                               @foreach(var ts in tstart){
-                                   <div class="col-sm-3">@ts.Key</div>  
-
-                               }
-                                @foreach(var te in tend){
-                                   <div class="col-sm-3">@te.Key</div>  
+                               @foreach(var ts in tstart)
+                                {
+                                   <div class="col-sm-6"><div style="margin-left: 10px;">Plan Start : @ts.Key</div></div>
 
                                }
                                 @foreach(var tas in tastart)
                                 {
-                                   <div class="col-sm-3"> @tas.Key</div>  
+                                   <div class="col-sm-6">Actual Start : @tas.Key</div>  
 
                                }
-                               @foreach(var tas in tastart)
+                                <div class="col-sm-12">&nbsp;</div>
+                                @foreach(var te in tend)
                                 {
-                                   <div class="col-sm-3"> @tas.Key</div>  
+                                   <div class="col-sm-6"><div style="margin-left: 10px;">Plan End : @te.Key</div></div>   
 
-                               }                             
+                               }
+                                
+                               @foreach(var tae in taend)
+                                {
+                                   <div class="col-sm-6">Actual End : @tae.Key</div>  
+
+                               }
+                                <div class="col-sm-12">&nbsp;</div>
+                                <div class="col-sm-12">
+                                    <div style="margin-left: 10px;">
+                                        <h4>Funtion List</h4>
+                                    </div>    
+                                </div>
+                                <div class="col-sm-12">&nbsp;</div>
                               
                             </div>
+                        
                         var funt = from f in item3
                                    group f by new { f.FunctionId, f.TaskId } into grf
                                    select new
@@ -125,14 +137,17 @@
                                           </h4>
                                       </div>
                           
-                                      <div id="@fun.FunctionId@fun.TaskId" class="panel-collapse collapse in">
+                                      <div id="@fun.FunctionId@fun.TaskId" class="panel-collapse collapse">
                             
                                           <div class="panel-body">
                                               <div class="row">
-                                                  <div class="col-sm-3">@fund.FunctionStart</div>
-                                                  <div class="col-sm-3">@fund.FunctionEnd</div>
-                                                  <div class="col-sm-3">@fund.TActualStart</div>
-                                                  <div class="col-sm-3">@fund.TActualEnd</div>
+                                                    <div class="col-sm-6"><div style="margin-left: 10px;">Plan Start : @fund.FunctionStart</div></div>
+
+                                                    <div class="col-sm-6">Actual Start : @fund.TActualStart</div>
+                                                    
+                                                    <div class="col-sm-6"><div style="margin-left: 10px;">Plan End : @fund.FunctionEnd</div></div>
+
+                                                    <div class="col-sm-6">Actual End : @fund.TActualEnd</div>
                                               </div>
                                           </div>
                                       </div>
