@@ -16,6 +16,6 @@ namespace ProjectSSMP.Models.Home
         public DateTime? Ctime { get; set; }
         public string CUserId { get; set; }
         public string CUsername { get; set; }
-
+        public string CFullname { get; set; }
     }
 }
