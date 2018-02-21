@@ -203,7 +203,8 @@ namespace ProjectSSMP.Controllers
 
 
             ViewData["Bulletin"] = modelx;
-            return View(model);
+            ViewData["Timeline"] = model;
+            return View();
 
         }
 
@@ -231,7 +232,43 @@ namespace ProjectSSMP.Controllers
         public ActionResult AddBulletin()
         {
 
-            return PartialView("AddBulletin");;
+            return PartialView("AddBulletin");
+        }
+
+        [Authorize]
+        public ActionResult ChatBulletin(String bid)
+        {
+            var b = (from x in context.Bulletin
+                     join x2 in context.UserSspm on x.UserId equals x2.UserId
+                     where x.Bnumber.Equals(bid)
+                     select new
+                     {
+                         Subject = x.Subject,
+                         Bnumber = x.Bnumber,
+                         Note = x.Note,
+                         Time = x.Time,
+                         UserId = x.UserId,
+                         Username = x2.Username
+                     }).SingleOrDefault();
+
+            var bc = (from c in context.Bulletin
+                      join c1 in context.BulletinChat on c.Bnumber equals c1.Bnumber
+                      join u in context.UserSspm on c1.UserId equals u.UserId
+                      where c.Bnumber.Equals(bid)
+                      select new
+                      {
+                          CUserId = c1.UserId,
+                          Bnumber = c.Bnumber,
+                          CUsername = u.Username,
+                          BChat = c1.Bchat,
+                          CTime = c1.Ctime,
+                          Chat = c1.Chat,
+                      }).ToList();
+
+
+            ViewData["Subject"] = b;
+            ViewData["Chat"] = bc;
+            return PartialView("ChatBulletin") ;
         }
 
         [HttpPost]

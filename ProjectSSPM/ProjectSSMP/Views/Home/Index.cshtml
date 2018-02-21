@@ -1,4 +1,4 @@
-﻿@model IEnumerable<ProjectSSMP.Models.Timesheet.TimeSheetInputModel>
+﻿@model ProjectSSMP.Models.Home.CreateBulletinModel
 @{
     ViewData["Title"] = "Home Page";
     Layout = "~/Views/Shared/_LayoutMenu.cshtml";
@@ -34,17 +34,22 @@
 
                                         <h2>@item.Subject</h2>
                                         <p>@item.Note</p>
-                                        <p><small class="text-muted"><i class="glyphicon glyphicon-pencil"></i> @item.Username &nbsp <i class="glyphicon glyphicon-time"></i> @item.Time </small></p>
+                                        <p><small class="text-muted"><i class="glyphicon glyphicon-edit"></i> @item.Username &nbsp <i class="glyphicon glyphicon-time"></i> @item.Time </small></p>
+                                        <div class= "text-right" style="margin-right: 10px;">
+                                            <a href="javascript:void(0);" class="anchorDetail btn btn-success btn-sm" data-id="@item.Bnumber"><i class="glyphicon glyphicon-pencil"></i></a>
+                                        </div>
                                     </div>
                                 </div>
                             </article>
                         }
-
+                      
 
                     </div>
                 </div>
                 <div class="panel-footer">
-                    <a href="javascript:void(0);" class="anchorDetail btn btn-warning btn-sm">Add New...</a>
+                    <div class= "text-right" style="margin-right: 10px;">
+                    <button type="button" class="btn btn-primary btn-sm" data-toggle="modal" data-target="#myModalAdd">Add New...</button>
+                    </div>
                 </div>
             </div>
             <!--sütun bitiş-->
@@ -57,7 +62,13 @@
     <div class="col-lg-10">
         <div class="row">
             @{
-                var project = Model.GroupBy(s => s.ProjectName);
+                IEnumerable<ProjectSSMP.Models.Timesheet.TimeSheetInputModel> Timeline =
+                    ViewData["Timeline"] as IEnumerable<ProjectSSMP.Models.Timesheet.TimeSheetInputModel>;
+
+            }
+
+            @{
+                var project = Timeline.GroupBy(s => s.ProjectName);
             }
             @foreach (var item in project)
             {
@@ -117,10 +128,58 @@
             }
         </div>
     </div>
+
+
+
+
+
+<!-- Modal Add -->
+<div class="modal fade" id="myModalAdd" role="dialog">
+    <div class="modal-dialog">
+    
+      <!-- Modal content-->
+      <div class="modal-content">
+            <div class="modal-header">
+              <button type="button" class="close" data-dismiss="modal">&times;</button>
+              <h4 class="modal-title">Create Bulletin</h4>
+            </div>
+
+                   <div class="modal-body">
+                    <div class="row">
+                        <form asp-controller="Home" asp-action="AddBulletin" method="post">
+                            
+                            <div class="col-sm-12 form-group">
+                                <label>Subject</label>
+                                <div class="form-group">
+                                    <input type="text" asp-for="Subject" name="Subject" id="Subject" placeholder="Enter Subject Here.." class="form-control">
+                                </div>
+                            </div>
+
+                            <div class="col-sm-12">
+                                <label>Note</label>
+                                <textarea placeholder="Enter Desc Here.." name="Note" id="Note" rows="3" class="form-control"></textarea>
+                            </div>
+
+                            <div class="col-sm-12">
+                                &nbsp;
+                            </div>
+
+                            <div class="col-sm-12 text-right">
+                                <button type="submit" class="btn btn-primary">Submit</button>
+                            </div>
+                        </form>
+                    </div>
+                </div>
+
+      </div>
+      
+    </div>
+  </div>
 </div>
+<!-- Modal Add -->
 
 
-
+<!-- Modal Chat -->
 <div id='myModal' class='modal'>
     <div class="modal-dialog">
         <div class="modal-content">
@@ -132,11 +191,11 @@
 
 @section scripts
     {
-    <script src="~/js/bulletin.js"></script>
+
 
     <script>
 
-        var TeamDetailPostBackURL = '/Home/AddBulletin/';
+        var TeamDetailPostBackURL = '/Home/Chatbulletin/';
         $(function () {
             $(".anchorDetail").click(function () {
                 //debugger;
