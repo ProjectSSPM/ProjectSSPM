@@ -81,7 +81,16 @@
                                         <a asp-action="UpdateTimeSheet" class="btn btn-success btn-sm" asp-route-id="@item.Key">Update</a>
 
                                     }
-                                        <a asp-action="UpdateTimeSheet" class="btn btn-success btn-sm" asp-route-id="@item.Key">App</a>
+                                    foreach(var checkappro in checkfin)
+                                    {
+                                        if(itme2.FunctionId == checkappro.FunctionId)
+                                        {
+
+                                            <a asp-action="UpdateTimeSheet" class="btn btn-success btn-sm" asp-route-id="@item.Key">App</a>
+                                        }
+
+                                    }
+                                        
 
 
                                 }

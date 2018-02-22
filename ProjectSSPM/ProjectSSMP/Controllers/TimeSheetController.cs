@@ -172,7 +172,7 @@ namespace ProjectSSMP.Controllers
                             join x3 in context.Project on x2.ProjectNumber equals x3.ProjectNumber
                             join x5 in context.TeamTask on x.FunctionId equals x5.FunctionId
                             where x.ProjectNumber.Equals(id) /*&& x5.UserId.Equals(uid.UserId)*/
-                             && !(checkAC.Select(p => p.FunctionId).Contains(x.FunctionId))
+                             //&& !(checkAC.Select(p => p.FunctionId).Contains(x.FunctionId))
                             select new
                             {
                                 ProjectNumber = x3.ProjectNumber,
