@@ -69,28 +69,42 @@
                             @{ 
                                 var gropid = ViewData["gropid"];
                                 var UserId =ViewData["UserId"];
-                                
-                                IEnumerable<ProjectSSMP.Models.TimeSheet> checkfin = ViewData["checkfi"] as
-                                                IEnumerable<ProjectSSMP.Models.TimeSheet>;
+                                IEnumerable<ProjectSSMP.Models.FunctionLog> checkfu = ViewData["checkfi"] as
+                                                IEnumerable<ProjectSSMP.Models.FunctionLog>;
+
+
+                                var grcheck =from c in checkfu 
+                                             group c by c.FunctionId into gr
+                                             select new {
+                                                 Key = gr.Key
+                                             };
+
+
+
                                 if (gropid.ToString() == "50")
                                 {
-                                    if(itme2.UserId == UserId.ToString())
+                                    bool check = false;
+                                    foreach(var chek in grcheck)
                                     {
-                                        <a href="javascript:void(0);" class="anchorDetail btn btn-info btn-sm"
-                                        data-id="@item.Key">Add</a>
-                                        <a asp-action="UpdateTimeSheet" class="btn btn-success btn-sm" asp-route-id="@item.Key">Update</a>
-
-                                    }
-                                    foreach(var checkappro in checkfin)
-                                    {
-                                        if(itme2.FunctionId == checkappro.FunctionId)
+                                        if(itme2.FunctionId.Equals(chek.Key))
                                         {
-
-                                            <a asp-action="UpdateTimeSheet" class="btn btn-success btn-sm" asp-route-id="@item.Key">App</a>
+                                            <a href="javascript:void(0);" class=" approvefun btn btn-info btn-sm"
+                                                  data-id="@item.Key" >Approve</a>
+                                            check = true;
                                         }
 
                                     }
-                                        
+
+
+                                    if(itme2.UserId  == UserId.ToString() && !(check))
+                                    {
+                                                <a href="javascript:void(0);" class="anchorDetail btn btn-info btn-sm"
+                                                data-id="@item.Key">Add</a>
+                                                <a asp-action="UpdateTimeSheet" class="btn btn-success btn-sm" asp-route-id="@item.Key">Update</a>
+
+                                            }
+                                            
+
 
 
                                 }
@@ -133,10 +147,21 @@
 
 </div>
 
+<div id='myModalapprove' class='modal'>
+    <div class="modal-dialog">
+        <div class="modal-content">
+            <div id='myModalContentapprove'></div>
+        </div>
+    </div>
+
+</div>
+
+
+
 @section scripts
     {
 
-    
+
 
     <script>
 
@@ -173,7 +198,54 @@
             $("#closbtn").click(function () {
                 $('#myModal').modal('hide');
             });
+
+
+            var TeamlapprovePostBackURL = '/TimeSheet/ApproveFunction/';
+
+            $(".approvefun").click(function () {
+                debugger;
+                var $buttonClicked = $(this);
+                var id = $buttonClicked.attr('data-id');
+
+                var options = { "backdrop": "static", keyboard: true };
+                $.ajax({
+                    type: "GET",
+                    url: TeamlapprovePostBackURL,
+                    contentType: "application/json; charset=utf-8",
+                    data: { "Id": id },
+                    datatype: "json",
+                    success: function (data) {
+                        //debugger;
+                        $('#myModalContentapprove').html(data);
+                        $('#myModalapprove').modal(options);
+                        $('#myModalapprove').modal('show');
+
+                    },
+                    error: function () {
+                        alert("Dynamic content load failed.");
+                    }
+                });
+            });
+            //$("#closebtn").on('click',function(){
+            //    $('#myModal').modal('hide');
+
+            $("#closbtn").click(function () {
+                $('#myModalapprove').modal('hide');
+            });
+
+
+
+
+
         });
+
+
+        
+        
+
+
+
+
 
     </script>
 
