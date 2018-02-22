@@ -10,7 +10,7 @@ namespace ProjectSSMP.Models.Home
         public string Bnumber { get; set; }
         public string Username { get; set; }
         public string Name { get; set; }
-
+        public int BCount { get; set; }
         public string Chat { get; set; }
     }
 }
