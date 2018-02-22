@@ -703,8 +703,12 @@ namespace ProjectSSMP.Controllers
             return RedirectToAction("Index", "TimeSheet");
         }
 
-        public ActionResult ApproveFunction(string id)
+        public ActionResult ApproveFunction(string Id)
         {
+            var id = (from x in context.TimeSheet where x.FunctionId.Equals(Id) && x.ActionId.Equals("Z") select x).FirstOrDefault();
+
+
+            ViewData["ApproveData"] = id;
             return PartialView("ApproveFunction");
         }
 
