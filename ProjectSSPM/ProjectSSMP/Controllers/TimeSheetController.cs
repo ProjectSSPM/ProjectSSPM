@@ -151,7 +151,9 @@ namespace ProjectSSMP.Controllers
 
             var uid = (from u in context.UserSspm where u.Username.Equals(loggedInUserName) select u).FirstOrDefault();
             var gropid = (from g in context.UserAssignGroup where g.UserId.Equals(uid.UserId)select g).FirstOrDefault();
-            ViewData["UserId"] = uid.UserId;
+            var checkfin = (from ts in context.TimeSheet where ts.ActionId.Equals("Z") select ts).ToList();
+            ViewData["checkfi"] = checkfin;
+            ViewData["UserId"] = uid.UserId;         
             ViewData["gropid"] = gropid.GroupId;
             var checkAC = (from fc in context.Function
                            join ts in context.TimeSheet on fc.FunctionId equals ts.FunctionId
@@ -685,6 +687,7 @@ namespace ProjectSSMP.Controllers
             }
             return RedirectToAction("Index", "TimeSheet");
         }
+
 
 
 

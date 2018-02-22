@@ -7,81 +7,88 @@
     <link rel="stylesheet" href="~/css/sortableKanbanBoards.css" />
 }
 
-<div class="container">
-    
-    <h2 class="well">DashBoard</h2>
-    <div class="col-lg-2">
-        <div id="sortableKanbanBoards" class="row">
-            @{
-                IEnumerable<ProjectSSMP.Models.Home.CreateBulletinModel> Bulletin =
-                    ViewData["Bulletin"] as IEnumerable<ProjectSSMP.Models.Home.CreateBulletinModel>;
-
-            }
-            <!--sütun başlangıç-->
-            <div class="panel panel-primary kanban-col">
-                <div class="panel-heading">
-                    Bulletin Board
-                    <i class="glyphicon glyphicon-heart-empty pull-right"></i>
-                </div>
-                <div class="panel-body">
-                    <div id="DOING" class="kanban-centered">
-                        @foreach (var item in Bulletin)
-                        {
-                            
-                            <article class="kanban-entry grab" id="@item.UserId+@item.Bnumber" draggable="true">
-                                <div class="kanban-entry-inner">
-                                    
-                                    <div class="kanban-label">
-                                        
-                                        <h2>@item.Subject</h2>
-                                        <p>@item.Note</p>
-                                        <p><small class="text-muted"><i class="glyphicon glyphicon-edit"></i> @item.Username &nbsp <i class="glyphicon glyphicon-time"></i> @item.Time </small></p>
-                                        <div class= "text-right" style="margin-right: 10px;">
-                                            <a href="javascript:void(0);" class="anchorDetail btn btn-success btn-xs" data-id="@item.Bnumber"><i class="glyphicon glyphicon-pencil"></i></a>
-                                        </div>
-                                    </div>
-                                </div>
-                            </article>
-                        }
-                      
-
-                    </div>
-                </div>
-                <div class="panel-footer">
-                    <div class= "text-right" style="margin-right: 10px;">
-                    <button type="button" class="btn btn-primary btn-sm" data-toggle="modal" data-target="#myModalAdd">Add New...</button>
-                    </div>
-                </div>
-            </div>
-            <!--sütun bitiş-->
-
-        </div>
-    </div>
-
-
-
-    <div class="col-lg-10">
+    <div class="container">
+        
+        <h2 class="well">DashBoard</h2>
         <div class="row">
-            @{
+        <div class="col-lg-2">
+            <div id="sortableKanbanBoards" class="row">
+
+
+
+                @{
+        IEnumerable<ProjectSSMP.Models.Home.CreateBulletinModel> Bulletin =
+            ViewData["Bulletin"] as IEnumerable<ProjectSSMP.Models.Home.CreateBulletinModel>;
+
+                }
+
+
+                
+                <!--sütun başlangıç-->
+                <div class="panel panel-primary kanban-col">
+                    <div class="panel-heading">
+                        Bulletin Board
+                        <i class="glyphicon glyphicon-heart-empty pull-right"></i>
+                    </div>
+                    <div class="panel-body">
+                        <div id="DOING" class="kanban-centered">
+                            @foreach (var item in Bulletin)
+                {
+
+                    <article class="kanban-entry grab" id="@item.UserId+@item.Bnumber" draggable="true">
+                        <div class="kanban-entry-inner">
+
+                            <div class="kanban-label">
+
+                                <h2>@item.Subject</h2>
+                                <p>@item.Note</p>
+                                <p><small class="text-muted"><i class="glyphicon glyphicon-edit"></i> @item.Username &nbsp <i class="glyphicon glyphicon-time"></i> @item.Time </small></p>
+                                <div class="text-right" style="margin-right: 10px;">
+                                    <a href="javascript:void(0);" class="anchorDetail btn btn-success btn-xs" data-id="@item.Bnumber"><i class="glyphicon glyphicon-pencil"></i></a>
+                                </div>
+                            </div>
+                        </div>
+                    </article>
+    }
+
+
+                        </div>
+                    </div>
+                    <div class="panel-footer">
+                        <div class="text-right" style="margin-right: 10px;">
+                            <button type="button" class="btn btn-primary btn-sm" data-toggle="modal" data-target="#myModalAdd">Add New...</button>
+                        </div>
+                    </div>
+                </div>
+                <!--sütun bitiş-->
+
+            </div>
+        </div>
+
+
+
+        <div class="col-lg-10">
+            <div class="row">
+                @{
                 IEnumerable<ProjectSSMP.Models.Timesheet.TimeSheetInputModel> Timeline =
                     ViewData["Timeline"] as IEnumerable<ProjectSSMP.Models.Timesheet.TimeSheetInputModel>;
 
-            }
+                }
 
-            @{
+                @{
                 var project = Timeline.GroupBy(s => s.ProjectName);
-            }
-            @foreach (var item in project)
+                }
+                @foreach (var item in project)
             {
 
                 <div class="[ col-xs-12 col-sm-offset-2 col-sm-8 ]">
                     <ul class="event-list">
                         <li>
                             @{
-                                var pronum = item.GroupBy(s => s.ProjectNumber);
-                                var proid = item.GroupBy(s => s.ProjectId);
-                                var pronote = item.GroupBy(s => s.Note);
-                                var proend = item.GroupBy(s => s.ProjectEnd);
+                            var pronum = item.GroupBy(s => s.ProjectNumber);
+                            var proid = item.GroupBy(s => s.ProjectId);
+                            var pronote = item.GroupBy(s => s.Note);
+                            var proend = item.GroupBy(s => s.ProjectEnd);
                             }
 
                             <time datetime="2014-07-20">
@@ -94,89 +101,90 @@
                                 <h2 class="title">@item.Key</h2>
 
                                 @foreach (var itemnum in pronum)
-                                {
-                                    <input type="hidden" value="@itemnum.Key" name="ProjectNumber" id="ProjectNumber" />
-                                }
+                            {
+                                <input type="hidden" value="@itemnum.Key" name="ProjectNumber" id="ProjectNumber" />
+                        }
 
                                 <p class="desc">
                                     @foreach (var itemnote in pronote)
-                                    {
-                                        @itemnote.Key
-                                    }
+                                {
+                                    @itemnote.Key
+                            }
                                 </p>
 
                             </div>
                             <div class="social">
                                 @foreach (var itemnum in pronum)
-                                {
-                                    <ul>
-                                        <li class="google-plus" style="width:33%;"><a asp-action="CheckTimeline" asp-route-id="@itemnum.Key"><span class="fa fa-arrow-right"></span></a></li>
-                                    </ul>
-                                    <ul>
-                                        <li class="facebook" style="width:33%;"><a href="/ProjectManagement/"><span class="fa fa-gear"></span></a></li>
-                                    </ul>
+                            {
+                                <ul>
+                                    <li class="google-plus" style="width:33%;"><a asp-action="CheckTimeline" asp-route-id="@itemnum.Key"><span class="fa fa-arrow-right"></span></a></li>
+                                </ul>
+                                <ul>
+                                    <li class="facebook" style="width:33%;"><a href="/ProjectManagement/"><span class="fa fa-gear"></span></a></li>
+                                </ul>
 
-                                    <ul>
-                                        <li class="twitter" style="width:33%;"><a asp-action="Result" asp-route-id="@itemnum.Key"><span class="fa fa-file-text-o"></span></a></li>
-                                    </ul>
+                                <ul>
+                                    <li class="twitter" style="width:33%;"><a asp-action="Result" asp-route-id="@itemnum.Key"><span class="fa fa-file-text-o"></span></a></li>
+                                </ul>
 
-                                }
+                        }
                             </div>
                         </li>
 
                     </ul>
                 </div>
-            }
-        </div>
-    </div>
-
-
-
-
-
-<!-- Modal Add -->
-<div class="modal fade" id="myModalAdd" role="dialog">
-    <div class="modal-dialog">
-    
-      <!-- Modal content-->
-      <div class="modal-content">
-            <div class="modal-header">
-              <button type="button" class="close" data-dismiss="modal">&times;</button>
-              <h4 class="modal-title">Create Bulletin</h4>
+        }
             </div>
+        </div>
+        </div>
 
-                   <div class="modal-body">
-                    <div class="row">
-                        <form asp-controller="Home" asp-action="AddBulletin" method="post">
-                            
-                            <div class="col-sm-12 form-group">
-                                <label>Subject</label>
-                                <div class="form-group">
-                                    <input type="text" asp-for="Subject" name="Subject" id="Subject" placeholder="Enter Subject Here.." class="form-control">
-                                </div>
-                            </div>
 
-                            <div class="col-sm-12">
-                                <label>Note</label>
-                                <textarea placeholder="Enter Desc Here.." name="Note" id="Note" rows="3" class="form-control"></textarea>
-                            </div>
 
-                            <div class="col-sm-12">
-                                &nbsp;
-                            </div>
 
-                            <div class="col-sm-12 text-right">
-                                <button type="submit" class="btn btn-primary">Submit</button>
-                            </div>
-                        </form>
+
+        <!-- Modal Add -->
+        <div class="modal fade" id="myModalAdd" role="dialog">
+            <div class="modal-dialog">
+
+                <!-- Modal content-->
+                <div class="modal-content">
+                    <div class="modal-header">
+                        <button type="button" class="close" data-dismiss="modal">&times;</button>
+                        <h4 class="modal-title">Create Bulletin</h4>
                     </div>
+
+                    <div class="modal-body">
+                        <div class="row">
+                            <form asp-controller="Home" asp-action="AddBulletin" method="post">
+
+                                <div class="col-sm-12 form-group">
+                                    <label>Subject</label>
+                                    <div class="form-group">
+                                        <input type="text" asp-for="Subject" name="Subject" id="Subject" placeholder="Enter Subject Here.." class="form-control">
+                                    </div>
+                                </div>
+
+                                <div class="col-sm-12">
+                                    <label>Note</label>
+                                    <textarea placeholder="Enter Desc Here.." name="Note" id="Note" rows="3" class="form-control"></textarea>
+                                </div>
+
+                                <div class="col-sm-12">
+                                    &nbsp;
+                                </div>
+
+                                <div class="col-sm-12 text-right">
+                                    <button type="submit" class="btn btn-primary">Submit</button>
+                                </div>
+                            </form>
+                        </div>
+                    </div>
+
                 </div>
 
-      </div>
-      
+            </div>
+        </div>
     </div>
-  </div>
-</div>
 <!-- Modal Add -->
 
 
@@ -192,7 +200,7 @@
 
 @section scripts
     {
-
+<script src="~/js/bulletin.js"></script>
 
     <script type="text/javascript">
 

@@ -69,6 +69,9 @@
                             @{ 
                                 var gropid = ViewData["gropid"];
                                 var UserId =ViewData["UserId"];
+                                
+                                IEnumerable<ProjectSSMP.Models.TimeSheet> checkfin = ViewData["checkfi"] as
+                                                IEnumerable<ProjectSSMP.Models.TimeSheet>;
                                 if (gropid.ToString() == "50")
                                 {
                                     if(itme2.UserId == UserId.ToString())
@@ -77,9 +80,9 @@
                                         data-id="@item.Key">Add</a>
                                         <a asp-action="UpdateTimeSheet" class="btn btn-success btn-sm" asp-route-id="@item.Key">Update</a>
 
-
                                     }
-                                    
+                                        <a asp-action="UpdateTimeSheet" class="btn btn-success btn-sm" asp-route-id="@item.Key">App</a>
+
 
                                 }
                                 else if(gropid.ToString() == "10")
