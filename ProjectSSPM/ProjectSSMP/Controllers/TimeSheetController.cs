@@ -56,11 +56,11 @@ namespace ProjectSSMP.Controllers
                           where x3.ProjectManager.Equals(checkgroup.UserId) || x2.UserId.Equals(checkgroup.UserId)
                           select new
                           {
-                                  ProjectNumber = x3.ProjectNumber,
-                                 ProjectName = x3.ProjectName,
-                                  ProjectId = x3.ProjectId,
+                                    ProjectNumber = x3.ProjectNumber,
+                                    ProjectName = x3.ProjectName,
+                                    ProjectId = x3.ProjectId,
                                     Note = x3.Note,
-                                  ProjectEnd = x3.ProjectEnd,
+                                    ProjectEnd = x3.ProjectEnd,
                           });
                 foreach (var item in PJ)
                 {
@@ -470,6 +470,8 @@ namespace ProjectSSMP.Controllers
                 FunctionId = fid,
                 UserId = uid.UserId,
                 ActionId = update.ActionId,
+                TaskId = update.TaskId,
+                ProjectNumber = update.ProjectNumber,
 
             };
             ViewData["Action"] = new SelectList(context.Action.Where(a => a.ActionId != "N"), "ActionId", "ActionName");
@@ -552,9 +554,10 @@ namespace ProjectSSMP.Controllers
                             await context.SaveChangesAsync();
                             try
                             {
-                                var check1 = (from x in context.FunctionLog where x.FunctionId.Equals(addLog.FunctionId) && x.StatusId.Equals("F") select x).FirstOrDefault();
+                                var check1 = (from x in context.FunctionLog where x.FunctionId.Equals(addLog.FunctionId) && x.StatusId.Equals("F") 
+                                              && x.ProjectNumber.Equals(inputModel.ProjectNumber) && x.TaskId.Equals(inputModel.TaskId) select x).FirstOrDefault();
                                 var update3 = (from x in context.Function
-                                               where x.FunctionId.Equals(inputModel.FunctionId)
+                                               where x.FunctionId.Equals(inputModel.FunctionId) && x.TaskId.Equals(inputModel.TaskId) && x.ProjectNumber.Equals(inputModel.ProjectNumber)
                                                select x);
                                 DateTime afstat = (DateTime)check1.ActualStart;
                                 DateTime afend = (DateTime)check1.ActualEnd;
@@ -597,14 +600,14 @@ namespace ProjectSSMP.Controllers
                                     await context.SaveChangesAsync();
 
                                     var AllProject = (from x in context.Task where x.TaskId.Equals(check1.TaskId) select x).Count();
-                                    var CheckProject = (from x in context.FunctionLog where x.TaskId.Equals(check1.TaskId) && x.StatusId.Equals("F") select x).Count();
+                                    var CheckProject = (from x in context.FunctionLog where x.TaskId.Equals(check1.TaskId) && x.StatusId.Equals("F") && x.ProjectNumber.Equals(check1.ProjectNumber) && x.TaskId.Equals(check1.TaskId) select x).Count();
                                     if (AllProject == CheckProject)
                                     {
                                         var update5 = (from x in context.Project
-                                                       where x.ProjectNumber.Equals(addLog.ProjectNumber)
+                                                       where x.ProjectNumber.Equals(inputModel.ProjectNumber)
                                                        select x);
                                         var ap = (from x in context.Project
-                                                  where x.ProjectNumber.Equals(addLog.ProjectNumber)
+                                                  where x.ProjectNumber.Equals(inputModel.ProjectNumber)
                                                   select x).FirstOrDefault();
                                         DateTime apstat = (DateTime)ap.ActualStart;
                                         DateTime apend = (DateTime)check1.ActualEnd;
@@ -624,7 +627,7 @@ namespace ProjectSSMP.Controllers
                             }
                         }
                         else{
-                            var c = (from x in context.TimeSheet where x.FunctionId.Equals(inputModel.FunctionId) select x).Count();
+                            var c = (from x in context.TimeSheet where x.FunctionId.Equals(inputModel.FunctionId) && x.TaskId.Equals(inputModel.TaskId) select x).Count();
                             if(c == 1){
                                 foreach (Models.FunctionLog FUpdate in update2)
                                 {
@@ -632,10 +635,22 @@ namespace ProjectSSMP.Controllers
                                 }
                                 await context.SaveChangesAsync();
 
+                                var c4 = (from x in context.Function where x.FunctionId.Equals(inputModel.FunctionId) && x.TaskId.Equals(inputModel.TaskId) select x).Count();
+                                if (c == 1)
+                                {
+                                    var update3 = (from x in context.Function
+                                                   where x.FunctionId.Equals(inputModel.FunctionId) && x.TaskId.Equals(inputModel.TaskId) && x.ProjectNumber.Equals(inputModel.ProjectNumber)
+                                                   select x);
+                                    foreach (Models.Function FUpdate in update3)
+                                    {
+                                        FUpdate.ActualStart = addLog.TimeSheetStart;
+                                    }
+                                    await context.SaveChangesAsync();
+                                }
                                 var c2 = (from x in context.TimeSheet where x.TaskId.Equals(addLog.TaskId) select x).Count();
                                 if (c2 == 1){
                                     var update4 = (from x in context.Task
-                                                   where x.TaskId.Equals(addLog.TaskId)
+                                                   where x.TaskId.Equals(addLog.TaskId) && x.ProjectNumber.Equals(inputModel.ProjectNumber)
                                                    select x);
                                     foreach (Models.Task FUpdate in update4)
                                     {
@@ -660,7 +675,7 @@ namespace ProjectSSMP.Controllers
                                 }
 
                             }
-                            var checkss = (from x in context.FunctionLog where x.FunctionNumber.Equals("100000") && x.FunctionId.Equals(addLog.FunctionId) select x).FirstOrDefault();
+                            var checkss = (from x in context.FunctionLog where x.FunctionNumber.Equals("100000") && x.FunctionId.Equals(addLog.FunctionId) && x.ProjectNumber.Equals(inputModel.ProjectNumber) && x.TaskId.Equals(inputModel.TaskId) select x).FirstOrDefault();
 
                             foreach (Models.FunctionLog FUpdate in update2)
                             {

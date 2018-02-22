@@ -190,6 +190,7 @@ namespace ProjectSSMP.Controllers
             }
 
             var bulle = (from x in context.Bulletin join x2 in context.UserSspm on x.UserId equals x2.UserId
+
                          orderby x.Time descending
                          select new{
                             Subject = x.Subject,
@@ -197,12 +198,14 @@ namespace ProjectSSMP.Controllers
                             Note = x.Note,
                             Time = x.Time,
                             UserId = x.UserId,
-                            Username = x2.Username
+                            Username = x2.Username,
+                            
                         }).Take(5).ToList();
             List<CreateBulletinModel> modelx = new List<CreateBulletinModel>();
 
             foreach (var item in bulle)
             {
+                var count = (from x in context.BulletinChat where x.Bnumber.Equals(item.Bnumber) select x).Count();
 
                 modelx.Add(new CreateBulletinModel()
                 {
@@ -211,8 +214,8 @@ namespace ProjectSSMP.Controllers
                     Note = item.Note,
                     Time = item.Time,
                     UserId = item.UserId,
-                    Username = item.Username
-
+                    Username = item.Username,
+                    BCount = count,
 
 
                 });
@@ -511,7 +514,8 @@ namespace ProjectSSMP.Controllers
                                 FunctionEnd = FC.FunctionEnd,
                                 FActualStart = FC.ActualStart,
                                 FActualEnd = FC.ActualEnd,
-                                Username = USR.Username,
+                                Username = USR.Firstname+" "+USR.Lastname,
+           
 
                            }).ToList();
 
@@ -519,7 +523,20 @@ namespace ProjectSSMP.Controllers
 
             foreach (var item in joinyub)
             {
-
+                var statnow = "";
+                Boolean X = Boolean.ReferenceEquals(item.FActualEnd, null);
+                if (X){
+                    Boolean Y = Boolean.ReferenceEquals(item.FActualStart, null);
+                    if(Y){
+                        statnow = "Not Started";
+                    }
+                    else{
+                        statnow = "Process";
+                    }
+                }
+                else{
+                    statnow = "Finished";
+                }
                 model.Add(new ResultModel()
                 {
                     TaskName = item.TaskName,
@@ -536,7 +553,7 @@ namespace ProjectSSMP.Controllers
                     FActualStart = item.FActualStart,
                     FActualEnd = item.FActualEnd,
                     Username = item.Username,
-
+                    Status = statnow
                 });
             }
 

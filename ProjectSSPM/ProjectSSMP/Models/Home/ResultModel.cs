@@ -17,6 +17,6 @@ namespace ProjectSSMP.Models.Home
         public DateTime? TaskEnd { get; set; }
         public DateTime? TActualStart { get; set; }
         public DateTime? TActualEnd { get; set; }
-
+        public string Status { get; set; }
     }
 }
