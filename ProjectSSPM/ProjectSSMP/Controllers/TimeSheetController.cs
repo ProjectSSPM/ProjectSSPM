@@ -151,15 +151,12 @@ namespace ProjectSSMP.Controllers
 
             var uid = (from u in context.UserSspm where u.Username.Equals(loggedInUserName) select u).FirstOrDefault();
             var gropid = (from g in context.UserAssignGroup where g.UserId.Equals(uid.UserId)select g).FirstOrDefault();
-<<<<<<< HEAD
+
             
             var checkAppro = from ts in context.TimeSheet select ts;
             ViewData["checkZ"] = from ts in context.TimeSheet select ts;
             ViewData["checkfi"] = checkAppro;
-=======
-            var checkAppro = from fl in context.TimeSheet where fl.ActionId.Equals("Y") select fl;
-           
->>>>>>> 376a2b2d9d18b952d0384d9ad7da25d618f60292
+
             ViewData["UserId"] = uid.UserId;         
             ViewData["gropid"] = gropid.GroupId;
             var checkAC = (from fc in context.Function
