@@ -643,7 +643,7 @@ namespace ProjectSSMP.Controllers
 
 
         [Authorize]
-        public IActionResult CreateFunction(string id)
+        public IActionResult CreateFunction(string id ,string rsc)
         {
             
             ViewBag.userMenu = GetMenu();
