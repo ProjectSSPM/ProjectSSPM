@@ -530,7 +530,7 @@ namespace ProjectSSMP.Controllers
                     {
                         stat = "P";
 
-                    }
+                    }    
                     FunctionLog ord = new FunctionLog
                     {
                         ProjectNumber = addLog.ProjectNumber,
