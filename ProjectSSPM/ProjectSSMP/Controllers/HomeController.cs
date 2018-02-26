@@ -152,7 +152,7 @@ namespace ProjectSSMP.Controllers
             }
 
             var checkfri = (from ts in context.TimeSheet
-                            where ts.ActionId.Equals("Z")
+                            where ts.ActionId.Equals("Z") || ts.ActionId.Equals("Y")
                             group ts by ts.FunctionId into tsgr
                             select new
                             {
@@ -179,7 +179,7 @@ namespace ProjectSSMP.Controllers
             {
                 DateTime fend = (DateTime)cdete.FunctionEnd;
                 DateTime datenow = DateTime.Now;
-                int checkfundae = (int)datenow.Subtract(fend).TotalDays;
+                int checkfundae = (int)fend.Subtract(datenow).TotalDays;
                 if (checkfundae <= 1)
                 {
                     _toastNotification.AddToastMessage("Warning", cdete.FunctionName + "", Enums.ToastType.Error, new ToastOption()
