@@ -107,17 +107,25 @@
                     </td>
 
                     <td>
-                        <div>
+                        <div class="text-right">
                         @{
                             if(item.percent == "0%" || item.percent == "-"){
-                                
-                                    <a asp-action="CreateFunction" class="btn btn-info btn-sm" asp-route-id="@item.TaskId">Add Function</a>
+
+                                    @Html.ActionLink("Add Function", "CreateFunction", 
+                                        new {id = item.TaskId, rfc = "False"},
+                                        new {@class = "btn btn-info btn-sm" })
+
+                                    
                                     <a href="javascript:void(0);" class="anchorDetail btn btn-warning btn-sm" data-id="@item.TaskId">Edit</a>
                                     <a asp-action="Update" class="btn btn-success btn-sm" asp-route-id="@item.ProjectNumber">Update</a>
                                 
                             }
                             else{
-                                    <a asp-action="CreateFunction" class="btn btn-danger btn-sm" asp-route-id="@item.TaskId">Add RFC</a>
+                                    @Html.ActionLink("Add RFC", "CreateFunction", 
+                                        new {id = item.TaskId, rfc = "True"},
+                                        new {@class = "btn btn-danger btn-sm" }) 
+                                    
+
                                     <a href="javascript:void(0);" class="anchorDetail btn btn-warning btn-sm" data-id="@item.TaskId">Edit</a>
                                     <a asp-action="Update" class="btn btn-success btn-sm" asp-route-id="@item.ProjectNumber">Update</a>
                             }
