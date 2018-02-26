@@ -4,27 +4,32 @@
     Layout = "~/Views/Shared/_LayoutMenu.cshtml";
 }
 
+@section Styles{
+    <link href="https://cdnjs.cloudflare.com/ajax/libs/select2/4.0.6-rc.0/css/select2.min.css" rel="stylesheet" />
+}
+
 <div class="container">
     <h1 class="well">Create Project</h1>
     @if (!ViewData.ModelState.IsValid && ViewData.ModelState["ErrorCreatePtoject"].Errors.Count > 0)
     {
         <div class="alert alert-danger">
-            <strong>Warning!</strong> <span class="text-danger "> &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
-            @ViewData.ModelState["ErrorCreatePtoject"].Errors.First().ErrorMessage
-        </span>
+            <strong>Warning!</strong> <span class="text-danger ">
+                &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+                @ViewData.ModelState["ErrorCreatePtoject"].Errors.First().ErrorMessage
+            </span>
         </div>
-        
+
 
     }
     <div class="col-lg-12 well">
 
         <form asp-controller="ProjectManagement" asp-action="CreateProject" method="post">
-            
+
             <div class="col-sm-6 form-group">
                 <label>Project ID</label>
                 <div class="form-group">
-                    <input type="text" asp-for="ProjectId" name="ProjectId" id="ProjectId" placeholder="Enter Project ID Here.." class="form-control" >
-                    @Html.ValidationMessageFor(m => m.ProjectId,"", new { @class = "text-danger" })
+                    <input type="text" asp-for="ProjectId" name="ProjectId" id="ProjectId" placeholder="Enter Project ID Here.." class="form-control">
+                    @Html.ValidationMessageFor(m => m.ProjectId, "", new { @class = "text-danger" })
                 </div>
             </div>
 
@@ -32,8 +37,8 @@
             <div class="col-sm-8 form-group">
                 <label>Project Name</label>
                 <div class="form-group">
-                    <input type="text" asp-for="ProjectName" name="ProjectName" id="ProjectName" placeholder="Enter Project Name Here.." class="form-control" >
-                    @Html.ValidationMessageFor(m => m.ProjectName,"", new { @class = "text-danger" })
+                    <input type="text" asp-for="ProjectName" name="ProjectName" id="ProjectName" placeholder="Enter Project Name Here.." class="form-control">
+                    @Html.ValidationMessageFor(m => m.ProjectName, "", new { @class = "text-danger" })
 
                 </div>
             </div>
@@ -51,7 +56,7 @@
                     </div>
                     @Html.ValidationMessageFor(m => m.ProjectStart, "", new { @class = "text-danger" })
                 </div>
-                
+
 
             </div>
             <div class="col-sm-6 form-group">
@@ -66,18 +71,18 @@
                     </div>
                     @Html.ValidationMessageFor(m => m.ProjectEnd, "", new { @class = "text-danger" })
                 </div>
-               
+
             </div>
 
             <div class="col-sm-4">
                 <div class="form-group">
                     <label>Project Manager</label>
                     @*<input type="text" name="ProjectManager" id="ProjectManager" placeholder="Select Manager Name Here.." class="form-control">*@
-                    <select class="form-control" asp-items="ViewBag.UserSSPM" name="ProjectManager" id="ProjectManager"
-                            asp-for="ProjectManager" required >
+                    <select class="form-control js-example-basic-single " asp-items="ViewBag.UserSSPM" name="ProjectManager" id="ProjectManager"
+                            asp-for="ProjectManager" required>
                         <option value="">Please select </option>
                     </select>
-                    @Html.ValidationMessageFor(m => m.ProjectManager,"", new { @class = "text-danger" })
+                    @Html.ValidationMessageFor(m => m.ProjectManager, "", new { @class = "text-danger" })
                 </div>
             </div>
 
@@ -88,17 +93,17 @@
 
             <div class="col-sm-4">
                 <div class="form-group">
-                    <label  >Estimated Cost</label>
+                    <label>Estimated Cost</label>
                     <input type="number" asp-for="ProjectCost" name="ProjectCost" id="ProjectCost" placeholder="Enter Project Cost Here.." class="form-control">
-                    @Html.ValidationMessageFor(m => m.ProjectCost,"", new { @class = "text-danger" })
+                    @Html.ValidationMessageFor(m => m.ProjectCost, "", new { @class = "text-danger" })
                 </div>
             </div>
 
             <div class="col-sm-4">
                 <div class="form-group">
                     <label>Customer Name</label>
-                    <input type="text" asp-for="CustomerName" name="CustomerName" id="CustomerName" placeholder="Select Customer Name Here.." class="form-control" >
-                    @Html.ValidationMessageFor(m => m.CustomerName,"", new { @class = "text-danger" })
+                    <input type="text" asp-for="CustomerName" name="CustomerName" id="CustomerName" placeholder="Select Customer Name Here.." class="form-control">
+                    @Html.ValidationMessageFor(m => m.CustomerName, "", new { @class = "text-danger" })
                 </div>
             </div>
 
@@ -110,7 +115,7 @@
                 <div class="form-group">
                     <label>Customer Tel.</label>
                     <input type="text" asp-for="CustomerTel" name="CustomerTel" id="CustomerTel" placeholder="Enter Customer Tel. Here.." class="form-control">
-                    @Html.ValidationMessageFor(m => m.CustomerTel,"", new { @class = "text-danger" })
+                    @Html.ValidationMessageFor(m => m.CustomerTel, "", new { @class = "text-danger" })
                 </div>
             </div>
 
@@ -135,4 +140,13 @@
         </form>
     </div>
 </div>
-   
+@section scripts{
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/select2/4.0.6-rc.0/js/select2.min.js"></script>
+    <script type="text/javascript">
+        $(document).ready(function () {
+            $('.js-example-basic-single').select2();
+        });
+    </script>
+
+
+}

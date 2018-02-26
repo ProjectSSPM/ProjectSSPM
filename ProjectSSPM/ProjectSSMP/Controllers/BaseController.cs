@@ -44,7 +44,7 @@ namespace ProjectSSMP.Controllers
             var loggedInUserName = loggedInUser.Identity.Name;
             var userid = (from u in context.UserSspm where u.Username.Equals(loggedInUserName) select u).FirstOrDefault();
             var checkfri = (from ts in context.TimeSheet
-                            where ts.ActionId.Equals("Z")
+                            where ts.ActionId.Equals("Z") || ts.ActionId.Equals("Y")
                             group ts by ts.FunctionId into tsgr
                             select new {
                                 Key = tsgr.Key

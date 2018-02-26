@@ -151,8 +151,12 @@ namespace ProjectSSMP.Controllers
 
             var uid = (from u in context.UserSspm where u.Username.Equals(loggedInUserName) select u).FirstOrDefault();
             var gropid = (from g in context.UserAssignGroup where g.UserId.Equals(uid.UserId)select g).FirstOrDefault();
-            var checkAppro = from fl in context.TimeSheet where fl.ActionId.Equals("Y") select fl;
-           
+
+            
+            var checkAppro = from ts in context.TimeSheet select ts;
+            ViewData["checkZ"] = from ts in context.TimeSheet select ts;
+            ViewData["checkfi"] = checkAppro;
+
             ViewData["UserId"] = uid.UserId;         
             ViewData["gropid"] = gropid.GroupId;
             var checkAC = (from fc in context.Function
@@ -163,7 +167,7 @@ namespace ProjectSSMP.Controllers
                                FunctionId =    f.Key
                                
                            }).ToList();
-            ViewData["checkfi"] = checkAppro;
+            
             List <TimeSheetInputModel> model = new List<TimeSheetInputModel>();
             if(gropid.GroupId == "50")
             {
@@ -474,7 +478,7 @@ namespace ProjectSSMP.Controllers
                 ProjectNumber = update.ProjectNumber,
 
             };
-            ViewData["Action"] = new SelectList(context.Action.Where(a => a.ActionId != "N"), "ActionId", "ActionName");
+            ViewData["Action"] = new SelectList(context.Action.Where(a => a.ActionId != "N" ), "ActionId", "ActionName");
 
             return PartialView("ConfirmTimeSheet", e);
         }

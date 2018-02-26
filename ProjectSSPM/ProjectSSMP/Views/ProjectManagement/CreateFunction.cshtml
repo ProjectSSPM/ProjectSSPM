@@ -4,29 +4,32 @@
     ViewData["Title"] = "Create Function";
     Layout = "~/Views/Shared/_LayoutMenu.cshtml";
 }
+@section Styles{
+    <link href="https://cdnjs.cloudflare.com/ajax/libs/select2/4.0.6-rc.0/css/select2.min.css" rel="stylesheet" />
+}
 
 
 <div class="container">
     <h2 class="well">@ViewData["ProjectName"] <span class="glyphicon glyphicon-chevron-right"></span> @ViewData["Taskname"] <span class="glyphicon glyphicon-chevron-right"></span>   Create Function  </h2>
 
-             <div class="col-lg-4">
-               <div class= "text-Left">
-                    
-                   @Html.ActionLink("Back", "CreateTask",
-                  new { Controller = "ProjectManagement",id= ViewData["ProjectNuber"] },
-                  new { @class="btn btn-danger btn-md"})
-                </div>
-        
-            </div>
-            <div class="col-lg-4"></div>
-            <div class="col-lg-4">
-                <div class= "text-right" style="margin-right: 10px;">
-                    <button type="button" class="btn btn-primary btn-md" data-toggle="modal" data-target="#myModalAdd">Add Function</button>
-                </div>
-            </div>
-    
+    <div class="col-lg-4">
+        <div class="text-Left">
+
+            @Html.ActionLink("Back", "CreateTask",
+                     new { Controller = "ProjectManagement", id = ViewData["ProjectNuber"] },
+                     new { @class = "btn btn-danger btn-md" })
+        </div>
+
+    </div>
+    <div class="col-lg-4"></div>
+    <div class="col-lg-4">
+        <div class="text-right" style="margin-right: 10px;">
+            <button type="button" class="btn btn-primary btn-md" data-toggle="modal" data-target="#myModalAdd">Add Function</button>
+        </div>
+    </div>
+
     <div class="col-lg-12">&nbsp;</div>
-    
+
     <table id="example" class="responsive" width="100%">
         <thead>
             <tr>
@@ -49,7 +52,7 @@
                 </th>
                 <th>
 
-                
+
 
 
 
@@ -57,12 +60,12 @@
             </tr>
         </thead>
         <tbody>
-            @{ 
+            @{
                 IEnumerable<ProjectSSMP.Models.ProjectManagement.CreateFunctionInputModel> createFunction =
                     ViewData["CreateFunction"] as IEnumerable<ProjectSSMP.Models.ProjectManagement.CreateFunctionInputModel>;
                 int autonum = 1;
 
-                }
+            }
 
             @foreach (var item in createFunction)
             {
@@ -82,12 +85,12 @@
                     </td>
                     <td>
                         <center>@Convert.ToString(string.Format("{0:dd MMMM yyyy}", item.FunctionEnd))</center>
-                    
+
                     <td>
                         <center>@Html.DisplayFor(modelItem => item.Timespan)</center>
                     </td>
 
-                     
+
                     <td>
                         <div class="text-right" style="margin-right: 10px;">
                             <a href="javascript:void(0);" class="anchorDetail btn btn-warning btn-sm" data-id="@item.FunctionId">Edit</a>
@@ -95,100 +98,100 @@
                         </div>
 
 
-                
-            </td>
 
-           
-        </tr>
-        autonum++;
-}
+                    </td>
+
+
+                </tr>
+                autonum++;
+            }
         </tbody>
 
     </table>
 
 
-  <!-- Modal -->
-  <div class="modal fade" id="myModalAdd" role="dialog">
-    <div class="modal-dialog">
-    
-      <!-- Modal content-->
-      <div class="modal-content">
-            <div class="modal-header">
-              <button type="button" class="close" data-dismiss="modal">&times;</button>
-              <h4 class="modal-title">Create Function</h4>
-            </div>
-                
+    <!-- Modal -->
+    <div class="modal fade" id="myModalAdd" role="dialog">
+        <div class="modal-dialog">
 
-                    <div class="modal-body col-lg-12">
-                        <form asp-controller="ProjectManagement" asp-action="CreateFunction" method="post">
-                            <input type="hidden" value="@ViewData["ProjectNuber"]" name="ProjectNumber" id="ProjectNumber" />
-                            <input type="hidden" value="@ViewData["TaskId"]" name="TaskId" id="TaskId" />
+            <!-- Modal content-->
+            <div class="modal-content">
+                <div class="modal-header">
+                    <button type="button" class="close" data-dismiss="modal">&times;</button>
+                    <h4 class="modal-title">Create Function</h4>
+                </div>
 
-                            <div class="col-sm-8 form-group">
-                                <label>Function Name</label>
-                                <div class="form-group">
-                                    <input type="text" asp-for="FunctionName" name="FunctionName" id="FunctionName" placeholder="Enter Task Name Here.." class="form-control">
-                                    @Html.ValidationMessageFor(m => m.FunctionName, "", new { @class = "text-danger" })
 
-                                </div>
+                <div class="modal-body col-lg-12">
+                    <form asp-controller="ProjectManagement" asp-action="CreateFunction" method="post">
+                        <input type="hidden" value="@ViewData["ProjectNuber"]" name="ProjectNumber" id="ProjectNumber" />
+                        <input type="hidden" value="@ViewData["TaskId"]" name="TaskId" id="TaskId" />
+
+                        <div class="col-sm-8 form-group">
+                            <label>Function Name</label>
+                            <div class="form-group">
+                                <input type="text" asp-for="FunctionName" name="FunctionName" id="FunctionName" placeholder="Enter Task Name Here.." class="form-control">
+                                @Html.ValidationMessageFor(m => m.FunctionName, "", new { @class = "text-danger" })
+
                             </div>
-
-                            <div class="col-sm-10 form-group">
-                                <label>Estimated Start Date</label>
-                                <div class="form-group">
-                                    <div class="input-group date form_date col-md-8" data-date="" data-date-format="dd MM yyyy" data-link-field="dtp_input2" data-link-format="yyyy-mm-dd">
-                                        <input class="form-control" size="10" type="text" name="FunctionStart" id="FunctionStart" asp-for="FunctionStart" >
-                                        <span class="input-group-addon"><span class="glyphicon glyphicon-remove"></span></span>
-                                        <span class="input-group-addon"><span class="glyphicon glyphicon-calendar"></span></span>
-                                    </div>
-                                    @Html.ValidationMessageFor(m => m.FunctionStart, "", new { @class = "text-danger" })
-                                </div>
-                            </div>
-
-                            <div class="col-sm-10 form-group">
-                                <label>Estimated End Date</label>
-                                <div class="form-group">
-                                    <div class="input-group date form_date col-md-8" data-date="" data-date-format="dd MM yyyy" data-link-field="dtp_input2" data-link-format="yyyy-mm-dd">
-                                        <input class="form-control" size="10" type="text" name="FunctionEnd" id="FunctionEnd" asp-for="FunctionEnd">
-                                        <span class="input-group-addon"><span class="glyphicon glyphicon-remove"></span></span>
-                                        <span class="input-group-addon"><span class="glyphicon glyphicon-calendar"></span></span>
-                                    </div>
-                                    @Html.ValidationMessageFor(m => m.FunctionEnd, "", new { @class = "text-danger" })
-                                </div>
-                            </div>
-
-                            <div class="col-sm-8 form-group" >
-                                <label>Responsible User</label>
-                                <div class="form-group" >
-                                    <select class="form-control" asp-items="ViewBag.UserSSPM"  name="UserId" id="UserId">
-                                        <option>Please select </option>
-                                    </select>
-                                </div>
-                            </div> 
-                            <div class="col-sm-8 form-group">
-                                        <label>Project Res.</label>
-                                    <div class="form-group">
-                                        <input type="text" name="ProjectResponsible" id="ProjectResponsible" placeholder="Enter ProjectResponsible Here.." class="form-control">
-                                    </div>
-                                </div>
-
-                        
-                            <div class= "col-sm-12 text-right">
-                            <button type="submit" class="btn btn-primary">Submit</button> 
                         </div>
-                        
+
+                        <div class="col-sm-10 form-group">
+                            <label>Estimated Start Date</label>
+                            <div class="form-group">
+                                <div class="input-group date form_date col-md-8" data-date="" data-date-format="dd MM yyyy" data-link-field="dtp_input2" data-link-format="yyyy-mm-dd">
+                                    <input class="form-control" size="10" type="text" name="FunctionStart" id="FunctionStart" asp-for="FunctionStart">
+                                    <span class="input-group-addon"><span class="glyphicon glyphicon-remove"></span></span>
+                                    <span class="input-group-addon"><span class="glyphicon glyphicon-calendar"></span></span>
+                                </div>
+                                @Html.ValidationMessageFor(m => m.FunctionStart, "", new { @class = "text-danger" })
+                            </div>
+                        </div>
+
+                        <div class="col-sm-10 form-group">
+                            <label>Estimated End Date</label>
+                            <div class="form-group">
+                                <div class="input-group date form_date col-md-8" data-date="" data-date-format="dd MM yyyy" data-link-field="dtp_input2" data-link-format="yyyy-mm-dd">
+                                    <input class="form-control" size="10" type="text" name="FunctionEnd" id="FunctionEnd" asp-for="FunctionEnd">
+                                    <span class="input-group-addon"><span class="glyphicon glyphicon-remove"></span></span>
+                                    <span class="input-group-addon"><span class="glyphicon glyphicon-calendar"></span></span>
+                                </div>
+                                @Html.ValidationMessageFor(m => m.FunctionEnd, "", new { @class = "text-danger" })
+                            </div>
+                        </div>
+
+                        <div class="col-sm-12 form-group">
+                            <label>Responsible User</label>
+                            <div class="form-group">
+                                <select class="js-example-basic-single  form-control " asp-items="ViewBag.UserSSPM" name="UserId" id="UserId">
+                                    <option>Please select </option>
+                                </select>
+                            </div>
+                        </div>
+                        <div class="col-sm-8 form-group">
+                            <label>Project Res.</label>
+                            <div class="form-group">
+                                <input type="text" name="ProjectResponsible" id="ProjectResponsible" placeholder="Enter ProjectResponsible Here.." class="form-control">
+                            </div>
+                        </div>
+
+
+                        <div class="col-sm-12 text-right">
+                            <button type="submit" class="btn btn-primary">Submit</button>
+                        </div>
+
                     </form>
 
-                 </div>
+                </div>
 
                 <div class="modal-footer">
-                        
-                 </div>
-             
-      </div>
-      
+
+                </div>
+
+            </div>
+
+        </div>
     </div>
-  </div>
 </div>
 
 
@@ -204,9 +207,15 @@
 
 @section scripts
     {
-    
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/select2/4.0.6-rc.0/js/select2.min.js"></script>
+
 
     <script>
+
+        $(document).ready(function () {
+            $('.js-example-basic-single').select2();
+        });
+    
 
         var TeamDetailPostBackURL = '/ProjectManagement/EditFunction/';
         $(function () {
