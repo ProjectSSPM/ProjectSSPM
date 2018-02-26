@@ -420,7 +420,25 @@ namespace ProjectSSMP.Controllers
 
             foreach (var itme in CreateTaskInputModel)
             {
-                
+                var check = (from x in context.FunctionLog where x.ProjectNumber.Equals(itme.ProjectNumber) && x.StatusId.Equals("F") && x.TaskId.Equals(itme.TaskId) select x).Count();
+                var all = (from x in context.Function where x.ProjectNumber.Equals(itme.ProjectNumber) && x.TaskId.Equals(itme.TaskId) select x).Count();
+                double percent = ((double)check / (double)all) * 100.0;
+                double f = Math.Floor(percent);
+                var ans = "";
+                if (f == 100)
+                {
+                    ans = "Finished!";
+                }
+                else
+                {
+                    ans = f.ToString() + "%";
+                }
+
+                if (ans.Equals("NaN%"))
+                {
+                    ans = "-";
+                }
+
                 model.Add(new CreateTaskInputModel()
                 {
                     ProjectNumber = id,
@@ -428,11 +446,14 @@ namespace ProjectSSMP.Controllers
                     TaskName = itme.TaskName,
                     TaskStart = itme.TaskStart,
                     TaskEnd = itme.TaskEnd,
-                    Timespan = DT((System.DateTime)itme.TaskEnd, (System.DateTime)itme.TaskStart)
+                    Timespan = DT((System.DateTime)itme.TaskEnd, (System.DateTime)itme.TaskStart),
+                    percent = ans
 
                 });
             }
+
             var Proname = (from p in context.Project where p.ProjectNumber.Equals(id) select p).FirstOrDefault();
+
             ViewData["ProjectName"] = "  "+Proname.ProjectId;
             ViewData["ProjectNuber"] = id;
             ViewData["CreateTask"] = model;

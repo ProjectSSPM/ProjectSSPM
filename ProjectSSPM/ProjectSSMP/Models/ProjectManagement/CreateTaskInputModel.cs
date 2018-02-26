@@ -19,6 +19,7 @@ namespace ProjectSSMP.Models.ProjectManagement
         [Required]
         public DateTime? TaskEnd { get; set; }
         public Double Timespan { get; set; }
+        public String percent { get; set; }
 
     }
 }
