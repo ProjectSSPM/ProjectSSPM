@@ -67,42 +67,60 @@
                         <div class="text-right" style="margin-right: 10px;">
 
                             @{ 
-                                var gropid = ViewData["gropid"];
-                                var UserId =ViewData["UserId"];
-                                IEnumerable<ProjectSSMP.Models.FunctionLog> checkfu = ViewData["checkfi"] as
-                                                IEnumerable<ProjectSSMP.Models.FunctionLog>;
+                                            var gropid = ViewData["gropid"];
+                                            var UserId =ViewData["UserId"];
+                                            IEnumerable<ProjectSSMP.Models.TimeSheet> checkfu = ViewData["checkfi"] as
+                                                            IEnumerable<ProjectSSMP.Models.TimeSheet>;
 
 
-                                var grcheck =from c in checkfu 
-                                             group c by c.FunctionId into gr
-                                             select new {
-                                                 Key = gr.Key
-                                             };
+
+                                            var grcheck =from c in checkfu
+                                                         where c.ActionId.Equals("Y")
+                                                         group c by c.FunctionId into gr
+                                                         select new {
+                                                             Key = gr.Key,
+                                                         };
+                                            var checkAC = from a in checkfu
+                                                          where a.ActionId.Equals("Z")
+                                                          group a by a.FunctionId into gr
+                                                          select new {
+                                                              Key = gr.Key
+                                                          };
 
 
 
                                 if (gropid.ToString() == "50")
                                 {
-                                    bool check = false;
-                                    foreach(var chek in grcheck)
-                                    {
-                                        if(itme2.FunctionId.Equals(chek.Key))
-                                        {
+                                     bool check = false;
+                                     foreach(var chek in grcheck)
+                                     {
+                                          if(itme2.FunctionId.Equals(chek.Key))
+                                          {
                                             <a href="javascript:void(0);" class=" approvefun btn btn-info btn-sm"
-                                                  data-id="@item.Key" >Approve</a>
+                                               data-id="@item.Key" >Approve</a>
                                             check = true;
+                                        }
+
+                                    }
+                                    foreach(var checka in checkAC)
+                                    {
+                                        if (itme2.FunctionId.Equals(checka.Key))
+                                        {
+                                            check = true;
+
                                         }
 
                                     }
 
 
+
                                     if(itme2.UserId  == UserId.ToString() && !(check))
                                     {
-                                                <a href="javascript:void(0);" class="anchorDetail btn btn-info btn-sm"
-                                                data-id="@item.Key">Add</a>
-                                                <a asp-action="UpdateTimeSheet" class="btn btn-success btn-sm" asp-route-id="@item.Key">Update</a>
+                                                        <a href="javascript:void(0);" class="anchorDetail btn btn-info btn-sm"
+                                                        data-id="@item.Key">Add</a>
+                                                        <a asp-action="UpdateTimeSheet" class="btn btn-success btn-sm" asp-route-id="@item.Key">Update</a>
 
-                                    }
+                                            }
                                             
 
 
