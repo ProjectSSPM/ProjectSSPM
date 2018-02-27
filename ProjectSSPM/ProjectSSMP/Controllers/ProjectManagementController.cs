@@ -7,7 +7,6 @@ using System.Threading.Tasks;
 using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.Mvc.Rendering;
-using Microsoft.AspNetCore.Routing;
 using Microsoft.EntityFrameworkCore;
 using ProjectSSMP.Models;
 using ProjectSSMP.Models.ProjectManagement;
@@ -644,20 +643,13 @@ namespace ProjectSSMP.Controllers
 
 
         [Authorize]
-        public IActionResult CreateFunction(string id, string rfc)
+<<<<<<< HEAD
+        public IActionResult CreateFunction(string id ,string rsc)
+=======
+        public IActionResult CreateFunction(string id)
+>>>>>>> parent of c6bfc39... commit-RFC
         {
-            var RFCcheck = "none";
-            if(rfc.Equals("True")){
-                RFCcheck = "[RFC]_";
-                ViewData["NAME"] = "RFC Function Management";
-                ViewData["C"] = "T";
-            }
-            else if(rfc.Equals("False")){
-                RFCcheck = "";
-                ViewData["NAME"] = "Function Management";
-                ViewData["C"] = "F";
-            }
-
+            
             ViewBag.userMenu = GetMenu();
             ViewBag.nothi = Nothi();
 
@@ -716,8 +708,7 @@ namespace ProjectSSMP.Controllers
             var taskname = (from t in context.Task where t.TaskId.Equals(id) select t).FirstOrDefault();
 
             ViewData["ProjectName"] = Proname.ProjectId;
-            ViewData["Taskname"] = RFCcheck+taskname.TaskName;
-
+            ViewData["Taskname"] = taskname.TaskName;
 
             ViewData["CreateFunction"] = model;
             return View();
@@ -738,7 +729,7 @@ namespace ProjectSSMP.Controllers
             {
 
                 var id = (from u in context.RunningNumber where u.Type.Equals("FunctionID") select u).FirstOrDefault();
-                var fname = "";
+
                 int num;
                 if (id.Number == null)
                 {
@@ -751,20 +742,11 @@ namespace ProjectSSMP.Controllers
                     num = num + 1;
                 }
 
-                var rf1 = "";
-                if(inputModel.RFCcheck.Equals("T")){
-                    fname = "[RFC]_" + inputModel.FunctionName;
-                    rf1 = "True";
-                }
-                else{
-                    fname = inputModel.FunctionName;
-                    rf1 = "False";
-                }
                 Models.Function ord = new Models.Function
                 {
                     ProjectNumber = inputModel.ProjectNumber,
                     TaskId = inputModel.TaskId,
-                    FunctionName = fname,
+                    FunctionName = inputModel.FunctionName,
                     FunctionStart = inputModel.FunctionStart,
                     FunctionEnd = inputModel.FunctionEnd,
                     FunctionId = num.ToString()
@@ -820,9 +802,8 @@ namespace ProjectSSMP.Controllers
 
 
 
+                return RedirectToAction("CreateFunction", "ProjectManagement");
 
-                return RedirectToAction("CreateFunction", "ProjectManagement", new RouteValueDictionary(
-                    new { Controller = "ProjectManagement", Action = "CreateFunction", id=inputModel.TaskId , rfc = rf1}));
 
 
             }

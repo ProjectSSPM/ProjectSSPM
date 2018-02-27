@@ -61,7 +61,21 @@
                     <a asp-action="TimeSheet" asp-controller="TimeSheet" asp-route-id="@itme.ProjectNumber">
                         
                         <div>
-                            <strong class="text-danger">Function นี้ใกล้ถึงเวลาสิ้นสุด</strong>
+                            @{ 
+                                DateTime datend = (DateTime)itme.FunctionEnd;
+                                DateTime datenow = (DateTime)itme.Datenow;
+                                if (datend < datenow)
+                                {
+
+                                    <strong class="text-danger">Function นี้สิ้นสุดแล้ว</strong>
+                                }else if (datend>datenow)
+                                {
+                                    <strong class="text-danger">Function นี้ใกล้ถึงเวลาสิ้นสุด</strong>
+
+                                }
+
+                            }
+                            
                             <div class="pull-right">Function Name : @itme.FunctionName</div>
                             <span class="pull-right text-muted">
                                     <em>End : @Convert.ToString(string.Format("{0:dd MMMM yyyy}", itme.FunctionEnd))</em>

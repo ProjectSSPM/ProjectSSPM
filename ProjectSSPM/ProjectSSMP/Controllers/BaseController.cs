@@ -43,6 +43,7 @@ namespace ProjectSSMP.Controllers
             var loggedInUser = HttpContext.User;
             var loggedInUserName = loggedInUser.Identity.Name;
             var userid = (from u in context.UserSspm where u.Username.Equals(loggedInUserName) select u).FirstOrDefault();
+
             var checkfri = (from ts in context.TimeSheet
                             where ts.ActionId.Equals("Z") || ts.ActionId.Equals("Y")
                             group ts by ts.FunctionId into tsgr
@@ -53,7 +54,6 @@ namespace ProjectSSMP.Controllers
 
             var checkdate = (from tt in context.TeamTask
                              join f in context.Function on tt.FunctionId equals f.FunctionId
-
                              where tt.UserId.Equals(userid.UserId) && !(checkfri.Select(p => p.Key).Contains(f.FunctionId))
                              select new
                              {
@@ -75,12 +75,13 @@ namespace ProjectSSMP.Controllers
                 if (checkfundae <= 1)
                 {
                     model.Add(new NotificationModel() {
-                        TaskId =cdete.TaskId,
+                        TaskId = cdete.TaskId,
                         FunctionName = cdete.FunctionName,
                         FunctionId = cdete.FunctionId,
                         FunctionStart = cdete.ActualStart,
                         FunctionEnd = cdete.FunctionEnd,
-                        ProjectNumber = cdete.ProjectNumber
+                        ProjectNumber = cdete.ProjectNumber,
+                        Datenow = DateTime.Now
 
                     });
                    
