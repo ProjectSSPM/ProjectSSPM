@@ -10,7 +10,7 @@
 
 
 <div class="container">
-    <h2 class="well">@ViewData["ProjectName"] <span class="glyphicon glyphicon-chevron-right"></span> @ViewData["Taskname"] <span class="glyphicon glyphicon-chevron-right"></span>   Create Function  </h2>
+    <h2 class="well">@ViewData["ProjectName"] <span class="glyphicon glyphicon-chevron-right"></span> @ViewData["Taskname"] <span class="glyphicon glyphicon-chevron-right"></span>   @ViewData["Name"]</h2>
 
     <div class="col-lg-4">
         <div class="text-Left">
@@ -126,7 +126,7 @@
                     <form asp-controller="ProjectManagement" asp-action="CreateFunction" method="post">
                         <input type="hidden" value="@ViewData["ProjectNuber"]" name="ProjectNumber" id="ProjectNumber" />
                         <input type="hidden" value="@ViewData["TaskId"]" name="TaskId" id="TaskId" />
-
+                        <input type="hidden" value="@ViewData["CheckRSC"]" name="RSC" id="RSC" />
                         <div class="col-sm-8 form-group">
                             <label>Function Name</label>
                             <div class="form-group">

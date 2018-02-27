@@ -7,6 +7,7 @@ using System.Threading.Tasks;
 using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.Mvc.Rendering;
+using Microsoft.AspNetCore.Routing;
 using Microsoft.EntityFrameworkCore;
 using ProjectSSMP.Models;
 using ProjectSSMP.Models.ProjectManagement;
@@ -643,11 +644,7 @@ namespace ProjectSSMP.Controllers
 
 
         [Authorize]
-<<<<<<< HEAD
         public IActionResult CreateFunction(string id ,string rsc)
-=======
-        public IActionResult CreateFunction(string id)
->>>>>>> parent of c6bfc39... commit-RFC
         {
             
             ViewBag.userMenu = GetMenu();
@@ -709,8 +706,19 @@ namespace ProjectSSMP.Controllers
 
             ViewData["ProjectName"] = Proname.ProjectId;
             ViewData["Taskname"] = taskname.TaskName;
-
             ViewData["CreateFunction"] = model;
+
+
+            if(rsc.Equals("true")){
+                ViewData["Name"] = "[RFC]_Function Management";
+                ViewData["CheckRSC"] = "T";
+            }
+            else{
+                ViewData["Name"] = "Function Management";
+                ViewData["CheckRSC"] = "F";
+            }
+
+
             return View();
 
 
@@ -741,12 +749,18 @@ namespace ProjectSSMP.Controllers
                     num = Convert.ToInt32(id.Number);
                     num = num + 1;
                 }
-
+                var nameRFC = "";
+                if(inputModel.RSC.Equals("T")){
+                    nameRFC = "[RFC]_" + inputModel.FunctionName;
+                }
+                else{
+                    nameRFC = inputModel.FunctionName;
+                }
                 Models.Function ord = new Models.Function
                 {
                     ProjectNumber = inputModel.ProjectNumber,
                     TaskId = inputModel.TaskId,
-                    FunctionName = inputModel.FunctionName,
+                    FunctionName = nameRFC,
                     FunctionStart = inputModel.FunctionStart,
                     FunctionEnd = inputModel.FunctionEnd,
                     FunctionId = num.ToString()
@@ -798,11 +812,12 @@ namespace ProjectSSMP.Controllers
                     Console.WriteLine(e);
                     // Provide for exceptions.
                 }
-
-
-
-
-                return RedirectToAction("CreateFunction", "ProjectManagement");
+                var SendBack = "false";
+                if(inputModel.RSC.Equals("T")){
+                    SendBack = "true";
+                }
+                return RedirectToAction("CreateFunction", "ProjectManagement", new RouteValueDictionary(
+                    new { Controller = "ProjectManagement", Action = "CreateFunction", id = inputModel.TaskId, rsc = SendBack }));
 
 
 
