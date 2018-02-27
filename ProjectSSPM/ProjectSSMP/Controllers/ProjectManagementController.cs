@@ -643,7 +643,11 @@ namespace ProjectSSMP.Controllers
 
 
         [Authorize]
+<<<<<<< HEAD
         public IActionResult CreateFunction(string id ,string rsc)
+=======
+        public IActionResult CreateFunction(string id)
+>>>>>>> parent of c6bfc39... commit-RFC
         {
             
             ViewBag.userMenu = GetMenu();
