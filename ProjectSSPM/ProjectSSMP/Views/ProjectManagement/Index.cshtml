@@ -1,9 +1,10 @@
-﻿@model IEnumerable<ProjectSSMP.Models.ProjectManagement.IndexProjectModel>
+﻿@model IEnumerable<SSMP.Models.ProjectManagement.IndexProjectModel>
 
 @{
     ViewData["Title"] = "Project Management";
     Layout = "~/Views/Shared/_LayoutMenu.cshtml";
 }
+
 
 <div class="container">
     <h2 class="well">Project Management</h2>
@@ -99,8 +100,12 @@
 
 @section scripts{
 
-    
+
     <script>
+
+        
+
+
 
         var TeamDetailPostBackURL = '/ProjectManagement/EditProject/';
         $(function () {
@@ -137,7 +142,8 @@
 
 
 
-        });
+        });
+
 
     </script>
 

@@ -1,14 +1,14 @@
 ﻿using Microsoft.AspNetCore.Authentication;
 using Microsoft.AspNetCore.Mvc;
-using ProjectSSMP.Models;
-using ProjectSSMP.Models.Security;
+using SSMP.Models;
+using SSMP.Models.Security;
 using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Security.Claims;
 using System.Threading.Tasks;
 
-namespace ProjectSSMP.Controllers
+namespace SSMP.Controllers
 {
     public class SecurityController : BaseController
     {

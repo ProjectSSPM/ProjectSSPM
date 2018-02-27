@@ -5,16 +5,16 @@ using System.Linq;
 using System.Threading.Tasks;
 using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
-using ProjectSSMP.Models;
+using SSMP.Models;
 using Newtonsoft.Json;
-using ProjectSSMP.Models.Timeline;
-using ProjectSSMP.Models.Timesheet;
-using ProjectSSMP.Models.Home;
+using SSMP.Models.Timeline;
+using SSMP.Models.Timesheet;
+using SSMP.Models.Home;
 using System.Globalization;
 using System.Threading;
 using NToastNotify;
 
-namespace ProjectSSMP.Controllers
+namespace SSMP.Controllers
 {
     public class HomeController : BaseController         
     {

@@ -8,12 +8,12 @@ using Microsoft.AspNetCore.Http;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
-using ProjectSSMP.Models;
+using SSMP.Models;
 using Microsoft.AspNetCore.Localization;
 using System.Globalization;
 using NToastNotify;
 
-namespace ProjectSSMP
+namespace SSMP
 {
     public class Startup
     {
@@ -41,7 +41,7 @@ namespace ProjectSSMP
 
             //services.AddSession();
 
-            var connection = @"Server=den1.mssql5.gear.host;Initial Catalog=sspm;Integrated Security=False;User ID=sspm;Password=Gi90MMTY!H_i;Connect Timeout=30;Encrypt=False;TrustServerCertificate=True;ApplicationIntent=ReadWrite;MultiSubnetFailover=False";
+            var connection = @"Server=192.168.88.100;Initial Catalog=sspm;Integrated Security=False;User ID=sspm;Password=sspm@dev;Connect Timeout=30;Encrypt=False;TrustServerCertificate=True;ApplicationIntent=ReadWrite;MultiSubnetFailover=False";
             services.AddDbContext<sspmContext>(options => options.UseSqlServer(connection));
         }
 

@@ -5,9 +5,9 @@ using System.Threading.Tasks;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.Mvc.Rendering;
 using Microsoft.EntityFrameworkCore;
-using ProjectSSMP.Models;
+using SSMP.Models;
 
-namespace ProjectSSMP.Controllers
+namespace SSMP.Controllers
 {
     public class UserSspmsController : Controller
     {

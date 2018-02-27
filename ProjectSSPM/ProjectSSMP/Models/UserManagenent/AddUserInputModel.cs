@@ -1,7 +1,7 @@
 ﻿using System;
 using System.ComponentModel.DataAnnotations;
 
-namespace ProjectSSMP.Models.UserManagement
+namespace SSMP.Models.UserManagement
 {
     public class AddUserInputModel
     {

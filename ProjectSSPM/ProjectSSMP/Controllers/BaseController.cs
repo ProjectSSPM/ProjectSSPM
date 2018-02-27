@@ -4,11 +4,11 @@ using System.Linq;
 using System.Threading.Tasks;
 using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
-using ProjectSSMP.Models;
-using ProjectSSMP.Models.Menu;
-using ProjectSSMP.Models.Notification;
+using SSMP.Models;
+using SSMP.Models.Menu;
+using SSMP.Models.Notification;
 
-namespace ProjectSSMP.Controllers
+namespace SSMP.Controllers
 {
     public class BaseController : Controller
     {

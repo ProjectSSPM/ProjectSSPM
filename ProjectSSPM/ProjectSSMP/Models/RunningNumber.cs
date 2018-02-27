@@ -1,7 +1,7 @@
 ﻿using System;
 using System.Collections.Generic;
 
-namespace ProjectSSMP.Models
+namespace SSMP.Models
 {
     public partial class RunningNumber
     {

@@ -12,11 +12,11 @@
   <MonoDevelop.Ide.Workspace ActiveConfiguration="Debug" />
   <MonoDevelop.Ide.DebuggingService.Breakpoints>
     <BreakpointStore>
-      <Breakpoint file="/Users/Palm/Desktop/ProjectSSPM/ProjectSSPM/ProjectSSMP/Controllers/TimeSheetController.cs" relfile="Controllers/TimeSheetController.cs" line="368" column="1" />
-      <Breakpoint file="/Users/Palm/Desktop/ProjectSSPM/ProjectSSPM/ProjectSSMP/Views/TimeSheet/ConfirmTimeSheet.cshtml" relfile="Views/TimeSheet/ConfirmTimeSheet.cshtml" line="15" column="75" />
+      <Breakpoint file="/Users/Palm/Desktop/ProjectSSPM/ProjectSSPM/SSMP/Controllers/TimeSheetController.cs" relfile="Controllers/TimeSheetController.cs" line="368" column="1" />
+      <Breakpoint file="/Users/Palm/Desktop/ProjectSSPM/ProjectSSPM/SSMP/Views/TimeSheet/ConfirmTimeSheet.cshtml" relfile="Views/TimeSheet/ConfirmTimeSheet.cshtml" line="15" column="75" />
     </BreakpointStore>
   </MonoDevelop.Ide.DebuggingService.Breakpoints>
   <MonoDevelop.Ide.DebuggingService.PinnedWatches />
-  <MonoDevelop.Ide.ItemProperties.ProjectSSMP PreferredExecutionTarget="MonoDevelop.Default" />
+  <MonoDevelop.Ide.ItemProperties.SSMP PreferredExecutionTarget="MonoDevelop.Default" />
   <MultiItemStartupConfigurations />
 </Properties>

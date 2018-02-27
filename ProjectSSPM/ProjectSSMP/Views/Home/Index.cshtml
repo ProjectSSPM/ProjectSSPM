@@ -1,4 +1,4 @@
-﻿@model ProjectSSMP.Models.Home.CreateBulletinModel
+﻿@model SSMP.Models.Home.CreateBulletinModel
 @{
     ViewData["Title"] = "Home Page";
     Layout = "~/Views/Shared/_LayoutMenu.cshtml";
@@ -17,8 +17,8 @@
 
 
                 @{
-        IEnumerable<ProjectSSMP.Models.Home.CreateBulletinModel> Bulletin =
-            ViewData["Bulletin"] as IEnumerable<ProjectSSMP.Models.Home.CreateBulletinModel>;
+        IEnumerable<SSMP.Models.Home.CreateBulletinModel> Bulletin =
+            ViewData["Bulletin"] as IEnumerable<SSMP.Models.Home.CreateBulletinModel>;
 
                 }
 
@@ -70,8 +70,8 @@
         <div class="col-lg-10">
             <div class="row">
                 @{
-                IEnumerable<ProjectSSMP.Models.Timesheet.TimeSheetInputModel> Timeline =
-                    ViewData["Timeline"] as IEnumerable<ProjectSSMP.Models.Timesheet.TimeSheetInputModel>;
+                IEnumerable<SSMP.Models.Timesheet.TimeSheetInputModel> Timeline =
+                    ViewData["Timeline"] as IEnumerable<SSMP.Models.Timesheet.TimeSheetInputModel>;
 
                 }
 

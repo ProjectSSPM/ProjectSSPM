@@ -1,6 +1,6 @@
 using System;
 
-namespace ProjectSSMP.Models
+namespace SSMP.Models
 {
     public class ErrorViewModel
     {

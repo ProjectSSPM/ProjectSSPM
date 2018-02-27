@@ -3,7 +3,7 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
 
-namespace ProjectSSMP.Models.Home
+namespace SSMP.Models.Home
 {
     public class ResultProjectModel
     {

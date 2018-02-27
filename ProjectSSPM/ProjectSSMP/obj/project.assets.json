@@ -13145,9 +13145,9 @@
       "hideWarningsAndErrors": true
     },
     "restore": {
-      "projectUniqueName": "D:\\GitHub\\ProjectSSPM\\ProjectSSPM\\ProjectSSMP\\ProjectSSMP.csproj",
-      "projectName": "ProjectSSMP",
-      "projectPath": "D:\\GitHub\\ProjectSSPM\\ProjectSSPM\\ProjectSSMP\\ProjectSSMP.csproj",
+      "projectUniqueName": "D:\\GitHub\\ProjectSSPM\\ProjectSSPM\\ProjectSSMP\\SSMP.csproj",
+      "projectName": "SSMP",
+      "projectPath": "D:\\GitHub\\ProjectSSPM\\ProjectSSPM\\ProjectSSMP\\SSMP.csproj",
       "packagesPath": "C:\\Users\\Ilumi\\.nuget\\packages\\",
       "outputPath": "D:\\GitHub\\ProjectSSPM\\ProjectSSPM\\ProjectSSMP\\obj\\",
       "projectStyle": "PackageReference",

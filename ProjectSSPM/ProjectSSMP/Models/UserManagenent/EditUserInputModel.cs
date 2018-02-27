@@ -1,6 +1,6 @@
 ﻿using System;
 
-namespace ProjectSSMP.Models.UserManagement
+namespace SSMP.Models.UserManagement
 {
     public class EditUserInputModel
     {

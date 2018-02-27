@@ -1,5 +1,5 @@
 ﻿using System;
-namespace ProjectSSMP.Models.Home
+namespace SSMP.Models.Home
 {
     public class ChatBulletinModel
     {

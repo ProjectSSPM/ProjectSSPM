@@ -1,4 +1,4 @@
-﻿@model ProjectSSMP.Models.ProjectManagement.CreateTaskInputModel
+﻿@model SSMP.Models.ProjectManagement.CreateTaskInputModel
 
 @{
     ViewData["Title"] = "Project Management";
@@ -67,8 +67,8 @@
         <tbody>
 
             @{
-                IEnumerable<ProjectSSMP.Models.ProjectManagement.CreateTaskInputModel> createTask =
-                    ViewData["CreateTask"] as IEnumerable<ProjectSSMP.Models.ProjectManagement.CreateTaskInputModel>;
+                IEnumerable<SSMP.Models.ProjectManagement.CreateTaskInputModel> createTask =
+                    ViewData["CreateTask"] as IEnumerable<SSMP.Models.ProjectManagement.CreateTaskInputModel>;
 
                 int autonum = 1;
 

@@ -5,7 +5,7 @@ using System.ComponentModel.DataAnnotations;
 using System.Linq;
 using System.Threading.Tasks;
 
-namespace ProjectSSMP.Models.ProjectManagement
+namespace SSMP.Models.ProjectManagement
 {
     public class CreateFunctionInputModel
     {
@@ -17,7 +17,7 @@ namespace ProjectSSMP.Models.ProjectManagement
         [Required]
         public DateTime? FunctionStart { get; set; }
 
-        [Remote(action: "VarifyDateFunction", controller: "validation", AdditionalFields = nameof(FunctionStart) + "," + nameof(FunctionEnd)+","+nameof(TaskId))]
+        [Remote(action: "VarifyDateFunction", controller: "validation", AdditionalFields = nameof(FunctionStart) + "," + nameof(FunctionEnd)+","+nameof(TaskId)+","+nameof(RSC))]
         [Required]
         public DateTime? FunctionEnd { get; set; }        
         public string ProjectNumber { get; set; }

@@ -5,9 +5,9 @@ using System.Linq;
 using System.Threading;
 using System.Threading.Tasks;
 using Microsoft.AspNetCore.Mvc;
-using ProjectSSMP.Models;
+using SSMP.Models;
 
-namespace ProjectSSMP.Controllers
+namespace SSMP.Controllers
 {
     public class validationController : BaseController
     {
@@ -44,17 +44,29 @@ namespace ProjectSSMP.Controllers
         }
 
         [AcceptVerbs("Get", "Post")]
-        public IActionResult VarifyDateFunction(DateTime FunctionStart, DateTime FunctionEnd, string TaskId)
+        public IActionResult VarifyDateFunction(DateTime FunctionStart, DateTime FunctionEnd, string TaskId,string RSC)
         {
-            if (FunctionEnd < FunctionStart)
+            if(RSC == "F")
             {
-                return Json(data: $"The Estimate End is greater than Start.");
-            }
-            var checkdate = (from t in context.Task where t.TaskId.Equals(TaskId) select t).FirstOrDefault();
-            if (FunctionEnd >= checkdate.TaskEnd)
+                if (FunctionEnd < FunctionStart)
+                {
+                    return Json(data: $"The Estimate End is greater than Start.");
+                }
+                var checkdate = (from t in context.Task where t.TaskId.Equals(TaskId) select t).FirstOrDefault();
+                if (FunctionEnd >= checkdate.TaskEnd)
+                {
+                    return Json(data: $"Your Task Start is Least than Project Start");
+                }
+
+            }else if (RSC == "T")
             {
-                return Json(data: $"Your Task Start is Least than Project Start");
+                if (FunctionEnd < FunctionStart)
+                {
+                    return Json(data: $"The Estimate End is greater than Start.");
+                }
+
             }
+           
 
             return Json(data: true);
         }

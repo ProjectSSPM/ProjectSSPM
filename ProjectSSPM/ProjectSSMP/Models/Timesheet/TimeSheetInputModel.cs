@@ -2,7 +2,7 @@
 using System;
 using System.ComponentModel.DataAnnotations;
 
-namespace ProjectSSMP.Models.Timesheet
+namespace SSMP.Models.Timesheet
 {
     public class TimeSheetInputModel
     {

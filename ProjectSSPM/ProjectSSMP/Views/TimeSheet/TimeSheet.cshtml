@@ -1,4 +1,4 @@
-﻿@model IEnumerable<ProjectSSMP.Models.Timesheet.TimeSheetInputModel>
+﻿@model IEnumerable<SSMP.Models.Timesheet.TimeSheetInputModel>
 @{
     ViewData["Title"] = "TimeSheet Page";
     Layout = "~/Views/Shared/_LayoutMenu.cshtml";
@@ -72,8 +72,8 @@
 
                                 var gropid = ViewData["gropid"];
                                 var UserId =ViewData["UserId"];
-                                IEnumerable<ProjectSSMP.Models.TimeSheet> checkfu = ViewData["checkfi"] as
-                                                IEnumerable<ProjectSSMP.Models.TimeSheet>;
+                                IEnumerable<SSMP.Models.TimeSheet> checkfu = ViewData["checkfi"] as
+                                                IEnumerable<SSMP.Models.TimeSheet>;
 
 
 

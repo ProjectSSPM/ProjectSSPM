@@ -1,5 +1,5 @@
 ﻿using System;
-namespace ProjectSSMP.Models.Timeline
+namespace SSMP.Models.Timeline
 {
     public class TimelineInputModel
     {

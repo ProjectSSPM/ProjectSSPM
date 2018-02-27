@@ -3,7 +3,7 @@ using Microsoft.AspNetCore.Mvc;
 using System;
 using System.ComponentModel.DataAnnotations;
 
-namespace ProjectSSMP.Models.ProjectManagement
+namespace SSMP.Models.ProjectManagement
 {
     public class CreateTaskInputModel
     {

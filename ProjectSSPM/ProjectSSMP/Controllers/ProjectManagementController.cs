@@ -9,13 +9,13 @@ using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.Mvc.Rendering;
 using Microsoft.AspNetCore.Routing;
 using Microsoft.EntityFrameworkCore;
-using ProjectSSMP.Models;
-using ProjectSSMP.Models.ProjectManagement;
-using ProjectSSMP.Models.UserManagenent;
+using SSMP.Models;
+using SSMP.Models.ProjectManagement;
+using SSMP.Models.UserManagenent;
 
 // For more information on enabling MVC for empty projects, visit https://go.microsoft.com/fwlink/?LinkID=397860
 
-namespace ProjectSSMP.Controllers
+namespace SSMP.Controllers
 {
     
     public class ProjectManagementController : BaseController
@@ -667,8 +667,14 @@ namespace ProjectSSMP.Controllers
             List<CreateFunctionInputModel> model = new List<CreateFunctionInputModel>();
             var projectnumber = (from t in context.Task where t.TaskId.Equals(id) select t).FirstOrDefault();
 
-            var CreateFunction = (from x in context.Function where x.TaskId.Equals(id) 
+            var CreateFunction = (from x in context.Function
+                                  where x.TaskId.Equals(id) 
                                   select x);
+            var CreateFunction2 = context.Function
+                                    .FromSql("SELECT * FROM [Function] WHERE FunctionName LIKE '_RFC_%'")
+                                    .Where(f => f.TaskId.Equals(id))
+                                    .Select(p=> p);
+
 
             foreach (var itme in CreateFunction)
             {

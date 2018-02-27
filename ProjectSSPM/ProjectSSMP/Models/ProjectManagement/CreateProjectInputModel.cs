@@ -2,7 +2,7 @@
 using System;
 using System.ComponentModel.DataAnnotations;
 
-namespace ProjectSSMP.Models.ProjectManagement
+namespace SSMP.Models.ProjectManagement
 {
     public class CreateProjectInputModel
     {

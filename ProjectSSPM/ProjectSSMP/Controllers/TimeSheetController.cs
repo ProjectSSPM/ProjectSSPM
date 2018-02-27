@@ -9,10 +9,10 @@ using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.Mvc.Rendering;
 using Microsoft.AspNetCore.Routing;
 using Microsoft.EntityFrameworkCore;
-using ProjectSSMP.Models;
-using ProjectSSMP.Models.Timesheet;
+using SSMP.Models;
+using SSMP.Models.Timesheet;
 
-namespace ProjectSSMP.Controllers
+namespace SSMP.Controllers
 {
     public class TimeSheetController : BaseController
     {

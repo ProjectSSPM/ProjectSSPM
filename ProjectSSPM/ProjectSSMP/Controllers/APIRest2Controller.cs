@@ -5,7 +5,7 @@ using System.Threading.Tasks;
 using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
 
-namespace ProjectSSMP.Controllers
+namespace SSMP.Controllers
 {
     [Produces("application/json")]
     [Route("api/APIRest2")]

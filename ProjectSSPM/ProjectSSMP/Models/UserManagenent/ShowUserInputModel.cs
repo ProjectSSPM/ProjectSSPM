@@ -1,5 +1,5 @@
 ﻿using System;
-namespace ProjectSSMP.Models.UserManagenent
+namespace SSMP.Models.UserManagenent
 {
     public class ShowUserInputModel
     {

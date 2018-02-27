@@ -1,10 +1,12 @@
 D:\GitHub\ProjectSSPM\ProjectSSPM\ProjectSSMP
 --output-path=obj\Any CPU\Release\netcoreapp2.0\
---application-name=ProjectSSMP
+--application-name=SSMP
 --content-root=D:\GitHub\ProjectSSPM\ProjectSSPM\ProjectSSMP
---file=D:\GitHub\ProjectSSPM\ProjectSSPM\ProjectSSMP\Views\Home\AddTimeline.cshtml
+--file=D:\GitHub\ProjectSSPM\ProjectSSPM\ProjectSSMP\Views\Home\AddBulletin.cshtml
+--file=D:\GitHub\ProjectSSPM\ProjectSSPM\ProjectSSMP\Views\Home\ChatBulletin.cshtml
 --file=D:\GitHub\ProjectSSPM\ProjectSSPM\ProjectSSMP\Views\Home\CheckTimeline.cshtml
 --file=D:\GitHub\ProjectSSPM\ProjectSSPM\ProjectSSMP\Views\Home\Index.cshtml
+--file=D:\GitHub\ProjectSSPM\ProjectSSPM\ProjectSSMP\Views\Home\Result.cshtml
 --file=D:\GitHub\ProjectSSPM\ProjectSSPM\ProjectSSMP\Views\MenuManagenent\AddMenu.cshtml
 --file=D:\GitHub\ProjectSSPM\ProjectSSPM\ProjectSSMP\Views\MenuManagenent\AddMenuAuthen.cshtml
 --file=D:\GitHub\ProjectSSPM\ProjectSSPM\ProjectSSMP\Views\MenuManagenent\Details.cshtml
@@ -27,6 +29,7 @@ D:\GitHub\ProjectSSPM\ProjectSSPM\ProjectSSMP
 --file=D:\GitHub\ProjectSSPM\ProjectSSPM\ProjectSSMP\Views\Shared\_LayoutModal.cshtml
 --file=D:\GitHub\ProjectSSPM\ProjectSSPM\ProjectSSMP\Views\Shared\_ValidationScriptsPartial.cshtml
 --file=D:\GitHub\ProjectSSPM\ProjectSSPM\ProjectSSMP\Views\TimeSheet\AddTimeSheet.cshtml
+--file=D:\GitHub\ProjectSSPM\ProjectSSPM\ProjectSSMP\Views\TimeSheet\ApproveFunction.cshtml
 --file=D:\GitHub\ProjectSSPM\ProjectSSPM\ProjectSSMP\Views\TimeSheet\ConfirmTimeSheet.cshtml
 --file=D:\GitHub\ProjectSSPM\ProjectSSPM\ProjectSSMP\Views\TimeSheet\Index.cshtml
 --file=D:\GitHub\ProjectSSPM\ProjectSSPM\ProjectSSMP\Views\TimeSheet\TimeSheet.cshtml

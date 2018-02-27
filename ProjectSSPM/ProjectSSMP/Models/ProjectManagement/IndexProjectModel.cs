@@ -1,5 +1,5 @@
 ﻿using System;
-namespace ProjectSSMP.Models.ProjectManagement
+namespace SSMP.Models.ProjectManagement
 {
     public class IndexProjectModel
     {

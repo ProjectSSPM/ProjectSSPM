@@ -1,4 +1,4 @@
-﻿@model ProjectSSMP.Models.ProjectManagement.CreateFunctionInputModel
+﻿@model SSMP.Models.ProjectManagement.CreateFunctionInputModel
 
 @{
     ViewData["Title"] = "Create Function";
@@ -61,8 +61,8 @@
         </thead>
         <tbody>
             @{
-                IEnumerable<ProjectSSMP.Models.ProjectManagement.CreateFunctionInputModel> createFunction =
-                    ViewData["CreateFunction"] as IEnumerable<ProjectSSMP.Models.ProjectManagement.CreateFunctionInputModel>;
+                IEnumerable<SSMP.Models.ProjectManagement.CreateFunctionInputModel> createFunction =
+                    ViewData["CreateFunction"] as IEnumerable<SSMP.Models.ProjectManagement.CreateFunctionInputModel>;
                 int autonum = 1;
 
             }
@@ -163,7 +163,7 @@
                         <div class="col-sm-12 form-group">
                             <label>Responsible User</label>
                             <div class="form-group">
-                                <select class="js-example-basic-single  form-control " asp-items="ViewBag.UserSSPM" name="UserId" id="UserId">
+                                <select class="js-example-basic-single  form-control " asp-items="ViewBag.UserSSPM" name="UserId" id="UserId" style="width: 300px">
                                     <option>Please select </option>
                                 </select>
                             </div>

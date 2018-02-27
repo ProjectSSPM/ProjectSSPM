@@ -1,19 +1,17 @@
-﻿@model ProjectSSMP.Models.ProjectManagement.CreateProjectInputModel
+﻿@model SSMP.Models.ProjectManagement.CreateProjectInputModel
 
-
+    <link href="https://cdnjs.cloudflare.com/ajax/libs/select2/4.0.6-rc.0/css/select2.min.css" rel="stylesheet" />
 
 
 <div class="modal-header">
     <button type="button" class="close" data-dismiss="modal" aria-hidden="true">×</button>
     <h4 class="modal-title" id="myModalLabel">Edit Project <span class="glyphicon glyphicon-chevron-right"></span> @ViewData["naemproject"]</h4>
 </div>
-
 <div class="modal-body">
     <div class="row">
         <form asp-controller="ProjectManagement" asp-action="EditProject" method="post">
             <input type="hidden" asp-for="ProjectNumber" />
             <div class="col-sm-12">
-
                 <div class="col-sm-6 form-group">
                     <label asp-for="ProjectId" class="control-label"></label>
                     <input asp-for="ProjectId" class="form-control" />
@@ -24,7 +22,6 @@
                     <input asp-for="ProjectName" class="form-control" />
                     <span asp-validation-for="ProjectName" class="text-danger"></span>
                 </div>
-
                 <div class="col-sm-6 form-group">
                     <label>Estimated Start Date</label>
                     <div class="form-group">
@@ -36,7 +33,6 @@
                         </div>
                     </div>
                 </div>
-
                 <div class="col-sm-6 form-group">
                     <label>Estimated End Date</label>
                     <div class="form-group">
@@ -49,12 +45,10 @@
                     </div>
                 </div>
 
-
                 <div class="col-sm-6 form-group">
                     <label asp-for="ProjectManager" class="control-label"></label>
 
-
-                    <select class="form-control" asp-items="ViewBag.UserSSPM" asp-for="ProjectManager" name="ProjectManager" id="ProjectManager">
+                    <select class="form-control " asp-items="ViewBag.UserSSPM" asp-for="ProjectManager" name="ProjectManager" id="ProjectManager">
                         <option>Please select </option>
                     </select>
                     <span asp-validation-for="ProjectManager" class="text-danger"></span>
@@ -64,7 +58,6 @@
                     <input asp-for="ProjectCost" class="form-control" />
                     <span asp-validation-for="ProjectCost" class="text-danger"></span>
                 </div>
-
                 <div class="col-sm-6 form-group">
                     <label asp-for="CustomerName" class="control-label"></label>
                     <input asp-for="CustomerName" class="form-control" />
@@ -78,13 +71,8 @@
 
 
 
-
-
-
-
                 <div class="col-sm-12 form-group">
                     <div class="text-right" style="margin-right: 10px;">
-
                         <input type="submit" value="Save" class="btn btn-default btn-primary" />
                     </div>
                 </div>
@@ -94,6 +82,10 @@
 </div>
 <script type="text/javascript" src="~/js/bootstrap-datetimepicker.js" charset="UTF-8"></script>
 <script type="text/javascript" src="~/js/locales/bootstrap-datetimepicker.fr.js" charset="UTF-8"></script>
+<script type="text/javascript">
+    
+</script>
+
 <script type="text/javascript">
 
 

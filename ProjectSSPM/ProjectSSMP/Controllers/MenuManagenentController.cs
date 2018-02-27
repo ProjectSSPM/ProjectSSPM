@@ -7,10 +7,10 @@ using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.Mvc.Rendering;
 using Microsoft.EntityFrameworkCore;
-using ProjectSSMP.Models;
-using ProjectSSMP.Models.Menu;
+using SSMP.Models;
+using SSMP.Models.Menu;
 
-namespace ProjectSSMP.Controllers
+namespace SSMP.Controllers
 {
     public class MenuManagenentController : BaseController
     {
