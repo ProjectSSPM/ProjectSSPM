@@ -161,14 +161,12 @@
                         </div>
 
                         <div class="col-sm-12 form-group">
-                            <label for="name">Responsible User</label><br/>
-                           
-                                <select class="js-example-basic-single  form-control " asp-items="ViewBag.UserSSPM" name="UserId" id="UserId" style="width: 300px;">
+                            <label>Responsible User</label>
+                            <div class="form-group">
+                                <select class="js-example-basic-single  form-control " asp-items="ViewBag.UserSSPM" name="UserId" id="UserId">
                                     <option>Please select </option>
                                 </select>
-                            
-                            
-                                
+                            </div>
                         </div>
                         <div class="col-sm-8 form-group">
                             <label>Project Res.</label>
