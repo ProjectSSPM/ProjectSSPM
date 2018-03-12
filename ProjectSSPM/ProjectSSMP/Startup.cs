@@ -41,7 +41,9 @@ namespace SSMP
 
             //services.AddSession();
 
-            var connection = @"Server=192.168.88.100;Initial Catalog=sspm;Integrated Security=False;User ID=sspm;Password=sspm@dev;Connect Timeout=30;Encrypt=False;TrustServerCertificate=True;ApplicationIntent=ReadWrite;MultiSubnetFailover=False";
+            //var connection = @"Server=192.168.88.100;Initial Catalog=sspm;Integrated Security=False;User ID=sspm;Password=sspm@dev;Connect Timeout=30;Encrypt=False;TrustServerCertificate=True;ApplicationIntent=ReadWrite;MultiSubnetFailover=False";
+            var connection = @"Server=den1.mssql5.gear.host;Initial Catalog=sspm;Integrated Security=False;User ID=sspm;Password=Gi90MMTY!H_i;Connect Timeout=30;Encrypt=False;TrustServerCertificate=True;ApplicationIntent=ReadWrite;MultiSubnetFailover=False";
+
             services.AddDbContext<sspmContext>(options => options.UseSqlServer(connection));
         }
 

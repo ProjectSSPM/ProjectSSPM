@@ -30,6 +30,10 @@ namespace SSMP.Controllers
 
         public async Task<IActionResult> Index()
         {
+            if (!checkuser())
+            {
+                return RedirectToAction("Index", "Home");
+            }
             ViewBag.nothi = Nothi();
             ViewBag.userMenu = GetMenu();
 
@@ -75,11 +79,16 @@ namespace SSMP.Controllers
         public async Task<IActionResult> EditProject(string id)
         {
            
+
             ViewBag.userMenu = GetMenu();
 
             if (id == null)
             {
                 return NotFound();
+            }
+            if (!checkuser())
+            {
+                return RedirectToAction("Index", "Home");
             }
 
             var Project = await context.Project.SingleOrDefaultAsync(m => m.ProjectNumber == id);
@@ -118,7 +127,7 @@ namespace SSMP.Controllers
             return PartialView("EditProject",e);
         }
 
-        [Authorize]
+        
         public async Task<IActionResult> EditFunction(string id)
         {
 
@@ -127,6 +136,10 @@ namespace SSMP.Controllers
             if (id == null)
             {
                 return NotFound();
+            }
+            if (!checkuser())
+            {
+                return RedirectToAction("Index", "Home");
             }
 
             var Function = await context.Function.SingleOrDefaultAsync(m => m.FunctionId == id);
@@ -167,12 +180,15 @@ namespace SSMP.Controllers
             return PartialView("EditFunction", e);
         }
 
-        [Authorize]
+       
         public async Task<IActionResult> EditTask(string id)
         {
 
             ViewBag.userMenu = GetMenu();
-
+            if (!checkuser())
+            {
+                return RedirectToAction("Index", "Home");
+            }
             if (id == null)
             {
                 return NotFound();
@@ -367,10 +383,14 @@ namespace SSMP.Controllers
 
 
 
-        [Authorize]
+        
         public IActionResult CreateProject()
         {
-            
+            if (!checkuser())
+            {
+                return RedirectToAction("Index", "Home");
+            }
+
             ViewBag.userMenu = GetMenu();
             ViewBag.nothi = Nothi();
             ViewData["UserSSPM"] = new SelectList(context.UserSspm.Join(context.UserAssignGroup,
@@ -400,10 +420,13 @@ namespace SSMP.Controllers
 
         }
 
-        [Authorize]
+        
         public IActionResult CreateTask(string id)
         {
-            
+            if (!checkuser())
+            {
+                return RedirectToAction("Index", "Home");
+            }
             ViewBag.userMenu = GetMenu();
             ViewBag.nothi = Nothi();
 
@@ -643,10 +666,14 @@ namespace SSMP.Controllers
 
 
 
-        [Authorize]
+        
         public IActionResult CreateFunction(string id ,string rsc)
         {
-            
+            if (!checkuser())
+            {
+                return RedirectToAction("Index", "Home");
+            }
+
             ViewBag.userMenu = GetMenu();
             ViewBag.nothi = Nothi();
 
@@ -837,9 +864,18 @@ namespace SSMP.Controllers
         }
 
 
-        public IActionResult Detail(string id)
+        public bool checkuser()
         {
-            return View();
+            var loggedInUser = HttpContext.User;
+            var loggedInUserName = loggedInUser.Identity.Name;
+            var userid = (from u in context.UserSspm where u.Username.Equals(loggedInUserName) select u).FirstOrDefault();
+            var groub = (from g in context.UserAssignGroup where g.UserId.Equals(userid.UserId) select g).FirstOrDefault();
+            if (groub.GroupId == "10")
+            {
+                return false;
+            }
+
+            return true;
         }
 
     }
