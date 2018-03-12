@@ -28,6 +28,13 @@ img {
     webkit-transition: all .2s ease-in-out
 }
 
+.panel-primary > .panel-heading {
+    
+    background-color: #07889b;
+    border-color: #07889b; 
+
+}
+
 .img-circle {
     border-radius: 50%
 }
