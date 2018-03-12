@@ -76,7 +76,7 @@
                         <div class="text-right" style="margin-right: 10px;">
                             <a asp-action="CreateTask" class="btn btn-info btn-sm" asp-route-id="@item.ProjectNumber">Add Task</a>
                             <a href="javascript:void(0);" class="anchorDetail btn btn-warning btn-sm" data-id="@item.ProjectNumber">Edit</a>
-                            <a asp-action="Detail" class="btn btn-success btn-sm" asp-route-id="@item.ProjectNumber">Details</a>
+                            <a asp-action="Result" asp-controller="Home" class="btn btn-success btn-sm" asp-route-id="@item.ProjectNumber">Details</a>
                         </div>
 
                     </td>

@@ -1,32 +1,25 @@
 ﻿<Properties StartupConfiguration="{99528461-6D99-4BA1-9100-7145EEE92C3D}|Default">
-<<<<<<< HEAD
-  <MonoDevelop.Ide.Workbench ActiveDocument="ProjectSSMP/Controllers/ProjectManagementController.cs">
-=======
-  <MonoDevelop.Ide.Workbench ActiveDocument="ProjectSSMP/Views/ProjectManagement/CreateTask.cshtml">
->>>>>>> 58654bd577f811f2addf91a7da79b9a5d3f5833c
+  <MonoDevelop.Ide.Workbench ActiveDocument="ProjectSSMP/Program.cs">
     <Files>
-      <File FileName="ProjectSSMP/Views/TimeSheet/ApproveFunction.cshtml" Line="22" Column="79" />
-      <File FileName="ProjectSSMP/Controllers/TimeSheetController.cs" Line="533" Column="25" />
-      <File FileName="ProjectSSMP/Views/Home/ChatBulletin.cshtml" Line="90" Column="1" />
-<<<<<<< HEAD
-      <File FileName="ProjectSSMP/Controllers/ProjectManagementController.cs" Line="827" Column="17" />
-      <File FileName="ProjectSSMP/Views/ProjectManagement/CreateTask.cshtml" Line="110" Column="47" />
-      <File FileName="ProjectSSMP/Views/ProjectManagement/CreateFunction.cshtml" Line="1" Column="1" />
-      <File FileName="ProjectSSMP/Models/ProjectManagement/CreateFunctionInputModel.cs" Line="28" Column="31" />
-      <File FileName="ProjectSSMP/Controllers/TimeSheetController.cs" Line="982" Column="13" />
-=======
-      <File FileName="ProjectSSMP/Views/TimeSheet/TimeSheet.cshtml" Line="1" Column="1" />
-      <File FileName="ProjectSSMP/Controllers/ProjectManagementController.cs" Line="450" Column="34" />
-      <File FileName="ProjectSSMP/Models/ProjectManagement/CreateTaskInputModel.cs" Line="22" Column="22" />
-      <File FileName="ProjectSSMP/Views/ProjectManagement/CreateTask.cshtml" Line="125" Column="32" />
->>>>>>> 58654bd577f811f2addf91a7da79b9a5d3f5833c
+      <File FileName="ProjectSSMP/Views/Shared/_LayoutMenu.cshtml" Line="9" Column="40" />
+      <File FileName="ProjectSSMP/Views/Home/Index.cshtml" Line="18" Column="13" />
+      <File FileName="../../HRMS/HRMS/HRMS/HRMS/Views/Shared/_AdminMenu.cshtml" Line="272" Column="69" />
+      <File FileName="ProjectSSMP/wwwroot/css/event-list.css" Line="28" Column="48" />
+      <File FileName="ProjectSSMP/wwwroot/css/sortableKanbanBoards.css" Line="32" Column="5" />
+      <File FileName="ProjectSSMP/Views/TimeSheet/ApproveFunction.cshtml" Line="7" Column="54" />
+      <File FileName="ProjectSSMP/Views/TimeSheet/TimeSheet.cshtml" Line="99" Column="1" />
+      <File FileName="ProjectSSMP/Program.cs" Line="17" Column="1" />
     </Files>
   </MonoDevelop.Ide.Workbench>
   <MonoDevelop.Ide.Workspace ActiveConfiguration="Debug" />
+  <MonoDevelop.Ide.ItemProperties.SSMP PreferredExecutionTarget="MonoDevelop.Default" />
   <MonoDevelop.Ide.DebuggingService.Breakpoints>
-    <BreakpointStore />
+    <BreakpointStore>
+      <Breakpoint file="/Users/Palm/Desktop/ProjectSSPM/ProjectSSPM/ProjectSSMP/Views/TimeSheet/TimeSheet.cshtml" relfile="ProjectSSMP/Views/TimeSheet/TimeSheet.cshtml" line="1" column="1" />
+      <Breakpoint file="/Users/Palm/Desktop/ProjectSSPM/ProjectSSPM/ProjectSSMP/Views/TimeSheet/TimeSheet.cshtml" relfile="ProjectSSMP/Views/TimeSheet/TimeSheet.cshtml" line="101" column="1" />
+      <Breakpoint file="/Users/Palm/Desktop/ProjectSSPM/ProjectSSPM/ProjectSSMP/Views/TimeSheet/TimeSheet.cshtml" relfile="ProjectSSMP/Views/TimeSheet/TimeSheet.cshtml" line="99" column="1" />
+    </BreakpointStore>
   </MonoDevelop.Ide.DebuggingService.Breakpoints>
   <MonoDevelop.Ide.DebuggingService.PinnedWatches />
-  <MonoDevelop.Ide.ItemProperties.ProjectSSMP PreferredExecutionTarget="MonoDevelop.Default" />
   <MultiItemStartupConfigurations />
 </Properties>
