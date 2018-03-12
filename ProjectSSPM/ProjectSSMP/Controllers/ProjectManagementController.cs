@@ -17,7 +17,7 @@ using SSMP.Models.UserManagenent;
 
 namespace SSMP.Controllers
 {
-    
+    [Authorize]
     public class ProjectManagementController : BaseController
     {
         // GET: /<controller>/
@@ -71,7 +71,7 @@ namespace SSMP.Controllers
             return View(model);
             //return View(await context.Project.ToListAsync());
         }
-        [Authorize]
+        
         public async Task<IActionResult> EditProject(string id)
         {
            

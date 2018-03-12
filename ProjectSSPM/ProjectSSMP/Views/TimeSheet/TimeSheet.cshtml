@@ -68,7 +68,7 @@
 
                             @{ 
 
-                                            
+
 
                                 var gropid = ViewData["gropid"];
                                 var UserId =ViewData["UserId"];
@@ -78,24 +78,31 @@
 
 
 
-                                            var grcheck =from c in checkfu
-                                                         where c.ActionId.Equals("Y")
-                                                         group c by c.FunctionId into gr
-                                                         select new {
-                                                             Key = gr.Key,
-                                                         };
-                                            var checkAC = from a in checkfu
-                                                          where a.ActionId.Equals("Z")
-                                                          group a by a.FunctionId into gr
-                                                          select new {
-                                                              Key = gr.Key
-                                                          };
+
+
+
+
+                                var grcheck = from c in checkfu
+                                              where c.ActionId == "Y"
+                                              group c by c.FunctionId into gr
+                                              select new
+                                              {
+                                                  Key = gr.Key,
+                                              };
+                                var checkAC = from a in checkfu
+                                              where a.ActionId == "Z"
+
+                                              group a by a.FunctionId into gr
+                                              select new
+                                              {
+                                                  Key = gr.Key
+                                              };
 
 
 
                                 if (gropid.ToString() == "50")
                                 {
-                                     bool check = false;
+                                    bool check = false;
                                      foreach(var chek in grcheck)
                                      {
                                           if(itme2.FunctionId.Equals(chek.Key))
@@ -106,20 +113,20 @@
                                         }
 
                                     }
-                                    foreach(var checka in checkAC)
-                                    {
-                                        if (itme2.FunctionId.Equals(checka.Key))
-                                        {
-                                            check = true;
+                            foreach(var checka in checkAC)
+                            {
+                                if (itme2.FunctionId.Equals(checka.Key))
+                                {
+                                    check = true;
 
-                                        }
+                                }
 
-                                    }
+                            }
 
 
 
-                                    if(itme2.UserId  == UserId.ToString() && !(check))
-                                    {
+                            if(itme2.UserId  == UserId.ToString() && !(check))
+                            {
                                                         <a href="javascript:void(0);" class="anchorDetail btn btn-info btn-sm"
                                                         data-id="@item.Key">Add</a>
                                                         <a asp-action="UpdateTimeSheet" class="btn btn-success btn-sm" asp-route-id="@item.Key">Update</a>

@@ -13,16 +13,24 @@ using SSMP.Models.UserManagenent;
 
 namespace SSMP.Controllers
 {
+    [Authorize]
     public class UserManagementController : BaseController
     {
         public UserManagementController(sspmContext context) => this.context = context;
 
-        [Authorize]
+        
         public IActionResult Index()
         {
+            if (!checkuser())
+            {
+                return RedirectToAction("Index", "Home");
+            }
             
             ViewBag.userMenu = GetMenu();
             ViewBag.nothi = Nothi();
+            
+
+
             List<IndexUserModel> model = new List<IndexUserModel>();
 
             var indexUserModel = (from x in context.UserSspm
@@ -68,9 +76,13 @@ namespace SSMP.Controllers
 
         }
 
-        [Authorize]
+       
         public IActionResult AddUser()
         {
+            if (!checkuser())
+            {
+                return RedirectToAction("Index", "Home");
+            }
 
             ViewBag.userMenu = GetMenu();
             ViewBag.nothi = Nothi();
@@ -173,10 +185,14 @@ namespace SSMP.Controllers
             return View(inputModel);
             
         }
-        [Authorize]
+        
         public async Task<IActionResult> Edit(string id)
         {
-            
+            if (!checkuser())
+            {
+                return RedirectToAction("Index", "Home");
+            }
+
             ViewBag.userMenu = GetMenu();
             ViewBag.nothi = Nothi();
             if (id == null)
@@ -292,7 +308,7 @@ namespace SSMP.Controllers
         {
             return context.UserSspm.Any(e => e.UserId == id);
         }
-        [Authorize]
+       
         public async Task<IActionResult> Details(string id)
         {
           
@@ -338,6 +354,20 @@ namespace SSMP.Controllers
                 return NotFound();
             }
             return PartialView("Details",e);
+        }
+
+        public bool checkuser()
+        {
+            var loggedInUser = HttpContext.User;
+            var loggedInUserName = loggedInUser.Identity.Name;
+            var userid = (from u in context.UserSspm where u.Username.Equals(loggedInUserName) select u).FirstOrDefault();
+            var groub = (from g in context.UserAssignGroup where g.UserId.Equals(userid.UserId) select g).FirstOrDefault();
+            if (groub.GroupId != "99")
+            {
+                return false;
+            }
+
+            return true;
         }
     }
 }
