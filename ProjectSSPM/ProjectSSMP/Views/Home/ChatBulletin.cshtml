@@ -50,7 +50,10 @@
                             @item.Chat
                         </div>
                         <div class="testimonial-desc">
-                            <img src="https://benmo.re/narutoroyal/wp-content/uploads/2014/07/Naruto_.png" alt="" />
+                            @{
+                            var img = String.Format("data:image/>gif;base64,{0}",item.Image);
+                                }
+                            <img src="@img" alt="" /> 
                             <div class="testimonial-writer">
                                 <div class="testimonial-writer-name">@item.CFullname</div>
                                 <div class="testimonial-writer-designation"><i class="glyphicon glyphicon-time"></i> @item.Ctime</div>

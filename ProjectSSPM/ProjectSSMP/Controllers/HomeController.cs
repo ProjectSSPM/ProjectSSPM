@@ -13,6 +13,8 @@ using SSMP.Models.Home;
 using System.Globalization;
 using System.Threading;
 using NToastNotify;
+using System.IO;
+using static System.Net.Mime.MediaTypeNames;
 
 namespace SSMP.Controllers
 {
@@ -262,6 +264,7 @@ namespace SSMP.Controllers
             ViewBag.nothi = Nothi();
             var b = (from x in context.Bulletin
                      join x2 in context.UserSspm on x.UserId equals x2.UserId
+                     join x3 in context.UserImage on x.UserId equals x3.UserId
                      where x.Bnumber.Equals(Id)
                      select new CreateBulletinModel
                      {
@@ -271,7 +274,8 @@ namespace SSMP.Controllers
                          Time = x.Time,
                          UserId = x.UserId,
                          Username = x2.Username,
-                         Name = x2.Firstname + " " + x2.Lastname
+                         Name = x2.Firstname + " " + x2.Lastname,
+                         Image = x3.Image,
                      }).SingleOrDefault();
 
             var bc = (from c in context.Bulletin
@@ -313,6 +317,24 @@ namespace SSMP.Controllers
             ViewData["Chat"] = model;
             return PartialView("ChatBulletin");
         }
+
+        public string EncodeTo64(string toEncode)
+
+        {
+
+            byte[] toEncodeAsBytes
+
+                  = System.Text.Encoding.ASCII.GetBytes(toEncode);
+
+            string returnValue
+
+                  = System.Convert.ToBase64String(toEncodeAsBytes);
+
+            return returnValue;
+
+        }
+
+
 
         [HttpPost]
         [ValidateAntiForgeryToken]
