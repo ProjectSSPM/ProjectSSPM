@@ -14,6 +14,9 @@ using System.Globalization;
 using System.Threading;
 using NToastNotify;
 
+using System.IO;
+using static System.Net.Mime.MediaTypeNames;
+
 namespace SSMP.Controllers
 {
     public class HomeController : BaseController         
@@ -38,7 +41,13 @@ namespace SSMP.Controllers
             var loggedInUserName = loggedInUser.Identity.Name;
             ViewBag.userMenu = GetMenu();
             ViewBag.nothi = Nothi();
-            
+
+            var getimg = (from i in context.UserImage where i.UserId.Equals("100028") select i).FirstOrDefault();
+
+          
+            ViewData["img"] = getimg.Image;
+           
+
 
 
 

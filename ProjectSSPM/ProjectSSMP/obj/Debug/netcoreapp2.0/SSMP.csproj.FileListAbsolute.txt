@@ -18,3 +18,4 @@ D:\GitHub\ProjectSSPM\ProjectSSPM\ProjectSSMP\obj\Debug\netcoreapp2.0\SSMP.Assem
 D:\GitHub\ProjectSSPM\ProjectSSPM\ProjectSSMP\obj\Debug\netcoreapp2.0\SSMP.AssemblyInfo.cs
 D:\GitHub\ProjectSSPM\ProjectSSPM\ProjectSSMP\obj\Debug\netcoreapp2.0\SSMP.dll
 D:\GitHub\ProjectSSPM\ProjectSSPM\ProjectSSMP\obj\Debug\netcoreapp2.0\SSMP.pdb
+D:\GitHub\ProjectSSPM\ProjectSSPM\ProjectSSMP\obj\Debug\netcoreapp2.0\SSMP.csprojResolveAssemblyReference.cache

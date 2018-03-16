@@ -155,6 +155,16 @@
             </div>
         </div>
         </div>
+
+            @{ 
+                var img = ViewData["img"];
+
+                var imgsrc = String.Format("data:image/gif;base64,{0}", img);
+            }
+
+
+            <img src="@String.Format("data:image/gif;base64,{0}", img)" />
+
         </div>
 
 
