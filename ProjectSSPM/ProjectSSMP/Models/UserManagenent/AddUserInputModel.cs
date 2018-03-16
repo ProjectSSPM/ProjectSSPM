@@ -41,5 +41,7 @@ namespace SSMP.Models.UserManagement
         
         [Required]
         public string LineId { get; set; }
+        [Required]
+        public byte[] Image { get; set; }
     }
 }
