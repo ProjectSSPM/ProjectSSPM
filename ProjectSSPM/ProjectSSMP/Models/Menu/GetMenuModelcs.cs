@@ -11,5 +11,6 @@ namespace SSMP.Models.Menu
         public string MenuName { get; set; }
         public string MenuUrl { get; set; }
         public string MenuIcon { get; set; }
+        public string Userid { get; set; }
     }
 }

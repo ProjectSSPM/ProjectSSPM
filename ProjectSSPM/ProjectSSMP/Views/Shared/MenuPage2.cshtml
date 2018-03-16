@@ -5,9 +5,10 @@
             <div class="gn-scroller">
                 <ul class="gn-menu">
                     @{
-                        var userMenu = ViewBag.userMenu;
+                            var userMenu = ViewBag.userMenu;
+                            
                         foreach (var data in userMenu)
-                        {
+                            {
                             <li>
                                 <a href="@data.MenuUrl" class="@data.MenuIcon">@data.MenuName</a>
 
@@ -37,6 +38,13 @@
         IEnumerable<SSMP.Models.Notification.NotificationModel> nothi2 =
             ViewBag.nothi as IEnumerable<SSMP.Models.Notification.NotificationModel>;
         var counothi = nothi2.Count();
+        IEnumerable<SSMP.Models.Menu.GetMenuModelcs> user = ViewBag.userMenu as IEnumerable<SSMP.Models.Menu.GetMenuModelcs>;
+        var Userid = (from u in user
+                    group u by u.Userid into g
+                    select new
+                    {
+                        Userid = g.Key
+                    }).FirstOrDefault();
     }
     <li>
 

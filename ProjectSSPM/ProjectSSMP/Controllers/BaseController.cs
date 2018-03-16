@@ -29,6 +29,7 @@ namespace SSMP.Controllers
                             where ua.UserId.Equals(userid.UserId)
                             select new GetMenuModelcs
                             {
+                                Userid =userid.UserId,
                                 MenuId =mg.MenuId,
                                 MenuName = mg.MenuName,
                                 MenuUrl  =  mg.MenuUrl,
@@ -36,7 +37,7 @@ namespace SSMP.Controllers
                             }).ToList();
             
             
-            return userMenu; ;
+            return userMenu; 
         }
 
         public List<NotificationModel> Nothi()
