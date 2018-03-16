@@ -1,4 +1,7 @@
 ﻿using System;
+using System.ComponentModel.DataAnnotations;
+using Microsoft.AspNetCore.Http;
+
 namespace SSMP.Models.Home
 {
     public class CreateBulletinModel
@@ -12,5 +15,6 @@ namespace SSMP.Models.Home
         public string Name { get; set; }
         public int BCount { get; set; }
         public string Chat { get; set; }
+        public string Image { get; set; }
     }
 }
