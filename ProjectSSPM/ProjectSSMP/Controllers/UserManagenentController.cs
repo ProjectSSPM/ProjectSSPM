@@ -1,8 +1,10 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.IO;
 using System.Linq;
 using System.Threading.Tasks;
 using Microsoft.AspNetCore.Authorization;
+using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.EntityFrameworkCore;
 using SSMP.Models;
@@ -13,9 +15,14 @@ using SSMP.Models.UserManagenent;
 
 namespace SSMP.Controllers
 {
+
+    
     [Authorize]
+    
     public class UserManagementController : BaseController
     {
+        
+        
         public UserManagementController(sspmContext context) => this.context = context;
 
         
@@ -94,6 +101,10 @@ namespace SSMP.Controllers
         public async Task<IActionResult> AddUser(AddUserInputModel inputModel)
         {
             
+            var file = inputModel.Image;
+            
+
+            
             ViewBag.userMenu = GetMenu();
             if (ModelState.IsValid)
             {
@@ -163,6 +174,33 @@ namespace SSMP.Controllers
                     try
                     {
                         await context.SaveChangesAsync();
+
+                        if (file.Length > 0)
+                        {
+                            using (var ms = new MemoryStream())
+                            {
+                                file.CopyTo(ms);
+                                
+                                 var fileBytes = ms.ToArray();
+                                 Convert.ToBase64String(fileBytes);
+                                UserImage ord3 = new UserImage
+                                {
+                                    UserId = userid.ToString(),
+                                    ImageNumber = userid,
+                                    Image = Convert.ToBase64String(fileBytes)
+
+                            };
+                                context.UserImage.Add(ord3);
+                                await context.SaveChangesAsync();
+                            }
+                        }
+                        
+
+
+
+                        
+                        
+
                     }
                     catch (Exception e)
                     {

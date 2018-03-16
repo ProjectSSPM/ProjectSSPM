@@ -1,4 +1,5 @@
-﻿using System;
+﻿using Microsoft.AspNetCore.Http;
+using System;
 using System.ComponentModel.DataAnnotations;
 
 namespace SSMP.Models.UserManagement
@@ -42,6 +43,6 @@ namespace SSMP.Models.UserManagement
         [Required]
         public string LineId { get; set; }
         [Required]
-        public byte[] Image { get; set; }
+        public IFormFile Image { get; set; }
     }
 }

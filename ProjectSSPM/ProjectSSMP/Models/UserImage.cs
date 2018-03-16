@@ -6,7 +6,7 @@ namespace SSMP.Models
     public partial class UserImage
     {
         public string UserId { get; set; }
-        public byte[] Image { get; set; }
+        public string Image { get; set; }
         public int? ImageNumber { get; set; }
     }
 }

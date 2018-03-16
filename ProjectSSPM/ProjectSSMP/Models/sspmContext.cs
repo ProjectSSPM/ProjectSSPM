@@ -33,7 +33,8 @@ namespace SSMP.Models
             
         }
         public sspmContext(DbContextOptions<sspmContext> options)
-            : base(options) { }
+            : base(options){ }
+
         protected override void OnModelCreating(ModelBuilder modelBuilder)
         {
             modelBuilder.Entity<Action>(entity =>
@@ -95,6 +96,8 @@ namespace SSMP.Models
                     .ValueGeneratedNever();
 
                 entity.Property(e => e.DeviceId).HasMaxLength(50);
+
+                entity.Property(e => e.PushToken).HasMaxLength(255);
 
                 entity.Property(e => e.Status).HasMaxLength(10);
             });
@@ -374,7 +377,7 @@ namespace SSMP.Models
                     .HasMaxLength(10)
                     .ValueGeneratedNever();
 
-                entity.Property(e => e.Image).HasColumnType("binary(255)");
+                entity.Property(e => e.Image).IsUnicode(false);
             });
 
             modelBuilder.Entity<UserSspm>(entity =>
