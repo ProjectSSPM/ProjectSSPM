@@ -46,16 +46,32 @@
                         Userid = g.Key
                     }).FirstOrDefault();
     }
-    <li>
 
 
+        <li class="dropdown " style="width: 120px;"> 
+        <a class="dropdown-toggle" data-toggle="dropdown" href="#" aria-expanded="true">
+            <i class="fa fa-user fa-fw"></i> 
+            
+        </a>
+        <ul class="dropdown-menu dropdown-menu-right"  >
+            
+                <li>
+                    <a asp-action="EditUser" asp-controller="UserManagement" asp-route-id="@Userid.Userid"><span class="gn-icon gn-icon-cog">Edit User</span>
+                     </a>
+                </li>
 
-        <a class=" gn-icon gn-icon-power" asp-controller="Security" asp-action="Logout"><span>logout</span></a>
+
+                <li>
+
+                    <a asp-controller="Security" asp-action="Logout"><span class="gn-icon gn-icon-power">Logout</span></a>
+
+                </li>
+          
 
 
-
-
+        </ul>
     </li>
+    
     <li class="dropdown ">
         <a class="dropdown-toggle" data-toggle="dropdown" href="#" aria-expanded="true">
             <i class="fa fa-bell fa-fw"></i> <span class="badge badge-notify">@counothi.ToString()</span>
@@ -98,6 +114,8 @@
 
         </ul>
     </li>
+
+
 
 
 
