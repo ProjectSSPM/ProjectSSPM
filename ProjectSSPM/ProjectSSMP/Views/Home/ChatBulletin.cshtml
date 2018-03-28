@@ -24,7 +24,13 @@
                             @Subject.Note
                         </div>
                         <div class="testimonial-desc">
-                            <img src="https://benmo.re/narutoroyal/wp-content/uploads/2014/07/Naruto_.png" alt="" />
+                            @{ 
+                                IEnumerable<SSMP.Models.UserImage> image = ViewData["imge"] as IEnumerable<SSMP.Models.UserImage>;
+                                var imgsu = (from i in image where i.UserId.Equals(Subject.UserId) select i).FirstOrDefault();  
+                                var imgsubject = String.Format("data:image/gif;base64,{0}",imgsu.Image);
+                                }
+                            
+                            <img src="@imgsubject" alt="" />
                             <div class="testimonial-writer">
                                 <div class="testimonial-writer-name">@Subject.Name</div>
                                 <div class="testimonial-writer-designation"><i class="glyphicon glyphicon-time"></i> @Subject.Time</div>
@@ -51,7 +57,7 @@
                         </div>
                         <div class="testimonial-desc">
                             @{
-                            var img = String.Format("data:image/>gif;base64,{0}",item.Image);
+                            var img = String.Format("data:image/gif;base64,{0}",item.Image);
                                 }
                             <img src="@img" alt="" /> 
                             <div class="testimonial-writer">
@@ -75,11 +81,14 @@
                                  @item.Chat
                             </div>
                             <div class="testimonial-desc">
-                                <img src="http://pirun.ku.ac.th/~b5510102951/images/300px-Sasuke_Shippuden.png" alt="" />
+                                @{
+                                    var img = String.Format("data:image/gif;base64,{0}", item.Image);
+                                }
+                                <img src="@img" alt="" />
                                 <div class="testimonial-writer">
                                     <div class="testimonial-writer-name">@item.CFullname</div>
                                     <div class="testimonial-writer-designation"><i class="glyphicon glyphicon-time"></i> @item.Ctime</div>
-                                    
+
                                 </div>
                             </div>
                         </div>   

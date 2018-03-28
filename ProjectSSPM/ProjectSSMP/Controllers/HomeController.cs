@@ -16,9 +16,6 @@ using NToastNotify;
 using System.IO;
 using static System.Net.Mime.MediaTypeNames;
 
-using System.IO;
-using static System.Net.Mime.MediaTypeNames;
-
 namespace SSMP.Controllers
 {
     public class HomeController : BaseController         
@@ -43,13 +40,7 @@ namespace SSMP.Controllers
             var loggedInUserName = loggedInUser.Identity.Name;
             ViewBag.userMenu = GetMenu();
             ViewBag.nothi = Nothi();
-
-            var getimg = (from i in context.UserImage where i.UserId.Equals("100028") select i).FirstOrDefault();
-
-          
-            ViewData["img"] = getimg.Image;
-           
-
+            
 
 
 
@@ -273,7 +264,7 @@ namespace SSMP.Controllers
             ViewBag.nothi = Nothi();
             var b = (from x in context.Bulletin
                      join x2 in context.UserSspm on x.UserId equals x2.UserId
-                     join x3 in context.UserImage on x.UserId equals x3.UserId
+                     //join x3 in context.UserImage on x2.UserId equals x3.UserId
                      where x.Bnumber.Equals(Id)
                      select new CreateBulletinModel
                      {
@@ -284,14 +275,14 @@ namespace SSMP.Controllers
                          UserId = x.UserId,
                          Username = x2.Username,
                          Name = x2.Firstname + " " + x2.Lastname,
-                         Image = x3.Image,
+                         //Image = x3.Image
                      }).SingleOrDefault();
 
             var bc = (from c in context.Bulletin
                       join c1 in context.BulletinChat on c.Bnumber equals c1.Bnumber
-                      join u in context.UserSspm on c1.UserId equals u.UserId
+                      join u in context.UserSspm on c.UserId equals u.UserId
                       where c.Bnumber.Equals(Id)
-                      select new
+                      select new 
                       {
                           CUserId = c1.UserId,
                           Bnumber = c.Bnumber,
@@ -306,22 +297,27 @@ namespace SSMP.Controllers
 
             foreach (var item in bc)
             {
+                var imge = (from i in context.UserImage where i.UserId.Equals(item.CUserId) select i).FirstOrDefault();
 
                 model.Add(new ChatBulletinModel()
                 {
+                    
                     Bchat = item.BChat,
                     Bnumber = item.Bnumber,
                     Ctime = item.CTime,
                     CUserId = item.CUserId,
                     CUsername = item.CUsername,
                     Chat = item.Chat,
-                    CFullname = item.CFullname
+                    CFullname = item.CFullname,
+                    Image = imge.Image
+                  
+                    
 
                 });
             }
 
 
-
+            ViewData["imge"] = from i in context.UserImage select i;
             ViewData["Subject"] = b;
             ViewData["Chat"] = model;
             return PartialView("ChatBulletin");

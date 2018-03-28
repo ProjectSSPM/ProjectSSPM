@@ -17,5 +17,7 @@ namespace SSMP.Models.Home
         public string CUserId { get; set; }
         public string CUsername { get; set; }
         public string CFullname { get; set; }
+
+        public string Image { get; set; }
     }
 }
