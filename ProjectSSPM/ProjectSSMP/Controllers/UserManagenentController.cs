@@ -271,6 +271,8 @@ namespace SSMP.Controllers
 
         public async Task<IActionResult> Edit(string id, EditUserInputModel editModel)
         {
+            var file = editModel.Image;
+
             var loggedInUser = HttpContext.User;
             var loggedInUserName = loggedInUser.Identity.Name;
             ViewBag.userMenu = GetMenu();
@@ -319,6 +321,35 @@ namespace SSMP.Controllers
 
                         }
                         await context.SaveChangesAsync();
+
+                        if (file.Length > 0)
+                        {
+                            using (var ms = new MemoryStream())
+                            {
+                                file.CopyTo(ms);
+                                
+                                 var fileBytes = ms.ToArray();
+                                 Convert.ToBase64String(fileBytes);
+                                UserImage ord3 = new UserImage
+                                {
+                                    
+                                    Image = Convert.ToBase64String(fileBytes)
+                                };
+                                var addquery3 = from test3 in context.UserImage
+                                                where test3.UserId.Equals(id)
+                                                                     select test3;
+                                foreach (UserImage UserUpdate3 in addquery3)
+                                {
+                                    UserUpdate3.Image = ord3.Image;
+
+                                }
+
+                                await context.SaveChangesAsync();
+                            }
+                        }
+
+
+
                     }
                     catch(Exception e)
                     {
@@ -424,6 +455,8 @@ namespace SSMP.Controllers
 
         public async Task<IActionResult> EditUser(string id)
         {
+
+
             if (!checkuser2(id))
             {
                 return RedirectToAction("Index", "Home");
@@ -465,6 +498,8 @@ namespace SSMP.Controllers
         [ValidateAntiForgeryToken]
         public async Task<IActionResult> EditUser(string id, EditUserInputModel editModel)
         {
+            var file = editModel.Image;
+
             var loggedInUser = HttpContext.User;
             var loggedInUserName = loggedInUser.Identity.Name;
             ViewBag.userMenu = GetMenu();
@@ -513,6 +548,39 @@ namespace SSMP.Controllers
 
                         }
                         await context.SaveChangesAsync();
+
+                        try{
+                            if (file.Length > 0)
+                            {
+                                using (var ms = new MemoryStream())
+                                {
+                                    file.CopyTo(ms);
+
+                                    var fileBytes = ms.ToArray();
+                                    Convert.ToBase64String(fileBytes);
+                                    UserImage ord3 = new UserImage
+                                    {
+
+                                        Image = Convert.ToBase64String(fileBytes)
+                                    };
+                                    var addquery3 = from test3 in context.UserImage
+                                                    where test3.UserId.Equals(id)
+                                                    select test3;
+                                    foreach (UserImage UserUpdate3 in addquery3)
+                                    {
+                                        UserUpdate3.Image = ord3.Image;
+
+                                    }
+
+                                    await context.SaveChangesAsync();
+                                }
+                            } 
+                        }
+                        catch (Exception e)
+                        {
+                            Console.WriteLine(e);
+                        }
+
                     }
                     catch (Exception e)
                     {

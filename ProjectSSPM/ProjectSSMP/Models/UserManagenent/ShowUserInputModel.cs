@@ -1,4 +1,6 @@
 ﻿using System;
+using Microsoft.AspNetCore.Http;
+
 namespace SSMP.Models.UserManagenent
 {
     public class ShowUserInputModel
@@ -15,5 +17,7 @@ namespace SSMP.Models.UserManagenent
             public string Status { get; set; }
             public string UserTel { get; set; }
             public string LineId { get; set; }
+
+            public IFormFile Image { get; set; }
     }
 }

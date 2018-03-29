@@ -1,4 +1,5 @@
 ﻿using System;
+using Microsoft.AspNetCore.Http;
 
 namespace SSMP.Models.UserManagement
 {
@@ -16,5 +17,7 @@ namespace SSMP.Models.UserManagement
         public string Status { get; set; }
         public string UserTel { get; set; }
         public string LineId { get; set; }
+
+        public IFormFile Image { get; set; }
     }
 }
