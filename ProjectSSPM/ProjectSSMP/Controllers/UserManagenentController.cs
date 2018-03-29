@@ -322,30 +322,54 @@ namespace SSMP.Controllers
                         }
                         await context.SaveChangesAsync();
 
-                        if (file.Length > 0)
+                        try
                         {
-                            using (var ms = new MemoryStream())
+                            if (file.Length > 0)
                             {
-                                file.CopyTo(ms);
-                                
-                                 var fileBytes = ms.ToArray();
-                                 Convert.ToBase64String(fileBytes);
-                                UserImage ord3 = new UserImage
+                                using (var ms = new MemoryStream())
                                 {
-                                    
-                                    Image = Convert.ToBase64String(fileBytes)
-                                };
-                                var addquery3 = from test3 in context.UserImage
-                                                where test3.UserId.Equals(id)
-                                                                     select test3;
-                                foreach (UserImage UserUpdate3 in addquery3)
-                                {
-                                    UserUpdate3.Image = ord3.Image;
+                                    file.CopyTo(ms);
 
+                                    var fileBytes = ms.ToArray();
+                                    Convert.ToBase64String(fileBytes);
+                                    var addquery3 = from test3 in context.UserImage
+                                                    where test3.UserId.Equals(id)
+                                                    select test3;
+
+                                    if (addquery3.Count() > 0)
+                                    {
+                                        UserImage ord3 = new UserImage
+                                        {
+
+                                            Image = Convert.ToBase64String(fileBytes)
+                                        };
+
+                                        foreach (UserImage UserUpdate3 in addquery3)
+                                        {
+                                            UserUpdate3.Image = ord3.Image;
+
+                                        }
+                                    }
+                                    else
+                                    {
+                                        UserImage ord3 = new UserImage
+                                        {
+                                            UserId = id,
+                                            ImageNumber = Convert.ToInt32(id),
+                                            Image = Convert.ToBase64String(fileBytes)
+
+                                        };
+                                        context.UserImage.Add(ord3);
+                                    }
+
+
+                                    await context.SaveChangesAsync();
                                 }
-
-                                await context.SaveChangesAsync();
                             }
+                        }
+                        catch (Exception e)
+                        {
+                            Console.WriteLine(e);
                         }
 
 
@@ -521,9 +545,11 @@ namespace SSMP.Controllers
                     var addquery = from test in context.UserSspm
                                    where test.UserId.Equals(id)
                                    select test;
+                   
+                                   
                     foreach (UserSspm UserUpdate in addquery)
                     {
-                        UserUpdate.Username = editModel.Username;
+                        //UserUpdate.Username = userupdate.Username;
                         UserUpdate.Password = editModel.Password;
                         UserUpdate.Firstname = editModel.Firstname;
                         UserUpdate.Lastname = editModel.Lastname;
@@ -536,56 +562,58 @@ namespace SSMP.Controllers
 
                     }
                     await context.SaveChangesAsync();
+                   
                     try
                     {
-                        var addquery2 = from test2 in context.UserAssignGroup
-                                        where test2.UserId.Equals(id)
-                                        select test2;
-                        foreach (UserAssignGroup UserUpdate2 in addquery2)
+                        if (file.Length > 0)
                         {
-                            UserUpdate2.GroupId = editModel.GroupId;
-                            UserUpdate2.UserId = id;
-
-                        }
-                        await context.SaveChangesAsync();
-
-                        try{
-                            if (file.Length > 0)
+                            using (var ms = new MemoryStream())
                             {
-                                using (var ms = new MemoryStream())
-                                {
-                                    file.CopyTo(ms);
+                                file.CopyTo(ms);
 
-                                    var fileBytes = ms.ToArray();
-                                    Convert.ToBase64String(fileBytes);
+                                var fileBytes = ms.ToArray();
+                                Convert.ToBase64String(fileBytes);
+                                var addquery3 = from test3 in context.UserImage
+                                                where test3.UserId.Equals(id)
+                                                select test3;
+
+                                if (addquery3.Count() > 0)
+                                {
                                     UserImage ord3 = new UserImage
                                     {
 
                                         Image = Convert.ToBase64String(fileBytes)
                                     };
-                                    var addquery3 = from test3 in context.UserImage
-                                                    where test3.UserId.Equals(id)
-                                                    select test3;
+                                   
                                     foreach (UserImage UserUpdate3 in addquery3)
                                     {
                                         UserUpdate3.Image = ord3.Image;
 
                                     }
-
-                                    await context.SaveChangesAsync();
                                 }
-                            } 
-                        }
-                        catch (Exception e)
-                        {
-                            Console.WriteLine(e);
-                        }
+                                else
+                                {
+                                    UserImage ord3 = new UserImage
+                                    {
+                                        UserId = id,
+                                        ImageNumber = Convert.ToInt32(id),
+                                        Image = Convert.ToBase64String(fileBytes)
 
+                                    };
+                                    context.UserImage.Add(ord3);                                   
+                                }
+                                
+
+                                await context.SaveChangesAsync();
+                            }
+                        }
                     }
                     catch (Exception e)
                     {
                         Console.WriteLine(e);
                     }
+                    
+
 
                 }
                 catch (DbUpdateConcurrencyException)
