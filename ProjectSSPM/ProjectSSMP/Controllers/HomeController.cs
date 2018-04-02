@@ -184,10 +184,7 @@ namespace SSMP.Controllers
                 int checkfundae = (int)datenow.Subtract(fend).TotalDays;
                 if (checkfundae <= 1)
                 {
-                    _toastNotification.AddToastMessage("Warning", cdete.FunctionName + "", Enums.ToastType.Error, new ToastOption()
-                    {
-                        PositionClass = ToastPositions.BottomRight
-                    });
+                    _toastNotification.AddErrorToastMessage( cdete.FunctionName );
                 }
             }
 
@@ -280,17 +277,18 @@ namespace SSMP.Controllers
 
             var bc = (from c in context.Bulletin
                       join c1 in context.BulletinChat on c.Bnumber equals c1.Bnumber
-                      join u in context.UserSspm on c.UserId equals u.UserId
+                      //join u in context.UserSspm on c.UserId equals u.UserId
                       where c.Bnumber.Equals(Id)
                       select new 
                       {
                           CUserId = c1.UserId,
                           Bnumber = c.Bnumber,
-                          CUsername = u.Username,
+                          //CUsername = u.Username,
                           BChat = c1.Bchat,
                           CTime = c1.Ctime,
                           Chat = c1.Chat,
-                          CFullname = u.Firstname + " " + u.Lastname
+                          //CFullname = u.Firstname + " " + u.Lastname
+
                       }).ToList();
 
             List<ChatBulletinModel> model = new List<ChatBulletinModel>();
@@ -298,6 +296,7 @@ namespace SSMP.Controllers
             foreach (var item in bc)
             {
                 var imge = (from i in context.UserImage where i.UserId.Equals(item.CUserId) select i).FirstOrDefault();
+                var user_bull = (from u in context.UserSspm where u.UserId.Equals(item.CUserId) select u).FirstOrDefault();
 
                 model.Add(new ChatBulletinModel()
                 {
@@ -306,9 +305,9 @@ namespace SSMP.Controllers
                     Bnumber = item.Bnumber,
                     Ctime = item.CTime,
                     CUserId = item.CUserId,
-                    CUsername = item.CUsername,
+                    CUsername = user_bull.Username,
                     Chat = item.Chat,
-                    CFullname = item.CFullname,
+                    CFullname = user_bull.Firstname +" "+ user_bull.Lastname,
                     Image = imge.Image
                   
                     

@@ -2850,7 +2850,7 @@
           "lib/netstandard1.3/Newtonsoft.Json.Bson.dll": {}
         }
       },
-      "NToastNotify/4.0.4": {
+      "NToastNotify/5.0.0": {
         "type": "package",
         "dependencies": {
           "Microsoft.AspNetCore.Mvc": "2.0.2",
@@ -7999,13 +7999,13 @@
         "newtonsoft.json.bson.nuspec"
       ]
     },
-    "NToastNotify/4.0.4": {
-      "sha512": "9A2ANjOw8wUJi8dbN/zl5FfuJrhRZ0JAGGVGaNhmnKzov4ZambIlHMpKDytdDQxjbPTnXNtRu3/d0BqxL/BBlw==",
+    "NToastNotify/5.0.0": {
+      "sha512": "CrxZrdVu5R8IFWG26lzEH+qvJm7fnv0Uae+OVxz6cXkql1q4swDQ/GjdSpXLCO8W8JIRhTyZRergI5ITDNunAA==",
       "type": "package",
-      "path": "ntoastnotify/4.0.4",
+      "path": "ntoastnotify/5.0.0",
       "files": [
         "lib/netstandard2.0/NToastNotify.dll",
-        "ntoastnotify.4.0.4.nupkg.sha512",
+        "ntoastnotify.5.0.0.nupkg.sha512",
         "ntoastnotify.nuspec"
       ]
     },
@@ -13132,7 +13132,7 @@
       "Microsoft.EntityFrameworkCore.Tools >= 2.0.1",
       "Microsoft.NETCore.App >= 2.0.0",
       "Microsoft.VisualStudio.Web.CodeGeneration.Design >= 2.0.2",
-      "NToastNotify >= 4.0.4"
+      "NToastNotify >= 5.0.0"
     ]
   },
   "packageFolders": {
@@ -13203,7 +13203,7 @@
           },
           "NToastNotify": {
             "target": "Package",
-            "version": "[4.0.4, )"
+            "version": "[5.0.0, )"
           }
         },
         "imports": [

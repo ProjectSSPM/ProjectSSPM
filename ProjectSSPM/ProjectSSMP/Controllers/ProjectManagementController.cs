@@ -272,10 +272,11 @@ namespace SSMP.Controllers
                 }
 
 
-                var baseFormat = "http://localhost:56087/ProjectManagement/CreateFunction/";
+                
                 var segment = query.TaskId.ToString();
-                var url = baseFormat + segment;
-                return Redirect(url);
+                
+                return RedirectToAction("CreateFunction", "ProjectManagement", new RouteValueDictionary(
+                   new { Controller = "ProjectManagement", Action = "CreateFunction", id = segment }));
             }
             return View(query.FunctionId);
         }
@@ -320,10 +321,11 @@ namespace SSMP.Controllers
                     throw;
                 }
 
-                var baseFormat = "http://localhost:56087/ProjectManagement/CreateTask/";
+               
                 var segment = query.ProjectNumber.ToString();
-                var url = baseFormat + segment;
-                return Redirect(url);
+                
+                return RedirectToAction("CreateTask", "ProjectManagement", new RouteValueDictionary(
+                    new { Controller = "ProjectManagement", Action = "CreateTask", id = segment }));
             }
             return View(query.TaskId);
         }

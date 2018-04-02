@@ -1,7 +1,7 @@
 {
   "runtimeTarget": {
     "name": ".NETCoreApp,Version=v2.0",
-    "signature": "2cd55f82011153635f1a743b1cc64aff3608b607"
+    "signature": "824c70afc80c86a20786257f3bd21488f831d7c1"
   },
   "compilationOptions": {
     "defines": [
@@ -29,7 +29,7 @@
           "Microsoft.EntityFrameworkCore.Tools": "2.0.1",
           "Microsoft.NETCore.App": "2.0.0",
           "Microsoft.VisualStudio.Web.CodeGeneration.Design": "2.0.2",
-          "NToastNotify": "4.0.4"
+          "NToastNotify": "5.0.0"
         },
         "runtime": {
           "SSMP.dll": {}
@@ -2475,7 +2475,7 @@
           "lib/netstandard1.3/Newtonsoft.Json.Bson.dll": {}
         }
       },
-      "NToastNotify/4.0.4": {
+      "NToastNotify/5.0.0": {
         "dependencies": {
           "Microsoft.AspNetCore.Mvc": "2.0.2",
           "Microsoft.AspNetCore.Mvc.ViewFeatures": "2.0.2",
@@ -5454,12 +5454,12 @@
       "path": "newtonsoft.json.bson/1.0.1",
       "hashPath": "newtonsoft.json.bson.1.0.1.nupkg.sha512"
     },
-    "NToastNotify/4.0.4": {
+    "NToastNotify/5.0.0": {
       "type": "package",
       "serviceable": true,
-      "sha512": "sha512-9A2ANjOw8wUJi8dbN/zl5FfuJrhRZ0JAGGVGaNhmnKzov4ZambIlHMpKDytdDQxjbPTnXNtRu3/d0BqxL/BBlw==",
-      "path": "ntoastnotify/4.0.4",
-      "hashPath": "ntoastnotify.4.0.4.nupkg.sha512"
+      "sha512": "sha512-CrxZrdVu5R8IFWG26lzEH+qvJm7fnv0Uae+OVxz6cXkql1q4swDQ/GjdSpXLCO8W8JIRhTyZRergI5ITDNunAA==",
+      "path": "ntoastnotify/5.0.0",
+      "hashPath": "ntoastnotify.5.0.0.nupkg.sha512"
     },
     "NuGet.Frameworks/4.0.0": {
       "type": "package",
