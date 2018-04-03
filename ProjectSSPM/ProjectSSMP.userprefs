@@ -1,24 +1,20 @@
 ﻿<Properties StartupConfiguration="{99528461-6D99-4BA1-9100-7145EEE92C3D}|Default">
-  <MonoDevelop.Ide.Workbench ActiveDocument="ProjectSSMP/Models/UserManagenent/EditUserInputModel.cs">
+  <MonoDevelop.Ide.Workbench ActiveDocument="ProjectSSMP/Views/TimeSheet/ApproveFunction.cshtml">
     <Files>
       <File FileName="ProjectSSMP/Views/Shared/MenuPage2.cshtml" Line="59" Column="136" />
-      <File FileName="ProjectSSMP/Controllers/UserManagenentController.cs" Line="276" Column="49" />
-      <File FileName="ProjectSSMP/Views/UserManagement/EditUser.cshtml" Line="90" Column="31" />
-      <File FileName="ProjectSSMP/Views/UserManagement/Edit.cshtml" Line="90" Column="31" />
-      <File FileName="ProjectSSMP/Views/Home/Index.cshtml" Line="32" Column="46" />
       <File FileName="ProjectSSMP/Controllers/HomeController.cs" Line="281" Column="46" />
-      <File FileName="ProjectSSMP/Models/UserManagenent/ShowUserInputModel.cs" Line="21" Column="13" />
-      <File FileName="ProjectSSMP/Models/UserManagenent/AddUserInputModel.cs" Line="45" Column="9" />
-      <File FileName="ProjectSSMP/Models/UserManagenent/EditUserInputModel.cs" Line="20" Column="9" />
+      <File FileName="ProjectSSMP/Views/Home/AddBulletin.cshtml" Line="1" Column="1" />
+      <File FileName="ProjectSSMP/Views/TimeSheet/TimeSheet.cshtml" Line="92" Column="1" />
+      <File FileName="ProjectSSMP/Views/ProjectManagement/CreateTask.cshtml" Line="119" Column="37" />
+      <File FileName="ProjectSSMP/Views/ProjectManagement/CreateFunction.cshtml" Line="95" Column="25" />
+      <File FileName="ProjectSSMP/Views/TimeSheet/ApproveFunction.cshtml" Line="1" Column="1" />
     </Files>
   </MonoDevelop.Ide.Workbench>
   <MonoDevelop.Ide.Workspace ActiveConfiguration="Debug" />
   <MonoDevelop.Ide.ItemProperties.SSMP PreferredExecutionTarget="MonoDevelop.Default" />
   <MonoDevelop.Ide.DebuggingService.Breakpoints>
     <BreakpointStore>
-      <Breakpoint file="/Users/Palm/Desktop/ProjectSSPM/ProjectSSPM/ProjectSSMP/Views/TimeSheet/TimeSheet.cshtml" relfile="ProjectSSMP/Views/TimeSheet/TimeSheet.cshtml" line="1" column="1" />
-      <Breakpoint file="/Users/Palm/Desktop/ProjectSSPM/ProjectSSPM/ProjectSSMP/Views/TimeSheet/TimeSheet.cshtml" relfile="ProjectSSMP/Views/TimeSheet/TimeSheet.cshtml" line="101" column="1" />
-      <Breakpoint file="/Users/Palm/Desktop/ProjectSSPM/ProjectSSPM/ProjectSSMP/Views/TimeSheet/TimeSheet.cshtml" relfile="ProjectSSMP/Views/TimeSheet/TimeSheet.cshtml" line="99" column="1" />
+      <Breakpoint file="/Users/Palm/Desktop/ProjectSSPM/ProjectSSPM/ProjectSSMP/Controllers/HomeController.cs" relfile="ProjectSSMP/Controllers/HomeController.cs" line="432" column="1" />
     </BreakpointStore>
   </MonoDevelop.Ide.DebuggingService.Breakpoints>
   <MonoDevelop.Ide.DebuggingService.PinnedWatches />
