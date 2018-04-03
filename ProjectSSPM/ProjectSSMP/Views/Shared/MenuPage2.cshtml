@@ -37,14 +37,18 @@
         var nothi = ViewBag.nothi;
         IEnumerable<SSMP.Models.Notification.NotificationModel> nothi2 =
             ViewBag.nothi as IEnumerable<SSMP.Models.Notification.NotificationModel>;
-        var counothi = nothi2.Count();
+        var notify = (from n in nothi2
+                      orderby n.FunctionEnd descending
+                      select n).Take(5);
+
+        var counothi = notify.Count();
         IEnumerable<SSMP.Models.Menu.GetMenuModelcs> user = ViewBag.userMenu as IEnumerable<SSMP.Models.Menu.GetMenuModelcs>;
         var Userid = (from u in user
-                    group u by u.Userid into g
-                    select new
-                    {
-                        Userid = g.Key
-                    }).FirstOrDefault();
+                      group u by u.Userid into g
+                      select new
+                      {
+                          Userid = g.Key
+                      }).FirstOrDefault();
     }
 
 
@@ -78,7 +82,7 @@
             
         </a>
         <ul class="dropdown-menu dropdown-menu-right"  >
-            @foreach (var itme in nothi2)
+            @foreach (var itme in notify)
             {
 
                 <li>

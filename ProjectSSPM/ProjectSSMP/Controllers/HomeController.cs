@@ -484,7 +484,7 @@ namespace SSMP.Controllers
             catch (Exception ex)
             {
                 var message = ex.Message;
-                return View();
+                return RedirectToAction("Index", "Home");
             }
 
         }
