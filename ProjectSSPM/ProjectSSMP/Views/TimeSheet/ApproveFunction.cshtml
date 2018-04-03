@@ -10,7 +10,7 @@
 
 <div class="modal-footer">
     <form asp-controller="TimeSheet" asp-action="ApproveFunction" method="post">
-            <div class="col-sm-10">
+            <div class="col-lg-12"> 
             @{
                 SSMP.Models.TimeSheet AP =
                 ViewData["ApproveData"] as SSMP.Models.TimeSheet;
@@ -19,8 +19,10 @@
                 <input type="hidden" id="TimesheetNumber" name="TimesheetNumber" value="@AP.TimeSheetNumber">
                 <input type="hidden" id="ProjectNumber" name="ProjectNumber" value="@AP.ProjectNumber">
                 <input type="hidden" id="UserId" name="UserId" value="@AP.UserId">
-                <input type="hidden" id="TaskId" name="TaskId" value="@AP.TaskId">    
+                <input type="hidden" id="TaskId" name="TaskId" value="@AP.TaskId">
+                <div class="text-right" style="margin-right: 10px;">
                 <button type="submit" class="btn btn-primary">Submit</button>
+                </div>
             </div>
 
     </form>
