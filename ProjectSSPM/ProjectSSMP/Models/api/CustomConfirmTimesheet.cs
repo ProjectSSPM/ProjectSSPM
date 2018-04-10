@@ -20,6 +20,7 @@ namespace ProjectSSMP.Models.api
         public string fullName { get; set; }
         public string timeNumber { get; set; }
         public DateTime timesheetId { get; set; }
+        public DateTime? DateSelect { get; set; }
         public TimeSpan? timeStart { get; set; }
         public TimeSpan? timeEnd { get; set; }
         public string strTimeStart { get; set; }

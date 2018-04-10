@@ -9,7 +9,7 @@ namespace ProjectSSMP.Models.api
 {
     public class CustomListTimesheet
     {
-        public DateTime timeSheetId { get; set; }
+        public DateTime timesheetId { get; set; }
         public string taskName { get; set; }
         public string projectName { get; set; }
         public string functionName { get; set; }

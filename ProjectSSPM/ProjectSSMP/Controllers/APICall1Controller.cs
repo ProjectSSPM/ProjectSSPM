@@ -27,9 +27,8 @@ namespace ProjectSSMP.Controllers
     {
         private sspmContext context;
 
-        private static string readTokenkey = "eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzI1NiJ9.eyJzdWIiOiIwOTg3NjU0MzIxIiwibmFtZSI6InR5Y2hlVG9rZW5SZWFkIiwiYWRtaW4iOnRydWUsImp0aSI6Ijk3Zjk3NzVlLTAyNjYtNDdjNC05ODU0LWZiZDQ5NmJhZDVjZSIsImlhdCI6MTUyMjM3MzM0OCwiZXhwIjoxNTIyMzc3MDM4fQ.rDQcbjacQ6tqcDosmB9Y8-QY-2H7CkDlwlwcK6KczIo";
-        private static string writeTokenkey = "eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzI1NiJ9.eyJzdWIiOiIwOTg3NjU0MzIxIiwibmFtZSI6InR5Y2hlVG9rZW5Xcml0ZSIsImFkbWluIjp0cnVlLCJqdGkiOiI5N2Y5Nzc1ZS0wMjY2LTQ3YzQtOTg1NC1mYmQ0OTZiYWQ1Y2UiLCJpYXQiOjE1MjIzNzMzNDgsImV4cCI6MTUyMjM3NzA2M30.qa_Bjn69l-8MQcxwN767W_MxMifsUgwTAYSsI4Dc35k";
-
+        private static string readTokenkey = "rDQcbjacQ6tqcDosmB9Y8-QY-2H7CkDlwlwcK6KczIo";
+        private static string writeTokenkey = "qa_Bjn69l-8MQcxwN767W_MxMifsUgwTAYSsI4Dc35k";
         //Setup JWT Token
         private static string tokenKey = string.Empty;
         public APICall1Controller(sspmContext context) => this.context = context;
@@ -39,13 +38,15 @@ namespace ProjectSSMP.Controllers
         //Authentication
         public JsonResult Identity([FromBody]CustomLogin itemModel)
         {
+            AccountInfo accoutInfo = new AccountInfo();
+
             if (validateuser(itemModel.username, itemModel.password) != true)
             {
-                return Json(new { success = false, msg = "ไม่สามารถดึงข้อมูลได้ กรุณาทำรายการใหม่" });
+                return Json(new { success = false, accoutInfo });
             }
             else
             {
-                AccountInfo accoutInfo = new AccountInfo();
+      
                 var user = (from data in context.UserSspm where data.Username == itemModel.username select data).SingleOrDefault();
                 var group = (from data in context.UserAssignGroup where data.UserId == user.UserId select data.GroupId).SingleOrDefault();
 
@@ -53,6 +54,8 @@ namespace ProjectSSMP.Controllers
                 accoutInfo.accountName = user.Firstname + " " + user.Lastname;
                 accoutInfo.accountPosition = user.JobResponsible;
                 accoutInfo.accountGroup = group;
+                accoutInfo.readToken = readTokenkey;
+                accoutInfo.writeToken = writeTokenkey;
 
                 return Json(new { success = true, accoutInfo });
             }

@@ -22,7 +22,7 @@ namespace ProjectSSMP.Models.api
       //  public TimeSpan? timeEnd { get; set; }
         public int durationHrs { get; set; }
         public int durationMns { get; set; }
-
+        public string base64Image { get; set; }
 
     }
 }

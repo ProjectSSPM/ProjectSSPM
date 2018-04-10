@@ -10,6 +10,6 @@ namespace ProjectSSMP.Models.api
         public string userId { get; set; }
         public string userName { get; set; }
         public string userImage { get; set; }
-
+        public string jobRes { get; set; }
     }
 }

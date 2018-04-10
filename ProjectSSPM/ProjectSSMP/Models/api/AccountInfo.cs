@@ -13,5 +13,7 @@ namespace ProjectSSMP.Models.api
         public string accountPosition { get; set; }
         public string accountImage { get; set; }
         public string deviceId { get; set; }
+        public string readToken { get; set; }
+        public string writeToken { get; set; }
     }
 }
