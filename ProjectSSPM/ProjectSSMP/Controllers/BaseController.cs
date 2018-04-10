@@ -33,7 +33,8 @@ namespace SSMP.Controllers
                                 MenuId =mg.MenuId,
                                 MenuName = mg.MenuName,
                                 MenuUrl  =  mg.MenuUrl,
-                                MenuIcon = mg.MenuIcon
+                                MenuIcon = mg.MenuIcon,
+                Username = loggedInUserName,
                             }).ToList();
             
             

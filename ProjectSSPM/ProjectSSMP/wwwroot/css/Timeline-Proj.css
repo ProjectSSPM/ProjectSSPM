@@ -3,7 +3,8 @@
 .timeline-horizontal {
     list-style: none;
     padding: 20px;
-    position: relative
+    position: relative;
+
 }
 
     .timeline:before {
@@ -19,7 +20,9 @@
 
     .timeline .timeline-item {
         margin-bottom: 20px;
-        position: relative
+        position: relative;
+        width: 100px;
+
     }
 
         .timeline .timeline-item:before,
