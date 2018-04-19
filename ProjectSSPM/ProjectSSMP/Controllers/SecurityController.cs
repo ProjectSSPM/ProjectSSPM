@@ -1,10 +1,13 @@
 ﻿using Microsoft.AspNetCore.Authentication;
+using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
 using SSMP.Models;
 using SSMP.Models.Security;
 using System;
 using System.Collections.Generic;
 using System.Linq;
+using System.Net;
+using System.Net.Http;
 using System.Security.Claims;
 using System.Threading.Tasks;
 
@@ -12,12 +15,18 @@ namespace SSMP.Controllers
 {
     public class SecurityController : BaseController
     {
-        public SecurityController(sspmContext context) => this.context = context;
+        public string IPAddress { get; private set; }
 
+        public SecurityController(sspmContext context )
+        {
+            this.context = context;
+           
+        }
         
         public IActionResult Login()
         {
-
+            string IPAddress = GetIPAddress();
+            
             return View();
         }
         [HttpPost]
@@ -89,6 +98,26 @@ namespace SSMP.Controllers
 
             return true;
         }
+        
+
+        public string GetIPAddress()
+        {
+           
+            IPHostEntry Host = default(IPHostEntry);
+            string Hostname = null;
+            Hostname = System.Environment.MachineName;
+            Host = Dns.GetHostEntry(Hostname);
+            foreach (IPAddress IP in Host.AddressList)
+            {
+                if (IP.AddressFamily == System.Net.Sockets.AddressFamily.InterNetwork)
+                {
+                    IPAddress = Convert.ToString(IP);
+                }
+            }
+            return IPAddress;
+        }
+        
+
 
     }
 }

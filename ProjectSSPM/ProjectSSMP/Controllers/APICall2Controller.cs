@@ -391,9 +391,12 @@ namespace ProjectSSMP.Controllers
 
             foreach (var item in result)
             {
-                var itemCount = (from data in context.Project where data.ProjectNumber == item.ProjectNumber && data.ActualEnd == null select data).SingleOrDefault();
+                var itemCount = (from data in context.Project where data.ProjectNumber == item.ProjectNumber select data).SingleOrDefault();
                 if (itemCount != null)
                 {
+                    var _contextCTask = context.Task.Count(t => t.ProjectNumber == itemCount.ProjectNumber);
+                    var _contextCTaskF = context.Task.Count(t => t.ProjectNumber == itemCount.ProjectNumber && t.ActualEnd != null);
+                    if(_contextCTask != _contextCTaskF)
                     PCount += 1;
 
                 }
@@ -419,7 +422,7 @@ namespace ProjectSSMP.Controllers
             }
 
             var getmonth = (from data in context.TimeSheet
-                          where data.UserId == id
+                          where data.UserId == id && data.ActionId != null
                             select data)
                           .ToList();
             foreach (var item in getmonth)
@@ -470,6 +473,7 @@ namespace ProjectSSMP.Controllers
 
             List<CustomProject2> itemer = new List<CustomProject2>();
             var result = (from data in context.Project
+                          orderby data.ProjectCreateDate
                           where data.ProjectManager == id
                           select data).ToList();
 
@@ -479,13 +483,14 @@ namespace ProjectSSMP.Controllers
                 {
                     if (item != null)
                     {
-                        var _user = context.UserSspm.SingleOrDefault(tp => tp.UserId == id);
-                        var _checkFinish = context.Project.SingleOrDefault(p => p.ProjectNumber == item.ProjectNumber);
+                        var tempFinish = context.Task.Count(tp => tp.ProjectNumber == item.ProjectNumber && tp.ActualEnd != null);
                         var checkTask = context.Task.Count(tp => tp.ProjectNumber == item.ProjectNumber);
-                        var tempFinish = context.Task.Count(tp => tp.ProjectNumber == item.ProjectNumber && tp.ActualEnd == null);
+                        var _user = context.UserSspm.SingleOrDefault(u => u.UserId == item.ProjectManager);
+                        var _checkFinish = context.Project.SingleOrDefault(p => p.ProjectNumber == item.ProjectNumber && p.ActualEnd != null);
 
-             
-                            temp2 = (DateTime)item.ProjectEnd;
+
+
+                        temp2 = (DateTime)item.ProjectEnd;
                             planDay = temp2.Day;
                         if (_checkFinish != null)
                         {

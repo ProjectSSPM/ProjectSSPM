@@ -21,8 +21,9 @@ namespace SSMP.Controllers
     public class HomeController : BaseController         
     {
         private readonly IToastNotification _toastNotification;
-
         
+
+
         public HomeController(sspmContext context ,IToastNotification toastNotification) //=> this.context = context;
         {
             this.context = context;

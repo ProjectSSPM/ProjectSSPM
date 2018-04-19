@@ -17,6 +17,7 @@ using System.Text;
 using ProjectSSMP.Models.api.NewTimesheet;
 using SSMP.Models;
 using SSMP.Models.api;
+using SSMP.Models.api.NewModel;
 
 namespace ProjectSSMP.Controllers
 {
@@ -360,11 +361,409 @@ namespace ProjectSSMP.Controllers
              
         }
 
+
+        public async Task<IActionResult> teamTimesheet([FromBody]CustomGetTimesheet2 itemGet)
+        {
+            List<CustomListTimesheet> timesheetResult = new List<CustomListTimesheet>();
+
+            if (string.IsNullOrEmpty(itemGet.token) || itemGet.token != readTokenkey)
+            {
+                return Json(timesheetResult);
+            }
+            else
+            {
+
+                var result =
+                           (from data in context.TimeSheet
+                            where data.UserId.Equals(itemGet.userId) && data.ProjectNumber == itemGet.projectNumber
+                            join data2 in context.Project on data.ProjectNumber equals data2.ProjectNumber
+                            join data3 in context.Task on data.TaskId equals data3.TaskId
+                            join data4 in context.Function on data.FunctionId equals data4.FunctionId
+                            join data5 in context.Action on data.ActionId equals data5.ActionId
+                            orderby data.TimeSheetId descending
+                            select new
+                            {
+                                timeId = data.TimeSheetId,
+                                proName = data2.ProjectName,
+                                taskName = data3.TaskName,
+                                funcName = data4.FunctionName,
+                                actName = data5.ActionName,
+                                approve1 = data.Approve1,
+                                approve2 = data.Approve2,
+                                inTime = data.TimeSheetStart,
+                                outTime = data.TimeSheetEnd,
+
+                            }).Skip(itemGet.pageIndex * itemGet.pageSize).Take(itemGet.pageSize).ToList();
+                TimeSpan? calculated;
+                string temp;
+
+                foreach (var item in result)
+                {
+                    var temp1 = (from appr1 in context.UserSspm where item.approve1.Equals(appr1.UserId) select appr1).SingleOrDefault();
+                    var temp2 = (from appr2 in context.UserSspm where item.approve2.Equals(appr2.UserId) select appr2).SingleOrDefault();
+
+
+                    if (temp1 == null && temp2 == null)
+                    {
+                        calculated = item.outTime - item.inTime;
+                        temp = calculated.ToString();
+                        timesheetResult.Add(new CustomListTimesheet
+                        {
+
+                            timesheetId = item.timeId,
+                            projectName = item.proName,
+                            taskName = item.taskName,
+                            functionName = item.funcName,
+                            actionName = item.actName,
+                            approve1 = "-/-",
+                            approve2 = "-/-",
+                            timeSheetStart = item.inTime,
+                            timeSheetEnd = item.outTime,
+                            duration = string.Concat(temp.Reverse().Skip(3).Reverse()),
+
+                        });
+
+                    }
+                    else if (temp2 == null)
+                    {
+                        calculated = item.outTime - item.inTime;
+                        temp = calculated.ToString();
+                        timesheetResult.Add(new CustomListTimesheet
+                        {
+                            timesheetId = item.timeId,
+                            projectName = item.proName,
+                            taskName = item.taskName,
+                            functionName = item.funcName,
+                            actionName = item.actName,
+                            approve1 = temp1.Firstname + " " + temp1.Lastname,
+                            approve2 = "-/-",
+                            timeSheetStart = item.inTime,
+                            timeSheetEnd = item.outTime,
+                            duration = string.Concat(temp.Reverse().Skip(3).Reverse()),
+
+                        });
+                    }
+                    else
+                    {
+                        calculated = item.outTime - item.inTime;
+                        temp = calculated.ToString();
+                        timesheetResult.Add(new CustomListTimesheet
+                        {
+                            timesheetId = item.timeId,
+                            projectName = item.proName,
+                            taskName = item.taskName,
+                            functionName = item.funcName,
+                            actionName = item.actName,
+                            approve1 = temp1.Firstname + " " + temp1.Lastname,
+                            approve2 = temp2.Firstname + " " + temp2.Lastname,
+                            timeSheetStart = item.inTime,
+                            timeSheetEnd = item.outTime,
+                            duration = string.Concat(temp.Reverse().Skip(3).Reverse()),
+                        });
+                    }
+                }
+                return Json(timesheetResult);
+            }
+
+        }
+
+        public async Task<IActionResult> listTimesheetFilter([FromBody]CustomGetTimesheet3 itemGet)
+        {
+            List<CustomListTimesheet> timesheetResult = new List<CustomListTimesheet>();
+            DateTime itemFilter;
+            int A;
+            int B;
+            if (string.IsNullOrEmpty(itemGet.token) || itemGet.token != readTokenkey)
+            {
+                return Json(timesheetResult);
+            }
+            else
+            {
+
+                var result =
+                           (from data in context.TimeSheet
+                            where data.UserId.Equals(itemGet.userId) 
+                            join data2 in context.Project on data.ProjectNumber equals data2.ProjectNumber
+                            join data3 in context.Task on data.TaskId equals data3.TaskId
+                            join data4 in context.Function on data.FunctionId equals data4.FunctionId
+                            join data5 in context.Action on data.ActionId equals data5.ActionId
+                            orderby data.TimeSheetId descending
+                            select new
+                            {
+                                timeId = data.TimeSheetId,
+                                start = data.TimeSheetStart,
+                                proName = data2.ProjectName,
+                                taskName = data3.TaskName,
+                                funcName = data4.FunctionName,
+                                actName = data5.ActionName,
+                                approve1 = data.Approve1,
+                                approve2 = data.Approve2,
+                                inTime = data.TimeSheetStart,
+                                outTime = data.TimeSheetEnd,
+
+                            }).Skip(itemGet.pageIndex * itemGet.pageSize).Take(itemGet.pageSize).ToList();
+                TimeSpan? calculated;
+                string temp;
+
+                foreach (var item in result)
+                {
+                    var temp1 = (from appr1 in context.UserSspm where item.approve1.Equals(appr1.UserId) select appr1).SingleOrDefault();
+                    var temp2 = (from appr2 in context.UserSspm where item.approve2.Equals(appr2.UserId) select appr2).SingleOrDefault();
+                    itemFilter = (DateTime)item.start;
+                    A = itemFilter.Month;
+                    B = itemFilter.Year;
+
+
+                    if (temp1 == null && temp2 == null)
+                    {
+                        if (A == itemGet.mounth && B == itemGet.year)
+                        {
+                            calculated = item.outTime - item.inTime;
+                            temp = calculated.ToString();
+                            timesheetResult.Add(new CustomListTimesheet
+                            {
+
+                                timesheetId = item.timeId,
+                                projectName = item.proName,
+                                taskName = item.taskName,
+                                functionName = item.funcName,
+                                actionName = item.actName,
+                                approve1 = "-/-",
+                                approve2 = "-/-",
+                                timeSheetStart = item.inTime,
+                                timeSheetEnd = item.outTime,
+                                duration = string.Concat(temp.Reverse().Skip(3).Reverse()),
+
+                            });
+                        }
+
+                    }
+                    else if (temp2 == null)
+                    {
+                        if (A == itemGet.mounth && B == itemGet.year)
+                        {
+                            calculated = item.outTime - item.inTime;
+                            temp = calculated.ToString();
+                            timesheetResult.Add(new CustomListTimesheet
+                            {
+                                timesheetId = item.timeId,
+                                projectName = item.proName,
+                                taskName = item.taskName,
+                                functionName = item.funcName,
+                                actionName = item.actName,
+                                approve1 = temp1.Firstname + " " + temp1.Lastname,
+                                approve2 = "-/-",
+                                timeSheetStart = item.inTime,
+                                timeSheetEnd = item.outTime,
+                                duration = string.Concat(temp.Reverse().Skip(3).Reverse()),
+
+                            });
+                        }
+                    }
+                    else
+                    {
+                        if (A == itemGet.mounth && B == itemGet.year)
+                        {
+                            calculated = item.outTime - item.inTime;
+                            temp = calculated.ToString();
+                            timesheetResult.Add(new CustomListTimesheet
+                            {
+                                timesheetId = item.timeId,
+                                projectName = item.proName,
+                                taskName = item.taskName,
+                                functionName = item.funcName,
+                                actionName = item.actName,
+                                approve1 = temp1.Firstname + " " + temp1.Lastname,
+                                approve2 = temp2.Firstname + " " + temp2.Lastname,
+                                timeSheetStart = item.inTime,
+                                timeSheetEnd = item.outTime,
+                                duration = string.Concat(temp.Reverse().Skip(3).Reverse()),
+                            });
+                        }
+                    }
+                }
+                return Json(timesheetResult);
+            }
+
+        }
+        public async Task<IActionResult> TeamlistTimesheetFilter([FromBody]CustomGetTImesheet4 itemGet)
+        {
+            List<CustomListTimesheet> timesheetResult = new List<CustomListTimesheet>();
+            DateTime itemFilter;
+            int A;
+            int B;
+            if (string.IsNullOrEmpty(itemGet.token) || itemGet.token != readTokenkey)
+            {
+                return Json(timesheetResult);
+            }
+            else
+            {
+
+                var result =
+                           (from data in context.TimeSheet
+                            where data.UserId.Equals(itemGet.userId) && data.ProjectNumber == itemGet.projectNumber
+                            join data2 in context.Project on data.ProjectNumber equals data2.ProjectNumber
+                            join data3 in context.Task on data.TaskId equals data3.TaskId
+                            join data4 in context.Function on data.FunctionId equals data4.FunctionId
+                            join data5 in context.Action on data.ActionId equals data5.ActionId
+                            orderby data.TimeSheetId descending
+                            select new
+                            {
+                                timeId = data.TimeSheetId,
+                                start = data.TimeSheetStart,
+                                proName = data2.ProjectName,
+                                taskName = data3.TaskName,
+                                funcName = data4.FunctionName,
+                                actName = data5.ActionName,
+                                approve1 = data.Approve1,
+                                approve2 = data.Approve2,
+                                inTime = data.TimeSheetStart,
+                                outTime = data.TimeSheetEnd,
+
+                            }).Skip(itemGet.pageIndex * itemGet.pageSize).Take(itemGet.pageSize).ToList();
+                TimeSpan? calculated;
+                string temp;
+
+                foreach (var item in result)
+                {
+                    var temp1 = (from appr1 in context.UserSspm where item.approve1.Equals(appr1.UserId) select appr1).SingleOrDefault();
+                    var temp2 = (from appr2 in context.UserSspm where item.approve2.Equals(appr2.UserId) select appr2).SingleOrDefault();
+                    itemFilter = (DateTime)item.start;
+                    A = itemFilter.Month;
+                    B = itemFilter.Year;
+
+
+                    if (temp1 == null && temp2 == null)
+                    {
+                        if (A == itemGet.mounth && B == itemGet.year)
+                        {
+                            calculated = item.outTime - item.inTime;
+                            temp = calculated.ToString();
+                            timesheetResult.Add(new CustomListTimesheet
+                            {
+
+                                timesheetId = item.timeId,
+                                projectName = item.proName,
+                                taskName = item.taskName,
+                                functionName = item.funcName,
+                                actionName = item.actName,
+                                approve1 = "-/-",
+                                approve2 = "-/-",
+                                timeSheetStart = item.inTime,
+                                timeSheetEnd = item.outTime,
+                                duration = string.Concat(temp.Reverse().Skip(3).Reverse()),
+
+                            });
+                        }
+
+                    }
+                    else if (temp2 == null)
+                    {
+                        if (A == itemGet.mounth && B == itemGet.year)
+                        {
+                            calculated = item.outTime - item.inTime;
+                            temp = calculated.ToString();
+                            timesheetResult.Add(new CustomListTimesheet
+                            {
+                                timesheetId = item.timeId,
+                                projectName = item.proName,
+                                taskName = item.taskName,
+                                functionName = item.funcName,
+                                actionName = item.actName,
+                                approve1 = temp1.Firstname + " " + temp1.Lastname,
+                                approve2 = "-/-",
+                                timeSheetStart = item.inTime,
+                                timeSheetEnd = item.outTime,
+                                duration = string.Concat(temp.Reverse().Skip(3).Reverse()),
+
+                            });
+                        }
+                    }
+                    else
+                    {
+                        if (A == itemGet.mounth && B == itemGet.year)
+                        {
+                            calculated = item.outTime - item.inTime;
+                            temp = calculated.ToString();
+                            timesheetResult.Add(new CustomListTimesheet
+                            {
+                                timesheetId = item.timeId,
+                                projectName = item.proName,
+                                taskName = item.taskName,
+                                functionName = item.funcName,
+                                actionName = item.actName,
+                                approve1 = temp1.Firstname + " " + temp1.Lastname,
+                                approve2 = temp2.Firstname + " " + temp2.Lastname,
+                                timeSheetStart = item.inTime,
+                                timeSheetEnd = item.outTime,
+                                duration = string.Concat(temp.Reverse().Skip(3).Reverse()),
+                            });
+                        }
+                    }
+                }
+                return Json(timesheetResult);
+            }
+
+        }
+
         //MaxLoadTimesheet
         public async Task<IActionResult> maxLoadTimesheet(string userId)
         {
             var maxLoad = (from data in context.TimeSheet where data.UserId == userId && data.ActionId != null select data).Count();
             return Json(new { maxLoad});
+        }
+
+        //MaxLoadTeamTimesheet
+        public async Task<IActionResult> maxLoadTeamTimesheet(string userId, string itemIndex)
+        {
+            var maxLoad = (from data in context.TimeSheet where data.UserId == userId && data.ActionId != null && data.ProjectNumber == itemIndex select data).Count();
+            return Json(new { maxLoad });
+        }
+
+        public async Task<IActionResult> maxLoadFilterTimesheet(string userId,  string indexMonth , string indexYear )
+        {
+            DateTime itemFilter;
+            int maxLoad = 0;
+            int A;
+            int B;
+            var result = (from data in context.TimeSheet where data.UserId == userId && data.ActionId != null  select data).ToList();
+            if (result != null)
+            {
+                foreach (var item in result)
+                {
+
+                    itemFilter = (DateTime)item.TimeSheetStart;
+                    A = itemFilter.Month;
+                    B = itemFilter.Year;
+                    if (A == Convert.ToInt16(indexMonth) && B == Convert.ToInt16(indexYear) )
+                        maxLoad += 1;
+                }
+            }
+
+            return Json(new { maxLoad });             
+        }
+
+        public async Task<IActionResult> maxLoadFilterTeamTimesheet(string userId, string itemIndex , string indexMonth , string indexYear)
+        {
+            DateTime itemFilter;
+            int maxLoad = 0;
+            int A;
+            int B;
+            var result = (from data in context.TimeSheet where data.UserId == userId && data.ActionId != null && data.ProjectNumber == itemIndex select data).ToList();
+            if (result != null)
+            {
+                foreach (var item in result)
+                {
+
+                    itemFilter = (DateTime)item.TimeSheetStart;
+                    A = itemFilter.Month;
+                    B = itemFilter.Year;
+                    if (A == Convert.ToInt16(indexMonth) && B == Convert.ToInt16(indexYear))
+                        maxLoad += 1;
+                }
+            }
+
+            return Json(new { maxLoad });
         }
 
         public async Task<IActionResult> FilterTimesheetTasktById(string id, string userId)

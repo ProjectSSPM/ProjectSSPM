@@ -3,15 +3,18 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
 using Microsoft.AspNetCore.Authorization;
+using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
 using SSMP.Models;
 using SSMP.Models.Menu;
 using SSMP.Models.Notification;
 
+
 namespace SSMP.Controllers
 {
     public class BaseController : Controller
     {
+        
         public sspmContext context;
 
         
@@ -94,5 +97,8 @@ namespace SSMP.Controllers
 
             return model;
         }
+
+
+      
     }
 }

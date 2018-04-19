@@ -35,12 +35,18 @@
     @RenderSection("Styles", false)
 
 </head>
-<body>
+<body class="do-nicescrol">
 
-    <div class="container" >
+    <div class="container " >
         @Html.Partial("~/Views/Shared/MenuPage2.cshtml")
         
+            
+        
+        
+
             @RenderBody()
+     
+
         
                 
           
@@ -112,8 +118,12 @@
                     dataSrc: 0
                 }
             });
-            $("body").niceScroll({ autohidemode: true });
             
+            
+        });
+
+        $(function () {
+            $("body").niceScroll({ horizrailenabled: false });
         });
 
         $('.gn-icon-menu').hover(function () {
